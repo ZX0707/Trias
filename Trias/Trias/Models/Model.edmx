@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TriasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Dict">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KeyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ValueName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="Pid" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Trias.dbo.Fossil”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Fossil">
+          <Key>
+            <PropertyRef Name="H_ID" />
+            <PropertyRef Name="P_ID" />
+            <PropertyRef Name="R_ID" />
+          </Key>
+          <Property Name="H_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="R_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time2" Type="int" />
+          <Property Name="Authorizer" Type="nvarchar" MaxLength="50" />
+          <Property Name="FossilGroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxonType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CollectFromTreatise" Type="char" MaxLength="2" />
+          <Property Name="RefDescribingRelation" Type="int" />
+          <Property Name="GenusName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpeciesName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Length" Type="nvarchar" MaxLength="50" />
+          <Property Name="width" Type="nvarchar" MaxLength="50" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Geochemical">
+          <Key>
+            <PropertyRef Name="G_ID" />
+          </Key>
+          <Property Name="G_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Section" Type="nvarchar" MaxLength="50" />
+          <Property Name="Authorizer" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="isotope" Type="nvarchar" MaxLength="50" />
+          <Property Name="Isotopepersents" Type="float" />
+          <Property Name="Element" Type="nvarchar" MaxLength="50" />
+          <Property Name="Elementpersents" Type="float" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time2" Type="int" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Notes" Type="text" />
+        </EntityType>
+        <EntityType Name="Reference">
+          <Key>
+            <PropertyRef Name="R_ID" />
+          </Key>
+          <Property Name="R_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReferenceType" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstAuthor" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondAuthor" Type="nvarchar" MaxLength="50" />
+          <Property Name="OtherAuthors" Type="nvarchar" MaxLength="50" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="BookTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Journal" Type="nvarchar" MaxLength="50" />
+          <Property Name="Editor1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Editor2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Editor3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Editor4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="50" />
+          <Property Name="Volume" Type="nvarchar" MaxLength="50" />
+          <Property Name="No" Type="nvarchar" MaxLength="50" />
+          <Property Name="PageBegin" Type="nvarchar" MaxLength="50" />
+          <Property Name="PageEnd" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOI" Type="nvarchar" MaxLength="50" />
+          <Property Name="URL1" Type="nvarchar" MaxLength="300" />
+          <Property Name="URL2" Type="nvarchar" MaxLength="300" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RID1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RID2" Type="nvarchar" MaxLength="50" />
+          <Property Name="RID3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time2" Type="int" />
+          <Property Name="EnterTime" Type="datetime" />
+          <Property Name="Authorizer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+          <Property Name="Village" Type="nvarchar" MaxLength="50" />
+          <Property Name="LonDegrees" Type="int" />
+          <Property Name="LonMinutes" Type="int" />
+          <Property Name="LonSeconds" Type="int" />
+          <Property Name="LatDegrees" Type="int" />
+          <Property Name="LatMinutes" Type="int" />
+          <Property Name="LatSeconds" Type="int" />
+          <Property Name="TectonicPlate" Type="nvarchar" MaxLength="50" />
+          <Property Name="Notes" Type="text" />
+          <Property Name="Comments" Type="text" />
+          <Property Name="Altitude" Type="float" />
+          <Property Name="Formation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lithologies" Type="nvarchar" MaxLength="50" />
+          <Property Name="Environments" Type="nvarchar" MaxLength="50" />
+          <Property Name="EnvironmentalZones" Type="nvarchar" MaxLength="50" />
+          <Property Name="Thickness" Type="float" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserPwd" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserUnit" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="ResearchField" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="TriasModelStoreContainer">
+          <EntitySet Name="Dict" EntityType="Self.Dict" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Geochemical" EntityType="Self.Geochemical" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fossil" EntityType="Self.Fossil" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Fossil].[H_ID] AS [H_ID], 
+[Fossil].[P_ID] AS [P_ID], 
+[Fossil].[R_ID] AS [R_ID], 
+[Fossil].[Time] AS [Time], 
+[Fossil].[SubTime] AS [SubTime], 
+[Fossil].[Time2] AS [Time2], 
+[Fossil].[Authorizer] AS [Authorizer], 
+[Fossil].[FossilGroup] AS [FossilGroup], 
+[Fossil].[TaxonType] AS [TaxonType], 
+[Fossil].[CollectFromTreatise] AS [CollectFromTreatise], 
+[Fossil].[RefDescribingRelation] AS [RefDescribingRelation], 
+[Fossil].[GenusName] AS [GenusName], 
+[Fossil].[SpeciesName] AS [SpeciesName], 
+[Fossil].[Position] AS [Position], 
+[Fossil].[Length] AS [Length], 
+[Fossil].[width] AS [width], 
+[Fossil].[Picture] AS [Picture], 
+[Fossil].[Notes] AS [Notes]
+FROM [dbo].[Fossil] AS [Fossil]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TriasModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="Dict">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KeyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ValueName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="Pid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Geochemical">
+          <Key>
+            <PropertyRef Name="G_ID" />
+          </Key>
+          <Property Name="G_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Authorizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="R_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isotope" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Isotopepersents" Type="Double" />
+          <Property Name="Element" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Elementpersents" Type="Double" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time2" Type="Int32" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Reference">
+          <Key>
+            <PropertyRef Name="R_ID" />
+          </Key>
+          <Property Name="R_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReferenceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OtherAuthors" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Journal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Editor1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Editor2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Editor3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Editor4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Volume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PageBegin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PageEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="URL1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="URL2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RID1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RID2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RID3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time2" Type="Int32" />
+          <Property Name="EnterTime" Type="DateTime" Precision="3" />
+          <Property Name="Authorizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Village" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LonDegrees" Type="Int32" />
+          <Property Name="LonMinutes" Type="Int32" />
+          <Property Name="LonSeconds" Type="Int32" />
+          <Property Name="LatDegrees" Type="Int32" />
+          <Property Name="LatMinutes" Type="Int32" />
+          <Property Name="LatSeconds" Type="Int32" />
+          <Property Name="TectonicPlate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Altitude" Type="Double" />
+          <Property Name="Formation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lithologies" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Environments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EnvironmentalZones" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Thickness" Type="Double" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResearchField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Fossil">
+          <Key>
+            <PropertyRef Name="H_ID" />
+            <PropertyRef Name="P_ID" />
+            <PropertyRef Name="R_ID" />
+          </Key>
+          <Property Name="H_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="P_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="R_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time2" Type="Int32" />
+          <Property Name="Authorizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FossilGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxonType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CollectFromTreatise" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="RefDescribingRelation" Type="Int32" />
+          <Property Name="GenusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpeciesName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Length" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="width" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="TriasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dict" EntityType="Self.Dict" />
+          <EntitySet Name="Geochemical" EntityType="Self.Geochemical" />
+          <EntitySet Name="Reference" EntityType="Self.Reference" />
+          <EntitySet Name="Section" EntityType="Self.Section" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Fossil" EntityType="Self.Fossil" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TriasModelStoreContainer" CdmEntityContainer="TriasEntities">
+          <EntitySetMapping Name="Dict">
+            <EntityTypeMapping TypeName="TriasModel.Dict">
+              <MappingFragment StoreEntitySet="Dict">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+                <ScalarProperty Name="ValueName" ColumnName="ValueName" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Geochemical">
+            <EntityTypeMapping TypeName="TriasModel.Geochemical">
+              <MappingFragment StoreEntitySet="Geochemical">
+                <ScalarProperty Name="G_ID" ColumnName="G_ID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="Authorizer" ColumnName="Authorizer" />
+                <ScalarProperty Name="R_ID" ColumnName="R_ID" />
+                <ScalarProperty Name="isotope" ColumnName="isotope" />
+                <ScalarProperty Name="Isotopepersents" ColumnName="Isotopepersents" />
+                <ScalarProperty Name="Element" ColumnName="Element" />
+                <ScalarProperty Name="Elementpersents" ColumnName="Elementpersents" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+                <ScalarProperty Name="Time2" ColumnName="Time2" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reference">
+            <EntityTypeMapping TypeName="TriasModel.Reference">
+              <MappingFragment StoreEntitySet="Reference">
+                <ScalarProperty Name="R_ID" ColumnName="R_ID" />
+                <ScalarProperty Name="ReferenceType" ColumnName="ReferenceType" />
+                <ScalarProperty Name="FirstAuthor" ColumnName="FirstAuthor" />
+                <ScalarProperty Name="SecondAuthor" ColumnName="SecondAuthor" />
+                <ScalarProperty Name="OtherAuthors" ColumnName="OtherAuthors" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="Journal" ColumnName="Journal" />
+                <ScalarProperty Name="Editor1" ColumnName="Editor1" />
+                <ScalarProperty Name="Editor2" ColumnName="Editor2" />
+                <ScalarProperty Name="Editor3" ColumnName="Editor3" />
+                <ScalarProperty Name="Editor4" ColumnName="Editor4" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="PageBegin" ColumnName="PageBegin" />
+                <ScalarProperty Name="PageEnd" ColumnName="PageEnd" />
+                <ScalarProperty Name="DOI" ColumnName="DOI" />
+                <ScalarProperty Name="URL1" ColumnName="URL1" />
+                <ScalarProperty Name="URL2" ColumnName="URL2" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Section">
+            <EntityTypeMapping TypeName="TriasModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="RID1" ColumnName="RID1" />
+                <ScalarProperty Name="RID2" ColumnName="RID2" />
+                <ScalarProperty Name="RID3" ColumnName="RID3" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+                <ScalarProperty Name="Time2" ColumnName="Time2" />
+                <ScalarProperty Name="EnterTime" ColumnName="EnterTime" />
+                <ScalarProperty Name="Authorizer" ColumnName="Authorizer" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Village" ColumnName="Village" />
+                <ScalarProperty Name="LonDegrees" ColumnName="LonDegrees" />
+                <ScalarProperty Name="LonMinutes" ColumnName="LonMinutes" />
+                <ScalarProperty Name="LonSeconds" ColumnName="LonSeconds" />
+                <ScalarProperty Name="LatDegrees" ColumnName="LatDegrees" />
+                <ScalarProperty Name="LatMinutes" ColumnName="LatMinutes" />
+                <ScalarProperty Name="LatSeconds" ColumnName="LatSeconds" />
+                <ScalarProperty Name="TectonicPlate" ColumnName="TectonicPlate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Altitude" ColumnName="Altitude" />
+                <ScalarProperty Name="Formation" ColumnName="Formation" />
+                <ScalarProperty Name="Lithologies" ColumnName="Lithologies" />
+                <ScalarProperty Name="Environments" ColumnName="Environments" />
+                <ScalarProperty Name="EnvironmentalZones" ColumnName="EnvironmentalZones" />
+                <ScalarProperty Name="Thickness" ColumnName="Thickness" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="TriasModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+                <ScalarProperty Name="UserUnit" ColumnName="UserUnit" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="ResearchField" ColumnName="ResearchField" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fossil">
+            <EntityTypeMapping TypeName="TriasModel.Fossil">
+              <MappingFragment StoreEntitySet="Fossil">
+                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="R_ID" ColumnName="R_ID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+                <ScalarProperty Name="Time2" ColumnName="Time2" />
+                <ScalarProperty Name="Authorizer" ColumnName="Authorizer" />
+                <ScalarProperty Name="FossilGroup" ColumnName="FossilGroup" />
+                <ScalarProperty Name="TaxonType" ColumnName="TaxonType" />
+                <ScalarProperty Name="CollectFromTreatise" ColumnName="CollectFromTreatise" />
+                <ScalarProperty Name="RefDescribingRelation" ColumnName="RefDescribingRelation" />
+                <ScalarProperty Name="GenusName" ColumnName="GenusName" />
+                <ScalarProperty Name="SpeciesName" ColumnName="SpeciesName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
