@@ -12,8 +12,8 @@ namespace Trias.Controllers
         public DictService dictSer = new DictService();
         public FossilService fossilSer = new FossilService();
         public GeochemicalService geochemicalSer = new GeochemicalService();
-        public ReferenceService ReferenceSer = new ReferenceService();
-        public SectionService SectionSer = new SectionService();
+        public ReferenceService referenceSer = new ReferenceService();
+        public SectionService sectionSer = new SectionService();
         public UserService userSer = new UserService();
 
         public ActionResult WriteError(object obj)

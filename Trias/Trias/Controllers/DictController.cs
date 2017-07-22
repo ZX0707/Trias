@@ -13,6 +13,10 @@ namespace Trias.Controllers
     /// </summary>
     public class DictController : BaseController
     {
+        /// <summary>
+        /// 主页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
