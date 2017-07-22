@@ -39,13 +39,9 @@
           <Property Name="Thickness" Type="float" />
           <Property Name="Comments" Type="text" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“Trias.dbo.Fossil”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Fossil">
           <Key>
             <PropertyRef Name="H_ID" />
-            <PropertyRef Name="P_ID" />
-            <PropertyRef Name="R_ID" />
           </Key>
           <Property Name="H_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="P_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -185,34 +181,13 @@
           <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dict" EntityType="Self.Dict" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formation" EntityType="Self.Formation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fossil" EntityType="Self.Fossil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Geochemical" EntityType="Self.Geochemical" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rock" EntityType="Self.Rock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Fossil" EntityType="Self.Fossil" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Fossil].[H_ID] AS [H_ID], 
-[Fossil].[P_ID] AS [P_ID], 
-[Fossil].[R_ID] AS [R_ID], 
-[Fossil].[Time] AS [Time], 
-[Fossil].[SubTime] AS [SubTime], 
-[Fossil].[Time2] AS [Time2], 
-[Fossil].[Authorizer] AS [Authorizer], 
-[Fossil].[FossilGroup] AS [FossilGroup], 
-[Fossil].[TaxonType] AS [TaxonType], 
-[Fossil].[CollectFromTreatise] AS [CollectFromTreatise], 
-[Fossil].[RefDescribingRelation] AS [RefDescribingRelation], 
-[Fossil].[GenusName] AS [GenusName], 
-[Fossil].[SpeciesName] AS [SpeciesName], 
-[Fossil].[Position] AS [Position], 
-[Fossil].[Length] AS [Length], 
-[Fossil].[width] AS [width], 
-[Fossil].[Picture] AS [Picture], 
-[Fossil].[Notes] AS [Notes]
-FROM [dbo].[Fossil] AS [Fossil]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
