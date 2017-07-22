@@ -47,6 +47,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -54,7 +55,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -208,7 +208,12 @@
     <Compile Include="Service\SectionService.cs" />
     <Compile Include="Service\UnitService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="Unit\CacheFacory.cs" />
+    <Compile Include="Unit\CacheHelper.cs" />
     <Compile Include="Unit\Expansion.cs" />
+    <Compile Include="Unit\Keys.cs" />
+    <Compile Include="Unit\MD5Helper.cs" />
+    <Compile Include="Unit\UserMgr.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -320,6 +325,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
