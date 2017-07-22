@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Caching;
 
-namespace Trias.Unit
+namespace Trias.Tool
 {
     public class CacheHelper
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Trias.Models;
 
-namespace Trias.Unit
+namespace Trias.Tool
 {
     public class UserMgr
     {

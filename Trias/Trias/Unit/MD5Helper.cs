@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace Trias.Unit
+namespace Trias.Tool
 {
     public class MD5Helper
     {
