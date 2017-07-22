@@ -20,7 +20,7 @@ namespace Trias.Controllers
 
         public ActionResult GetList()
         {
-            return Json(userSer.Where().ToList());
+            return Json(dictSer.Where().ToList());
         }
 
         public ActionResult Save(DictView model)
@@ -29,6 +29,20 @@ namespace Trias.Controllers
             Model.CopyFrom(model);
             dictSer.Add(Model);
             Model.Id = Guid.NewGuid().ToString();
+            dictSer.SaveChanges();
+            return WriteSuccess("操作成功！");
+        }
+
+        public ActionResult Edit(DictView model)
+        {
+            dictSer.EditWhere(x => x.Id == model.Id, model);
+            dictSer.SaveChanges();
+            return WriteSuccess("操作成功！");
+        }
+
+        public ActionResult Remove(string id)
+        {
+            dictSer.RemoveWhere(x => x.Id == id);
             dictSer.SaveChanges();
             return WriteSuccess("操作成功！");
         }

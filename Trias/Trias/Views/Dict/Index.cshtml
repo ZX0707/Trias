@@ -53,14 +53,14 @@
 
     function Add() {
         var tr = $("<tr/>");
-        tr.append($("<td><div>1</div></td>"));
-        tr.append($("<td><div contenteditable='true'>1</div></td>"));
-        tr.append($("<td><div contenteditable='true'>2</div></td>"));
-        tr.append($("<td><div contenteditable='true'>3</div></td>"));
-        tr.append($("<td><div contenteditable='true'>4</div></td>"));
-        tr.append($("<td><div contenteditable='true'>5</div></td>"));
+        tr.append($("<td><div>新的一行</div></td>"));
+        tr.append($("<td><div contenteditable='true'></div></td>"));
+        tr.append($("<td><div contenteditable='true'></div></td>"));
+        tr.append($("<td><div contenteditable='true'></div></td>"));
+        tr.append($("<td><div contenteditable='true'></div></td>"));
+        tr.append($("<td><div contenteditable='true'></div></td>"));
         tr.append($("<td><input type='button' value='保存' onclick='Save(this)'/></td>"));
-        $("#tbody").append(tr);
+        $("#tbody").prepend(tr);
     }
 
     function Edit(dom) {

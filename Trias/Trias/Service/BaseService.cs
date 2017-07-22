@@ -10,8 +10,8 @@ namespace Trias.Service
 {
     public class BaseService<T> where T : class
     {
-        private static readonly TriasEntities db = DbContextFactory.GetCurrentThreadInstance();
-        private static readonly DbSet<T> service = db.Set<T>();
+        protected static readonly TriasEntities db = DbContextFactory.GetCurrentThreadInstance();
+        protected static readonly DbSet<T> service = db.Set<T>();
 
         #region 添加
 
@@ -91,7 +91,7 @@ namespace Trias.Service
         /// <param name="Model"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public T Edit(T Model, object obj) 
+        public T Edit(T Model, object obj)
         {
             var objType = obj.GetType();
             var objProperties = objType.GetProperties();
