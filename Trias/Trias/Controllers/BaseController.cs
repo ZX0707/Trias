@@ -15,6 +15,9 @@ namespace Trias.Controllers
         public ReferenceService referenceSer = new ReferenceService();
         public SectionService sectionSer = new SectionService();
         public UserService userSer = new UserService();
+        public CollectionService collectionSer = new CollectionService();
+        public RockService rockSer = new RockService();
+        public UnitService unitSer = new UnitService();
 
         public ActionResult WriteError(object obj)
         {

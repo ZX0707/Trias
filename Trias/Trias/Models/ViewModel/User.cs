@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Trias.Models.ViewModel
+namespace Trias.Models
 {
     public class UserView
     {
