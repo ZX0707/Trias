@@ -19,6 +19,11 @@ namespace Trias.Controllers
         public RockService rockSer = new RockService();
         public UnitService unitSer = new UnitService();
 
+        public ActionResult WriteStatusError(ModelStateDictionary modelState)
+        {
+            return WriteError(modelState.Values.Where(x => x.Errors.Any()).FirstOrDefault().Errors.FirstOrDefault());
+        }
+
         public ActionResult WriteError(object obj)
         {
             return Json(new

@@ -15,7 +15,7 @@ namespace Trias.Unit
         /// </summary>
         /// <param name="str">待加密字符串</param>
         /// <returns></returns>
-        public static string GetMD5(string str)
+        public static string GetMd5(string str)
         {
             var md5 = new MD5CryptoServiceProvider();
             var array = Encoding.UTF8.GetBytes(str);
@@ -33,7 +33,7 @@ namespace Trias.Unit
         /// </summary>
         /// <param name="stream">文件流</param>
         /// <returns></returns>
-        public static string GetStreamMD5(Stream stream)
+        public static string GetStreamMd5(Stream stream)
         {
             var strResult = "";
             var strHashData = "";

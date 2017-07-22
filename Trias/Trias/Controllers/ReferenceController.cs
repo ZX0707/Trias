@@ -39,6 +39,10 @@ namespace Trias.Controllers
 
         public ActionResult Add(ReferenceView model)
         {
+            if (!ModelState.IsValid)
+            {
+                return WriteStatusError(ModelState);
+            }
             var Model = new Reference();
             Model.CopyFrom(model);
             referenceSer.Add(Model);
@@ -48,6 +52,10 @@ namespace Trias.Controllers
 
         public ActionResult Edit(ReferenceView model)
         {
+            if (!ModelState.IsValid)
+            {
+                return WriteStatusError(ModelState);
+            }
             referenceSer.EditWhere(x => x.R_ID == model.R_ID, model);
             referenceSer.SaveChanges();
             return WriteSuccess("操作成功！");

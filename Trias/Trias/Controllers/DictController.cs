@@ -38,6 +38,10 @@ namespace Trias.Controllers
         /// <returns></returns>
         public ActionResult Save(DictView model)
         {
+            if (!ModelState.IsValid)
+            {
+                return WriteStatusError(ModelState);
+            }
             var Model = new Dict();
             Model.CopyFrom(model);
             dictSer.Add(Model);
@@ -53,6 +57,10 @@ namespace Trias.Controllers
         /// <returns></returns>
         public ActionResult Edit(DictView model)
         {
+            if (!ModelState.IsValid)
+            {
+                return WriteStatusError(ModelState);
+            }
             dictSer.EditWhere(x => x.Id == model.Id, model);
             dictSer.SaveChanges();
             return WriteSuccess("操作成功！");

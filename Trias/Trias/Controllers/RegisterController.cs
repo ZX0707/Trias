@@ -17,10 +17,14 @@ namespace Trias.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(UserView model2)
+        public ActionResult Register(UserView model)
         {
+            if (!ModelState.IsValid)
+            {
+                return WriteStatusError(ModelState);
+            }
             var Model = new User();
-            Model.CopyFrom(model2);
+            Model.CopyFrom(model);
             userSer.Add(Model);
             Model.User_ID = new Guid().ToString();
             userSer.SaveChanges();
