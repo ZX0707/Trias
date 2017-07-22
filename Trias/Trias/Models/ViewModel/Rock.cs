@@ -12,7 +12,7 @@ namespace Trias.Models
     using System;
     using System.Collections.Generic;
 
-    public partial class Rock
+    public partial class RockView
     {
         public string Rock_ID { get; set; }
         public string Type { get; set; }

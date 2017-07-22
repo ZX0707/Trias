@@ -12,7 +12,7 @@ namespace Trias.Models
     using System;
     using System.Collections.Generic;
 
-    public partial class Geochemical
+    public partial class GeochemicalView
     {
         public string G_ID { get; set; }
         public string Section { get; set; }

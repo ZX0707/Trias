@@ -12,7 +12,7 @@ namespace Trias.Models
     using System;
     using System.Collections.Generic;
 
-    public partial class Unit
+    public partial class UnitView
     {
         public string U_ID { get; set; }
         public string F_ID { get; set; }

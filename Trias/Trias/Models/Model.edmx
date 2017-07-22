@@ -357,8 +357,6 @@
         <EntityType Name="Fossil">
           <Key>
             <PropertyRef Name="H_ID" />
-            <PropertyRef Name="P_ID" />
-            <PropertyRef Name="R_ID" />
           </Key>
           <Property Name="H_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="P_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />

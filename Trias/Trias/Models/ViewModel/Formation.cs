@@ -12,7 +12,7 @@ namespace Trias.Models
     using System;
     using System.Collections.Generic;
 
-    public partial class Formation
+    public partial class FormationView
     {
         public string F_ID { get; set; }
         public string S_ID { get; set; }
