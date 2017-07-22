@@ -1,16 +1,17 @@
 ﻿@{
+    ViewBag.Title = "Dic";
 }
 
 @model Trias.Models.DictView
 
 <style>
-    div {
+    .list div {
         border: 1px solid yellow;
     }
 </style>
 
 <body>
-    <table>
+    <table class="list">
         <thead>
             <tr>
                 <th>@Html.LabelFor(x => x.Id)</th>

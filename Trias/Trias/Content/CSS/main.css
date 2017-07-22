@@ -1,0 +1,25 @@
+﻿* {
+    font-size: 12px;
+    font-family: "Microsoft YaHei";
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    /*min-width: 1300px;*/
+}
+
+ul, li {
+    list-style: none;
+}
+/******************全局样式end**************************/
+.form_input {
+    width: 200px;
+    height: 20px;
+}
+.form_button {
+    width: 100px;
+    height: 20px;
+}
+
