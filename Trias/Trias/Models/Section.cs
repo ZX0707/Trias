@@ -40,10 +40,5 @@ namespace Trias.Models
         public string Notes { get; set; }
         public string Comments { get; set; }
         public Nullable<double> Altitude { get; set; }
-        public string Formation { get; set; }
-        public string Lithologies { get; set; }
-        public string Environments { get; set; }
-        public string EnvironmentalZones { get; set; }
-        public Nullable<double> Thickness { get; set; }
     }
 }
