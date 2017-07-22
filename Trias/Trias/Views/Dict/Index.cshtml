@@ -1,0 +1,103 @@
+﻿@{
+}
+
+@model Trias.Models.DictView
+
+<style>
+    div {
+        border: 1px solid yellow;
+    }
+</style>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(x => x.Id)</th>
+                <th>@Html.LabelFor(x => x.Pid)</th>
+                <th>@Html.LabelFor(x => x.Type)</th>
+                <th>@Html.LabelFor(x => x.KeyName)</th>
+                <th>@Html.LabelFor(x => x.ValueName)</th>
+                <th>@Html.LabelFor(x => x.Sort)</th>
+                <th><input type="button" value="添加" id="Add" /></th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</body>
+
+<script>
+    $(function () {
+        reload();
+        $("#Add").click(function () {
+            Add();
+        });
+    });
+
+    function reload() {
+        $.post("@Url.Action("GetList")", {}, function (data) {
+            $("#tbody").html("");
+            for (var i = 0; i < data.length; i++) {
+                var tr = $("<tr/>");
+                tr.append($("<td><div>" + data[i].Id + "</div></td>"));
+                tr.append($("<td><div contenteditable='true'>" + data[i].Pid + "</div></td>"));
+                tr.append($("<td><div contenteditable='true'>" + data[i].Type + "</div></td>"));
+                tr.append($("<td><div contenteditable='true'>" + data[i].KeyName + "</div></td>"));
+                tr.append($("<td><div contenteditable='true'>" + data[i].ValueName + "</div></td>"));
+                tr.append($("<td><div contenteditable='true'>" + data[i].Sort + "</div></td>"));
+                tr.append($("<td><input type='button' value='修改' onclick='Edit(this)'/><input type='button' value='删除' onclick='Remove(this)'/></td>"));
+                $("#tbody").append(tr);
+            }
+        }, "json");
+    }
+
+    function Add() {
+        var tr = $("<tr/>");
+        tr.append($("<td><div>1</div></td>"));
+        tr.append($("<td><div contenteditable='true'>1</div></td>"));
+        tr.append($("<td><div contenteditable='true'>2</div></td>"));
+        tr.append($("<td><div contenteditable='true'>3</div></td>"));
+        tr.append($("<td><div contenteditable='true'>4</div></td>"));
+        tr.append($("<td><div contenteditable='true'>5</div></td>"));
+        tr.append($("<td><input type='button' value='保存' onclick='Save(this)'/></td>"));
+        $("#tbody").append(tr);
+    }
+
+    function Edit(dom) {
+        var obj = {
+            Id: $(dom).parent().parent().find("td").eq(0).find("div").html(),
+            Pid: $(dom).parent().parent().find("td").eq(1).find("div").html(),
+            Type: $(dom).parent().parent().find("td").eq(2).find("div").html(),
+            KeyName: $(dom).parent().parent().find("td").eq(3).find("div").html(),
+            ValueName: $(dom).parent().parent().find("td").eq(4).find("div").html(),
+            Sort: $(dom).parent().parent().find("td").eq(5).find("div").html()
+        };
+        $.post("@Url.Action("Edit")", obj, function (data) {
+            console.log(data);
+            reload();
+        });
+    }
+
+    function Remove(dom) {
+        var Id = $(dom).parent().parent().find("td").eq(0).find("div").html();
+        $.post("@Url.Action("Remove")", { id: Id }, function (data) {
+            console.log(data);
+            reload();
+        });
+    }
+
+    function Save(dom) {
+        var obj = {
+            Id : $(dom).parent().parent().find("td").eq(0).find("div").html(),
+            Pid : $(dom).parent().parent().find("td").eq(1).find("div").html(),
+            Type : $(dom).parent().parent().find("td").eq(2).find("div").html(),
+            KeyName : $(dom).parent().parent().find("td").eq(3).find("div").html(),
+            ValueName : $(dom).parent().parent().find("td").eq(4).find("div").html(),
+            Sort : $(dom).parent().parent().find("td").eq(5).find("div").html()
+        };
+        $.post("@Url.Action("Save")", obj, function (data) {
+            console.log(data);
+            reload();
+        });
+    }
+</script>
