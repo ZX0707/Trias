@@ -186,19 +186,27 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\Collection.cs" />
     <Compile Include="Models\ViewModel\Dict.cs" />
+    <Compile Include="Models\ViewModel\Formation.cs" />
     <Compile Include="Models\ViewModel\Fossil.cs" />
+    <Compile Include="Models\ViewModel\Geochemical.cs" />
     <Compile Include="Models\ViewModel\Reference.cs" />
+    <Compile Include="Models\ViewModel\Rock.cs" />
     <Compile Include="Models\ViewModel\Section.cs" />
+    <Compile Include="Models\ViewModel\Unit.cs" />
     <Compile Include="Models\ViewModel\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BaseService.cs" />
+    <Compile Include="Service\CollectionService.cs" />
     <Compile Include="Service\DbContextFactory.cs" />
     <Compile Include="Service\DictService.cs" />
     <Compile Include="Service\FossilService.cs" />
     <Compile Include="Service\GeochemicalService.cs" />
     <Compile Include="Service\ReferenceService.cs" />
+    <Compile Include="Service\RockService.cs" />
     <Compile Include="Service\SectionService.cs" />
+    <Compile Include="Service\UnitService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Unit\Expansion.cs" />
   </ItemGroup>
