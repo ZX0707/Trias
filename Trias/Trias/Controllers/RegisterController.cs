@@ -12,7 +12,11 @@ namespace Trias.Controllers
     {
         //
         // GET: /Register/
-
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult Register(UserView model2)
         {
             var Model = new User();
