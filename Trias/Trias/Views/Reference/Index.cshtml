@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "添加文献";
+}
+
+@model Trias.Models.Reference
+
+<div style="margin: 10px;">
+    <form id="form" method="post">
+        <h2>添加文献</h2>
+        文献类型：<select name="ReferenceType" id="ReferenceType">
+            <option>1</option>
+            <option>2</option>
+        </select><br />
+        <br />
+        第一作者：
+        <input name="FirstAuthor" id="FirstAuthor" type="text" /><br />
+        <br />
+        第二作者：<input name="SecondAuthor" id="SecondAuthor" type="text" /><br />
+        <br />
+        其他作者：<input name="OtherAuthors" id="OtherAuthors" type="text" /><br />
+        <br />
+        年度：<input name="Year" id="Year" type="text" /><br />
+        <br />
+        文献名：<input name="Title" id="Title" type="text" /><br />
+        <br />
+        编辑：<input name="Editor1" id="Editor1" type="text" /><input name="Editor2" id="Editor2" type="text" /><input name="Editor3" id="Editor3" type="text" /><input name="Editor4" id="Editor4" type="text" /><br />
+        <br />
+        书名：<input name="BookTitle" id="BookTitle" type="text" /><br />
+        <br />
+        杂志名：<input name="Journal" id="Journal" type="text" /><br />
+        <br />
+        册：<input name="Volume" id="Volume" type="text" />卷：<input name="No" id="No" type="text" />
+        起始页：<input name="PageBegin" id="PageBegin" type="text" />
+        结束页：<input name="PageEnd" type="text" id="PageEnd" /><br />
+        <br />
+        出版社：<input name="Publisher" id="Publisher" type="text" /><br />
+        <br />
+        语言：<select name="Language" id="Language">
+            <option value="Arabic">Arabic</option>
+        </select><br />
+        <br />
+        编码：<input name="DOI" id="DOI" type="text" /><br />
+        <br />
+        链接1：<input name="URL1" id="URL1" type="text" /><br />
+        <br />
+        链接2：<input name="URL2" id="URL2" type="text" /><br />
+        <br />
+        评论：<textarea name="Comments" id="Comments"></textarea><br />
+        <br />
+        <a class="easyui-linkbutton" onclick="reset()">重置</a>
+        <a class="easyui-linkbutton" onclick="save()">保存</a>
+        <a class="easyui-linkbutton" onclick="addSection()">添加剖面</a>
+    </form>
+</div>
+<script>
+    $(function () {
+        $('#form').form({
+            url: '/Reference/Add',
+            onSubmit: function () {
+                //提交验证，return false;不提交
+            },
+            success: function (data) {
+                //提交成功后的操作
+                alert(data);
+            }
+        });
+
+    });
+    function reset() {
+        $('#form').form("reset");
+    }
+    function save() {
+        $('#form').form("submit");
+    }
+    function addSection() {
+
+    }
+</script>

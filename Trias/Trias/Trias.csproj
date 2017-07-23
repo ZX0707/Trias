@@ -1136,10 +1136,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Dict\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithLogin.cshtml" />
+    <Content Include="Views\Home\IndexWithLogin.cshtml" />
+    <Content Include="Views\Reference\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

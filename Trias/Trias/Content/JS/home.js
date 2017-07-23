@@ -16,37 +16,9 @@ function login() {
         if (result.status == "error") {
             $("#remain").html(result.msg);
         } else {
+            location.href = "/Home/IndexWithLogin";
         }
     }, "json");
 }
 
 
-
-//function initMenu(){
-//	$("#leftAnimite").click(function()
-//	{
-//		if ($(".right").css("left")=="300px") {
-//			 layerToLeft();
-
-//		}
-//		else
-//		{
-//        	layerToRight();
-//		}
-
-//	})
-//}
-//	// 隐藏左侧
-//	function layerToLeft(){
-//	$(".left").animate({ "left": "-300px" }, "fast");//系统左侧
-//    $(".right").animate({ "left": "0px" }, "fast");//二维地图容器
-//    $(".Animite").css({ "background-image": "url('/Content/images/right.png')" });//右侧隐藏图标换成向左显示图标
-
-//	}
-//	// 显示左侧
-//	function layerToRight(){
-//	$(".right").animate({ "left": "300px" }, "fast");//系统左侧
-//    $(".left").animate({ "left": "0px" }, "fast");//二维地图容器
-//    $(".Animite").css({ "background-image": "url('/Content/images/left.png')" });//右侧隐藏图标换成向左显示图标
-
-//	}
