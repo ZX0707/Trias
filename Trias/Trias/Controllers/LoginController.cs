@@ -25,5 +25,9 @@ namespace Trias.Controllers
             }
         }
 
+        public ActionResult GetCurrentUser()
+        {
+            return Json(UserMgr.CurrUserInfo());
+        }
     }
 }

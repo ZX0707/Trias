@@ -214,13 +214,13 @@
     <Compile Include="Service\SectionService.cs" />
     <Compile Include="Service\UnitService.cs" />
     <Compile Include="Service\UserService.cs" />
-    <Compile Include="Unit\BaiduApiHelper.cs" />
-    <Compile Include="Unit\CacheFacory.cs" />
-    <Compile Include="Unit\CacheHelper.cs" />
-    <Compile Include="Unit\Expansion.cs" />
-    <Compile Include="Unit\Keys.cs" />
-    <Compile Include="Unit\MD5Helper.cs" />
-    <Compile Include="Unit\UserMgr.cs" />
+    <Compile Include="Tool\BaiduApiHelper.cs" />
+    <Compile Include="Tool\CacheFacory.cs" />
+    <Compile Include="Tool\CacheHelper.cs" />
+    <Compile Include="Tool\Expansion.cs" />
+    <Compile Include="Tool\Keys.cs" />
+    <Compile Include="Tool\MD5Helper.cs" />
+    <Compile Include="Tool\UserMgr.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CSS\main.css" />
