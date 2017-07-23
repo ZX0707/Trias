@@ -17,25 +17,31 @@ namespace Trias.Models
     public partial class ReferenceView
     {
         public string R_ID { get; set; }
+        [Required(ErrorMessage="文献类型必填")]
         public string ReferenceType { get; set; }
+        [Required(ErrorMessage="至少有一位作者")]
         public string FirstAuthor { get; set; }
         public string SecondAuthor { get; set; }
         public string OtherAuthors { get; set; }
+        [Required(ErrorMessage="文献年度必填")]
         public Nullable<int> Year { get; set; }
-        [Required(ErrorMessage = "标题是必填的")]
+        [Required(ErrorMessage="文献名称不能为空")]
         public string Title { get; set; }
         public string BookTitle { get; set; }
         public string Journal { get; set; }
+        [Required(ErrorMessage="至少有一位编辑")]
         public string Editor1 { get; set; }
         public string Editor2 { get; set; }
         public string Editor3 { get; set; }
         public string Editor4 { get; set; }
+        [Required(ErrorMessage="语言必选")]
         public string Language { get; set; }
         public string Publisher { get; set; }
         public string Volume { get; set; }
         public string No { get; set; }
         public string PageBegin { get; set; }
         public string PageEnd { get; set; }
+        [Required(ErrorMessage="文献的唯一标识码必填")]
         public string DOI { get; set; }
         public string URL1 { get; set; }
         public string URL2 { get; set; }

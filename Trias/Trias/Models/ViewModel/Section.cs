@@ -11,6 +11,7 @@ namespace Trias.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class SectionView
     {
@@ -24,15 +25,21 @@ namespace Trias.Models
         public string SubTime { get; set; }
         public Nullable<int> Time2 { get; set; }
         public Nullable<System.DateTime> EnterTime { get; set; }
+        [Required(ErrorMessage="核准人不能为空")]
         public string Authorizer { get; set; }
+        [Required(ErrorMessage = "国家不能为空")]
         public string Country { get; set; }
+        [Required(ErrorMessage = "省份不能为空")]
         public string Province { get; set; }
+        [Required(ErrorMessage = "城市不能为空")]
         public string City { get; set; }
         public string County { get; set; }
         public string Village { get; set; }
+        [Required(ErrorMessage = "GPS不能为空")]
         public Nullable<int> LonDegrees { get; set; }
         public Nullable<int> LonMinutes { get; set; }
         public Nullable<int> LonSeconds { get; set; }
+        [Required(ErrorMessage = "GPS不能为空")]
         public Nullable<int> LatDegrees { get; set; }
         public Nullable<int> LatMinutes { get; set; }
         public Nullable<int> LatSeconds { get; set; }
