@@ -13,8 +13,9 @@ namespace Trias.Controllers
         //
         // GET: /Section/
 
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            ViewBag.R_ID = id;
             return View();
         }
         //添加剖面
@@ -34,12 +35,12 @@ namespace Trias.Controllers
         //根据用户id查询剖面信息
         public ActionResult GetSection(string username)
         {
-            if(username==null)
+            if (username == null)
             {
                 return WriteError("用户名为空");
             }
             var sectionlist = sectionSer.Where(x => x.Authorizer.Contains(username)).ToList();
-            if(sectionlist.Count==0)
+            if (sectionlist.Count == 0)
             {
                 return WriteSuccess("查询成功，未添加剖面");
             }
@@ -57,7 +58,7 @@ namespace Trias.Controllers
         }
         public ActionResult RemoveSection(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("次文献不存在");
             }

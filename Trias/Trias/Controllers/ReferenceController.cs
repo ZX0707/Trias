@@ -52,7 +52,11 @@ namespace Trias.Controllers
             referenceSer.Add(Model);
             Model.R_ID = Guid.NewGuid().ToString();
             referenceSer.SaveChanges();
-            return WriteSuccess("操作成功！");
+            return WriteSuccess(new
+            {
+                R_ID = Model.R_ID,
+                msg = "操作成功！"
+            });
         }
 
         public ActionResult Edit(ReferenceView model)
