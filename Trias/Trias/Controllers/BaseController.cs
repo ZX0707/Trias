@@ -18,6 +18,7 @@ namespace Trias.Controllers
         public CollectionService collectionSer = new CollectionService();
         public RockService rockSer = new RockService();
         public UnitService unitSer = new UnitService();
+        public FormationService formationSer = new FormationService();
 
         public ActionResult WriteStatusError(ModelStateDictionary modelState)
         {

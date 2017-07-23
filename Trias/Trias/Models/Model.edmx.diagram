@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="TriasModel.Unit" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.Formation" Width="1.5" PointX="4.625" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.Section" Width="1.5" PointX="7.625" PointY="4.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="TriasModel.Fossil" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="TriasModel.Fossil" Width="1.5" PointX="5" PointY="4.75" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -16,7 +16,6 @@ function login() {
         if (result.status == "error") {
             $("#remain").html(result.msg);
         } else {
-
         }
     }, "json");
 }
