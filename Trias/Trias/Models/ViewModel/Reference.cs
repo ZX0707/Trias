@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Trias.Models
 {
     using System;
@@ -20,6 +22,7 @@ namespace Trias.Models
         public string SecondAuthor { get; set; }
         public string OtherAuthors { get; set; }
         public Nullable<int> Year { get; set; }
+        [Required]
         public string Title { get; set; }
         public string BookTitle { get; set; }
         public string Journal { get; set; }
