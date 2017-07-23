@@ -78,5 +78,15 @@ namespace Trias.Controllers
             return WriteSuccess("操作成功！");
         }
 
+        /// <summary>
+        /// 获取下拉选项
+        /// </summary>
+        /// <param name="type">选项type</param>
+        /// <returns></returns>
+        public ActionResult GetSelectOptions(string type)
+        {
+            return Json(dictSer.Where(x => x.Type == type).OrderBy(x => x.Sort).ToList());
+        }
+
     }
 }
