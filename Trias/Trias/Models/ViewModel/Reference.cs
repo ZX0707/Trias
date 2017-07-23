@@ -13,7 +13,7 @@ namespace Trias.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class ReferenceView
     {
         public string R_ID { get; set; }
@@ -22,7 +22,7 @@ namespace Trias.Models
         public string SecondAuthor { get; set; }
         public string OtherAuthors { get; set; }
         public Nullable<int> Year { get; set; }
-        [Required]
+        [Required(ErrorMessage = "标题是必填的")]
         public string Title { get; set; }
         public string BookTitle { get; set; }
         public string Journal { get; set; }
