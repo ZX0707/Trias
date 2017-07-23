@@ -61,7 +61,7 @@ namespace Trias.Controllers
         {
             if(id==null)
             {
-                return WriteError("岩石组不存在")
+                return WriteError("岩石组不存在");
             }
             formationSer.RemoveWhere(x=>x.F_ID==id);
             formationSer.SaveChanges();
