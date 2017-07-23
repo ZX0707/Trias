@@ -89,7 +89,7 @@ namespace Trias.Controllers
             var list = dictSer.Where(x => x.Type == type);
             if (!string.IsNullOrWhiteSpace(pid))
             {
-                list = list.Where(x => x.Type == type);
+                list = list.Where(x => x.Pid == pid);
             }
             return Json(list.OrderBy(x => x.Sort).ToList());
         }
