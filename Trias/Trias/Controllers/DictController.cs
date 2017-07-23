@@ -82,10 +82,16 @@ namespace Trias.Controllers
         /// 获取下拉选项
         /// </summary>
         /// <param name="type">选项type</param>
+        /// <param name="pid">父ID</param>
         /// <returns></returns>
-        public ActionResult GetSelectOptions(string type)
+        public ActionResult GetSelectOptions(string type, string pid)
         {
-            return Json(dictSer.Where(x => x.Type == type).OrderBy(x => x.Sort).ToList());
+            var list = dictSer.Where(x => x.Type == type);
+            if (!string.IsNullOrWhiteSpace(pid))
+            {
+                list = list.Where(x => x.Type == type);
+            }
+            return Json(list.OrderBy(x => x.Sort).ToList());
         }
 
     }
