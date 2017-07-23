@@ -17,7 +17,7 @@
         <br />
         其他作者：<input name="OtherAuthors" id="OtherAuthors" type="text" /><br />
         <br />
-        年度：<input name="Year" id="Year" type="number"  /><font color="red">*</font><br />
+        年度：<input name="Year" id="Year" type="number" /><font color="red">*</font><br />
         <br />
         文献名：<input name="Title" id="Title" type="text" /><font color="red">*</font><br />
         <br />
@@ -29,7 +29,7 @@
         <br />
         册：<input name="Volume" id="Volume" type="number" />卷：<input name="No" id="No" type="number" />
         起始页：<input name="PageBegin" id="PageBegin" type="number" />
-        结束页：<input name="PageEnd"  id="PageEnd" type="number" /><br />
+        结束页：<input name="PageEnd" id="PageEnd" type="number" /><br />
         <br />
         出版社：<input name="Publisher" id="Publisher" type="text" /><br />
         <br />
@@ -51,10 +51,9 @@
     </form>
 </div>
 <script>
+    var rid;
     $(function () {
         $('#addSection').linkbutton('disable');//禁用button
-
-
         $.post("/Dict/GetSelectOptions", { type: "ReferenceType" }, function (result) {
             $("#ReferenceType").html("");
             for (var i = 0; i < result.length; i++) {
@@ -84,6 +83,7 @@
                     data = $.parseJSON(data);
                 }
                 if (data.status == "success") {
+                    rid = data.msg.R_ID;
                     $('#addSection').linkbutton('enable');//启用button
                     $.messager.alert("", "保存成功！", "info");
                 }
@@ -101,6 +101,6 @@
         $('#form').form("submit");
     }
     function addSection() {
-        location.href = "/Section/Index/";
+        location.href = "/Section/Index/" + rid;
     }
 </script>
