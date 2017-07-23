@@ -22,7 +22,7 @@ namespace Trias.Controllers
 
         public ActionResult WriteStatusError(ModelStateDictionary modelState)
         {
-            return WriteError(modelState.Values.Where(x => x.Errors.Any()).FirstOrDefault().Errors.FirstOrDefault());
+            return WriteError(modelState.Values.Where(x => x.Errors.Any()).FirstOrDefault().Errors.FirstOrDefault().ErrorMessage);
         }
 
         public ActionResult WriteError(object obj)
