@@ -7,7 +7,7 @@ using Trias.Tool;
 
 namespace Trias.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         //
         // GET: /Home/

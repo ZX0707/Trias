@@ -26,7 +26,7 @@ namespace Trias.Controllers
             var Model = new User();
             Model.CopyFrom(model);
             userSer.Add(Model);
-            Model.User_ID = new Guid().ToString();
+            Model.User_ID = Guid.NewGuid().ToString();
             userSer.SaveChanges();
             return WriteSuccess("添加成功");
         }

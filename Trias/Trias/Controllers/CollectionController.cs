@@ -29,7 +29,7 @@ namespace Trias.Controllers
             var modelCollection = new Collection();
             modelCollection.CopyFrom(model);
             collectionSer.Add(modelCollection);
-            modelCollection.U_ID = new Guid().ToString();
+            modelCollection.U_ID = Guid.NewGuid().ToString();
             collectionSer.SaveChanges();
             return WriteSuccess("添加成功");
         }

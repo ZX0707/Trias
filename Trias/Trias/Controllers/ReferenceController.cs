@@ -46,7 +46,7 @@ namespace Trias.Controllers
             var Model = new Reference();
             Model.CopyFrom(model);
             referenceSer.Add(Model);
-            Model.R_ID = new Guid().ToString();
+            Model.R_ID = Guid.NewGuid().ToString();
             referenceSer.SaveChanges();
             return WriteSuccess("操作成功！");
         }

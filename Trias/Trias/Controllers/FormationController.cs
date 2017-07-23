@@ -27,7 +27,7 @@ namespace Trias.Controllers
             Formation modelformation = new Formation();
             modelformation.CopyFrom(model);
             formationSer.Add(modelformation);
-            modelformation.F_ID = new Guid().ToString();
+            modelformation.F_ID = Guid.NewGuid().ToString();
             formationSer.SaveChanges();
             return WriteSuccess("添加成功");
         }

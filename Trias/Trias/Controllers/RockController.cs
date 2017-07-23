@@ -27,7 +27,7 @@ namespace Trias.Controllers
             var modelRock = new Rock();
             modelRock.CopyFrom(model);
             rockSer.Add(modelRock);
-            modelRock.Rock_ID=new Guid().ToString();
+            modelRock.Rock_ID = Guid.NewGuid().ToString();
             rockSer.SaveChanges();
             return WriteSuccess("添加成功");
         }

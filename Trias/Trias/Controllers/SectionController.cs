@@ -27,7 +27,7 @@ namespace Trias.Controllers
             var Model = new Section();
             Model.CopyFrom(model);
             sectionSer.Add(Model);
-            Model.S_ID = new Guid().ToString();
+            Model.S_ID = Guid.NewGuid().ToString();
             sectionSer.SaveChanges();
             return WriteSuccess("添加成功");
         }
