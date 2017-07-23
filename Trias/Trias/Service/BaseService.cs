@@ -159,6 +159,20 @@ namespace Trias.Service
 
         #endregion
 
+        #region 其他
+
+        /// <summary>
+        /// 判定是否存在
+        /// </summary>
+        /// <param name="predicate">判断条件</param>
+        /// <returns></returns>
+        public bool Any(Expression<Func<T, bool>> predicate)
+        {
+            return Where(predicate).Any();
+        }
+
+        #endregion
+
         #region 保存
 
         public int SaveChanges()
