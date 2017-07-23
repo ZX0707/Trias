@@ -12,6 +12,7 @@
     <link href="~/Content/easyui/themes/icon.css" rel="stylesheet" />
     <link href="~/Content/easyui/demo/demo.css" rel="stylesheet" />
     <script src="~/Content/easyui/jquery.easyui.min.js"></script>
+    <script src="~/Content/easyui/locale/easyui-lang-zh_CN.js"></script>
     @* easyui *@
 
 
@@ -21,13 +22,29 @@
         .order {
             color: #447C88;
         }
+
         .meu {
-            padding:3px 10px;font-size:12px;border:1px solid #666666;
-
+            padding: 3px 10px;
+            font-size: 12px;
+            border: 1px solid #666666;
         }
-
-          
     </style>
+    <script>
+        var currentUser;
+        $.post("/Login/GetCurrentUser", {}, function (result) {
+            currentUser = result;
+            if (result.UserName == null) {
+                location.href = "/Home/Index";
+            }
+            else {
+                $("#name").html(result.UserName);
+            }
+            if (typeof init == "function") {
+                init();
+            }
+        }, "json");
+    </script>
+
 
 </head>
 <body class="easyui-layout">
@@ -35,7 +52,7 @@
     <div data-options="region:'west',title:'Login'" style="width: 300px;">
         @*<div>@ViewBag.UserName</div>*@
         <div style="margin: 10px; text-align: center">
-            <span><strong>@ViewBag.UserName</strong>
+            <span><strong id="name"></strong>
                 <a href="Logout.aspx" target="_parent" style="color: #FF9A00;"><strong>Sign out</strong></a>
             </span>
         </div>
@@ -45,7 +62,7 @@
                 <div title="添加数据" data-options="iconCls:'icon-save'" style="overflow: auto; padding: 10px;">
                     <div class="order">
                         <div class="meu"><a href="/Reference/Index"><b>添加文献</b></a></div>
-                        <div class="meu"><a href="#"><b>添加剖面</b></a></div>
+                        <div class="meu"><a href="/Section/Index"><b>添加剖面</b></a></div>
                         <div class="meu"><a href="#"><b>添加岩石组</b></a></div>
                         <div class="meu"><a href="#"><b>添加化石</b></a></div>
                     </div>
@@ -69,5 +86,6 @@
     <div data-options="region:'center'">
         @RenderBody()
     </div>
+
 </body>
 </html>

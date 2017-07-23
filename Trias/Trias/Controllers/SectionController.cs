@@ -13,10 +13,10 @@ namespace Trias.Controllers
         //
         // GET: /Section/
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+            return View();
+        }
         //添加剖面
         public ActionResult AddSection(SectionView model)
         {
