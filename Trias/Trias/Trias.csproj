@@ -134,6 +134,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CollectionController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
+    <Compile Include="Controllers\FossilController.cs" />
+    <Compile Include="Controllers\GeochemicalController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="Controllers\BaiduController.cs" />
     <Compile Include="Controllers\RockController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
+    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

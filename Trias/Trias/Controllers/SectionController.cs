@@ -31,7 +31,7 @@ namespace Trias.Controllers
             sectionSer.SaveChanges();
             return WriteSuccess("添加成功");
         }
-        //根据用户
+        //根据用户id查询剖面信息
         public ActionResult GetSection(string username)
         {
             if(username==null)
