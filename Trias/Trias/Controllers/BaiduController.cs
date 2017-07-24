@@ -9,17 +9,9 @@ namespace Trias.Controllers
 {
     public class BaiduController : BaseController
     {
-        public ActionResult Index(string id)
+        public ActionResult Index(string city, string place)
         {
-            try
-            {
-                return Json(BaiduApiHelper.GetLocationByName(id), JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return WriteError(e.Message);
-            }
+            return Content(BaiduApiHelper.GetLocationsByName(city, place));
         }
 
     }
