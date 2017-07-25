@@ -13,10 +13,10 @@ namespace Trias.Controllers
         //
         // GET: /Formation/
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+            return View();
+        }
         //添加岩石组信息
         public ActionResult AddFormation(FormationView model)
         {

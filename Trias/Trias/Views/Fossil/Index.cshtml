@@ -1,12 +1,9 @@
 ﻿@{
-    ViewBag.Title = "添加文献";
+    ViewBag.Title = "添加化石";
 }
-
-@model Trias.Models.Reference
-
 <div style="margin: 10px;">
     <form id="form" method="post">
-        <h2>添加文献</h2>
+        <h2>添加化石</h2>
         文献类型：<select name="ReferenceType" id="ReferenceType">
         </select><font color="red">*</font><br />
         <br />
@@ -103,3 +100,4 @@
         location.href = "/Section/Index/" + rid;
     }
 </script>
+
