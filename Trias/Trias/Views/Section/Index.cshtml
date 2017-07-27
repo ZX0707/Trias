@@ -3,77 +3,219 @@
 }
 @model Trias.Models.Section
 @*模态框*@
-<div id="dd" class="easyui-dialog" title="My Dialog" style="width: 400px; height: 200px;"
+<div id="dd" class="easyui-dialog" title="文献信息" style="width: 600px; height: 400px;"
     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
-    Dialog Content.    
+    <div style="margin: 10px; text-align: center;">
+        <form class="form-horizontal" role="form" method="post">
+            <div>
+                <a href="#"><u>重置</u></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><u>添加新文献</u></a>
+            </div>
+            <div style="margin-top: 8px;">
+                <label>文献编号/作者：</label>
+                <input name="NoAuthorizer" id="NoAuthorizer" type="text" placeholder="输入编号/作者">
+                <label>年度：</label>
+                <input name="SearchYear" id="SearchYear" type="text" placeholder="输入年度">
+                <a class="easyui-linkbutton" id="SearchBtn" onclick="SearchBtn()">查询</a>
+            </div>
+        </form>
+    </div>
 </div>
 <div style="margin: 10px;">
-    <form id="form" method="post">
-        <h2>添加剖面</h2>
-        核准人：
-        <input name="Authorizer" id="Authorizer" type="text" readonly="readonly" /><font color="red">*</font><br />
-        <br />
-        核准时间：<input class="easyui-datebox" name="EnterTime" id="EnterTime" type="text" /><font color="red">*</font><br />
-        <br />
-        剖面名称：<input name="SectionName" id="SectionName" type="text" /><font color="red">*</font><br />
-        <br />
-        参考文献：<input name="RID1" id="RID1" type="text" value="@ViewBag.R_ID" readonly="readonly" onclick="openDialog(1)"/><font color="red">*</font>
-        <input name="RID2" id="RID2" type="text" readonly="readonly" onclick="openDialog(2)" />
-        <input name="RID3" id="RID3" type="text" readonly="readonly" onclick="openDialog(3)" /><br />
-        <br />
-        时代：<input name="Time2" id="Time2" type="text" />百万年<br />
-        <br />
-        时代：
-        <select name="Time" id="Time" onchange="change()">
-        </select>
-        <select name="SubTime" id="SubTime">
-        </select>
-        <br />
-        <br />
-        国家：<input name="Country" id="Country" type="text" /><font color="red">*</font>
-        省份：<input name="Province" id="Province" type="text" /><font color="red">*</font>
-        城市：<input name="City" id="City" type="text" /><font color="red">*</font>
-        县/区：<input name="County" id="County" type="text" />
-        村：<input name="Village" id="Village" type="text" /><br />
-        <br />
-        度，分，秒<br />
-        <br />
-        经度：<input name="LonDegrees" id="LonDegrees" type="text" />° 
-        <input name="LonMinutes" id="LonMinutes" type="text" />' 
-        <input name="LonSeconds" id="LonSeconds" type="text" />"<select name="lon" id="lon">
-            <option value="Arabic">北纬</option>
-            <option value="Arabic">南纬</option>
-        </select><select name="GetLocation" id="GetLocation">
-            <option value="Province">省份</option>
-            <option value="City">城市</option>
-            <option value="County">县/区</option>
-            <option value="Village">村</option>
-        </select>
-        <br />
-        <br />
-        纬度：<input name="LatDegrees" id="LatDegrees" type="text" />° 
-        <input name="LatMinutes" id="LatMinutes" type="text" />' 
-        <input name="LatSeconds" id="LatSeconds" type="text" />"<select name="lat" id="lat">
-            <option value="Arabic">东经</option>
-            <option value="Arabic">西经</option>
-        </select>
-        <a class="easyui-linkbutton" onclick="GetGPS()">获取GPS值</a><font color="red">*</font><br />
-        <br />
-        海拔：<input name="Altitude" id="Altitude" type="text" /><select name="measure" id="measure">
-            <option value="Arabic">米</option>
-            <option value="Arabic">英寸</option>
-        </select><br />
-        <br />
+    <form class="form-horizontal" role="form" id="form" method="post">
+        <div class="form-group">
+            <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
+                添加剖面</label>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">核准人：</label>
+            <div class="col-sm-2 ">
+                <input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control"
+                    style="background-color: #FFFFC0" readonly="readonly" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">核准时间：</label>
+            <div class="col-sm-2 ">
+                <input name="EnterTime" id="EnterTime" type="text" class="easyui-datebox "
+                    style="height: 33px;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">剖面名称:</label>
+            <div class="col-sm-3 ">
+                <input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">参考文献：</label>
+            <div class="col-sm-2 ">
+                <input name="RID1" id="RID1" type="text" value="@ViewBag.R_ID" readonly="readonly" 
+                    onclick="openDialog(1)" placeholder="输入参考文献1" class="form-control" style="background-color: #FFFFC0"/>
+            </div>
+            <div class="col-sm-2 ">
+                <input name="RID2" id="RID2" type="text" readonly="readonly" onclick="openDialog(2)" placeholder="输入参考文献2" class="form-control" />
+            </div>
+            <div class="col-sm-2 ">
+                <input name="RID3" id="RID3" type="text" readonly="readonly" onclick="openDialog(3)" placeholder="输入参考文献3" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">时代：</label>
+            <div class="col-sm-2 ">
+                <input name="Time2" id="Time2" type="text" placeholder="输入时代" class="form-control" />
+            </div>
+            <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">时代：</label>
+            <div class="col-sm-2 ">
+                <select name="Time" id="Time" onchange="change()" class="form-control"></select>
+            </div>
+            <div class="col-sm-2 ">
+                <select name="SubTime" id="SubTime" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">国家：</label>
+            <div class="col-sm-2 ">
+                <input name="Country" id="Country" type="text" placeholder="输入国家"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+            <label class="col-sm-1 control-label">省份：</label>
+            <div class="col-sm-2 ">
+                <input name="Province" id="Province" type="text" placeholder="输入省份"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+            <label class="col-sm-1 control-label">城市：</label>
+            <div class="col-sm-2 ">
+                <input name="City" id="City" type="text" placeholder="输入城市"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">县/区：</label>
+            <div class="col-sm-2 ">
+                <input name="County" id="County" type="text" placeholder="输入县/区"
+                    class="form-control" />
+            </div>
+            <label class="col-sm-1 control-label">村：</label>
+            <div class="col-sm-2 ">
+                <input name="Village" id="Village" type="text" placeholder="输入村"
+                    class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">根据:</label>
+            <div class="col-sm-2" style="width: auto;">
+                <select name="GetLocation" id="GetLocation" class="form-control" style="background-color: #FFFFC0">
+                    <option value="Province">省份</option>
+                    <option value="City">城市</option>
+                    <option value="County">县/区</option>
+                    <option value="Village">村</option>
+                </select>
+            </div>
+            <div class="col-sm-2" style="width: auto;">
+                <button onclick="GetGPS()" class="form-control">获取GPS值</button>
+            </div>
+        </div>
+        <div class="form-group" style="text-align: center; margin: 1px;">
+            <label class="col-sm-2 control-label"></label>
+            <label class="col-sm-2">度</label>
+            <label class="col-sm-2" style="margin-left: 1%;">分</label>
+            <label class="col-sm-2" style="margin-left: 2%;">秒</label>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">经度:</label>
+            <div class="col-sm-2">
+                <input name="LonDegrees" id="LonDegrees" type="number" placeholder="经度"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+            <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
+            <div class="col-sm-2 ">
+                <input name="LonMinutes" id="LonMinutes" type="number" placeholder="经分"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+            <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
+            <div class="col-sm-2 ">
+                <input name="LonSeconds" id="LonSeconds" type="number" placeholder="经秒"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+            <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
+            <div class="col-sm-2" style="width: auto;">
+                <select name="lon" id="lon" class="form-control">
+                    <option value="Arabic">东经</option>
+                    <option value="Arabic">西经</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">纬度:</label>
+            <div class="col-sm-2 ">
+                <input name="LatDegrees" id="LatDegrees" type="number" placeholder="纬度"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+            <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
+            <div class="col-sm-2 ">
+                <input name="LatMinutes" id="LatMinutes" type="number" placeholder="纬分"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+            <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
+            <div class="col-sm-2 ">
+                <input name="LatSeconds" id="LatSeconds" type="number" placeholder="纬秒"
+                    class="form-control" style="background-color: #FFFFC0" />
+            </div>
+            <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
+            <div class="col-sm-2" style="width: auto;">
+                <select name="lat" id="lat" class="form-control">
+                    <option value="Arabic">北纬</option>
+                    <option value="Arabic">南纬</option>
+                </select>
+            </div>
+        </div>
 
-        构造板块：<input name="TectonicPlate" id="TectonicPlate" type="text" /><br />
-        <br />
-        注释：<input name="Notes" id="Notes" type="text" /><br />
-        <br />
-        评论：<textarea name="Comments" id="Comments"></textarea><br />
-        <br />
-        <a class="easyui-linkbutton" onclick="reset()">重置</a>
-        <a class="easyui-linkbutton" onclick="save()">保存</a>
-        <a class="easyui-linkbutton" id="addFormation" onclick="addFormation()">添加岩石组</a>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label">海拔：</label>
+            <div class="col-sm-2">
+                <input name="Altitude" id="Altitude" type="number" class="form-control" placeholder="输入海拔" />
+            </div>
+            <div class="col-sm-2" style="width: auto;">
+                <select name="measure" id="measure" class="form-control">
+                    <option value="Arabic">米</option>
+                    <option value="Arabic">英寸</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">构造板块：</label>
+            <div class="col-sm-2">
+                <input name="TectonicPlate" id="TectonicPlate" type="text" class="form-control" placeholder="输入构造板块" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">注释：</label>
+            <div class="col-sm-2">
+                <input name="Notes" id="Notes" type="text" class="form-control" placeholder="输入注释" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">评论：</label>
+            <div class="col-sm-5">
+                <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4" style="padding-left: 18%">
+                <a class="easyui-linkbutton" onclick="reset()">重置</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="easyui-linkbutton" onclick="save()">保存</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="easyui-linkbutton" id="addFormation" onclick="addFormation()">添加岩石组</a>
+            </div>
+        </div>
     </form>
 </div>
 <script>
@@ -103,7 +245,7 @@
     }
 
     $(function () {
-        $('#addFormation').linkbutton('disable');//禁用button
+        $('#addFormation').linkbutton('disable');//禁用添加岩石组button
         //获取当前日期
         var currentDate = new Date();
         $('#EnterTime').datebox('setValue', (currentDate.getMonth + 1) + "/" + currentDate.getDate() + "/" + currentDate.getYear());
@@ -113,7 +255,7 @@
             for (var i = 0; i < result.length; i++) {
                 var value = result[i].KeyName;
                 var text = result[i].ValueName;
-                $("#Time").append("<option id='"+result[i].Id+"' value='" + value + "'>" + text + "</option>");
+                $("#Time").append("<option id='" + result[i].Id + "' value='" + value + "'>" + text + "</option>");
             }
             change();
 
@@ -150,6 +292,9 @@
         $('#form').form("submit");
     }
     function Formation() {
+
+    }
+    function SearchBtn() {
 
     }
 </script>

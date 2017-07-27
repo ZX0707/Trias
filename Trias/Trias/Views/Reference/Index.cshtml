@@ -5,48 +5,162 @@
 @model Trias.Models.Reference
 
 <div style="margin: 10px;">
-    <form id="form" method="post">
-        <h2>添加文献</h2>
-        文献类型：<select name="ReferenceType" id="ReferenceType">
-        </select><font color="red">*</font><br />
-        <br />
-        第一作者：
-        <input name="FirstAuthor" id="FirstAuthor" type="text" /><font color="red">*</font><br />
-        <br />
-        第二作者：<input name="SecondAuthor" id="SecondAuthor" type="text" /><br />
-        <br />
-        其他作者：<input name="OtherAuthors" id="OtherAuthors" type="text" /><br />
-        <br />
-        年度：<input name="Year" id="Year" type="number" /><font color="red">*</font><br />
-        <br />
-        文献名：<input name="Title" id="Title" type="text" /><font color="red">*</font><br />
-        <br />
-        编辑：<input name="Editor1" id="Editor1" type="text" /><font color="red">*</font><input name="Editor2" id="Editor2" type="text" /><input name="Editor3" id="Editor3" type="text" /><input name="Editor4" id="Editor4" type="text" /><br />
-        <br />
-        书名：<input name="BookTitle" id="BookTitle" type="text" /><br />
-        <br />
-        杂志名：<input name="Journal" id="Journal" type="text" /><br />
-        <br />
-        册：<input name="Volume" id="Volume" type="number" />卷：<input name="No" id="No" type="number" />
-        起始页：<input name="PageBegin" id="PageBegin" type="number" />
-        结束页：<input name="PageEnd" id="PageEnd" type="number" /><br />
-        <br />
-        出版社：<input name="Publisher" id="Publisher" type="text" /><br />
-        <br />
-        语言：<select name="Language" id="Language">
-        </select><font color="red">*</font><br />
-        <br />
-        编码：<input name="DOI" id="DOI" type="text" /><font color="red">*</font><br />
-        <br />
-        链接1：<input name="URL1" id="URL1" type="text" /><br />
-        <br />
-        链接2：<input name="URL2" id="URL2" type="text" /><br />
-        <br />
-        评论：<textarea name="Comments" id="Comments"></textarea><br />
-        <br />
-        <a class="easyui-linkbutton" onclick="reset()">重置</a>
-        <a class="easyui-linkbutton" onclick="save()">保存</a>
-        <a class="easyui-linkbutton" id="addSection" onclick="addSection()">添加剖面</a>
+    <form class="form-horizontal" role="form" id="form" method="post">
+
+        <div class="form-group">
+            <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
+                添加文献</label>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">文献类型：</label>
+            <div class="col-sm-3">
+                <select name="ReferenceType" id="ReferenceType" class="form-control" style="background-color: #FFFFC0">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">第一作者：</label>
+            <div class="col-sm-2">
+                <input name="FirstAuthor" id="FirstAuthor" class="form-control" type="text"
+                    placeholder="输入第一作者" style="background-color: #FFFFC0">
+            </div>
+            <div class="col-sm-2">
+                <input name="SecondAuthor" id="SecondAuthor" class="form-control" type="text"
+                    placeholder="输入第二作者">
+            </div>
+            <div class="col-sm-2">
+                <input name="OtherAuthors" id="OtherAuthors" class="form-control" type="text" placeholder="输入其他作者">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">年度：</label>
+            <div class="col-sm-2">
+                <input name="Year" id="Year" type="number" class="form-control" placeholder="输入年度" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">文献名：</label>
+            <div class="col-sm-3">
+                <input name="Title" id="Title" type="text" class="form-control"
+                    placeholder="输入文献名" style="background-color: #FFFFC0" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">编辑：</label>
+            <div class="col-sm-2">
+                <input name="Editor1" id="Editor1" type="text" class="form-control"
+                    placeholder="输入第一编辑" style="background-color: #FFFFC0" />
+            </div>
+            <div class="col-sm-2">
+                <input name="Editor2" id="Editor2" type="text" class="form-control" placeholder="输入第二编辑" />
+            </div>
+            <div class="col-sm-2">
+                <input name="Editor3" id="Editor3" type="text" class="form-control" placeholder="输入第三编辑" />
+            </div>
+            <div class="col-sm-2">
+                <input name="Editor4" id="Editor4" type="text" class="form-control" placeholder="输入第四编辑" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">书名：</label>
+            <div class="col-sm-3">
+                <input name="BookTitle" id="BookTitle" type="text" class="form-control"
+                    placeholder="输入书名" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">杂志名：</label>
+            <div class="col-sm-3">
+                <input name="Journal" id="Journal" type="text" class="form-control"
+                    placeholder="输入杂志名" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">册：</label>
+            <div class="col-sm-2">
+                <input name="Volume" id="Volume" type="number" class="form-control" placeholder="册" />
+            </div>
+            <label class="col-sm-1 control-label">卷：</label>
+            <div class="col-sm-2">
+                <input name="No" id="No" type="number" class="form-control" placeholder="卷" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">起始页：</label>
+            <div class="col-sm-2">
+                <input name="PageBegin" id="PageBegin" type="number" class="form-control" placeholder="起始页" />
+            </div>
+            <label class="col-sm-1 control-label">结束页：</label>
+            <div class="col-sm-2">
+                <input name="PageEnd" id="PageEnd" type="number" class="form-control" placeholder="结束页" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">出版社：</label>
+            <div class="col-sm-3">
+                <input name="Publisher" id="Publisher" type="text" class="form-control"
+                    placeholder="输入出版社" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">语言：</label>
+            <div class="col-sm-2">
+                <select name="Language" id="Language" class="form-control" style="background-color: #FFFFC0">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">编码：</label>
+            <div class="col-sm-3">
+                <input name="DOI" id="DOI" type="text" class="form-control"
+                    placeholder="输入编码" style="background-color: #FFFFC0" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">链接1：</label>
+            <div class="col-sm-5">
+                <input name="URL1" id="URL1" type="text" class="form-control"
+                    placeholder="输入链接1" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">链接2：</label>
+            <div class="col-sm-5">
+                <input name="URL2" id="URL2" type="text" class="form-control"
+                    placeholder="输入链接2" />
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">评论：</label>
+            <div class="col-sm-5">
+                <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4" style="padding-left: 18%">
+                <a class="easyui-linkbutton" onclick="reset()">重置</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="easyui-linkbutton" onclick="save()">保存</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="easyui-linkbutton" id="addSection" onclick="addSection()">添加剖面</a>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
     </form>
 </div>
 <script>

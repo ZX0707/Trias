@@ -25,6 +25,7 @@
         </thead>
         <tbody id="tbody"></tbody>
     </table>
+    <div id="pp" class="easyui-pagination" data-options="total:2000,pageSize:10" style="background:#efefef;border:1px solid #ccc;"></div> 
 </body>
 
 <script>
@@ -33,6 +34,7 @@
         $("#Add").click(function () {
             Add();
         });
+
     });
 
     function reload() {
@@ -101,4 +103,6 @@
             reload();
         });
     }
+   
+
 </script>

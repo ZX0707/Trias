@@ -226,6 +226,13 @@
     <Compile Include="Tool\UserMgr.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap.css" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-3.3.7-dist\js\bootstrap.js" />
+    <Content Include="Content\bootstrap-3.3.7-dist\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-3.3.7-dist\js\npm.js" />
     <Content Include="Content\CSS\main.css" />
     <Content Include="Content\easyui\changelog.txt" />
     <Content Include="Content\easyui\demo-mobile\accordion\basic.html" />
@@ -1109,6 +1116,23 @@
     <Content Include="Content\easyui\demo\tree\tree_data1.json" />
     <Content Include="Content\easyui\demo\tree\tree_data2.json" />
     <Content Include="Content\easyui\themes\material\images\Thumbs.db" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\Desktop_1.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\css\Desktop_2.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\Desktop_1.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\Desktop_2.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\Desktop_1.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\Desktop_2.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\bootstrap-3.3.7-dist\js\Desktop_1.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\js\Desktop_2.ini" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
