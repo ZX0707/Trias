@@ -9,24 +9,24 @@
 
         <div class="form-group">
             <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
-                添加文献</label>
+                添加文献
+            </label>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">文献类型：</label>
             <div class="col-sm-3">
-                <select name="ReferenceType" id="ReferenceType" class="form-control" style="background-color: #FFFFC0">
-                </select>
+                <select name="ReferenceType" id="ReferenceType" class="form-control" style="background-color: #FFFFC0"></select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">第一作者：</label>
             <div class="col-sm-2">
                 <input name="FirstAuthor" id="FirstAuthor" class="form-control" type="text"
-                    placeholder="输入第一作者" style="background-color: #FFFFC0">
+                       placeholder="输入第一作者" style="background-color: #FFFFC0">
             </div>
             <div class="col-sm-2">
                 <input name="SecondAuthor" id="SecondAuthor" class="form-control" type="text"
-                    placeholder="输入第二作者">
+                       placeholder="输入第二作者">
             </div>
             <div class="col-sm-2">
                 <input name="OtherAuthors" id="OtherAuthors" class="form-control" type="text" placeholder="输入其他作者">
@@ -42,14 +42,14 @@
             <label class="col-sm-2 control-label">文献名：</label>
             <div class="col-sm-3">
                 <input name="Title" id="Title" type="text" class="form-control"
-                    placeholder="输入文献名" style="background-color: #FFFFC0" />
+                       placeholder="输入文献名" style="background-color: #FFFFC0" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">编辑：</label>
             <div class="col-sm-2">
                 <input name="Editor1" id="Editor1" type="text" class="form-control"
-                    placeholder="输入第一编辑" style="background-color: #FFFFC0" />
+                       placeholder="输入第一编辑" style="background-color: #FFFFC0" />
             </div>
             <div class="col-sm-2">
                 <input name="Editor2" id="Editor2" type="text" class="form-control" placeholder="输入第二编辑" />
@@ -65,14 +65,14 @@
             <label class="col-sm-2 control-label">书名：</label>
             <div class="col-sm-3">
                 <input name="BookTitle" id="BookTitle" type="text" class="form-control"
-                    placeholder="输入书名" />
+                       placeholder="输入书名" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">杂志名：</label>
             <div class="col-sm-3">
                 <input name="Journal" id="Journal" type="text" class="form-control"
-                    placeholder="输入杂志名" />
+                       placeholder="输入杂志名" />
             </div>
         </div>
 
@@ -100,35 +100,34 @@
             <label class="col-sm-2 control-label">出版社：</label>
             <div class="col-sm-3">
                 <input name="Publisher" id="Publisher" type="text" class="form-control"
-                    placeholder="输入出版社" />
+                       placeholder="输入出版社" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">语言：</label>
             <div class="col-sm-2">
-                <select name="Language" id="Language" class="form-control" style="background-color: #FFFFC0">
-                </select>
+                <select name="Language" id="Language" class="form-control" style="background-color: #FFFFC0"></select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">编码：</label>
             <div class="col-sm-3">
                 <input name="DOI" id="DOI" type="text" class="form-control"
-                    placeholder="输入编码" style="background-color: #FFFFC0" />
+                       placeholder="输入编码" style="background-color: #FFFFC0" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">链接1：</label>
             <div class="col-sm-5">
                 <input name="URL1" id="URL1" type="text" class="form-control"
-                    placeholder="输入链接1" />
+                       placeholder="输入链接1" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">链接2：</label>
             <div class="col-sm-5">
                 <input name="URL2" id="URL2" type="text" class="form-control"
-                    placeholder="输入链接2" />
+                       placeholder="输入链接2" />
             </div>
         </div>
 
@@ -165,16 +164,34 @@
 </div>
 <script>
     var rid;
-    $(function () {
-        $('#addSection').linkbutton('disable');//禁用button
-        $.post("/Dict/GetSelectOptions", { type: "ReferenceType" }, function (result) {
-            $("#ReferenceType").html("");
+    var getOptionsURL = "@Url.Action("GetSelectOptions","Dict")";
+
+    // 初始化下拉框
+    // obj下拉框的Jquery对象
+    // url请求的url地址
+    // prarm请求附带的参数
+    function initSelect(obj, url, param) {
+        $.post(url, param, function (result) {
+            obj.html("");
             for (var i = 0; i < result.length; i++) {
                 var value = result[i].KeyName;
                 var text = result[i].ValueName;
-                $("#ReferenceType").append("<option value='" + value + "'>" + text + "</option>");
+                obj.append("<option value='" + value + "'>" + text + "</option>");
             }
         }, "json");
+    }
+
+    $(function () {
+        $('#addSection').linkbutton('disable');//禁用button
+        //$.post("/Dict/GetSelectOptions", { type: "ReferenceType" }, function (result) {
+        //    $("#ReferenceType").html("");
+        //    for (var i = 0; i < result.length; i++) {
+        //        var value = result[i].KeyName;
+        //        var text = result[i].ValueName;
+        //        $("#ReferenceType").append("<option value='" + value + "'>" + text + "</option>");
+        //    }
+        //}, "json");
+        initSelect($("#ReferenceType"), getOptionsURL, { type: "ReferenceType" });
 
         $.post("/Dict/GetSelectOptions", { type: "Language" }, function (result) {
             $("#Language").html("");
