@@ -10,7 +10,6 @@ namespace Trias.Controllers
 {
     public class LoginController : BaseController
     {
-        [HttpPost]
         public ActionResult Login(UserView model)
         {
             var user = userSer.FirstOrDefault(x => x.UserName == model.UserName && x.UserPwd == model.UserPwd);
@@ -18,16 +17,19 @@ namespace Trias.Controllers
             {
                 return WriteError("用户名或密码错误");
             }
-            else
-            {
-                Session[Keys.Login_UserInfo] = user;
-                return WriteSuccess("登录成功");
-            }
+            Session[Keys.Login_UserInfo] = user;
+            return WriteSuccess("登录成功");
+        }
+
+        public ActionResult SignOut()
+        {
+            Session[Keys.Login_UserInfo] = null;
+            return Content("/");
         }
 
         public ActionResult GetCurrentUser()
         {
-            return Json(UserMgr.CurrUserInfo());
+            return WriteSuccess(UserMgr.CurrUserInfo());
         }
     }
 }

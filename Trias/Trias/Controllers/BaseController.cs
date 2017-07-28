@@ -31,7 +31,7 @@ namespace Trias.Controllers
             {
                 status = "error",
                 msg = obj
-            });
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult WriteSuccess(object obj)
@@ -40,7 +40,7 @@ namespace Trias.Controllers
             {
                 status = "success",
                 msg = obj
-            });
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -8,8 +8,6 @@
     <script src="~/Content/JS/jquery-1.9.1.min.js"></script>
     <script src="~/Content/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-
-
     @* easyui *@
     <link href="~/Content/easyui/themes/default/easyui.css" rel="stylesheet" />
     <link href="~/Content/easyui/themes/icon.css" rel="stylesheet" />
@@ -17,8 +15,6 @@
     <script src="~/Content/easyui/jquery.easyui.min.js"></script>
     <script src="~/Content/easyui/locale/easyui-lang-zh_CN.js"></script>
     @* easyui *@
-
-
     <link href="~/Content/CSS/main.css" rel="stylesheet" />
     <script src="~/Content/JS/home.js"></script>
     <style>
@@ -34,51 +30,55 @@
     </style>
     <script>
         var currentUser;
-        $.post("/Login/GetCurrentUser", {}, function (result) {
-            currentUser = result;
-            if (result.UserName == null) {
-                location.href = "/Home/Index";
-            }
-            else {
-                $("#name").html(result.UserName);
-            }
-            if (typeof init == "function") {
-                init();
-            }
-        }, "json");
+        $(function () {
+            $.post("/Login/GetCurrentUser", {}, function (result) {
+                currentUser = result.msg;
+                if (currentUser == null) {
+                    location.href = "/Home/Index";
+                }
+                else {
+                    $("#name").html(currentUser.UserName);
+                }
+                if (typeof init == "function") {
+                    init();
+                }
+            }, "json");
+        });
+
+        function SignOut() {
+            $.post("/Login/SignOut/", {}, function (url) {
+                location.href = url;
+            }, "text");
+        }
     </script>
-
-
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north'" style="height: 90px;">1</div>
     <div data-options="region:'west',title:'Login'" style="width: 300px;">
-        @*<div>@ViewBag.UserName</div>*@
         <div style="margin: 10px; text-align: center">
-            <span><strong id="name"></strong>
-                <a href="/Home/Index" style="color: #FF9A00;"><strong>Sign out</strong></a>
+            <span>
+                <strong id="name"></strong>
+                <a onclick="SignOut()" style="color: #FF9A00;"><strong>Sign out</strong></a>
             </span>
         </div>
-
         <div>
             <div id="aa" class="easyui-accordion" style="width: 300px; height: 200px;">
-                <div title="添加数据" data-options="iconCls:'icon-save'" style="overflow: auto; padding: 10px;">
+                <div title="添加数据" data-options="iconCls:'icon-save',selected:true" style="overflow: auto; padding: 10px;">
                     <div class="order">
                         <div class="meu"><a href="/Reference/Index"><b>添加文献</b></a></div>
                         <div class="meu"><a href="/Section/Index"><b>添加剖面</b></a></div>
                         <div class="meu"><a href="/Formation/Index"><b>添加岩石组</b></a></div>
                         <div class="meu"><a href="/Fossil/Index"><b>添加化石</b></a></div>
                     </div>
-
                 </div>
-                <div title="查询数据" data-options="iconCls:'icon-reload',selected:true" style="padding: 10px;">
+                <div title="查询数据" data-options="iconCls:'icon-save'" style="padding: 10px;">
                     <ul>
                         <li>查询文献</li>
                         <li>查询剖面</li>
                     </ul>
                 </div>
-                <div title="Title3">
-                    content3    
+                <div title="Title3" data-options="iconCls:'icon-save'">
+                    content3
                 </div>
             </div>
         </div>
@@ -86,6 +86,5 @@
     <div data-options="region:'center'">
         @RenderBody()
     </div>
-
 </body>
 </html>

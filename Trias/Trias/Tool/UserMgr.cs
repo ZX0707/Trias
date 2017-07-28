@@ -14,7 +14,7 @@ namespace Trias.Tool
             {
                 return HttpContext.Current.Session[Keys.Login_UserInfo] as User;
             }
-            return new User() { };
+            return null;
         }
     }
 }

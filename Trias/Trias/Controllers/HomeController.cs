@@ -19,8 +19,6 @@ namespace Trias.Controllers
 
         public ActionResult IndexWithLogin()
         {
-            var user = UserMgr.CurrUserInfo();
-            ViewBag.UserName = user.UserName;
             return View();
         }
     }
