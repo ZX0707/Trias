@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "添加剖面";
 }
-@model Trias.Models.Section
-@*模态框*@
+@*文献模态框*@
 <div id="dd" class="easyui-dialog" title="文献信息" style="width: 600px; height: 400px;"
     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <div style="margin: 10px; text-align: center;">
@@ -17,6 +16,51 @@
                 <input name="SearchYear" id="SearchYear" type="text" placeholder="输入年度">
                 <a class="easyui-linkbutton" id="SearchBtn" onclick="SearchBtn()">查询</a>
             </div>
+        </form>
+    </div>
+</div>
+
+@*获取GPS模态框*@
+<div id="mm" class="easyui-dialog" title="获取GPS" style="width: 600px; height: 400px;"
+    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <div style="margin: 10px; text-align: center;">
+        <form class="form-horizontal" role="form" method="post">
+            <div>
+                <a href="#"><u>重置</u></a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th colspan="2">搜索结果</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <tr>
+                        <td style="width: 30px;">
+                            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'"></a>
+                        </td>
+                        <td>地址<br />
+                            详细地址+经纬度<br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'"></a>
+                        </td>
+                        <td>地址<br />
+                            详细地址+经纬度<br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'"></a>
+                        </td>
+                        <td>地址<br />
+                            详细地址+经纬度<br />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </form>
     </div>
 </div>
@@ -119,12 +163,21 @@
             <button onclick="GetGPS()" type="button" class="btn btn-default">获取GPS值</button>
         </div>
     </div>
-    <div class="form-group" style="text-align: center; margin: 1px;">
-        <label class="col-sm-2 control-label"></label>
-        <label class="col-sm-2">度</label>
-        <label class="col-sm-2" style="margin-left: 1%;">分</label>
-        <label class="col-sm-2" style="margin-left: 2%;">秒</label>
+
+    <div class="form-group" style="text-align: center;">
+        <label class="col-sm-2 control-label">经度：</label>
+        <div class="col-sm-2">
+            <input name="Lon" id="Lon" type="number" placeholder="经度"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label">纬度：</label>
+        <div class="col-sm-2">
+            <input name="Lat" id="Lat" type="number" placeholder="纬度"
+                class="form-control required" />
+        </div>
+
     </div>
+
     <div class="form-group">
         <label class="col-sm-2 control-label">经度：</label>
         <div class="col-sm-2">
@@ -221,20 +274,40 @@
 <script>
     function change() {
         //处理时代子元素下拉框
-        $.post("/Dict/GetSelectOptions", { type: "SubTime", pid: $("#Time>option:selected").attr("id") }, function (result) {
-            $("#SubTime").html("");
-            for (var i = 0; i < result.length; i++) {
-                var value = result[i].KeyName;
-                var text = result[i].ValueName;
-                $("#SubTime").append("<option value='" + value + "'>" + text + "</option>");
-            }
-        }, "json");
+        initSelect($("#SubTime"), getOptionsURL, { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
     }
     function GetGPS() {
         var value = $("#GetLocation").val();
         var text = $("#" + value).val()
-        $.post("/Baidu/Index", { id: text }, function (result) {
-            console.log(result);
+        $.post("/Baidu/GetLocationByPlaceName", { city: $("#City").val(), place: text }, function (data) {
+            $("#tbody").html("");
+            var re = data.results;
+            for (var i = 0; i < re.length; i++) {
+                var address = re[i].address;
+                if (address == undefined) {
+                    address = "";
+                }
+                var name = re[i].name;
+                var loca = re[i].location;
+                var tr = $("<tr/>");
+                $("#tbody").append(tr);
+                var td_btn = $("<td style='width:30px;'/>");
+                tr.append(td_btn);
+                var btn = $("<a class='easyui-linkbutton' data-options='iconCls:\"icon-ok\"'/>");
+                btn.on("click", { loca: loca }, function (event) {
+                    var loca = event.data.loca;
+                    $("#Lon").val(loca.lng);
+                    $("#Lat").val(loca.lat);
+                    $("#Lat").change();
+                    $("#mm").dialog("close");
+                });
+                td_btn.append(btn);
+                var td_label = $("<td/>");
+                tr.append(td_label);
+                td_label.append(address + "</br>" + name + "," + loca.lng + "," + loca.lat);
+                $.parser.parse();
+            }
+            $('#mm').dialog("open");//弹出模态框
         }, "json");
     }
     function openDialog(re) {//打开参考文献模态框
@@ -245,21 +318,34 @@
     }
 
     $(function () {
+        $("#Lon,#Lat").on("change", {}, function () {
+            var lon = $("#Lon").val();
+            var pint = parseInt(lon);
+            $("#LonDegrees").val(pint);
+            lon = (lon - pint) * 60;
+            pint = parseInt(lon);
+            $("#LonMinutes").val(pint);
+            lon = (lon - pint) * 60;
+            pint = parseInt(lon);
+            $("#LonSeconds").val(pint);
+
+            var lat = $("#Lat").val();
+            pint = parseInt(lat);
+            $("#LatDegrees").val(pint);
+            lat = (lat - pint) * 60;
+            pint = parseInt(lat);
+            $("#LatMinutes").val(pint);
+            lat = (lat - pint) * 60;
+            pint = parseInt(lat);
+            $("#LatSeconds").val(pint);
+        });
+
         $('#addFormation').linkbutton('disable');//禁用添加岩石组button
         //获取当前日期
         var currentDate = new Date();
         $('#EnterTime').datebox('setValue', (currentDate.getMonth + 1) + "/" + currentDate.getDate() + "/" + currentDate.getYear());
         //处理时代下拉框
-        $.post("/Dict/GetSelectOptions", { type: "Time" }, function (result) {
-            $("#Time").html("");
-            for (var i = 0; i < result.length; i++) {
-                var value = result[i].KeyName;
-                var text = result[i].ValueName;
-                $("#Time").append("<option id='" + result[i].Id + "' value='" + value + "'>" + text + "</option>");
-            }
-            change();
-
-        }, "json");
+        initSelect($("#Time"), getOptionsURL, { type: "Time" }, change);
         //表单操作
         $('#form').form({
             url: '/Section/Add',
@@ -301,7 +387,12 @@
 
     }
     function SearchBtn() {
-
+        var NoAuthorizer = $("#NoAuthorizer").val();
+        var SearchYear = $("#SearchYear").val();
+        SearchYear = parseInt(SearchYear);
+        $.post("@Url.Action("GetList", "Reference")", { doiANDauthor: NoAuthorizer, year: SearchYear, page: 1, rows: 5 }, function (data) {
+            console.log(data);
+        }, "json");
     }
 </script>
 

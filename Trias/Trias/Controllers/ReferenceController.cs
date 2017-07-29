@@ -37,7 +37,7 @@ namespace Trias.Controllers
                 list = list.Where(x => x.DOI == doiANDauthor || x.FirstAuthor.Contains(doiANDauthor) || x.SecondAuthor.Contains(doiANDauthor) || x.OtherAuthors.Contains(doiANDauthor));
             }
             var total = list.Count();
-            list = list.Skip(rows * (page - 1)).Take(rows);
+            list = list.OrderByDescending(x => x.Year).Skip(rows * (page - 1)).Take(rows);
             return Json(new
             {
                 total = total,

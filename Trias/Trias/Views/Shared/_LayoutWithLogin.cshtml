@@ -116,13 +116,17 @@
     // obj下拉框的Jquery对象
     // url请求的url地址
     // prarm请求附带的参数
-    function initSelect(obj, url, param) {
+    // callback回调函数
+    function initSelect(obj, url, param, callback) {
         $.post(url, param, function (result) {
             obj.html("");
             for (var i = 0; i < result.length; i++) {
                 var value = result[i].KeyName;
                 var text = result[i].ValueName;
                 obj.append("<option value='" + value + "'>" + text + "</option>");
+            }
+            if (typeof callback == "function") {
+                callback();
             }
         }, "json");
     }
