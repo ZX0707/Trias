@@ -1,124 +1,111 @@
 ﻿@{
     ViewBag.Title = "添加岩石组";
 }
-<div style="margin: 10px;">
-    <form id="form" method="post">
-        <h2>添加岩石组</h2>
-        核准人：
-        <input name="Authorizer" id="Authorizer" type="text" readonly="readonly" /><font color="red">*</font>
-        核准时间：<input class="easyui-datebox" name="EnterTime" id="EnterTime" type="text" /><font color="red">*</font><br />
-        <br />
-        剖面名称：<input name="SectionName" id="SectionName" type="text" /><font color="red">*</font><br />
-        <br />
-        时代：<input name="Time2" id="Time2" type="text" />百万年<br />
-        <br />
-        时代：
-        <select name="Time" id="Time" onchange="change()">
-        </select>
-        <select name="SubTime" id="SubTime">
-        </select>
-        <br />
-        <br />
-        国家：<input name="Country" id="Country" type="text" /><font color="red">*</font>
-        省份：<input name="Province" id="Province" type="text" /><font color="red">*</font>
-        城市：<input name="City" id="City" type="text" /><font color="red">*</font>
-        县/区：<input name="County" id="County" type="text" />
-        村：<input name="Village" id="Village" type="text" /><br />
-        <br />
-        <div style="width:auto;height:auto;background-color:#bee2fb;padding:10px;">
-            <div><span>岩石组</span>
-                <div><span style="margin-left:20px;">单元</span>
-                    <div><span style="margin-left:40px;">采样位置</span>
-                       <div> <span style="margin-left:60px;">化石</span></div>
-                        <div><span style="margin-left:60px;">地球化学信息</span></div>
-                    </div>
-
-                </div>
-            </div>
+<form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
+    <div class="form-group">
+        <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
+            添加岩石组</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">核准人：</label>
+        <div class="col-sm-2 ">
+            <input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control required"
+                readonly="readonly" />
         </div>
-        <br />
-        <br />
-        评论：<textarea name="Comments" id="Comments" rows=4 cols=60></textarea><br />
-        <br />
-        <a class="easyui-linkbutton" onclick="reset()">重置</a>
-        <a class="easyui-linkbutton" onclick="save()">保存</a>
-        <a class="easyui-linkbutton" id="addFormation" onclick="addFormation()">完成</a>
-    </form>
-</div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">核准时间：</label>
+        <div class="col-sm-2 ">
+            <input name="EnterTime" id="EnterTime" type="text" class="easyui-datebox "
+                style="height: 33px;" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">剖面名称：</label>
+        <div class="col-sm-3 ">
+            <input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
+                class="form-control required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">时代：</label>
+        <div class="col-sm-2 ">
+            <input name="Time2" id="Time2" type="text" placeholder="输入时代" class="form-control" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">时代：</label>
+        <div class="col-sm-2 ">
+            <select name="Time" id="Time" onchange="change()" class="form-control"></select>
+        </div>
+        <div class="col-sm-2 ">
+            <select name="SubTime" id="SubTime" class="form-control" style="width: auto"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">国家：</label>
+        <div class="col-sm-2 ">
+            <input name="Country" id="Country" type="text" placeholder="输入国家"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label">省份：</label>
+        <div class="col-sm-2 ">
+            <input name="Province" id="Province" type="text" placeholder="输入省份"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label">城市：</label>
+        <div class="col-sm-2 ">
+            <input name="City" id="City" type="text" placeholder="输入城市"
+                class="form-control required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">县/区：</label>
+        <div class="col-sm-2 ">
+            <input name="County" id="County" type="text" placeholder="输入县/区"
+                class="form-control" />
+        </div>
+        <label class="col-sm-1 control-label">村：</label>
+        <div class="col-sm-2 ">
+            <input name="Village" id="Village" type="text" placeholder="输入村"
+                class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10" style="background-color: #bee2fb; padding: 10px;">
+            <span>岩石组</span>
+                <div>
+                    <span style="margin-left: 20px;">单元</span>
+                    <div>
+                        <span style="margin-left: 40px;">采样位置</span>
+                        <div><span style="margin-left: 60px;">化石</span></div>
+                        <div><span style="margin-left: 60px;">地球化学信息</span></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">评论：</label>
+        <div class="col-sm-5">
+            <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论"></textarea>
+        </div>
+    </div>
+    <div class="form-group" style="text-align: center">
+        <div class="col-sm-3">
+            <button onclick="reset()" type="button" class="btn btn-default">重置</button>
+        </div>
+        <div class="col-sm-3">
+            <button onclick="save()" type="button" class="btn btn-default">保存</button>
+        </div>
+        <div class="col-sm-3">
+            <button onclick="addFossil()" type="button" class="btn btn-default">添加化石</button>
+        </div>
+    </div>
+</form>
+
+
 <script>
-    function change() {
-        //处理时代子元素下拉框
-        $.post("/Dict/GetSelectOptions", { type: "SubTime", pid: $("#Time>option:selected").attr("id") }, function (result) {
-            $("#SubTime").html("");
-            for (var i = 0; i < result.length; i++) {
-                var value = result[i].KeyName;
-                var text = result[i].ValueName;
-                $("#SubTime").append("<option value='" + value + "'>" + text + "</option>");
-            }
-        }, "json");
-    }
-    function GetGPS() {
-        var value = $("#GetLocation").val();
-        var text = $("#" + value).val()
-        $.post("/Baidu/Index", { id: text }, function (result) {
-            console.log(result);
-        }, "json");
-    }
-    function openDialog(re) {//打开参考文献模态框
-        $('#dd').dialog("open");
-    }
-    function init() {
-        $("#Authorizer").val(currentUser.UserName);//获取核准人
-    }
-
-    $(function () {
-        $('#addFormation').linkbutton('disable');//禁用button
-        //获取当前日期
-        var currentDate = new Date();
-        $('#EnterTime').datebox('setValue', (currentDate.getMonth + 1) + "/" + currentDate.getDate() + "/" + currentDate.getYear());
-        //处理时代下拉框
-        $.post("/Dict/GetSelectOptions", { type: "Time" }, function (result) {
-            $("#Time").html("");
-            for (var i = 0; i < result.length; i++) {
-                var value = result[i].KeyName;
-                var text = result[i].ValueName;
-                $("#Time").append("<option id='" + result[i].Id + "' value='" + value + "'>" + text + "</option>");
-            }
-            change();
-
-        }, "json");
-        //表单操作
-        $('#form').form({
-            url: '/Section/Add',
-            onSubmit: function () {
-                //提交验证，return false;不提交
-            },
-            success: function (data) {
-                //提交成功后的操作
-                //提交成功后的操作
-                if (typeof data == "string") {
-                    data = $.parseJSON(data);
-                }
-                if (data.status == "success") {
-                    rid = data.msg.R_ID;
-                    $('#addFormation').linkbutton('enable');//启用button
-                    $.messager.alert("", "保存成功！", "info");
-                }
-                else {
-                    $.messager.alert("", data.msg, "warning");
-                }
-            }
-        });
-    });
-    function reset() {
-        $.messager.alert("", "重置完成！", "info");
-        $('#form').form("reset");
-    }
-    function save() {
-
-        $('#form').form("submit");
-    }
-    function Formation() {
-
-    }
+  
 </script>

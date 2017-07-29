@@ -4,185 +4,161 @@
 
 @model Trias.Models.Reference
 
-<div style="margin: 10px;">
-    <form class="form-horizontal" role="form" id="form" method="post">
 
-        <div class="form-group">
-            <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
-                添加文献
-            </label>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">文献类型：</label>
-            <div class="col-sm-3">
-                <select name="ReferenceType" id="ReferenceType" class="form-control" style="background-color: #FFFFC0"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">第一作者：</label>
-            <div class="col-sm-2">
-                <input name="FirstAuthor" id="FirstAuthor" class="form-control" type="text"
-                       placeholder="输入第一作者" style="background-color: #FFFFC0">
-            </div>
-            <div class="col-sm-2">
-                <input name="SecondAuthor" id="SecondAuthor" class="form-control" type="text"
-                       placeholder="输入第二作者">
-            </div>
-            <div class="col-sm-2">
-                <input name="OtherAuthors" id="OtherAuthors" class="form-control" type="text" placeholder="输入其他作者">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">年度：</label>
-            <div class="col-sm-2">
-                <input name="Year" id="Year" type="number" class="form-control" placeholder="输入年度" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">文献名：</label>
-            <div class="col-sm-3">
-                <input name="Title" id="Title" type="text" class="form-control"
-                       placeholder="输入文献名" style="background-color: #FFFFC0" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">编辑：</label>
-            <div class="col-sm-2">
-                <input name="Editor1" id="Editor1" type="text" class="form-control"
-                       placeholder="输入第一编辑" style="background-color: #FFFFC0" />
-            </div>
-            <div class="col-sm-2">
-                <input name="Editor2" id="Editor2" type="text" class="form-control" placeholder="输入第二编辑" />
-            </div>
-            <div class="col-sm-2">
-                <input name="Editor3" id="Editor3" type="text" class="form-control" placeholder="输入第三编辑" />
-            </div>
-            <div class="col-sm-2">
-                <input name="Editor4" id="Editor4" type="text" class="form-control" placeholder="输入第四编辑" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">书名：</label>
-            <div class="col-sm-3">
-                <input name="BookTitle" id="BookTitle" type="text" class="form-control"
-                       placeholder="输入书名" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">杂志名：</label>
-            <div class="col-sm-3">
-                <input name="Journal" id="Journal" type="text" class="form-control"
-                       placeholder="输入杂志名" />
-            </div>
-        </div>
+<form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label">册：</label>
-            <div class="col-sm-2">
-                <input name="Volume" id="Volume" type="number" class="form-control" placeholder="册" />
-            </div>
-            <label class="col-sm-1 control-label">卷：</label>
-            <div class="col-sm-2">
-                <input name="No" id="No" type="number" class="form-control" placeholder="卷" />
-            </div>
+    <div class="form-group">
+        <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
+            添加文献
+        </label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">文献类型：</label>
+        <div class="col-sm-3">
+            <select name="ReferenceType" id="ReferenceType" class="form-control required">
+            </select>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">起始页：</label>
-            <div class="col-sm-2">
-                <input name="PageBegin" id="PageBegin" type="number" class="form-control" placeholder="起始页" />
-            </div>
-            <label class="col-sm-1 control-label">结束页：</label>
-            <div class="col-sm-2">
-                <input name="PageEnd" id="PageEnd" type="number" class="form-control" placeholder="结束页" />
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">第一作者：</label>
+        <div class="col-sm-2">
+            <input name="FirstAuthor" id="FirstAuthor" class="form-control required" type="text"
+                placeholder="输入第一作者">
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">出版社：</label>
-            <div class="col-sm-3">
-                <input name="Publisher" id="Publisher" type="text" class="form-control"
-                       placeholder="输入出版社" />
-            </div>
+        <div class="col-sm-2">
+            <input name="SecondAuthor" id="SecondAuthor" class="form-control" type="text"
+                placeholder="输入第二作者">
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">语言：</label>
-            <div class="col-sm-2">
-                <select name="Language" id="Language" class="form-control" style="background-color: #FFFFC0"></select>
-            </div>
+        <div class="col-sm-2">
+            <input name="OtherAuthors" id="OtherAuthors" class="form-control" type="text" placeholder="输入其他作者">
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">编码：</label>
-            <div class="col-sm-3">
-                <input name="DOI" id="DOI" type="text" class="form-control"
-                       placeholder="输入编码" style="background-color: #FFFFC0" />
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">年度：</label>
+        <div class="col-sm-2">
+            <input name="Year" id="Year" type="number" class="form-control required" placeholder="输入年度" />
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">链接1：</label>
-            <div class="col-sm-5">
-                <input name="URL1" id="URL1" type="text" class="form-control"
-                       placeholder="输入链接1" />
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">文献名：</label>
+        <div class="col-sm-3">
+            <input name="Title" id="Title" type="text" class="form-control required"
+                placeholder="输入文献名" />
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">链接2：</label>
-            <div class="col-sm-5">
-                <input name="URL2" id="URL2" type="text" class="form-control"
-                       placeholder="输入链接2" />
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">编辑：</label>
+        <div class="col-sm-2">
+            <input name="Editor1" id="Editor1" type="text" class="form-control required"
+                placeholder="输入第一编辑" />
         </div>
-
-
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="name">评论：</label>
-            <div class="col-sm-5">
-                <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论"></textarea>
-            </div>
+        <div class="col-sm-2">
+            <input name="Editor2" id="Editor2" type="text" class="form-control" placeholder="输入第二编辑" />
         </div>
-        <div class="form-group">
-            <div class="col-sm-4" style="padding-left: 18%">
-                <a class="easyui-linkbutton" onclick="reset()">重置</a>
-            </div>
-            <div class="col-sm-2">
-                <a class="easyui-linkbutton" onclick="save()">保存</a>
-            </div>
-            <div class="col-sm-2">
-                <a class="easyui-linkbutton" id="addSection" onclick="addSection()">添加剖面</a>
-            </div>
-
+        <div class="col-sm-2">
+            <input name="Editor3" id="Editor3" type="text" class="form-control" placeholder="输入第三编辑" />
         </div>
+        <div class="col-sm-2">
+            <input name="Editor4" id="Editor4" type="text" class="form-control" placeholder="输入第四编辑" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">书名：</label>
+        <div class="col-sm-3">
+            <input name="BookTitle" id="BookTitle" type="text" class="form-control"
+                placeholder="输入书名" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">杂志名：</label>
+        <div class="col-sm-3">
+            <input name="Journal" id="Journal" type="text" class="form-control"
+                placeholder="输入杂志名" />
+        </div>
+    </div>
 
+    <div class="form-group">
+        <label class="col-sm-2 control-label">册：</label>
+        <div class="col-sm-2">
+            <input name="Volume" id="Volume" type="number" class="form-control" placeholder="册" />
+        </div>
+        <label class="col-sm-1 control-label">卷：</label>
+        <div class="col-sm-2">
+            <input name="No" id="No" type="number" class="form-control" placeholder="卷" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">起始页：</label>
+        <div class="col-sm-2">
+            <input name="PageBegin" id="PageBegin" type="number" class="form-control" placeholder="起始页" />
+        </div>
+        <label class="col-sm-1 control-label">结束页：</label>
+        <div class="col-sm-2">
+            <input name="PageEnd" id="PageEnd" type="number" class="form-control" placeholder="结束页" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">出版社：</label>
+        <div class="col-sm-3">
+            <input name="Publisher" id="Publisher" type="text" class="form-control"
+                placeholder="输入出版社" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">语言：</label>
+        <div class="col-sm-2">
+            <select name="Language" id="Language" class="form-control required"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">编码：</label>
+        <div class="col-sm-3">
+            <input name="DOI" id="DOI" type="text" class="form-control required"
+                placeholder="输入编码" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">链接1：</label>
+        <div class="col-sm-5">
+            <input name="URL1" id="URL1" type="text" class="form-control"
+                placeholder="输入链接1" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">链接2：</label>
+        <div class="col-sm-5">
+            <input name="URL2" id="URL2" type="text" class="form-control"
+                placeholder="输入链接2" />
+        </div>
+    </div>
 
-
-
-
-
-
-
-
-    </form>
-</div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">评论：</label>
+        <div class="col-sm-5">
+            <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论"></textarea>
+        </div>
+    </div>
+    <div class="form-group" style="text-align: center">
+        <div class="col-sm-3">
+            <button onclick="reset()" type="button" class="btn btn-default">重置</button>
+        </div>
+        <div class="col-sm-3">
+            <button onclick="save()" type="button" class="btn btn-default">保存</button>
+        </div>
+        <div class="col-sm-3">
+             <button  id="addSection" type="button" class="btn btn-default">添加剖面</button>
+        </div>
+    </div>
+</form>
 <script>
     var rid;
-    var getOptionsURL = "@Url.Action("GetSelectOptions","Dict")";
-
-    // 初始化下拉框
-    // obj下拉框的Jquery对象
-    // url请求的url地址
-    // prarm请求附带的参数
-    function initSelect(obj, url, param) {
-        $.post(url, param, function (result) {
-            obj.html("");
-            for (var i = 0; i < result.length; i++) {
-                var value = result[i].KeyName;
-                var text = result[i].ValueName;
-                obj.append("<option value='" + value + "'>" + text + "</option>");
-            }
-        }, "json");
-    }
-
     $(function () {
-        $('#addSection').linkbutton('disable');//禁用button
+        //移除必填项错误提示
+        $("#PageBegin,#PageEnd").on("focus", {}, function () {
+            $(this).removeClass("error_ness");
+        });
+        $('#addSection').attr({ "disabled": "disabled" });//禁用button
+        //$('#addSection').linkbutton('disable');//禁用button
         //$.post("/Dict/GetSelectOptions", { type: "ReferenceType" }, function (result) {
         //    $("#ReferenceType").html("");
         //    for (var i = 0; i < result.length; i++) {
@@ -191,21 +167,41 @@
         //        $("#ReferenceType").append("<option value='" + value + "'>" + text + "</option>");
         //    }
         //}, "json");
+        //处理文献类型下拉框
         initSelect($("#ReferenceType"), getOptionsURL, { type: "ReferenceType" });
-
-        $.post("/Dict/GetSelectOptions", { type: "Language" }, function (result) {
-            $("#Language").html("");
-            for (var i = 0; i < result.length; i++) {
-                var value = result[i].KeyName;
-                var text = result[i].ValueName;
-                $("#Language").append("<option value='" + value + "'>" + text + "</option>");
-            }
-        }, "json");
+        //处理语言下拉框
+        initSelect($("#Language"), getOptionsURL, { type: "Language" });
+        //$.post("/Dict/GetSelectOptions", { type: "Language" }, function (result) {
+        //    $("#Language").html("");
+        //    for (var i = 0; i < result.length; i++) {
+        //        var value = result[i].KeyName;
+        //        var text = result[i].ValueName;
+        //        $("#Language").append("<option value='" + value + "'>" + text + "</option>");
+        //    }
+        //}, "json");
 
         $('#form').form({
             url: '/Reference/Add',
             onSubmit: function () {
                 //提交验证，return false;不提交
+                var arr = $(".required");
+                var flag = true;
+                for (var i = 0; i < arr.length; i++) {
+                    if ($(arr[i]).val() == "") {
+                        flag = false;
+                        $(arr[i]).addClass("error_ness");
+                    }
+                }
+                var PageBegin=$("#PageBegin").val();
+                var PageEnd= $("#PageEnd").val();
+                if (PageBegin != "" && PageEnd != "") {
+                    if (parseInt(PageBegin) > parseInt(PageEnd)) {
+                        flag = false;
+                        $("#PageBegin,#PageEnd").addClass("error_ness");
+                        $.messager.alert("", "结束页须大于等于起始页！", "warning");
+                    }
+                }
+                return flag;
             },
             success: function (data) {
                 //提交成功后的操作
@@ -214,7 +210,7 @@
                 }
                 if (data.status == "success") {
                     rid = data.msg.R_ID;
-                    $('#addSection').linkbutton('enable');//启用button
+                    $('#addSection').removeAttr("disabled");//启用button
                     $.messager.alert("", "保存成功！", "info");
                 }
                 else {
@@ -222,6 +218,10 @@
                 }
             }
         });
+        $("#addSection").click(function () {
+            location.href = "/Section/Index/" + rid;
+        });
+      
 
     });
     function reset() {
@@ -229,8 +229,5 @@
     }
     function save() {
         $('#form').form("submit");
-    }
-    function addSection() {
-        location.href = "/Section/Index/" + rid;
     }
 </script>

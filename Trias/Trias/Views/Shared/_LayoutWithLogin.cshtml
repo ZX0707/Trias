@@ -25,32 +25,20 @@
         .meu {
             padding: 3px 10px;
             font-size: 12px;
-            border: 1px solid #666666;
+            /*border: 1px solid #666666;*/
+        }
+
+        .required {
+            background-color: #FFFFC0;
+        }
+
+        .error_ness {
+            border: 1px solid red;
+            box-shadow: 0px 0px 5px red;
+            background-color: white;
         }
     </style>
-    <script>
-        var currentUser;
-        $(function () {
-            $.post("/Login/GetCurrentUser", {}, function (result) {
-                currentUser = result.msg;
-                if (currentUser == null) {
-                    location.href = "/Home/Index";
-                }
-                else {
-                    $("#name").html(currentUser.UserName);
-                }
-                if (typeof init == "function") {
-                    init();
-                }
-            }, "json");
-        });
 
-        function SignOut() {
-            $.post("/Login/SignOut/", {}, function (url) {
-                location.href = url;
-            }, "text");
-        }
-    </script>
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north'" style="height: 90px;">1</div>
@@ -72,10 +60,10 @@
                     </div>
                 </div>
                 <div title="查询数据" data-options="iconCls:'icon-save'" style="padding: 10px;">
-                    <ul>
-                        <li>查询文献</li>
-                        <li>查询剖面</li>
-                    </ul>
+                    <div class="order">
+                        <div class="meu"><a href="#"><b>查询文献</b></a></div>
+                        <div class="meu"><a href="#"><b>查询剖面</b></a></div>
+                    </div>
                 </div>
                 <div title="Title3" data-options="iconCls:'icon-save'">
                     content3
@@ -88,3 +76,54 @@
     </div>
 </body>
 </html>
+<script>
+    var currentUser;
+    $(function () {
+        //获取用户名
+        $.post("/Login/GetCurrentUser", {}, function (result) {
+            currentUser = result.msg;
+            if (currentUser == null) {
+                location.href = "/Home/Index";
+            }
+            else {
+                $("#name").html(currentUser.UserName);
+            }
+            if (typeof init == "function") {
+                init();
+            }
+        }, "json");
+        //移除必填项错误提示
+        $(".required").on("focus", {}, function () {
+            $(this).removeClass("error_ness");
+        });
+        //移除必填项错误提示方法2
+        //$(function () {
+        //    $(".required").map(function (index, dom) {
+        //        $(dom).on("focus",{},function () {
+        //        $(this).removeClass("error_ness");
+        //        });
+        //    });
+    });
+    //退出函数
+    function SignOut() {
+        $.post("/Login/SignOut/", {}, function (url) {
+            location.href = url;
+        }, "text");
+    }
+    var getOptionsURL = "@Url.Action("GetSelectOptions", "Dict")";
+
+    // 初始化下拉框
+    // obj下拉框的Jquery对象
+    // url请求的url地址
+    // prarm请求附带的参数
+    function initSelect(obj, url, param) {
+        $.post(url, param, function (result) {
+            obj.html("");
+            for (var i = 0; i < result.length; i++) {
+                var value = result[i].KeyName;
+                var text = result[i].ValueName;
+                obj.append("<option value='" + value + "'>" + text + "</option>");
+            }
+        }, "json");
+    }
+</script>

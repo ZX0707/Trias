@@ -23,7 +23,7 @@ namespace Trias.Controllers
 
         public ActionResult SignOut()
         {
-            Session[Keys.Login_UserInfo] = null;
+            Session[Keys.Login_UserInfo] = null;//清除Session
             return Content("/");
         }
 

@@ -20,204 +20,204 @@
         </form>
     </div>
 </div>
-<div style="margin: 10px;">
-    <form class="form-horizontal" role="form" id="form" method="post">
-        <div class="form-group">
-            <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
-                添加剖面</label>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">核准人：</label>
-            <div class="col-sm-2 ">
-                <input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control"
-                    style="background-color: #FFFFC0" readonly="readonly" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">核准时间：</label>
-            <div class="col-sm-2 ">
-                <input name="EnterTime" id="EnterTime" type="text" class="easyui-datebox "
-                    style="height: 33px;" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">剖面名称:</label>
-            <div class="col-sm-3 ">
-                <input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">参考文献：</label>
-            <div class="col-sm-2 ">
-                <input name="RID1" id="RID1" type="text" value="@ViewBag.R_ID" readonly="readonly" 
-                    onclick="openDialog(1)" placeholder="输入参考文献1" class="form-control" style="background-color: #FFFFC0"/>
-            </div>
-            <div class="col-sm-2 ">
-                <input name="RID2" id="RID2" type="text" readonly="readonly" onclick="openDialog(2)" placeholder="输入参考文献2" class="form-control" />
-            </div>
-            <div class="col-sm-2 ">
-                <input name="RID3" id="RID3" type="text" readonly="readonly" onclick="openDialog(3)" placeholder="输入参考文献3" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">时代：</label>
-            <div class="col-sm-2 ">
-                <input name="Time2" id="Time2" type="text" placeholder="输入时代" class="form-control" />
-            </div>
-            <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">时代：</label>
-            <div class="col-sm-2 ">
-                <select name="Time" id="Time" onchange="change()" class="form-control"></select>
-            </div>
-            <div class="col-sm-2 ">
-                <select name="SubTime" id="SubTime" class="form-control"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">国家：</label>
-            <div class="col-sm-2 ">
-                <input name="Country" id="Country" type="text" placeholder="输入国家"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-            <label class="col-sm-1 control-label">省份：</label>
-            <div class="col-sm-2 ">
-                <input name="Province" id="Province" type="text" placeholder="输入省份"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-            <label class="col-sm-1 control-label">城市：</label>
-            <div class="col-sm-2 ">
-                <input name="City" id="City" type="text" placeholder="输入城市"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">县/区：</label>
-            <div class="col-sm-2 ">
-                <input name="County" id="County" type="text" placeholder="输入县/区"
-                    class="form-control" />
-            </div>
-            <label class="col-sm-1 control-label">村：</label>
-            <div class="col-sm-2 ">
-                <input name="Village" id="Village" type="text" placeholder="输入村"
-                    class="form-control" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">根据:</label>
-            <div class="col-sm-2" style="width: auto;">
-                <select name="GetLocation" id="GetLocation" class="form-control" style="background-color: #FFFFC0">
-                    <option value="Province">省份</option>
-                    <option value="City">城市</option>
-                    <option value="County">县/区</option>
-                    <option value="Village">村</option>
-                </select>
-            </div>
-            <div class="col-sm-2" style="width: auto;">
-                <button onclick="GetGPS()" class="form-control">获取GPS值</button>
-            </div>
-        </div>
-        <div class="form-group" style="text-align: center; margin: 1px;">
-            <label class="col-sm-2 control-label"></label>
-            <label class="col-sm-2">度</label>
-            <label class="col-sm-2" style="margin-left: 1%;">分</label>
-            <label class="col-sm-2" style="margin-left: 2%;">秒</label>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">经度:</label>
-            <div class="col-sm-2">
-                <input name="LonDegrees" id="LonDegrees" type="number" placeholder="经度"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-            <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
-            <div class="col-sm-2 ">
-                <input name="LonMinutes" id="LonMinutes" type="number" placeholder="经分"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-            <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
-            <div class="col-sm-2 ">
-                <input name="LonSeconds" id="LonSeconds" type="number" placeholder="经秒"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-            <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
-            <div class="col-sm-2" style="width: auto;">
-                <select name="lon" id="lon" class="form-control">
-                    <option value="Arabic">东经</option>
-                    <option value="Arabic">西经</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">纬度:</label>
-            <div class="col-sm-2 ">
-                <input name="LatDegrees" id="LatDegrees" type="number" placeholder="纬度"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-            <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
-            <div class="col-sm-2 ">
-                <input name="LatMinutes" id="LatMinutes" type="number" placeholder="纬分"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-            <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
-            <div class="col-sm-2 ">
-                <input name="LatSeconds" id="LatSeconds" type="number" placeholder="纬秒"
-                    class="form-control" style="background-color: #FFFFC0" />
-            </div>
-            <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
-            <div class="col-sm-2" style="width: auto;">
-                <select name="lat" id="lat" class="form-control">
-                    <option value="Arabic">北纬</option>
-                    <option value="Arabic">南纬</option>
-                </select>
-            </div>
-        </div>
 
-        
-        <div class="form-group">
-            <label class="col-sm-2 control-label">海拔：</label>
-            <div class="col-sm-2">
-                <input name="Altitude" id="Altitude" type="number" class="form-control" placeholder="输入海拔" />
-            </div>
-            <div class="col-sm-2" style="width: auto;">
-                <select name="measure" id="measure" class="form-control">
-                    <option value="Arabic">米</option>
-                    <option value="Arabic">英寸</option>
-                </select>
-            </div>
+<form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
+    <div class="form-group">
+        <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
+            添加剖面</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">核准人：</label>
+        <div class="col-sm-2 ">
+            <input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control required"
+                readonly="readonly" />
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">构造板块：</label>
-            <div class="col-sm-2">
-                <input name="TectonicPlate" id="TectonicPlate" type="text" class="form-control" placeholder="输入构造板块" />
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">核准时间：</label>
+        <div class="col-sm-2 ">
+            <input name="EnterTime" id="EnterTime" type="text" class="easyui-datebox "
+                style="height: 33px;" />
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">注释：</label>
-            <div class="col-sm-2">
-                <input name="Notes" id="Notes" type="text" class="form-control" placeholder="输入注释" />
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">剖面名称：</label>
+        <div class="col-sm-3 ">
+            <input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
+                class="form-control required" />
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="name">评论：</label>
-            <div class="col-sm-5">
-                <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论"></textarea>
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">参考文献：</label>
+        <div class="col-sm-2 ">
+            <input name="RID1" id="RID1" type="text" value="@ViewBag.R_ID" readonly="readonly" 
+                    onclick="openDialog(1)" placeholder="输入参考文献1" class="form-control required"/>
         </div>
-        <div class="form-group">
-            <div class="col-sm-4" style="padding-left: 18%">
-                <a class="easyui-linkbutton" onclick="reset()">重置</a>
-            </div>
-            <div class="col-sm-2">
-                <a class="easyui-linkbutton" onclick="save()">保存</a>
-            </div>
-            <div class="col-sm-2">
-                <a class="easyui-linkbutton" id="addFormation" onclick="addFormation()">添加岩石组</a>
-            </div>
+        <div class="col-sm-2 ">
+            <input name="RID2" id="RID2" type="text" readonly="readonly" onclick="openDialog(2)" placeholder="输入参考文献2" class="form-control" />
         </div>
-    </form>
-</div>
+        <div class="col-sm-2 ">
+            <input name="RID3" id="RID3" type="text" readonly="readonly" onclick="openDialog(3)" placeholder="输入参考文献3" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">时代：</label>
+        <div class="col-sm-2 ">
+            <input name="Time2" id="Time2" type="text" placeholder="输入时代" class="form-control" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">时代：</label>
+        <div class="col-sm-2 ">
+            <select name="Time" id="Time" onchange="change()" class="form-control"></select>
+        </div>
+        <div class="col-sm-2 ">
+            <select name="SubTime" id="SubTime" class="form-control" style="width: auto"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">国家：</label>
+        <div class="col-sm-2 ">
+            <input name="Country" id="Country" type="text" placeholder="输入国家"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label">省份：</label>
+        <div class="col-sm-2 ">
+            <input name="Province" id="Province" type="text" placeholder="输入省份"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label">城市：</label>
+        <div class="col-sm-2 ">
+            <input name="City" id="City" type="text" placeholder="输入城市"
+                class="form-control required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">县/区：</label>
+        <div class="col-sm-2 ">
+            <input name="County" id="County" type="text" placeholder="输入县/区"
+                class="form-control" />
+        </div>
+        <label class="col-sm-1 control-label">村：</label>
+        <div class="col-sm-2 ">
+            <input name="Village" id="Village" type="text" placeholder="输入村"
+                class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">根据：</label>
+        <div class="col-sm-2" style="width: auto;">
+            <select name="GetLocation" id="GetLocation" class="form-control required">
+                <option value="Province">省份</option>
+                <option value="City">城市</option>
+                <option value="County">县/区</option>
+                <option value="Village">村</option>
+            </select>
+        </div>
+        <div class="col-sm-2" style="width: auto;">
+            <button onclick="GetGPS()" type="button" class="btn btn-default">获取GPS值</button>
+        </div>
+    </div>
+    <div class="form-group" style="text-align: center; margin: 1px;">
+        <label class="col-sm-2 control-label"></label>
+        <label class="col-sm-2">度</label>
+        <label class="col-sm-2" style="margin-left: 1%;">分</label>
+        <label class="col-sm-2" style="margin-left: 2%;">秒</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">经度：</label>
+        <div class="col-sm-2">
+            <input name="LonDegrees" id="LonDegrees" type="number" placeholder="经度"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
+        <div class="col-sm-2 ">
+            <input name="LonMinutes" id="LonMinutes" type="number" placeholder="经分"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
+        <div class="col-sm-2 ">
+            <input name="LonSeconds" id="LonSeconds" type="number" placeholder="经秒"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
+        <div class="col-sm-2" style="width: auto;">
+            <select name="lon" id="lon" class="form-control">
+                <option value="Arabic">东经</option>
+                <option value="Arabic">西经</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">纬度：</label>
+        <div class="col-sm-2 ">
+            <input name="LatDegrees" id="LatDegrees" type="number" placeholder="纬度"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
+        <div class="col-sm-2 ">
+            <input name="LatMinutes" id="LatMinutes" type="number" placeholder="纬分"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
+        <div class="col-sm-2 ">
+            <input name="LatSeconds" id="LatSeconds" type="number" placeholder="纬秒"
+                class="form-control required" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
+        <div class="col-sm-2" style="width: auto;">
+            <select name="lat" id="lat" class="form-control">
+                <option value="Arabic">北纬</option>
+                <option value="Arabic">南纬</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">海拔：</label>
+        <div class="col-sm-2">
+            <input name="Altitude" id="Altitude" type="number" class="form-control" placeholder="输入海拔" />
+        </div>
+        <div class="col-sm-2" style="width: auto;">
+            <select name="measure" id="measure" class="form-control">
+                <option value="Arabic">米</option>
+                <option value="Arabic">英寸</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">构造板块：</label>
+        <div class="col-sm-2">
+            <input name="TectonicPlate" id="TectonicPlate" type="text" class="form-control" placeholder="输入构造板块" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">注释：</label>
+        <div class="col-sm-2">
+            <input name="Notes" id="Notes" type="text" class="form-control" placeholder="输入注释" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">评论：</label>
+        <div class="col-sm-5">
+            <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论"></textarea>
+        </div>
+    </div>
+    <div class="form-group" style="text-align: center">
+        <div class="col-sm-3">
+            <button onclick="reset()" type="button" class="btn btn-default">重置</button>
+        </div>
+        <div class="col-sm-3">
+            <button onclick="save()" type="button" class="btn btn-default">保存</button>
+        </div>
+        <div class="col-sm-3">
+            <button onclick="addFormation()" type="button" class="btn btn-default">添加剖面</button>
+        </div>
+    </div>
+</form>
+
 <script>
     function change() {
         //处理时代子元素下拉框
@@ -265,6 +265,12 @@
             url: '/Section/Add',
             onSubmit: function () {
                 //提交验证，return false;不提交
+                var arr = $(".required");
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].val() == "") {
+                        arr[i].addClass("error_ness");
+                    }
+                }
             },
             success: function (data) {
                 //提交成功后的操作
