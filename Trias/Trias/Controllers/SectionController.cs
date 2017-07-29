@@ -29,8 +29,19 @@ namespace Trias.Controllers
             Model.CopyFrom(model);
             sectionSer.Add(Model);
             Model.S_ID = Guid.NewGuid().ToString();
-            sectionSer.SaveChanges();
-            return WriteSuccess("添加成功");
+            try
+            {
+                sectionSer.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return WriteError(e.Message);
+            }
+            return WriteSuccess(new
+            {
+                Model.S_ID,
+                msg = "添加成功！"
+            });
         }
         //根据用户id查询剖面信息
         public ActionResult GetSection(string username)

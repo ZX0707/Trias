@@ -123,7 +123,8 @@
             for (var i = 0; i < result.length; i++) {
                 var value = result[i].KeyName;
                 var text = result[i].ValueName;
-                obj.append("<option value='" + value + "'>" + text + "</option>");
+                var id = result[i].Id;
+                obj.append("<option id='" + id + "' value='" + value + "'>" + text + "</option>");
             }
             if (typeof callback == "function") {
                 callback();

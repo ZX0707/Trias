@@ -5,7 +5,7 @@
 <div id="dd" class="easyui-dialog" title="文献信息" style="width: 600px; height: 400px;"
     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <div id="toolbar">
-        <a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加新文献</a>
+        <a class="easyui-linkbutton" href="/Reference/Index" data-options="iconCls:'icon-add',plain:true">添加新文献</a>
 
         <label>文献编号/作者：</label>
         <input name="NoAuthorizer" id="NoAuthorizer" type="text" placeholder="输入编号/作者">
@@ -88,7 +88,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">时代：</label>
         <div class="col-sm-2 ">
-            <input name="Time2" id="Time2" type="text" placeholder="输入时代" class="form-control" />
+            <input name="Time2" id="Time2" type="number" placeholder="输入时代" class="form-control" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
     </div>
@@ -149,12 +149,12 @@
         <label class="col-sm-2 control-label">经度：</label>
         <div class="col-sm-2">
             <input name="Lon" id="Lon" type="number" placeholder="经度"
-                class="form-control required" />
+                class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label">纬度：</label>
         <div class="col-sm-2">
             <input name="Lat" id="Lat" type="number" placeholder="纬度"
-                class="form-control required" />
+                class="form-control required lon_lat" />
         </div>
 
     </div>
@@ -163,17 +163,17 @@
         <label class="col-sm-2 control-label">经度：</label>
         <div class="col-sm-2">
             <input name="LonDegrees" id="LonDegrees" type="number" placeholder="经度"
-                class="form-control required" />
+                class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
         <div class="col-sm-2 ">
             <input name="LonMinutes" id="LonMinutes" type="number" placeholder="经分"
-                class="form-control required" />
+                class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
         <div class="col-sm-2 ">
             <input name="LonSeconds" id="LonSeconds" type="number" placeholder="经秒"
-                class="form-control required" />
+                class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
     </div>
@@ -181,17 +181,17 @@
         <label class="col-sm-2 control-label">纬度：</label>
         <div class="col-sm-2 ">
             <input name="LatDegrees" id="LatDegrees" type="number" placeholder="纬度"
-                class="form-control required" />
+                class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
         <div class="col-sm-2 ">
             <input name="LatMinutes" id="LatMinutes" type="number" placeholder="纬分"
-                class="form-control required" />
+                class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
         <div class="col-sm-2 ">
             <input name="LatSeconds" id="LatSeconds" type="number" placeholder="纬秒"
-                class="form-control required" />
+                class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
     </div>
@@ -235,12 +235,13 @@
             <button onclick="save()" type="button" class="btn btn-default">保存</button>
         </div>
         <div class="col-sm-3">
-            <button onclick="addFormation()" type="button" class="btn btn-default">添加剖面</button>
+            <button id="addFormation" type="button" class="btn btn-default">添加剖面</button>
         </div>
     </div>
 </form>
 
 <script>
+    var sid; 
     var index_dialog;
     function test(value, row, index) {
         return "<div onclick='selectReference(\"" + row.DOI + "\")' class='icon-ok' style='width:30px;height:30px;'/>";
@@ -251,6 +252,7 @@
     }
 
     function change() {
+        console.log($("#Time>option:selected").attr("id"));
         //处理时代子元素下拉框
         initSelect($("#SubTime"), getOptionsURL, { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
     }
@@ -314,6 +316,7 @@
     }
 
     $(function () {
+
         $("#Lon,#Lat").on("change", {}, function () {
             var lon = $("#Lon").val();
             var pint = parseInt(lon);
@@ -334,9 +337,11 @@
             lat = (lat - pint) * 60;
             pint = parseInt(lat);
             $("#LatSeconds").val(pint);
+
+            $(".lon_lat").focus();
         });
 
-        $('#addFormation').linkbutton('disable');//禁用添加岩石组button
+        $('#addFormation').attr({ "disabled": "disabled" });//禁用button
         //获取当前日期
         var currentDate = new Date();
         $('#EnterTime').datebox('setValue', (currentDate.getMonth + 1) + "/" + currentDate.getDate() + "/" + currentDate.getYear());
@@ -344,15 +349,18 @@
         initSelect($("#Time"), getOptionsURL, { type: "Time" }, change);
         //表单操作
         $('#form').form({
-            url: '/Section/Add',
+            url: '/Section/AddSection',
             onSubmit: function () {
                 //提交验证，return false;不提交
                 var arr = $(".required");
+                var flag = true;
                 for (var i = 0; i < arr.length; i++) {
-                    if (arr[i].val() == "") {
-                        arr[i].addClass("error_ness");
+                    if ($(arr[i]).val() == "") {
+                        flag = false;
+                        $(arr[i]).addClass("error_ness");
                     }
                 }
+                return flag;
             },
             success: function (data) {
                 //提交成功后的操作
@@ -361,14 +369,19 @@
                     data = $.parseJSON(data);
                 }
                 if (data.status == "success") {
-                    rid = data.msg.R_ID;
+                    sid = data.msg.S_ID;
                     $('#addFormation').linkbutton('enable');//启用button
+                    $('#addFormation').removeAttr('disabled');//启用button
                     $.messager.alert("", "保存成功！", "info");
                 }
                 else {
                     $.messager.alert("", data.msg, "warning");
                 }
             }
+
+        });
+        $("#addFormation").click(function () {
+            location.href = "/Formation/Index/" + sid;
         });
     });
     function reset() {
