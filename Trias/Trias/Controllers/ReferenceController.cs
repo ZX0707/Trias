@@ -55,6 +55,22 @@ namespace Trias.Controllers
             {
                 return WriteError("已经存在文献的DOI为" + model.DOI + "，请确认！");
             }
+            if (!string.IsNullOrWhiteSpace(model.PageBegin) && !string.IsNullOrWhiteSpace(model.PageEnd))
+            {
+                try
+                {
+                    var start = int.Parse(model.PageBegin);
+                    var end = int.Parse(model.PageEnd);
+                    if (start > end)
+                    {
+                        return WriteError("起始页不能大于终止页！");
+                    }
+                }
+                catch (Exception e)
+                {
+                    return WriteError(e.Message);
+                }
+            }
             var Model = new Reference();
             Model.CopyFrom(model);
             referenceSer.Add(Model);
@@ -77,7 +93,23 @@ namespace Trias.Controllers
             {
                 return WriteError("已经存在文献的DOI为" + model.DOI + "，请确认！");
             }
-            referenceSer.EditWhere(x => x.R_ID == model.R_ID, model);
+                      if (!string.IsNullOrWhiteSpace(model.PageBegin) && !string.IsNullOrWhiteSpace(model.PageEnd))
+            {
+                try
+                {
+                    var start = int.Parse(model.PageBegin);
+                    var end = int.Parse(model.PageEnd);
+                    if (start > end)
+                    {
+                        return WriteError("起始页不能大于终止页！");
+                    }
+                }
+                catch (Exception e)
+                {
+                    return WriteError(e.Message);
+                }
+            }
+  referenceSer.EditWhere(x => x.R_ID == model.R_ID, model);
             referenceSer.SaveChanges();
             return WriteSuccess("操作成功！");
         }
