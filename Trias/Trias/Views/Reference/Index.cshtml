@@ -151,7 +151,7 @@
     </div>
 </form>
 <script>
-    var rid;
+    var doi;
     $(function () {
         //移除必填项错误提示
         $("#PageBegin,#PageEnd").on("focus", {}, function () {
@@ -209,7 +209,7 @@
                     data = $.parseJSON(data);
                 }
                 if (data.status == "success") {
-                    rid = data.msg.R_ID;
+                    doi = data.msg.DOI;
                     $('#addSection').removeAttr("disabled");//启用button
                     $.messager.alert("", "保存成功！", "info");
                 }
@@ -219,7 +219,7 @@
             }
         });
         $("#addSection").click(function () {
-            location.href = "/Section/Index/" + rid;
+            location.href = "/Section/Index/" + doi;
         });
       
 

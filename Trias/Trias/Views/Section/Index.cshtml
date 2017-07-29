@@ -4,30 +4,35 @@
 @*文献模态框*@
 <div id="dd" class="easyui-dialog" title="文献信息" style="width: 600px; height: 400px;"
     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
-    <div style="margin: 10px; text-align: center;">
-        <form class="form-horizontal" role="form" method="post">
-            <div>
-                <a href="#"><u>重置</u></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><u>添加新文献</u></a>
-            </div>
-            <div style="margin-top: 8px;">
-                <label>文献编号/作者：</label>
-                <input name="NoAuthorizer" id="NoAuthorizer" type="text" placeholder="输入编号/作者">
-                <label>年度：</label>
-                <input name="SearchYear" id="SearchYear" type="text" placeholder="输入年度">
-                <a class="easyui-linkbutton" id="SearchBtn" onclick="SearchBtn()">查询</a>
-            </div>
-        </form>
+    <div id="toolbar">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加新文献</a>
+
+        <label>文献编号/作者：</label>
+        <input name="NoAuthorizer" id="NoAuthorizer" type="text" placeholder="输入编号/作者">
+        <label>年度：</label>
+        <input name="SearchYear" id="SearchYear" type="text" placeholder="输入年度">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" id="SearchBtn" onclick="SearchBtn()">查询</a>
     </div>
+    <table id="grid" class="easyui-datagrid" style="width: 100%; height: 100%;"
+            data-options="url:'@Url.Action("GetList", "Reference")',fitColumns:true,singleSelect:true,pagination:true,toolbar:'#toolbar'">
+        <thead>
+            <tr>
+                <th data-options="field:'R_ID',width:30,formatter:test"></th>
+                <th data-options="field:'DOI',width:100">DOI</th>
+                <th data-options="field:'FirstAuthor',width:100">作者</th>
+                <th data-options="field:'Year',width:100">年度</th>
+                <th data-options="field:'Title',width:100">标题</th>
+            </tr>
+        </thead>
+    </table>
 </div>
+
 
 @*获取GPS模态框*@
 <div id="mm" class="easyui-dialog" title="获取GPS" style="width: 600px; height: 400px;"
     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <div style="margin: 10px; text-align: center;">
         <form class="form-horizontal" role="form" method="post">
-            <div>
-                <a href="#"><u>重置</u></a>
-            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -35,30 +40,6 @@
                     </tr>
                 </thead>
                 <tbody id="tbody">
-                    <tr>
-                        <td style="width: 30px;">
-                            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'"></a>
-                        </td>
-                        <td>地址<br />
-                            详细地址+经纬度<br />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'"></a>
-                        </td>
-                        <td>地址<br />
-                            详细地址+经纬度<br />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'"></a>
-                        </td>
-                        <td>地址<br />
-                            详细地址+经纬度<br />
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </form>
@@ -94,7 +75,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">参考文献：</label>
         <div class="col-sm-2 ">
-            <input name="RID1" id="RID1" type="text" value="@ViewBag.R_ID" readonly="readonly" 
+            <input name="RID1" id="RID1" type="text" value="@ViewBag.DOI" readonly="readonly" 
                     onclick="openDialog(1)" placeholder="输入参考文献1" class="form-control required"/>
         </div>
         <div class="col-sm-2 ">
@@ -195,12 +176,6 @@
                 class="form-control required" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
-        <div class="col-sm-2" style="width: auto;">
-            <select name="lon" id="lon" class="form-control">
-                <option value="Arabic">东经</option>
-                <option value="Arabic">西经</option>
-            </select>
-        </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">纬度：</label>
@@ -219,12 +194,6 @@
                 class="form-control required" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
-        <div class="col-sm-2" style="width: auto;">
-            <select name="lat" id="lat" class="form-control">
-                <option value="Arabic">北纬</option>
-                <option value="Arabic">南纬</option>
-            </select>
-        </div>
     </div>
 
 
@@ -272,6 +241,15 @@
 </form>
 
 <script>
+    var index_dialog;
+    function test(value, row, index) {
+        return "<div onclick='selectReference(\"" + row.DOI + "\")' class='icon-ok' style='width:30px;height:30px;'/>";
+    }
+    function selectReference(doi) {
+        $("#RID" + index_dialog).val(doi);
+        $('#dd').dialog("close");
+    }
+
     function change() {
         //处理时代子元素下拉框
         initSelect($("#SubTime"), getOptionsURL, { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
@@ -280,6 +258,17 @@
         var value = $("#GetLocation").val();
         var text = $("#" + value).val()
         $.post("/Baidu/GetLocationByPlaceName", { city: $("#City").val(), place: text }, function (data) {
+            debugger;
+            if (data.status == "error") {
+                $("#tbody").html(data.msg);
+                $('#mm').dialog("open");//弹出模态框
+                return false;
+            }
+            if (data.status != 0) {
+                $("#tbody").html(data.message);
+                $('#mm').dialog("open");//弹出模态框
+                return false;
+            }
             $("#tbody").html("");
             var re = data.results;
             for (var i = 0; i < re.length; i++) {
@@ -289,11 +278,16 @@
                 }
                 var name = re[i].name;
                 var loca = re[i].location;
+                if (!re[i].hasOwnProperty("location")) {
+                    $("#tbody").html("无搜索结果！");
+                    $('#mm').dialog("open");//弹出模态框
+                    return false;
+                }
                 var tr = $("<tr/>");
                 $("#tbody").append(tr);
                 var td_btn = $("<td style='width:30px;'/>");
                 tr.append(td_btn);
-                var btn = $("<a class='easyui-linkbutton' data-options='iconCls:\"icon-ok\"'/>");
+                var btn = $("<a id='btn' class='easyui-linkbutton' data-options='iconCls:\"icon-ok\",plain:true'/>");
                 btn.on("click", { loca: loca }, function (event) {
                     var loca = event.data.loca;
                     $("#Lon").val(loca.lng);
@@ -305,12 +299,14 @@
                 var td_label = $("<td/>");
                 tr.append(td_label);
                 td_label.append(address + "</br>" + name + "," + loca.lng + "," + loca.lat);
-                $.parser.parse();
+                $.parser.parse(); // 解析指定节点
+                $('#mm').dialog("open");//弹出模态框
             }
-            $('#mm').dialog("open");//弹出模态框
+
         }, "json");
     }
     function openDialog(re) {//打开参考文献模态框
+        index_dialog = re;
         $('#dd').dialog("open");
     }
     function init() {
@@ -390,9 +386,14 @@
         var NoAuthorizer = $("#NoAuthorizer").val();
         var SearchYear = $("#SearchYear").val();
         SearchYear = parseInt(SearchYear);
-        $.post("@Url.Action("GetList", "Reference")", { doiANDauthor: NoAuthorizer, year: SearchYear, page: 1, rows: 5 }, function (data) {
+        $("#grid").datagrid("reload", {
+            doiANDauthor: NoAuthorizer,
+            year: SearchYear
+        });
+   @*     $.post("@Url.Action("GetList", "Reference")", { doiANDauthor: NoAuthorizer, year: SearchYear, page: 1, rows: 5 }, function (data) {
+            $("#grid").datagrid("loadData", data);
             console.log(data);
-        }, "json");
+        }, "json");*@
     }
 </script>
 
