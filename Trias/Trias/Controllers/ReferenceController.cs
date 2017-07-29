@@ -25,9 +25,17 @@ namespace Trias.Controllers
         /// <param name="page">页码</param>
         /// <param name="rows">每页多少条数据</param>
         /// <returns></returns>
-        public ActionResult GetList(int page = 1, int rows = int.MaxValue)
+        public ActionResult GetList(string doiANDauthor,int year=0,int page = 1, int rows = int.MaxValue)
         {
             var list = referenceSer.Where();
+            if (year != 0)
+            {
+                list = list.Where(x => x.Year == year);
+            }
+            if (!string.IsNullOrWhiteSpace(doiANDauthor))
+            {
+                list = list.Where(x => x.DOI == doiANDauthor || x.FirstAuthor.Contains(doiANDauthor) || x.SecondAuthor.Contains(doiANDauthor) || x.OtherAuthors.Contains(doiANDauthor));
+            }
             var total = list.Count();
             list = list.Skip(rows * (page - 1)).Take(rows);
             return Json(new

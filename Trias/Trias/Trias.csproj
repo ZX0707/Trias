@@ -1169,12 +1169,12 @@
     <Content Include="Views\Reference\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\IndexWithLogin.cshtml" />
-    <Content Include="Views\Section\Index.cshtml" />
     <Content Include="Views\Formation\Index.cshtml" />
     <Content Include="Views\Fossil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Section\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
