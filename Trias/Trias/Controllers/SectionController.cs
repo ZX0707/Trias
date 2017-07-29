@@ -25,18 +25,13 @@ namespace Trias.Controllers
             {
                 return WriteStatusError(ModelState);
             }
+            var user = UserMgr.CurrUserInfo();
+            model.User_ID = user.User_ID;
             var Model = new Section();
             Model.CopyFrom(model);
             sectionSer.Add(Model);
             Model.S_ID = Guid.NewGuid().ToString();
-            try
-            {
-                sectionSer.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                return WriteError(e.Message);
-            }
+            sectionSer.SaveChanges();
             return WriteSuccess(new
             {
                 Model.S_ID,

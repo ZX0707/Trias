@@ -13,9 +13,10 @@ namespace Trias.Controllers
         //
         // GET: /Formation/
 
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View();
+            var model = sectionSer.Find(id) ?? new Section();
+            return View(model);
         }
         //添加岩石组信息
         public ActionResult AddFormation(FormationView model)
@@ -45,12 +46,12 @@ namespace Trias.Controllers
         //根据 剖面id 查询岩石组信息
         public ActionResult GetFormation(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("该剖面不存在");
             }
             var formationlist = formationSer.Where(x => x.S_ID.Contains(id)).ToList();
-            if(formationlist.Count==0)
+            if (formationlist.Count == 0)
             {
                 return WriteSuccess("暂无岩石组信息");
             }
@@ -59,11 +60,11 @@ namespace Trias.Controllers
         //删除岩石组信息
         public ActionResult RemoveFormation(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("岩石组不存在");
             }
-            formationSer.RemoveWhere(x=>x.F_ID==id);
+            formationSer.RemoveWhere(x => x.F_ID == id);
             formationSer.SaveChanges();
             return WriteSuccess("删除成功");
         }

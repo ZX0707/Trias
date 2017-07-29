@@ -3,7 +3,7 @@
 }
 @*文献模态框*@
 <div id="dd" class="easyui-dialog" title="文献信息" style="width: 600px; height: 400px;"
-    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <div id="toolbar">
         <a class="easyui-linkbutton" href="/Reference/Index" data-options="iconCls:'icon-add',plain:true">添加新文献</a>
 
@@ -14,7 +14,7 @@
         <a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" id="SearchBtn" onclick="SearchBtn()">查询</a>
     </div>
     <table id="grid" class="easyui-datagrid" style="width: 100%; height: 100%;"
-            data-options="url:'@Url.Action("GetList", "Reference")',fitColumns:true,singleSelect:true,pagination:true,toolbar:'#toolbar'">
+           data-options="url:'@Url.Action("GetList", "Reference")',fitColumns:true,singleSelect:true,pagination:true,toolbar:'#toolbar'">
         <thead>
             <tr>
                 <th data-options="field:'R_ID',width:30,formatter:test"></th>
@@ -30,7 +30,7 @@
 
 @*获取GPS模态框*@
 <div id="mm" class="easyui-dialog" title="获取GPS" style="width: 600px; height: 400px;"
-    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <div style="margin: 10px; text-align: center;">
         <form class="form-horizontal" role="form" method="post">
             <table class="table table-striped">
@@ -39,8 +39,7 @@
                         <th colspan="2">搜索结果</th>
                     </tr>
                 </thead>
-                <tbody id="tbody">
-                </tbody>
+                <tbody id="tbody"></tbody>
             </table>
         </form>
     </div>
@@ -49,34 +48,35 @@
 <form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
     <div class="form-group">
         <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
-            添加剖面</label>
+            添加剖面
+        </label>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">核准人：</label>
         <div class="col-sm-2 ">
             <input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control required"
-                readonly="readonly" />
+                   readonly="readonly" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">核准时间：</label>
         <div class="col-sm-2 ">
             <input name="EnterTime" id="EnterTime" type="text" class="easyui-datebox "
-                style="height: 33px;" />
+                   style="height: 33px;" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">剖面名称：</label>
         <div class="col-sm-3 ">
             <input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
-                class="form-control required" />
+                   class="form-control required" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">参考文献：</label>
         <div class="col-sm-2 ">
-            <input name="RID1" id="RID1" type="text" value="@ViewBag.DOI" readonly="readonly" 
-                    onclick="openDialog(1)" placeholder="输入参考文献1" class="form-control required"/>
+            <input name="RID1" id="RID1" type="text" value="@ViewBag.DOI" readonly="readonly"
+                   onclick="openDialog(1)" placeholder="输入参考文献1" class="form-control required" />
         </div>
         <div class="col-sm-2 ">
             <input name="RID2" id="RID2" type="text" readonly="readonly" onclick="openDialog(2)" placeholder="输入参考文献2" class="form-control" />
@@ -105,29 +105,29 @@
         <label class="col-sm-2 control-label">国家：</label>
         <div class="col-sm-2 ">
             <input name="Country" id="Country" type="text" placeholder="输入国家"
-                class="form-control required" />
+                   class="form-control required" />
         </div>
         <label class="col-sm-1 control-label">省份：</label>
         <div class="col-sm-2 ">
             <input name="Province" id="Province" type="text" placeholder="输入省份"
-                class="form-control required" />
+                   class="form-control required" />
         </div>
         <label class="col-sm-1 control-label">城市：</label>
         <div class="col-sm-2 ">
             <input name="City" id="City" type="text" placeholder="输入城市"
-                class="form-control required" />
+                   class="form-control required" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">县/区：</label>
         <div class="col-sm-2 ">
             <input name="County" id="County" type="text" placeholder="输入县/区"
-                class="form-control" />
+                   class="form-control" />
         </div>
         <label class="col-sm-1 control-label">村：</label>
         <div class="col-sm-2 ">
             <input name="Village" id="Village" type="text" placeholder="输入村"
-                class="form-control" />
+                   class="form-control" />
         </div>
     </div>
     <div class="form-group">
@@ -149,12 +149,12 @@
         <label class="col-sm-2 control-label">经度：</label>
         <div class="col-sm-2">
             <input name="Lon" id="Lon" type="number" placeholder="经度"
-                class="form-control required lon_lat" />
+                   class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label">纬度：</label>
         <div class="col-sm-2">
             <input name="Lat" id="Lat" type="number" placeholder="纬度"
-                class="form-control required lon_lat" />
+                   class="form-control required lon_lat" />
         </div>
 
     </div>
@@ -163,17 +163,17 @@
         <label class="col-sm-2 control-label">经度：</label>
         <div class="col-sm-2">
             <input name="LonDegrees" id="LonDegrees" type="number" placeholder="经度"
-                class="form-control required lon_lat" />
+                   class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
         <div class="col-sm-2 ">
             <input name="LonMinutes" id="LonMinutes" type="number" placeholder="经分"
-                class="form-control required lon_lat" />
+                   class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
         <div class="col-sm-2 ">
             <input name="LonSeconds" id="LonSeconds" type="number" placeholder="经秒"
-                class="form-control required lon_lat" />
+                   class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
     </div>
@@ -181,17 +181,17 @@
         <label class="col-sm-2 control-label">纬度：</label>
         <div class="col-sm-2 ">
             <input name="LatDegrees" id="LatDegrees" type="number" placeholder="纬度"
-                class="form-control required lon_lat" />
+                   class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
         <div class="col-sm-2 ">
             <input name="LatMinutes" id="LatMinutes" type="number" placeholder="纬分"
-                class="form-control required lon_lat" />
+                   class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
         <div class="col-sm-2 ">
             <input name="LatSeconds" id="LatSeconds" type="number" placeholder="纬秒"
-                class="form-control required lon_lat" />
+                   class="form-control required lon_lat" />
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
     </div>
@@ -241,7 +241,7 @@
 </form>
 
 <script>
-    var sid; 
+    var sid;
     var index_dialog;
     function test(value, row, index) {
         return "<div onclick='selectReference(\"" + row.DOI + "\")' class='icon-ok' style='width:30px;height:30px;'/>";
@@ -260,15 +260,15 @@
         var value = $("#GetLocation").val();
         var text = $("#" + value).val()
         $.post("/Baidu/GetLocationByPlaceName", { city: $("#City").val(), place: text }, function (data) {
-            debugger;
+            $('#mm').dialog("open");//弹出模态框
             if (data.status == "error") {
                 $("#tbody").html(data.msg);
-                $('#mm').dialog("open");//弹出模态框
+                //$('#mm').dialog("open");//弹出模态框
                 return false;
             }
             if (data.status != 0) {
                 $("#tbody").html(data.message);
-                $('#mm').dialog("open");//弹出模态框
+                //$('#mm').dialog("open");//弹出模态框
                 return false;
             }
             $("#tbody").html("");
@@ -282,14 +282,14 @@
                 var loca = re[i].location;
                 if (!re[i].hasOwnProperty("location")) {
                     $("#tbody").html("无搜索结果！");
-                    $('#mm').dialog("open");//弹出模态框
+                    //$('#mm').dialog("open");//弹出模态框
                     return false;
                 }
                 var tr = $("<tr/>");
                 $("#tbody").append(tr);
                 var td_btn = $("<td style='width:30px;'/>");
                 tr.append(td_btn);
-                var btn = $("<a id='btn' class='easyui-linkbutton' data-options='iconCls:\"icon-ok\",plain:true'/>");
+                var btn = $("<div class='icon-ok' style='width:30px;height:30px;'/>");
                 btn.on("click", { loca: loca }, function (event) {
                     var loca = event.data.loca;
                     $("#Lon").val(loca.lng);
@@ -301,8 +301,8 @@
                 var td_label = $("<td/>");
                 tr.append(td_label);
                 td_label.append(address + "</br>" + name + "," + loca.lng + "," + loca.lat);
-                $.parser.parse(); // 解析指定节点
-                $('#mm').dialog("open");//弹出模态框
+                //$.parser.parse("#btn"); // 解析指定节点
+                //$('#mm').dialog("open");//弹出模态框
             }
 
         }, "json");
@@ -370,7 +370,7 @@
                 }
                 if (data.status == "success") {
                     sid = data.msg.S_ID;
-                    $('#addFormation').linkbutton('enable');//启用button
+                    //$('#addFormation').linkbutton('enable');//启用button
                     $('#addFormation').removeAttr('disabled');//启用button
                     $.messager.alert("", "保存成功！", "info");
                 }

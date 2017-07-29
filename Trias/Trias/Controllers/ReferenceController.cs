@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Trias.Models;
 using Trias.Tool;
@@ -22,8 +20,10 @@ namespace Trias.Controllers
         /// <summary>
         /// 获取文献列表，带分页
         /// </summary>
+        /// <param name="year">年份</param>
         /// <param name="page">页码</param>
         /// <param name="rows">每页多少条数据</param>
+        /// <param name="doiANDauthor">doi或者作者名</param>
         /// <returns></returns>
         public ActionResult GetList(string doiANDauthor, int year = 0, int page = 1, int rows = int.MaxValue)
         {
@@ -40,11 +40,16 @@ namespace Trias.Controllers
             list = list.OrderByDescending(x => x.Year).Skip(rows * (page - 1)).Take(rows);
             return Json(new
             {
-                total = total,
+                total,
                 rows = list.ToList()
             });
         }
 
+        /// <summary>
+        /// 添加文献
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public ActionResult Add(ReferenceView model)
         {
             if (!ModelState.IsValid)
@@ -71,18 +76,23 @@ namespace Trias.Controllers
                     return WriteError(e.Message);
                 }
             }
-            var Model = new Reference();
-            Model.CopyFrom(model);
-            referenceSer.Add(Model);
-            Model.R_ID = Guid.NewGuid().ToString();
+            var rModel = new Reference();
+            rModel.CopyFrom(model);
+            referenceSer.Add(rModel);
+            rModel.R_ID = Guid.NewGuid().ToString();
             referenceSer.SaveChanges();
             return WriteSuccess(new
             {
-                DOI = Model.DOI,
+                rModel.DOI,
                 msg = "操作成功！"
             });
         }
 
+        /// <summary>
+        /// 修改文献
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public ActionResult Edit(ReferenceView model)
         {
             if (!ModelState.IsValid)
@@ -114,6 +124,11 @@ namespace Trias.Controllers
             return WriteSuccess("操作成功！");
         }
 
+        /// <summary>
+        /// 删除文献
+        /// </summary>
+        /// <param name="id">文献的Id</param>
+        /// <returns></returns>
         public ActionResult Remove(string id)
         {
             referenceSer.RemoveWhere(x => x.R_ID == id);
