@@ -78,7 +78,7 @@ namespace Trias.Controllers
             referenceSer.SaveChanges();
             return WriteSuccess(new
             {
-                R_ID = Model.R_ID,
+                DOI = Model.DOI,
                 msg = "操作成功！"
             });
         }

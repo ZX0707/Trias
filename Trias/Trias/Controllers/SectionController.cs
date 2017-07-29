@@ -15,7 +15,7 @@ namespace Trias.Controllers
 
         public ActionResult Index(string id)
         {
-            ViewBag.R_ID = id;
+            ViewBag.DOI = id;
             return View();
         }
         //添加剖面
