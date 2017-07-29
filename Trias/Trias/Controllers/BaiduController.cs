@@ -17,7 +17,14 @@ namespace Trias.Controllers
         /// <returns></returns>
         public ActionResult GetLocationByPlaceName(string city, string place)
         {
-            return Content(BaiduApiHelper.GetLocationsByName(city, place));
+            try
+            {
+                return Content(BaiduApiHelper.GetLocationsByName(city, place));
+            }
+            catch (Exception e)
+            {
+                return WriteError(e.Message);
+            }
         }
 
     }
