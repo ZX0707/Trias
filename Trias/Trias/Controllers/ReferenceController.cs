@@ -25,7 +25,7 @@ namespace Trias.Controllers
         /// <param name="page">页码</param>
         /// <param name="rows">每页多少条数据</param>
         /// <returns></returns>
-        public ActionResult GetList(string doiANDauthor,int year=0,int page = 1, int rows = int.MaxValue)
+        public ActionResult GetList(string doiANDauthor, int year = 0, int page = 1, int rows = int.MaxValue)
         {
             var list = referenceSer.Where();
             if (year != 0)
@@ -93,7 +93,7 @@ namespace Trias.Controllers
             {
                 return WriteError("已经存在文献的DOI为" + model.DOI + "，请确认！");
             }
-                      if (!string.IsNullOrWhiteSpace(model.PageBegin) && !string.IsNullOrWhiteSpace(model.PageEnd))
+            if (!string.IsNullOrWhiteSpace(model.PageBegin) && !string.IsNullOrWhiteSpace(model.PageEnd))
             {
                 try
                 {
@@ -109,7 +109,7 @@ namespace Trias.Controllers
                     return WriteError(e.Message);
                 }
             }
-  referenceSer.EditWhere(x => x.R_ID == model.R_ID, model);
+            referenceSer.EditWhere(x => x.R_ID == model.R_ID, model);
             referenceSer.SaveChanges();
             return WriteSuccess("操作成功！");
         }
