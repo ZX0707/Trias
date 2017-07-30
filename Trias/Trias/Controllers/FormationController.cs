@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Trias.Models;
 using Trias.Tool;
+using WebGrease.Css.Extensions;
 
 namespace Trias.Controllers
 {
@@ -18,6 +19,28 @@ namespace Trias.Controllers
             var model = sectionSer.Find(id) ?? new Section();
             return View(model);
         }
+
+        /// <summary>
+        /// 通过剖面Id获取岩石组相关信息
+        /// </summary>
+        /// <param name="sid">剖面Id</param>
+        /// <returns></returns>
+        public ActionResult GetInfomationBySId(string sid)
+        {
+            var list = formationSer.Where(x => x.S_ID == sid).Select(f => new
+            {
+                units = unitSer.Where(u => u.F_ID == f.F_ID).ToList().Select(u => new
+                {
+                    collections = collectionSer.Where(c => c.U_ID == u.U_ID).ToList().Select(c => new
+                    {
+                        fossils = fossilSer.Where(fo => fo.C_ID == c.C_ID).ToList(),
+                        geochemicals = geochemicalSer.Where(g => g.C_ID == c.C_ID).ToList()
+                    }).ToList()
+                }).ToList()
+            }).ToList();
+            return Json(list);
+        }
+
         //添加岩石组信息
         public ActionResult AddFormation(FormationView model)
         {

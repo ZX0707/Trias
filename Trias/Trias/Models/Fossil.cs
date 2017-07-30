@@ -15,7 +15,7 @@ namespace Trias.Models
     public partial class Fossil
     {
         public string H_ID { get; set; }
-        public string P_ID { get; set; }
+        public string C_ID { get; set; }
         public string R_ID { get; set; }
         public string Time { get; set; }
         public string SubTime { get; set; }

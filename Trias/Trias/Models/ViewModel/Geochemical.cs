@@ -15,7 +15,7 @@ namespace Trias.Models
     public partial class GeochemicalView
     {
         public string G_ID { get; set; }
-        public string Section { get; set; }
+        public string C_ID { get; set; }
         public string Authorizer { get; set; }
         public string R_ID { get; set; }
         public string isotope { get; set; }

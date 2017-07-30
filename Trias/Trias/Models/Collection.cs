@@ -15,7 +15,6 @@ namespace Trias.Models
     public partial class Collection
     {
         public string C_ID { get; set; }
-        public string F_ID { get; set; }
         public string U_ID { get; set; }
         public string Precision { get; set; }
         public string Details { get; set; }

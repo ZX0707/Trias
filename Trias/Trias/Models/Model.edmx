@@ -4,13 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TriasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="TriasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="Collection">
           <Key>
             <PropertyRef Name="C_ID" />
           </Key>
           <Property Name="C_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="F_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="U_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Precision" Type="nvarchar" MaxLength="50" />
           <Property Name="Details" Type="text" />
@@ -44,7 +43,7 @@
             <PropertyRef Name="H_ID" />
           </Key>
           <Property Name="H_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="P_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="C_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="R_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Time" Type="nvarchar" MaxLength="50" />
           <Property Name="SubTime" Type="nvarchar" MaxLength="50" />
@@ -59,7 +58,7 @@
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Length" Type="nvarchar" MaxLength="50" />
           <Property Name="width" Type="nvarchar" MaxLength="50" />
-          <Property Name="Picture" Type="nvarchar" MaxLength="255" />
+          <Property Name="Picture" Type="nvarchar(max)" />
           <Property Name="Notes" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Geochemical">
@@ -67,7 +66,7 @@
             <PropertyRef Name="G_ID" />
           </Key>
           <Property Name="G_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Section" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Authorizer" Type="nvarchar" MaxLength="50" />
           <Property Name="R_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="isotope" Type="nvarchar" MaxLength="50" />
@@ -204,24 +203,6 @@
           <Property Name="Sort" Type="Int32" Nullable="false" />
           <Property Name="Pid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Geochemical">
-          <Key>
-            <PropertyRef Name="G_ID" />
-          </Key>
-          <Property Name="G_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Authorizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="R_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="isotope" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Isotopepersents" Type="Double" />
-          <Property Name="Element" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Elementpersents" Type="Double" />
-          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SubTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Time2" Type="Int32" />
-          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Reference">
           <Key>
             <PropertyRef Name="R_ID" />
@@ -263,15 +244,15 @@
         </EntityType>
         <EntityContainer Name="TriasEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Dict" EntityType="Self.Dict" />
-          <EntitySet Name="Geochemical" EntityType="Self.Geochemical" />
           <EntitySet Name="Reference" EntityType="Self.Reference" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="Rock" EntityType="TriasModel.Rock" />
-          <EntitySet Name="Collection" EntityType="TriasModel.Collection" />
           <EntitySet Name="Unit" EntityType="TriasModel.Unit" />
           <EntitySet Name="Formation" EntityType="TriasModel.Formation" />
           <EntitySet Name="Section" EntityType="TriasModel.Section" />
+          <EntitySet Name="Collection" EntityType="TriasModel.Collection" />
           <EntitySet Name="Fossil" EntityType="TriasModel.Fossil" />
+          <EntitySet Name="Geochemical" EntityType="TriasModel.Geochemical" />
         </EntityContainer>
         <EntityType Name="Rock">
           <Key>
@@ -287,18 +268,6 @@
           <Property Name="MainLithology" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sort" Type="Int32" />
           <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Collection">
-          <Key>
-            <PropertyRef Name="C_ID" />
-          </Key>
-          <Property Name="C_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="U_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Precision" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Depth1" Type="Double" />
-          <Property Name="Depth2" Type="Double" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -354,12 +323,23 @@
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Altitude" Type="Double" />
         </EntityType>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="C_ID" />
+          </Key>
+          <Property Name="C_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="U_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Precision" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Depth1" Type="Double" />
+          <Property Name="Depth2" Type="Double" />
+        </EntityType>
         <EntityType Name="Fossil">
           <Key>
             <PropertyRef Name="H_ID" />
           </Key>
           <Property Name="H_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="P_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="R_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SubTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -374,8 +354,26 @@
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Length" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="width" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Picture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Geochemical">
+          <Key>
+            <PropertyRef Name="G_ID" />
+          </Key>
+          <Property Name="G_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Authorizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="R_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isotope" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Isotopepersents" Type="Double" />
+          <Property Name="Element" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Elementpersents" Type="Double" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time2" Type="Int32" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -392,25 +390,6 @@
                 <ScalarProperty Name="ValueName" ColumnName="ValueName" />
                 <ScalarProperty Name="Sort" ColumnName="Sort" />
                 <ScalarProperty Name="Pid" ColumnName="Pid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Geochemical">
-            <EntityTypeMapping TypeName="TriasModel.Geochemical">
-              <MappingFragment StoreEntitySet="Geochemical">
-                <ScalarProperty Name="G_ID" ColumnName="G_ID" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="Authorizer" ColumnName="Authorizer" />
-                <ScalarProperty Name="R_ID" ColumnName="R_ID" />
-                <ScalarProperty Name="isotope" ColumnName="isotope" />
-                <ScalarProperty Name="Isotopepersents" ColumnName="Isotopepersents" />
-                <ScalarProperty Name="Element" ColumnName="Element" />
-                <ScalarProperty Name="Elementpersents" ColumnName="Elementpersents" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
-                <ScalarProperty Name="Time2" ColumnName="Time2" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -471,19 +450,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Collection">
-            <EntityTypeMapping TypeName="TriasModel.Collection">
-              <MappingFragment StoreEntitySet="Collection">
-                <ScalarProperty Name="Depth2" ColumnName="Depth2" />
-                <ScalarProperty Name="Depth1" ColumnName="Depth1" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="Precision" ColumnName="Precision" />
-                <ScalarProperty Name="U_ID" ColumnName="U_ID" />
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="C_ID" ColumnName="C_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Unit">
             <EntityTypeMapping TypeName="TriasModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
@@ -541,6 +507,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Collection">
+            <EntityTypeMapping TypeName="TriasModel.Collection">
+              <MappingFragment StoreEntitySet="Collection">
+                <ScalarProperty Name="Depth2" ColumnName="Depth2" />
+                <ScalarProperty Name="Depth1" ColumnName="Depth1" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Precision" ColumnName="Precision" />
+                <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+                <ScalarProperty Name="C_ID" ColumnName="C_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Fossil">
             <EntityTypeMapping TypeName="TriasModel.Fossil">
               <MappingFragment StoreEntitySet="Fossil">
@@ -560,8 +538,27 @@
                 <ScalarProperty Name="SubTime" ColumnName="SubTime" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="R_ID" ColumnName="R_ID" />
-                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="C_ID" ColumnName="C_ID" />
                 <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Geochemical">
+            <EntityTypeMapping TypeName="TriasModel.Geochemical">
+              <MappingFragment StoreEntitySet="Geochemical">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Time2" ColumnName="Time2" />
+                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Elementpersents" ColumnName="Elementpersents" />
+                <ScalarProperty Name="Element" ColumnName="Element" />
+                <ScalarProperty Name="Isotopepersents" ColumnName="Isotopepersents" />
+                <ScalarProperty Name="isotope" ColumnName="isotope" />
+                <ScalarProperty Name="R_ID" ColumnName="R_ID" />
+                <ScalarProperty Name="Authorizer" ColumnName="Authorizer" />
+                <ScalarProperty Name="C_ID" ColumnName="C_ID" />
+                <ScalarProperty Name="G_ID" ColumnName="G_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

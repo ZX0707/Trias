@@ -20,7 +20,7 @@
                 <th data-options="field:'S_ID',width:30,formatter:test"></th>
                 <th data-options="field:'SectionName',width:100">名称</th>
                 <th data-options="field:'Authorizer',width:100">核准人</th>
-                <th data-options="field:'EnterTime',width:100">核准时间</th>
+                <th data-options="field:'EnterTime',width:100,formatter:parseTimer">核准时间</th>
             </tr>
         </thead>
     </table>
@@ -156,6 +156,10 @@
 </form>
 
 <script>
+    function parseTimer(value) {
+        return commHelper.ChangeDateFormatYMD(value);
+    }
+
     function test(value, row, index) {
         return "<div onclick='selectSection(\"" + row.S_ID + "\")' class='icon-ok' style='width:30px;height:30px;'/>";
     }
