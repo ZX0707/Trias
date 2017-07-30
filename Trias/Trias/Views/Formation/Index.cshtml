@@ -42,10 +42,12 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">时代：</label>
         <div class="col-sm-2 ">
-            <select name="Time" id="Time" onchange="change()" class="form-control" value="@Model.Time"></select>
+            @Html.TextBoxFor(x => x.Time, new { type = "text", @class = "form-control", @readonly = "readonly" })
+            @*<select name="Time" id="Time" onchange="change()" class="form-control" value="@Model.Time"></select>*@
         </div>
         <div class="col-sm-2 ">
-            <select name="SubTime" id="SubTime" class="form-control" style="width: auto" value="@Model.SubTime"></select>
+            @Html.TextBoxFor(x => x.SubTime, new { type = "text", @class = "form-control", @readonly = "readonly" })
+           @* <select name="SubTime" id="SubTime" class="form-control" style="width: auto" value="@Model.SubTime"></select>*@
         </div>
     </div>
     <div class="form-group">
