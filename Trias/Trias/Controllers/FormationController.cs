@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.SqlServer.Server;
+using Newtonsoft.Json;
 using Trias.Models;
 using Trias.Tool;
 using WebGrease.Css.Extensions;
@@ -18,6 +20,29 @@ namespace Trias.Controllers
         {
             var model = sectionSer.Find(id) ?? new Section();
             return View(model);
+        }
+
+        public ActionResult Add(string id)
+        {
+            ViewBag.SId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(string formation, string rocks)
+        {
+            var formtionModel = JsonConvert.DeserializeObject<Formation>(formation);
+            formtionModel.F_ID = Guid.NewGuid().ToString();
+            var rockList = JsonConvert.DeserializeObject<List<Rock>>(rocks);
+            rockList.ForEach(x =>
+            {
+                x.Rock_ID = Guid.NewGuid().ToString();
+                x.Type_ID = formtionModel.F_ID;
+            });
+            formationSer.Add(formtionModel);
+            rockSer.AddList(rockList);
+            rockSer.SaveChanges();
+            return WriteSuccess("添加成功！");
         }
 
         /// <summary>

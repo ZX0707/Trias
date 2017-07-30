@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/JS/jquery-1.9.1.min.js"></script>
+    <script src="~/Content/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    @* easyui *@
+    <link href="~/Content/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="~/Content/easyui/demo/demo.css" rel="stylesheet" />
+    <script src="~/Content/easyui/jquery.easyui.min.js"></script>
+    <script src="~/Content/easyui/locale/easyui-lang-zh_CN.js"></script>
+    @* easyui *@
+    <link href="~/Content/CSS/main.css" rel="stylesheet" />
+    <script src="~/Content/JS/home.js"></script>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+}
+
+<form class="form-horizontal" role="form" method="post" style="padding: 10px; text-align: center;">
+    <div class="bian_ju">
+        <div style="float: left">
+            <label>岩石组名：</label>
+        </div>
+        <div style="float: left">
+            <input name="FormationName" id="FormationName" type="text" placeholder="岩石组名" />
+        </div>
+        <div style="margin-left: 50px; float: left">
+            <label>厚度：</label>
+        </div>
+        <div style="float: left">
+            <input name="Thickness" id="Thickness" type="number" placeholder="厚度" />
+        </div>
+        <select style="float: left; height: 23px; margin-left: 2px;">
+            <option>米</option>
+            <option>英寸</option>
+            <option>厘米</option>
+        </select>
+        <div style="margin-left: 50px; float: left">
+            <label>沉积相带：</label>
+        </div>
+        <select id="EnvironmentalZones" style="float: left; height: 23px; margin-left: 2px;"></select>
+        <div class="clear"></div>
+    </div>
+    <div class="bian_ju" style="height: 150px;">
+        <div>
+            <div class="col-sm-2">
+                <label>颜色1</label>
+            </div>
+            <div class="col-sm-2">
+                <label>颜色2</label>
+            </div>
+            <div class="col-sm-2">
+                <label>岩性1</label>
+            </div>
+            <div class="col-sm-2">
+                <label>岩性2</label>
+            </div>
+            <div class="col-sm-2">
+                <label>主要岩性</label>
+            </div>
+            <div class="col-sm-2">
+                <label>关系</label>
+            </div>
+        </div>
+        <div class="co_li">
+            <div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <select style="width: 70px;height:23px;"></select>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <select style="width: 70px;height:23px;"></select>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <select style="width: 70px;height:23px;"></select>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bian_ju">
+        <div style="float: left">
+            <label>备注：</label>
+        </div>
+        <div style="float: left">
+            <textarea name="DeFormation" id="DeFormation" rows="5" style="width: 522px; resize: none" placeholder="备注"></textarea>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <button id="btn_save" type="button">保存</button>
+</form>
+<script>
+    var SId = "@ViewBag.SId";
+</script>
+<script>
+    $(function () {
+        //保存响应事件
+        $("#btn_save").on("click", {}, function () {
+            var formation = {
+                S_ID: SId,
+                FormationName: $("#FormationName").val(),
+                EnvironmentalZones: $("#EnvironmentalZones").val(),
+                Thickness: $("#Thickness").val(),
+                Comments: $("#DeFormation").val()
+            };
+            var rocks = [];
+            var lines = $(".co_li>div");
+            for (var i = 0; i < lines.length; i++) {
+                var rock = {
+                    Type: "Formation",
+                    Color1: $(lines[i]).find("input:eq(0)").val(),
+                    Color2: $(lines[i]).find("input:eq(1)").val(),
+                    Lithology1: $(lines[i]).find("input:eq(1)").val(),
+                    Lithology2: $(lines[i]).find("input:eq(1)").val(),
+                    MainLithology: $(lines[i]).find("input:eq(1)").val(),
+                    Sort: i,
+                    Relation: $(lines[i]).find("input:eq(1)").val()
+                }
+                if (rock.Color1.length <= 0 && rock.Color2.length <= 0 && rock.Lithology1.length <= 0 && rock.Lithology2.length <= 0 && rock.MainLithology.length <= 0) {
+                    //一个都没填视为无效
+                    continue;
+                }
+                rocks.push(rock);
+            }
+            $.post("@Url.Action("Add")",
+                { formation: JSON.stringify(formation), rocks: JSON.stringify(rocks) },
+                function(data) {
+                    if (data.status === "success") {
+                        $.messager.alert("",
+                            data.msg,
+                            "info",
+                            function() {
+                                commHelper.CloseDialog("添加岩石组");
+                            });
+                    } else {
+                        $.messager.alert("", data.msg, "warning");
+                    }
+                },
+                "json");
+        });
+    });
+</script>

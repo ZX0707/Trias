@@ -104,7 +104,7 @@
                         <input />
                     </div>
                     <div class="col-sm-2">
-                       <select style="width: 70px;height:23px;"></select>
+                        <select style="width: 70px;height:23px;"></select>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -125,7 +125,7 @@
                         <input />
                     </div>
                     <div class="col-sm-2">
-                     <select style="width: 70px;height:23px;"></select>
+                        <select style="width: 70px;height:23px;"></select>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -146,7 +146,7 @@
                         <input />
                     </div>
                     <div class="col-sm-2">
-                       @* <input />*@
+                        @* <input />*@
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -165,18 +165,18 @@
         <button type="button">保存</button>
 
         @* <div class="form-group">
-            <label class="col-sm-2 control-label" for="name">厚度：</label>
-            <div class="col-sm-2">
-                <input name="Thickness" id="Thickness" class="form-control" placeholder="厚度" />
+                <label class="col-sm-2 control-label" for="name">厚度：</label>
+                <div class="col-sm-2">
+                    <input name="Thickness" id="Thickness" class="form-control" placeholder="厚度" />
+                </div>
             </div>
-        </div>
-       
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="name">备注：</label>
-            <div class="col-sm-5">
-                <textarea name="DeFormation" id="DeFormation" class="form-control" rows="3" placeholder="备注"></textarea>
-            </div>
-        </div>*@
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="name">备注：</label>
+                <div class="col-sm-5">
+                    <textarea name="DeFormation" id="DeFormation" class="form-control" rows="3" placeholder="备注"></textarea>
+                </div>
+            </div>*@
 
     </form>
 </div>
@@ -357,7 +357,7 @@
 <script>
     //打开模态框
     function myFormation() {
-        //commHelper.OpenDialog("添加岩石组","@Url.Action("Add")")
+        commHelper.OpenDialog("添加岩石组", "@Url.Action("Add")/@Model.S_ID");
         //$('#myFormation').dialog("open");
     }
     function parseTimer(value) {
