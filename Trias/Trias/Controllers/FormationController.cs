@@ -42,6 +42,7 @@ namespace Trias.Controllers
             formationSer.Add(formtionModel);
             rockSer.AddList(rockList);
             rockSer.SaveChanges();
+            formationSer.SaveChanges();
             return WriteSuccess("添加成功！");
         }
 
@@ -52,15 +53,26 @@ namespace Trias.Controllers
         /// <returns></returns>
         public ActionResult GetInfomationBySId(string sid)
         {
-            var list = formationSer.Where(x => x.S_ID == sid).Select(f => new
+            var formationList = formationSer.Where(x => x.S_ID == sid).ToList();
+            var formationIds = formationList.Select(x => x.F_ID).ToList();
+            var unitList = unitSer.Where(x => formationIds.Contains(x.F_ID)).ToList();
+            var unitIds = unitList.Select(x => x.U_ID).ToList();
+            var collectionList = collectionSer.Where(x => unitIds.Contains(x.U_ID)).ToList();
+            var collectionIds = collectionList.Select(x => x.C_ID).ToList();
+            var fossilList = fossilSer.Where(x => collectionIds.Contains(x.C_ID)).ToList();
+            var geochemicalList = geochemicalSer.Where(x => collectionIds.Contains(x.C_ID)).ToList();
+            var list = formationList.Select(f => new
             {
-                units = unitSer.Where(u => u.F_ID == f.F_ID).ToList().Select(u => new
+                formation = f,
+                units = unitList.Where(u => u.F_ID == f.F_ID).Select(u => new
                 {
-                    collections = collectionSer.Where(c => c.U_ID == u.U_ID).ToList().Select(c => new
+                    unit = u,
+                    collections = collectionList.Where(c => c.U_ID == u.U_ID).Select(c => new
                     {
-                        fossils = fossilSer.Where(fo => fo.C_ID == c.C_ID).ToList(),
-                        geochemicals = geochemicalSer.Where(g => g.C_ID == c.C_ID).ToList()
-                    }).ToList()
+                        collection = c,
+                        fossils = fossilList.Where(fo => fo.C_ID == c.C_ID).ToList(),
+                        geochemicals = geochemicalList.Where(g => g.C_ID == c.C_ID).ToList()
+                    })
                 }).ToList()
             }).ToList();
             return Json(list);

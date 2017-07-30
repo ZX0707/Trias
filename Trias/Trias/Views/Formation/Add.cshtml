@@ -168,7 +168,8 @@
                         $.messager.alert("",
                             data.msg,
                             "info",
-                            function() {
+                            function () {
+                                parent.reload();
                                 commHelper.CloseDialog("添加岩石组");
                             });
                     } else {

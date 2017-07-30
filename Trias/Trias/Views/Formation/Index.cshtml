@@ -2,7 +2,7 @@
     ViewBag.Title = "添加岩石组";
 }
 <style>
-    .level2, .level3, .level4 {
+    .level1, .level2, .level3, .level4 {
         padding-left: 25px;
     }
 
@@ -20,166 +20,6 @@
     }
 </style>
 @model Trias.Models.Section
-@*添加岩石组模态框*@
-<div id="myFormation" class="easyui-dialog" title="添加岩石组" style="width: 600px; height: 400px;"
-     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
-    <form class="form-horizontal" role="form" method="post" style="padding: 10px; text-align: center;">
-        <div class="bian_ju">
-            <div style="float: left">
-                <label>岩石组名：</label>
-            </div>
-            <div style="float: left">
-                <input name="FormationName" id="FormationName" type="text" placeholder="岩石组名" />
-            </div>
-            <div style="margin-left: 50px; float: left">
-                <label>厚度：</label>
-            </div>
-            <div style="float: left">
-                <input name="Thickness" id="Thickness" type="number" placeholder="厚度" />
-            </div>
-            <select style="float: left; height: 23px; margin-left: 2px;">
-                <option>米</option>
-                <option>英寸</option>
-                <option>厘米</option>
-            </select>
-            <div class="clear"></div>
-        </div>
-        <div class="bian_ju" style="height: 150px;">
-            <div>
-                <div class="col-sm-2">
-                    <label>颜色1</label>
-                </div>
-                <div class="col-sm-2">
-                    <label>颜色2</label>
-                </div>
-                <div class="col-sm-2">
-                    <label>岩性1</label>
-                </div>
-                <div class="col-sm-2">
-                    <label>岩性2</label>
-                </div>
-                <div class="col-sm-2">
-                    <label>主要岩性</label>
-                </div>
-                <div class="col-sm-2">
-                    <label>关系</label>
-                </div>
-            </div>
-            <div class="co_li">
-                <div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <select style="width: 70px;height:23px;"></select>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <select style="width: 70px;height:23px;"></select>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <select style="width: 70px;height:23px;"></select>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        <input />
-                    </div>
-                    <div class="col-sm-2">
-                        @* <input />*@
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bian_ju">
-            <div style="float: left">
-                <label>备注：</label>
-            </div>
-            <div style="float: left">
-                <textarea name="DeFormation" id="DeFormation" rows="5" style="width: 522px; resize: none" placeholder="备注"></textarea>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <button type="button">保存</button>
-
-        @* <div class="form-group">
-                <label class="col-sm-2 control-label" for="name">厚度：</label>
-                <div class="col-sm-2">
-                    <input name="Thickness" id="Thickness" class="form-control" placeholder="厚度" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="name">备注：</label>
-                <div class="col-sm-5">
-                    <textarea name="DeFormation" id="DeFormation" class="form-control" rows="3" placeholder="备注"></textarea>
-                </div>
-            </div>*@
-
-    </form>
-</div>
 
 @*选择剖面模态框*@
 <<div id="xx" class="easyui-dialog" title="选择剖面" style="width: 600px; height: 400px;"
@@ -311,25 +151,7 @@
                         添加岩石组
                     </button>
                 </div>
-                <div class="level1">
-                    <label class="control-label">岩石组</label>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default">按钮 1</button>
-                        <button type="button" class="btn btn-default">按钮 2</button>
-                        <button type="button" class="btn btn-default">按钮 3</button>
-                    </div>
-                    <div class="level2">
-                        <label class="control-label">单元</label>
-                        <div class="level3">
-                            <label class="control-label">采样位置</label>
-                            <div class="level4">
-                                <label class="control-label">化石</label>
-                            </div>
-                            <div class="level4">
-                                <label class="control-label">地球化学信息</label>
-                            </div>
-                        </div>
-                    </div>
+                <div id="box">
                 </div>
             </div>
         </div>
@@ -355,11 +177,79 @@
 </form>
 
 <script>
+    $(function() {
+        reload();
+    });
+    function reload() {
+        $.post("@Url.Action("GetInfomationBySId")", { sid: "@Model.S_ID" }, function (data) {
+            var box = $("#box");
+            box.html("");
+            for (var i = 0; i < data.length; i++) {
+                var formation = data[i].formation;
+                var fid = formation.F_ID;
+                var fName = formation.FormationName;
+                var units = data[i].units;
+                var formationDiv = $("<div class='level1'/>");
+                formationDiv.append("<label class='control-label'>" + fName + "</label>");
+                formationDiv.append(
+                    "<div class='btn-group'><button type='button' class='btn btn-default' onclick='myUnit(\""+fid+"\")'>添加单元</button><button type='button' class='btn btn-default'>删除岩石组</button><button type='button' class='btn btn-default'>修改岩石组</button></div>");
+                box.append(formationDiv);
+                for (var j = 0; j < units.length; j++) {
+                    var unit = units[j].unit;
+                    var uid = unit.U_ID;
+                    var uName = "单元" + (j+1);
+                    var collections = units[j].collections;
+                    var unitDiv = $("<div class='level2'/>");
+                    unitDiv.append("<label class='control-label'>" + uName + "</label>");
+                    unitDiv.append(
+                        "<div class='btn-group'><button type='button' class='btn btn-default'>添加采样位置</button><button type='button' class='btn btn-default'>删除单元</button><button type='button' class='btn btn-default'>修改单元</button></div>");
+                    formationDiv.append(unitDiv);
+                    for (var k = 0; k < collections.length; k++) {
+                        var collection = collections[i].collection;
+                        var cid = collection.C_ID;
+                        var cName = "采样位置" + (k+1);
+                        var fossils = collections[k].fossils;
+                        var collectionDiv = $("<div class='level3'/>");
+                        collectionDiv.append("<label class='control-label'>" + uName + "</label>");
+                        collectionDiv.append(
+                            "<div class='btn-group'><button type='button' class='btn btn-default'>添加化石</button><button type='button' class='btn btn-default'>添加地球化学信息</button><button type='button' class='btn btn-default'>删除单元</button><button type='button' class='btn btn-default'>修改单元</button></div>");
+                        unitDiv.append(collectionDiv);
+                        for (var l = 0; l < fossils.length; l++) {
+                            var fossil = fossils[l];
+                            var foid = fossil.H_ID;
+                            var foName = "化石" + (l+1);
+                            var fossilDiv = $("<div class='level2'/>");
+                            fossilDiv.append("<label class='control-label'>" + uName + "</label>");
+                            fossilDiv.append(
+                                "<div class='btn-group'><button type='button' class='btn btn-default'>删除化石</button><button type='button' class='btn btn-default'>修改化石</button></div>");
+                            collectionDiv.append(fossilDiv);
+                        }
+                        var geochemicals = collections[k].geochemicals;
+                        for (var l = 0; l < geochemicals.length; l++) {
+                            var geochemical = geochemicals[l];
+                            var gid = geochemical.G_ID;
+                            var gName = "地球化学信息 " + (l+1);
+                            var geochemicalDiv = $("<div class='level2'/>");
+                            geochemicalDiv.append("<label class='control-label'>" + uName + "</label>");
+                            geochemicalDiv.append(
+                                "<div class='btn-group'><button type='button' class='btn btn-default'>删除地球化学信息 </button><button type='button' class='btn btn-default'>修改地球化学信息 </button></div>");
+                            collectionDiv.append(geochemicalDiv);
+                        }
+                    }
+                }
+            }
+        },"json");
+    }
+
+
     //打开模态框
     function myFormation() {
         commHelper.OpenDialog("添加岩石组", "@Url.Action("Add")/@Model.S_ID");
-        $('#myFormation').dialog("open");
     }
+    function myUnit(fid) {
+        commHelper.OpenDialog("添加单元", "@Url.Action("Add","Unit")/" + fid);
+    }
+
     function parseTimer(value) {
         return commHelper.ChangeDateFormatYMD(value);
     }
