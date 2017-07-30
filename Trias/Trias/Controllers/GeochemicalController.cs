@@ -20,26 +20,26 @@ namespace Trias.Controllers
         //添加地球化学信息
         public ActionResult AddGeochemiacal(GeochemicalView model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);
             }
-            Geochemical geochemicalmodel=new Geochemical();
+            Geochemical geochemicalmodel = new Geochemical();
             geochemicalmodel.CopyFrom(model);
             geochemicalSer.Add(geochemicalmodel);
             geochemicalmodel.G_ID = Guid.NewGuid().ToString();
             geochemicalSer.SaveChanges();
             return WriteSuccess("添加成功");
         }
-        //根据 剖面id 获取地球化学信息
+        //根据 cid 获取地球化学信息
         public ActionResult GetGeochemical(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("该剖面不存在");
             }
-            var geochemicallist = geochemicalSer.Where(x => x.Section.Contains(id)).ToList();
-            if(geochemicallist.Count==0)
+            var geochemicallist = geochemicalSer.Where(x => x.C_ID.Contains(id)).ToList();
+            if (geochemicallist.Count == 0)
             {
                 WriteSuccess("暂无地球化学信息");
             }
@@ -59,7 +59,7 @@ namespace Trias.Controllers
         //删除地球化学信息
         public ActionResult RemoveGeochemical(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("地球化学信息不存在");
             }

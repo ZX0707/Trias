@@ -34,12 +34,12 @@ namespace Trias.Controllers
         //根据剖面或单元id查询添加的岩石信息
         public ActionResult GetRock(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("该剖面不存在");
             }
-            var rocklist=rockSer.Where(x=>x.FU_ID.Contains(id)).ToList();
-            if(rocklist.Count==0)
+            var rocklist = rockSer.Where(x => x.Type_ID.Contains(id)).ToList();
+            if (rocklist.Count == 0)
             {
                 return WriteSuccess("暂未添加岩石");
             }
@@ -51,17 +51,17 @@ namespace Trias.Controllers
             {
                 return WriteStatusError(ModelState);
             }
-            rockSer.EditWhere(x=>x.Rock_ID==model.Rock_ID,model);
+            rockSer.EditWhere(x => x.Rock_ID == model.Rock_ID, model);
             rockSer.SaveChanges();
             return WriteSuccess("修改成功");
         }
         public ActionResult RemoveRock(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("岩石不存在");
             }
-            rockSer.RemoveWhere(x=>x.Rock_ID==id);
+            rockSer.RemoveWhere(x => x.Rock_ID == id);
             rockSer.SaveChanges();
             return WriteSuccess("删除成功");
         }

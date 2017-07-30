@@ -1,7 +1,135 @@
 ﻿@{
     ViewBag.Title = "添加岩石组";
 }
+<style>
+    .level2, .level3, .level4 {
+        padding-left: 25px;
+    }
+
+    .co_li div {
+        height: 100%;
+        margin-top: 5px;
+    }
+
+    .co_li input {
+        width: 60px;
+    }
+</style>
 @model Trias.Models.Section
+@*添加岩石组模态框*@
+<div id="myFormation" class="easyui-dialog" title="添加岩石组" style="width: 600px; height: 400px;"
+    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <form class="form-horizontal" role="form" method="post" style="padding: 10px; text-align: center;">
+        <div>
+            <label>岩石组名：</label>
+            <input name="FormationName" id="FormationName" type="text" placeholder="岩石组名" />
+        </div>
+        <div>
+            <div class="col-sm-2">
+                <label>颜色1</label>
+            </div>
+            <div class="col-sm-2">
+                <label>颜色1</label>
+            </div>
+            <div class="col-sm-2">
+                <label>颜色1</label>
+            </div>
+            <div class="col-sm-2">
+                <label>颜色1</label>
+            </div>
+            <div class="col-sm-2">
+                <label>颜色1</label>
+            </div>
+            <div class="col-sm-2">
+                <label>颜色1</label>
+            </div>
+        </div>
+        <div class="co_li">
+            <div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+            </div>
+            <div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+            </div>
+            <div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+            </div>
+            <div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+                <div class="col-sm-2">
+                    <input />
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
 @*选择剖面模态框*@
 <<div id="xx" class="easyui-dialog" title="选择剖面" style="width: 600px; height: 400px;"
     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
@@ -123,19 +251,38 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label"></label>
-        <div class="col-sm-8" style="background-color: #bee2fb;">
-            <span>岩石组</span>
+        <label class="col-sm-1 control-label"></label>
+        <div class="col-sm-10 " style="background-color: #bee2fb; height: auto; padding: 10px;">
             <div>
-                <span style="margin-left: 20px;">单元</span>
-                <div>
-                    <span style="margin-left: 40px;">采样位置</span>
-                    <div><span style="margin-left: 60px;">化石</span></div>
-                    <div><span style="margin-left: 60px;">地球化学信息</span></div>
+                <label class="control-label" style="font-size: 20px">岩石组</label>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" onclick="myFormation()">
+                        添加岩石组</button>
+                </div>
+                <div class="level1">
+                    <label class="control-label">岩石组</label>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">按钮 1</button>
+                        <button type="button" class="btn btn-default">按钮 2</button>
+                        <button type="button" class="btn btn-default">按钮 3</button>
+                    </div>
+                    <div class="level2">
+                        <label class="control-label">单元</label>
+                        <div class="level3">
+                            <label class="control-label">采样位置</label>
+                            <div class="level4">
+                                <label class="control-label">化石</label>
+                            </div>
+                            <div class="level4">
+                                <label class="control-label">地球化学信息</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="form-group">
         <label class="col-sm-2 control-label" for="name">评论：</label>
         <div class="col-sm-5">
@@ -156,10 +303,13 @@
 </form>
 
 <script>
+    //打开模态框
+    function myFormation() {
+        $('#myFormation').dialog("open");
+    }
     function parseTimer(value) {
         return commHelper.ChangeDateFormatYMD(value);
     }
-
     function test(value, row, index) {
         return "<div onclick='selectSection(\"" + row.S_ID + "\")' class='icon-ok' style='width:30px;height:30px;'/>";
     }
