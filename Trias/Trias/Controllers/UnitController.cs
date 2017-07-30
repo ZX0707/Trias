@@ -17,6 +17,12 @@ namespace Trias.Controllers
         {
             return View();
         }
+
+        public ActionResult Add()
+        {
+            return View();
+        }
+
         //添加单元信息
         public ActionResult AddUnit(UnitView model)
         {

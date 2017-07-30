@@ -1172,6 +1172,7 @@
     <Content Include="Views\Formation\Index.cshtml" />
     <Content Include="Views\Fossil\Index.cshtml" />
     <Content Include="Views\Section\Index.cshtml" />
+    <Content Include="Views\Unit\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

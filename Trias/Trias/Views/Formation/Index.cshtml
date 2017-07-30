@@ -12,7 +12,11 @@
     }
 
     .co_li input {
-        width: 60px;
+        width: 70px;
+    }
+
+    .bian_ju {
+        margin-bottom: 10px;
     }
 </style>
 @model Trias.Models.Section
@@ -20,112 +24,159 @@
 <div id="myFormation" class="easyui-dialog" title="添加岩石组" style="width: 600px; height: 400px;"
      data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <form class="form-horizontal" role="form" method="post" style="padding: 10px; text-align: center;">
-        <div>
-            <label>岩石组名：</label>
-            <input name="FormationName" id="FormationName" type="text" placeholder="岩石组名" />
+        <div class="bian_ju">
+            <div style="float: left">
+                <label>岩石组名：</label>
+            </div>
+            <div style="float: left">
+                <input name="FormationName" id="FormationName" type="text" placeholder="岩石组名" />
+            </div>
+            <div style="margin-left: 50px; float: left">
+                <label>厚度：</label>
+            </div>
+            <div style="float: left">
+                <input name="Thickness" id="Thickness" type="number" placeholder="厚度" />
+            </div>
+            <select style="float: left; height: 23px; margin-left: 2px;">
+                <option>米</option>
+                <option>英寸</option>
+                <option>厘米</option>
+            </select>
+            <div class="clear"></div>
         </div>
-        <div>
-            <div class="col-sm-2">
-                <label>颜色1</label>
+        <div class="bian_ju" style="height: 150px;">
+            <div>
+                <div class="col-sm-2">
+                    <label>颜色1</label>
+                </div>
+                <div class="col-sm-2">
+                    <label>颜色2</label>
+                </div>
+                <div class="col-sm-2">
+                    <label>岩性1</label>
+                </div>
+                <div class="col-sm-2">
+                    <label>岩性2</label>
+                </div>
+                <div class="col-sm-2">
+                    <label>主要岩性</label>
+                </div>
+                <div class="col-sm-2">
+                    <label>关系</label>
+                </div>
             </div>
-            <div class="col-sm-2">
-                <label>颜色1</label>
-            </div>
-            <div class="col-sm-2">
-                <label>颜色1</label>
-            </div>
-            <div class="col-sm-2">
-                <label>颜色1</label>
-            </div>
-            <div class="col-sm-2">
-                <label>颜色1</label>
-            </div>
-            <div class="col-sm-2">
-                <label>颜色1</label>
+            <div class="co_li">
+                <div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <select style="width: 70px;height:23px;"></select>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                       <select style="width: 70px;height:23px;"></select>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                     <select style="width: 70px;height:23px;"></select>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                        <input />
+                    </div>
+                    <div class="col-sm-2">
+                       @* <input />*@
+                    </div>
+                    <div class="clear"></div>
+                </div>
             </div>
         </div>
-        <div class="co_li">
-            <div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
+
+        <div class="bian_ju">
+            <div style="float: left">
+                <label>备注：</label>
             </div>
-            <div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
+            <div style="float: left">
+                <textarea name="DeFormation" id="DeFormation" rows="5" style="width: 522px; resize: none" placeholder="备注"></textarea>
             </div>
-            <div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-            </div>
-            <div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
-                <div class="col-sm-2">
-                    <input />
-                </div>
+            <div class="clear"></div>
+        </div>
+        <button type="button">保存</button>
+
+        @* <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">厚度：</label>
+            <div class="col-sm-2">
+                <input name="Thickness" id="Thickness" class="form-control" placeholder="厚度" />
             </div>
         </div>
+       
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">备注：</label>
+            <div class="col-sm-5">
+                <textarea name="DeFormation" id="DeFormation" class="form-control" rows="3" placeholder="备注"></textarea>
+            </div>
+        </div>*@
 
     </form>
 </div>
