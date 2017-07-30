@@ -19,7 +19,7 @@ namespace Trias.Models
         public string FirstAuthor { get; set; }
         public string SecondAuthor { get; set; }
         public string OtherAuthors { get; set; }
-        public Nullable<int> Year { get; set; }
+        public int Year { get; set; }
         public string Title { get; set; }
         public string BookTitle { get; set; }
         public string Journal { get; set; }

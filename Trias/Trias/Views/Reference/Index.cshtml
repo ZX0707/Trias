@@ -15,19 +15,18 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">文献类型：</label>
         <div class="col-sm-3">
-            <select name="ReferenceType" id="ReferenceType" class="form-control required">
-            </select>
+            <select name="ReferenceType" id="ReferenceType" class="form-control required"></select>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">第一作者：</label>
         <div class="col-sm-2">
             <input name="FirstAuthor" id="FirstAuthor" class="form-control required" type="text"
-                placeholder="输入第一作者">
+                   placeholder="输入第一作者">
         </div>
         <div class="col-sm-2">
             <input name="SecondAuthor" id="SecondAuthor" class="form-control" type="text"
-                placeholder="输入第二作者">
+                   placeholder="输入第二作者">
         </div>
         <div class="col-sm-2">
             <input name="OtherAuthors" id="OtherAuthors" class="form-control" type="text" placeholder="输入其他作者">
@@ -43,14 +42,14 @@
         <label class="col-sm-2 control-label">文献名：</label>
         <div class="col-sm-3">
             <input name="Title" id="Title" type="text" class="form-control required"
-                placeholder="输入文献名" />
+                   placeholder="输入文献名" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">编辑：</label>
         <div class="col-sm-2">
             <input name="Editor1" id="Editor1" type="text" class="form-control required"
-                placeholder="输入第一编辑" />
+                   placeholder="输入第一编辑" />
         </div>
         <div class="col-sm-2">
             <input name="Editor2" id="Editor2" type="text" class="form-control" placeholder="输入第二编辑" />
@@ -66,14 +65,14 @@
         <label class="col-sm-2 control-label">书名：</label>
         <div class="col-sm-3">
             <input name="BookTitle" id="BookTitle" type="text" class="form-control"
-                placeholder="输入书名" />
+                   placeholder="输入书名" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">杂志名：</label>
         <div class="col-sm-3">
             <input name="Journal" id="Journal" type="text" class="form-control"
-                placeholder="输入杂志名" />
+                   placeholder="输入杂志名" />
         </div>
     </div>
 
@@ -101,7 +100,7 @@
         <label class="col-sm-2 control-label">出版社：</label>
         <div class="col-sm-3">
             <input name="Publisher" id="Publisher" type="text" class="form-control"
-                placeholder="输入出版社" />
+                   placeholder="输入出版社" />
         </div>
     </div>
     <div class="form-group">
@@ -114,21 +113,21 @@
         <label class="col-sm-2 control-label">编码：</label>
         <div class="col-sm-3">
             <input name="DOI" id="DOI" type="text" class="form-control required"
-                placeholder="输入编码" />
+                   placeholder="输入编码" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">链接1：</label>
         <div class="col-sm-5">
             <input name="URL1" id="URL1" type="text" class="form-control"
-                placeholder="输入链接1" />
+                   placeholder="输入链接1" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">链接2：</label>
         <div class="col-sm-5">
             <input name="URL2" id="URL2" type="text" class="form-control"
-                placeholder="输入链接2" />
+                   placeholder="输入链接2" />
         </div>
     </div>
 
@@ -140,13 +139,13 @@
     </div>
     <div class="form-group" style="text-align: center">
         <div class="col-sm-3">
-            <button onclick="reset()" type="button" class="btn btn-default">重置</button>
+            <button onclick="resetForm()" type="button" class="btn btn-default">重置</button>
         </div>
         <div class="col-sm-3">
             <button onclick="save()" type="button" class="btn btn-default">保存</button>
         </div>
         <div class="col-sm-3">
-             <button  id="addSection" type="button" class="btn btn-default">添加剖面</button>
+            <button id="addSection" type="button" class="btn btn-default">添加剖面</button>
         </div>
     </div>
 </form>
@@ -191,8 +190,8 @@
                         $(arr[i]).addClass("error_ness");
                     }
                 }
-                var PageBegin=$("#PageBegin").val();
-                var PageEnd= $("#PageEnd").val();
+                var PageBegin = $("#PageBegin").val();
+                var PageEnd = $("#PageEnd").val();
                 if (PageBegin != "" && PageEnd != "") {
                     if (parseInt(PageBegin) > parseInt(PageEnd)) {
                         flag = false;
@@ -220,11 +219,12 @@
         $("#addSection").click(function () {
             location.href = "/Section/Index/" + doi;
         });
-      
+
 
     });
-    function reset() {
+    function resetForm() {
         $('#form').form("reset");
+        commHelper.OpenDialog("添加剖面", "/Section");
     }
     function save() {
         $('#form').form("submit");

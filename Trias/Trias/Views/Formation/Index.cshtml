@@ -18,7 +18,7 @@
 @model Trias.Models.Section
 @*添加岩石组模态框*@
 <div id="myFormation" class="easyui-dialog" title="添加岩石组" style="width: 600px; height: 400px;"
-    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <form class="form-horizontal" role="form" method="post" style="padding: 10px; text-align: center;">
         <div>
             <label>岩石组名：</label>
@@ -132,7 +132,7 @@
 
 @*选择剖面模态框*@
 <<div id="xx" class="easyui-dialog" title="选择剖面" style="width: 600px; height: 400px;"
-    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+      data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <div id="toolbar">
         <a class="easyui-linkbutton" href="/Section/Index" data-options="iconCls:'icon-add',plain:true">添加新剖面</a>
         <label>核准人：</label>
@@ -165,7 +165,7 @@
         <div class="col-sm-2 ">
             @Html.TextBoxFor(x => x.SectionName, new { type = "text", @class = "form-control", @readonly = "readonly" })
             @*<input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
-                   class="form-control required" />*@
+                class="form-control required" />*@
         </div>
         <div class="col-sm-1">
             <button onclick="seSection()" type="button" class="btn btn-default">选择剖面</button>
@@ -221,19 +221,19 @@
         <div class="col-sm-2 ">
             @Html.TextBoxFor(x => x.Country, new { type = "text", @class = "form-control", @readonly = "readonly" })
             @*<input name="Country" id="Country" type="text" placeholder="输入国家"
-                   class="form-control required" />*@
+                class="form-control required" />*@
         </div>
         <label class="col-sm-1 control-label">省份：</label>
         <div class="col-sm-2 ">
             @Html.TextBoxFor(x => x.Province, new { type = "text", @class = "form-control", @readonly = "readonly" })
             @*<input name="Province" id="Province" type="text" placeholder="输入省份"
-                   class="form-control required" />*@
+                class="form-control required" />*@
         </div>
         <label class="col-sm-1 control-label">城市：</label>
         <div class="col-sm-2 ">
             @Html.TextBoxFor(x => x.City, new { type = "text", @class = "form-control", @readonly = "readonly" })
             @*<input name="City" id="City" type="text" placeholder="输入城市"
-                   class="form-control required" />*@
+                class="form-control required" />*@
         </div>
     </div>
     <div class="form-group">
@@ -241,13 +241,13 @@
         <div class="col-sm-2 ">
             @Html.TextBoxFor(x => x.County, new { type = "text", @class = "form-control", @readonly = "readonly" })
             @*<input name="County" id="County" type="text" placeholder="输入县/区"
-                   class="form-control" />*@
+                class="form-control" />*@
         </div>
         <label class="col-sm-1 control-label">村：</label>
         <div class="col-sm-2 ">
             @Html.TextBoxFor(x => x.Village, new { type = "text", @class = "form-control", @readonly = "readonly" })
             @*<input name="Village" id="Village" type="text" placeholder="输入村"
-                   class="form-control" />*@
+                class="form-control" />*@
         </div>
     </div>
     <div class="form-group">
@@ -257,7 +257,8 @@
                 <label class="control-label" style="font-size: 20px">岩石组</label>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default" onclick="myFormation()">
-                        添加岩石组</button>
+                        添加岩石组
+                    </button>
                 </div>
                 <div class="level1">
                     <label class="control-label">岩石组</label>
@@ -305,7 +306,8 @@
 <script>
     //打开模态框
     function myFormation() {
-        $('#myFormation').dialog("open");
+        //commHelper.OpenDialog("添加岩石组","@Url.Action("Add")")
+        //$('#myFormation').dialog("open");
     }
     function parseTimer(value) {
         return commHelper.ChangeDateFormatYMD(value);

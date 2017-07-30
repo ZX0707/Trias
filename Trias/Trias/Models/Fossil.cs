@@ -16,7 +16,6 @@ namespace Trias.Models
     {
         public string H_ID { get; set; }
         public string C_ID { get; set; }
-        public string R_ID { get; set; }
         public string Time { get; set; }
         public string SubTime { get; set; }
         public Nullable<int> Time2 { get; set; }
@@ -24,7 +23,7 @@ namespace Trias.Models
         public string FossilGroup { get; set; }
         public string TaxonType { get; set; }
         public string CollectFromTreatise { get; set; }
-        public Nullable<int> RefDescribingRelation { get; set; }
+        public string RefDescribingRelation { get; set; }
         public string GenusName { get; set; }
         public string SpeciesName { get; set; }
         public string Position { get; set; }

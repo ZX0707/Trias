@@ -39,7 +39,27 @@ var commHelper = {
         return date.getFullYear() + "-" + month + "-" + currentDate;
     },
 
-    //2.1
-    Open
+    //2.1打开一个模态框
+    OpenDialog: function (title, url, width, height) {
+        if (width == undefined) {
+            width = $(window).width() * 0.8;
+        }
+        if (height == undefined) {
+            height = $(window).height() * 0.8;
+        }
+        var dialog = $("<div id='dialog_" + title + "'/>");
+        $(window).find("body").append(dialog);
+        dialog.dialog({
+            title: title,
+            width: width,
+            height: height,
+            modal: true,
+            content: '<iframe scrolling="yes" frameborder="0"  style="width:100%;height:99%;" src="' + url + '"/>'
+        });
+    },
+    //2.1关闭一个模态框
+    CloseDialog: function (title) {
+        window.parent.$("#dialog_" + title).dialog("close");
+    }
 }
 
