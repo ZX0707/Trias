@@ -2,12 +2,46 @@
     ViewBag.Title = "添加岩石组";
 }
 @model Trias.Models.Section
+@*选择剖面模态框*@
+<<div id="xx" class="easyui-dialog" title="选择剖面" style="width: 600px; height: 400px;"
+    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <div id="toolbar">
+        <a class="easyui-linkbutton" href="/Section/Index" data-options="iconCls:'icon-add',plain:true">添加新剖面</a>
+        <label>核准人：</label>
+        <input name="SearchAuthorizer" id="SearchAuthorizer" type="text" placeholder="输入核准人">
+        <label>剖面名称：</label>
+        <input name="SearchName" id="SearchName" type="text" placeholder="剖面名称">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" id="SearchBtn" onclick="SearchBtn()">查询</a>
+    </div>
+    <table id="grid" class="easyui-datagrid" style="width: 100%; height: 100%;"
+           data-options="url:'@Url.Action("GetSection", "Section")',fitColumns:true,singleSelect:true,pagination:true,toolbar:'#toolbar'">
+        <thead>
+            <tr>
+                <th data-options="field:'S_ID',width:30,formatter:test"></th>
+                <th data-options="field:'SectionName',width:100">名称</th>
+                <th data-options="field:'Authorizer',width:100">核准人</th>
+                <th data-options="field:'EnterTime',width:100">核准时间</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 
 <form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
     <div class="form-group">
         <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
             添加岩石组
         </label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">剖面名称：</label>
+        <div class="col-sm-2 ">
+            @Html.TextBoxFor(x => x.SectionName, new { type = "text", @class = "form-control", @readonly = "readonly" })
+            @*<input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
+                   class="form-control required" />*@
+        </div>
+        <div class="col-sm-1">
+            <button onclick="seSection()" type="button" class="btn btn-default">选择剖面</button>
+        </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">核准人：</label>
@@ -20,17 +54,21 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">核准时间：</label>
         <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.EnterTime, new { type = "text", @class = "form-control", @readonly = "readonly" })
+            @{
+                var enterStr = "";
+                if (Model.EnterTime == null)
+                {
+                    enterStr = "";
+                }
+                else
+                {
+                    enterStr = ((DateTime)Model.EnterTime).ToString("yyyy-MM-dd");
+                }
+            }
+            @Html.TextBox("EnterTime", enterStr, new { type = "text", @class = "form-control", @readonly = "readonly" })
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">剖面名称：</label>
-        <div class="col-sm-3 ">
-            @Html.TextBoxFor(x => x.SectionName, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
-                   class="form-control required" />*@
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-sm-2 control-label">时代：</label>
         <div class="col-sm-2 ">
@@ -47,7 +85,7 @@
         </div>
         <div class="col-sm-2 ">
             @Html.TextBoxFor(x => x.SubTime, new { type = "text", @class = "form-control", @readonly = "readonly" })
-           @* <select name="SubTime" id="SubTime" class="form-control" style="width: auto" value="@Model.SubTime"></select>*@
+            @* <select name="SubTime" id="SubTime" class="form-control" style="width: auto" value="@Model.SubTime"></select>*@
         </div>
     </div>
     <div class="form-group">
@@ -118,5 +156,21 @@
 </form>
 
 <script>
-
+    function test(value, row, index) {
+        return "<div onclick='selectSection(\"" + row.S_ID + "\")' class='icon-ok' style='width:30px;height:30px;'/>";
+    }
+    function selectSection(sid) {
+        location.href = "/Formation/Index/" + sid;
+    }
+    function seSection() {
+        $('#xx').dialog("open");//弹出模态框
+    }
+    function SearchBtn() {
+        var SearchAuthorizer = $("#SearchAuthorizer").val();
+        var SearchName = $("#SearchName").val();
+        $("#grid").datagrid("reload", {
+            authorizer: SearchAuthorizer,
+            sectionName: SearchName
+        });
+    }
 </script>
