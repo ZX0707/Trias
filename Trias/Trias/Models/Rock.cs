@@ -16,13 +16,13 @@ namespace Trias.Models
     {
         public string Rock_ID { get; set; }
         public string Type { get; set; }
-        public string FU_ID { get; set; }
+        public string Type_ID { get; set; }
         public string Color1 { get; set; }
         public string Color2 { get; set; }
         public string Lithology1 { get; set; }
         public string Lithology2 { get; set; }
         public string MainLithology { get; set; }
-        public Nullable<int> Sort { get; set; }
+        public int Sort { get; set; }
         public string Relation { get; set; }
     }
 }

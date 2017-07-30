@@ -11,15 +11,26 @@ namespace Trias.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// 单元
+    /// </summary>
     public partial class UnitView
     {
+        [Display(Name = "主键")]
         public string U_ID { get; set; }
+        [Display(Name = "岩石组Id")]
         public string F_ID { get; set; }
+        [Display(Name = "厚度")]
         public Nullable<double> Thickness { get; set; }
+        [Display(Name = "基准点")]
         public string ContactBase { get; set; }
+        [Display(Name = "外观")]
         public string Facies { get; set; }
+        [Display(Name = "沉积环境")]
         public string Environments { get; set; }
+        [Display(Name = "备注")]
         public string Details { get; set; }
     }
 }

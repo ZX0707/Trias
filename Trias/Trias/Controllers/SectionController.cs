@@ -25,6 +25,10 @@ namespace Trias.Controllers
             {
                 return WriteStatusError(ModelState);
             }
+            if (sectionSer.Any(x => x.SectionName == model.SectionName))
+            {
+                return WriteError("剖面名称" + model.SectionName + "已经存在，请确认！");
+            }
             var user = UserMgr.CurrUserInfo();
             model.User_ID = user.User_ID;
             var Model = new Section();
@@ -63,6 +67,10 @@ namespace Trias.Controllers
             if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);
+            }
+            if (sectionSer.Any(x => x.SectionName == model.SectionName && x.S_ID != model.S_ID))
+            {
+                return WriteError("剖面名称" + model.SectionName + "已经存在，请确认！");
             }
             sectionSer.EditWhere(x => x.S_ID == model.S_ID, model);
             sectionSer.SaveChanges();

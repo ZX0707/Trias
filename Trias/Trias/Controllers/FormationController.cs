@@ -48,7 +48,7 @@ namespace Trias.Controllers
             {
                 return WriteStatusError(ModelState);
             }
-            Formation modelformation = new Formation();
+            var modelformation = new Formation();
             modelformation.CopyFrom(model);
             formationSer.Add(modelformation);
             modelformation.F_ID = Guid.NewGuid().ToString();

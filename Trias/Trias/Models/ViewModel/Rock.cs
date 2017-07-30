@@ -11,18 +11,32 @@ namespace Trias.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// 颜色与岩性
+    /// </summary>
     public partial class RockView
     {
+        [Display(Name = "主键")]
         public string Rock_ID { get; set; }
+        [Display(Name = "所属类型（岩石组，单元，采样位置。。。）")]
         public string Type { get; set; }
-        public string FU_ID { get; set; }
+        [Display(Name = "所属Id")]
+        public string Type_Id { get; set; }
+        [Display(Name = "颜色")]
         public string Color1 { get; set; }
+        [Display(Name = "颜色")]
         public string Color2 { get; set; }
+        [Display(Name = "岩性")]
         public string Lithology1 { get; set; }
+        [Display(Name = "岩性")]
         public string Lithology2 { get; set; }
+        [Display(Name = "主要岩性")]
         public string MainLithology { get; set; }
-        public Nullable<int> Sort { get; set; }
+        [Display(Name = "排序")]
+        public int Sort { get; set; }
+        [Display(Name = "关系")]
         public string Relation { get; set; }
     }
 }

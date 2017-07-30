@@ -8,13 +8,13 @@
         <EntityTypeShape EntityType="TriasModel.Dict" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.Reference" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.User" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="TriasModel.Rock" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.Unit" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="TriasModel.Formation" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.Section" Width="1.5" PointX="4.75" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.Collection" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.Fossil" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="false" />
         <EntityTypeShape EntityType="TriasModel.Geochemical" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="TriasModel.Rock" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="TriasModel.Formation" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

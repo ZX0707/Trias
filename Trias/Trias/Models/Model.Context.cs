@@ -28,12 +28,12 @@ namespace Trias.Models
         public DbSet<Dict> Dict { get; set; }
         public DbSet<Reference> Reference { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Rock> Rock { get; set; }
         public DbSet<Unit> Unit { get; set; }
-        public DbSet<Formation> Formation { get; set; }
         public DbSet<Section> Section { get; set; }
         public DbSet<Collection> Collection { get; set; }
         public DbSet<Fossil> Fossil { get; set; }
         public DbSet<Geochemical> Geochemical { get; set; }
+        public DbSet<Rock> Rock { get; set; }
+        public DbSet<Formation> Formation { get; set; }
     }
 }

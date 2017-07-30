@@ -13,6 +13,9 @@ namespace Trias.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// 字典
+    /// </summary>
     public partial class DictView
     {
         [Display(Name = "主键")]

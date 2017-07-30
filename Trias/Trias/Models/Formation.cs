@@ -16,7 +16,7 @@ namespace Trias.Models
     {
         public string F_ID { get; set; }
         public string S_ID { get; set; }
-        public string Formation1 { get; set; }
+        public string FormationName { get; set; }
         public string EnvironmentalZones { get; set; }
         public Nullable<double> Thickness { get; set; }
         public string Comments { get; set; }

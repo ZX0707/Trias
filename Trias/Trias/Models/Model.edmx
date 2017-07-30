@@ -33,7 +33,7 @@
           </Key>
           <Property Name="F_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="S_ID" Type="nvarchar" MaxLength="50" />
-          <Property Name="Formation" Type="nvarchar" MaxLength="50" />
+          <Property Name="FormationName" Type="nvarchar" MaxLength="50" />
           <Property Name="EnvironmentalZones" Type="nvarchar" MaxLength="50" />
           <Property Name="Thickness" Type="float" />
           <Property Name="Comments" Type="text" />
@@ -113,13 +113,13 @@
           </Key>
           <Property Name="Rock_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="FU_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Color1" Type="nvarchar" MaxLength="50" />
           <Property Name="Color2" Type="nvarchar" MaxLength="50" />
           <Property Name="Lithology1" Type="nvarchar" MaxLength="50" />
           <Property Name="Lithology2" Type="nvarchar" MaxLength="50" />
           <Property Name="MainLithology" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sort" Type="int" />
+          <Property Name="Sort" Type="int" Nullable="false" />
           <Property Name="Relation" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Section">
@@ -246,29 +246,14 @@
           <EntitySet Name="Dict" EntityType="Self.Dict" />
           <EntitySet Name="Reference" EntityType="Self.Reference" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="Rock" EntityType="TriasModel.Rock" />
           <EntitySet Name="Unit" EntityType="TriasModel.Unit" />
-          <EntitySet Name="Formation" EntityType="TriasModel.Formation" />
           <EntitySet Name="Section" EntityType="TriasModel.Section" />
           <EntitySet Name="Collection" EntityType="TriasModel.Collection" />
           <EntitySet Name="Fossil" EntityType="TriasModel.Fossil" />
           <EntitySet Name="Geochemical" EntityType="TriasModel.Geochemical" />
+          <EntitySet Name="Rock" EntityType="TriasModel.Rock" />
+          <EntitySet Name="Formation" EntityType="TriasModel.Formation" />
         </EntityContainer>
-        <EntityType Name="Rock">
-          <Key>
-            <PropertyRef Name="Rock_ID" />
-          </Key>
-          <Property Name="Rock_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FU_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Color1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Color2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Lithology1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Lithology2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MainLithology" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sort" Type="Int32" />
-          <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Unit">
           <Key>
             <PropertyRef Name="U_ID" />
@@ -280,17 +265,6 @@
           <Property Name="Facies" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Environments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Formation">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="S_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Formation1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EnvironmentalZones" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Thickness" Type="Double" />
-          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -375,6 +349,32 @@
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Rock">
+          <Key>
+            <PropertyRef Name="Rock_ID" />
+          </Key>
+          <Property Name="Rock_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lithology1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lithology2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MainLithology" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Formation">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="S_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FormationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EnvironmentalZones" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Thickness" Type="Double" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -434,22 +434,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rock">
-            <EntityTypeMapping TypeName="TriasModel.Rock">
-              <MappingFragment StoreEntitySet="Rock">
-                <ScalarProperty Name="Relation" ColumnName="Relation" />
-                <ScalarProperty Name="Sort" ColumnName="Sort" />
-                <ScalarProperty Name="MainLithology" ColumnName="MainLithology" />
-                <ScalarProperty Name="Lithology2" ColumnName="Lithology2" />
-                <ScalarProperty Name="Lithology1" ColumnName="Lithology1" />
-                <ScalarProperty Name="Color2" ColumnName="Color2" />
-                <ScalarProperty Name="Color1" ColumnName="Color1" />
-                <ScalarProperty Name="FU_ID" ColumnName="FU_ID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Rock_ID" ColumnName="Rock_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Unit">
             <EntityTypeMapping TypeName="TriasModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
@@ -460,18 +444,6 @@
                 <ScalarProperty Name="Thickness" ColumnName="Thickness" />
                 <ScalarProperty Name="F_ID" ColumnName="F_ID" />
                 <ScalarProperty Name="U_ID" ColumnName="U_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Formation">
-            <EntityTypeMapping TypeName="TriasModel.Formation">
-              <MappingFragment StoreEntitySet="Formation">
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="Thickness" ColumnName="Thickness" />
-                <ScalarProperty Name="EnvironmentalZones" ColumnName="EnvironmentalZones" />
-                <ScalarProperty Name="Formation1" ColumnName="Formation" />
-                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -559,6 +531,34 @@
                 <ScalarProperty Name="Authorizer" ColumnName="Authorizer" />
                 <ScalarProperty Name="C_ID" ColumnName="C_ID" />
                 <ScalarProperty Name="G_ID" ColumnName="G_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rock">
+            <EntityTypeMapping TypeName="TriasModel.Rock">
+              <MappingFragment StoreEntitySet="Rock">
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="MainLithology" ColumnName="MainLithology" />
+                <ScalarProperty Name="Lithology2" ColumnName="Lithology2" />
+                <ScalarProperty Name="Lithology1" ColumnName="Lithology1" />
+                <ScalarProperty Name="Color2" ColumnName="Color2" />
+                <ScalarProperty Name="Color1" ColumnName="Color1" />
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Rock_ID" ColumnName="Rock_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formation">
+            <EntityTypeMapping TypeName="TriasModel.Formation">
+              <MappingFragment StoreEntitySet="Formation">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Thickness" ColumnName="Thickness" />
+                <ScalarProperty Name="EnvironmentalZones" ColumnName="EnvironmentalZones" />
+                <ScalarProperty Name="FormationName" ColumnName="FormationName" />
+                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

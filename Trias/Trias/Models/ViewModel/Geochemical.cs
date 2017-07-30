@@ -11,21 +11,36 @@ namespace Trias.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// 地球化学信息
+    /// </summary>
     public partial class GeochemicalView
     {
+        [Display(Name = "主键")]
         public string G_ID { get; set; }
+        [Display(Name = "采样位置Id")]
         public string C_ID { get; set; }
+        [Display(Name = "核准人")]
         public string Authorizer { get; set; }
-        public string R_ID { get; set; }
+        [Display(Name = "同位素")]
         public string isotope { get; set; }
+        [Display(Name = "同位素含量")]
         public Nullable<double> Isotopepersents { get; set; }
+        [Display(Name = "元素")]
         public string Element { get; set; }
+        [Display(Name = "元素含量")]
         public Nullable<double> Elementpersents { get; set; }
+        [Display(Name = "时代")]
         public string Time { get; set; }
+        [Display(Name = "子时代")]
         public string SubTime { get; set; }
+        [Display(Name = "时代（百万年）")]
         public Nullable<int> Time2 { get; set; }
+        [Display(Name = "距离剖面底部的位置")]
         public string Position { get; set; }
+        [Display(Name = "备注")]
         public string Notes { get; set; }
     }
 }
