@@ -6,14 +6,14 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">岩石组名：</label>
         <div class="col-sm-2">
-            <input name="U_ID" id="U_ID" type="text" placeholder="岩石组名" class="form-control" />
+            <input name="FormationName" id="FormationName" type="text" placeholder="岩石组名" class="form-control" />
         </div>
         <label class="col-sm-2 control-label">沉积相带：</label>
         <div class="col-sm-2">
             <select name="EnvironmentalZones" id="EnvironmentalZones" class="form-control"></select>
         </div>
     </div>
-    
+
     <div class="form-group">
         <label class="col-sm-2 control-label">厚度：</label>
         <div class="col-sm-2">
@@ -113,7 +113,7 @@
                 <input class="form-control" />
             </div>
             <div class="col-sm-3">
-               @* <button type="button" class="btn btn-info" style="width: 100%;">从岩石组拷贝</button>*@
+                @* <button type="button" class="btn btn-info" style="width: 100%;">从岩石组拷贝</button>*@
             </div>
         </div>
 
@@ -125,7 +125,7 @@
         </div>
     </div>
     <div class="form-group" style="text-align: center">
-        <button type="button" class="btn btn-default">确定</button>
+        <button id="btn_save" type="button" class="btn btn-default">确定</button>
     </div>
 </form>
 <script>
@@ -140,7 +140,7 @@
                 FormationName: $("#FormationName").val(),
                 EnvironmentalZones: $("#EnvironmentalZones").val(),
                 Thickness: $("#Thickness").val(),
-                Comments: $("#DeFormation").val()
+                Comments: $("#Details").val()
             };
             var rocks = [];
             var lines = $(".co_li>div");
@@ -163,7 +163,7 @@
             }
             $.post("@Url.Action("Add")",
                 { formation: JSON.stringify(formation), rocks: JSON.stringify(rocks) },
-                function(data) {
+                function (data) {
                     if (data.status === "success") {
                         $.messager.alert("",
                             data.msg,
