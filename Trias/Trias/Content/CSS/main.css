@@ -13,6 +13,9 @@ body {
 ul, li {
     list-style: none;
 }
+.clear {
+   clear:both;
+}
 /******************全局样式end**************************/
 .form_input {
     width: 200px;
