@@ -17,6 +17,10 @@ namespace Trias.Controllers
         {
             return View();
         }
+        public ActionResult Add()
+        {
+            return View();
+        }
         //添加地球化学信息
         public ActionResult AddGeochemiacal(GeochemicalView model)
         {

@@ -82,7 +82,7 @@
         $.post("/Login/GetCurrentUser", {}, function (result) {
             currentUser = result.msg;
             if (currentUser == null) {
-                location.href = "/Home/Index";
+               location.href = "/Home/Index";
             }
             else {
                 $("#name").html(currentUser.UserName);

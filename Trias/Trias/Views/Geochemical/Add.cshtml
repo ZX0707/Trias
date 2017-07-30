@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "地球化学信息";
+}
+<form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">核准人：</label>
+        <div class="col-sm-2 ">
+            <input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control" />
+        </div>
+        <label class="col-sm-2 control-label">时代：</label>
+        <div class="col-sm-2 ">
+            <input name="Time2" id="Time2" type="number" placeholder="输入时代" class="form-control" />
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">距剖面底部的位置：</label>
+        <div class="col-sm-2 ">
+            <input name="Position" id="Position" class="form-control" />
+        </div>
+        <label class="col-sm-2 control-label">时代：</label>
+        <div class="col-sm-2 ">
+            <select name="Time" id="Time" onchange="change()" class="form-control"></select>
+        </div>
+        <div class="col-sm-2 ">
+            <select name="SubTime" id="SubTime" class="form-control" style="width: auto"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">同位素：</label>
+        <div class="col-sm-2 ">
+            <input name="isotope" id="isotope" class="form-control" />
+        </div>
+        <label class="col-sm-2 control-label">同位素含量：</label>
+        <div class="col-sm-2 ">
+            <input name="Isotopepersents" id="Isotopepersents" type="number" class="form-control" />
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">元素：</label>
+        <div class="col-sm-2 ">
+            <input name="Element" id="Element" type="text" class="form-control" />
+        </div>
+        <label class="col-sm-2 control-label">元素含量：</label>
+        <div class="col-sm-2 ">
+            <input name="Elementpersents" id="Elementpersents" type="number" class="form-control" />
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">备注：</label>
+        <div class="col-sm-7">
+            <textarea name="Notes" id="Notes" class="form-control" rows="3" placeholder="评论" style="resize: none"></textarea>
+        </div>
+    </div>
+    <div class="form-group" style="text-align: center">
+        <button type="button" class="btn btn-default">确定</button>
+    </div>
+</form>
+

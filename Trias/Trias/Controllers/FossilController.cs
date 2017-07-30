@@ -17,6 +17,10 @@ namespace Trias.Controllers
         {
             return View();
         }
+        public ActionResult Add()
+        {
+            return View();
+        }
         //添加化石信息
         public ActionResult AddFossil(FossilView model)
         {
