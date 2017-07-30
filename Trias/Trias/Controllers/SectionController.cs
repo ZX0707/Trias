@@ -39,18 +39,24 @@ namespace Trias.Controllers
             });
         }
         //根据用户id查询剖面信息
-        public ActionResult GetSection(string username)
+        public ActionResult GetSection(string sectionName, string authorizer, int page = 1, int rows = int.MaxValue)
         {
-            if (username == null)
+            var list = sectionSer.Where();
+            if (!string.IsNullOrWhiteSpace(sectionName))
             {
-                return WriteError("用户名为空");
+                list = list.Where(x => x.SectionName.Contains(sectionName));
             }
-            var sectionlist = sectionSer.Where(x => x.Authorizer.Contains(username)).ToList();
-            if (sectionlist.Count == 0)
+            if (!string.IsNullOrWhiteSpace(authorizer))
             {
-                return WriteSuccess("查询成功，未添加剖面");
+                list = list.Where(x => x.Authorizer.Contains(authorizer));
             }
-            return Json(sectionlist);
+            var total = list.Count();
+            list = list.OrderByDescending(x => x.EnterTime).Skip((page - 1) * rows).Take(rows);
+            return Json(new
+            {
+                total,
+                rows = list.ToList()
+            });
         }
         public ActionResult EditSection(SectionView model)
         {
