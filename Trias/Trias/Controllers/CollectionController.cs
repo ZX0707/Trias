@@ -18,11 +18,15 @@ namespace Trias.Controllers
         //{
         //    return View();
         //}
+        public ActionResult Add()
+        {
+            return View();
+        }
 
         //添加采样位置
         public ActionResult AddCollection(ViewCollection model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);
             }
@@ -37,12 +41,12 @@ namespace Trias.Controllers
         //根据 单元id 查询采样位置
         public ActionResult GetCollection(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("采样位置不存在");
             }
             var collectionlist = collectionSer.Where(x => x.U_ID.Contains(id)).ToList();
-            if(collectionlist.Count==0)
+            if (collectionlist.Count == 0)
             {
                 return WriteSuccess("暂无采样");
             }
@@ -51,7 +55,7 @@ namespace Trias.Controllers
         //修改采样位置
         public ActionResult EditCollection(CollectionView model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);
             }
@@ -62,7 +66,7 @@ namespace Trias.Controllers
         //删除采样位置
         public ActionResult RemoveCollection(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("采样位置不存在");
             }

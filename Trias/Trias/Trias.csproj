@@ -1174,6 +1174,7 @@
     <Content Include="Views\Section\Index.cshtml" />
     <Content Include="Views\Formation\Add.cshtml" />
     <Content Include="Views\Unit\Add.cshtml" />
+    <Content Include="Views\Collection\Add.cshtml" />
     <Content Include="Views\Shared\_LayoutWithNothing.cshtml" />
   </ItemGroup>
   <ItemGroup>

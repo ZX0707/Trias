@@ -358,7 +358,7 @@
     //打开模态框
     function myFormation() {
         commHelper.OpenDialog("添加岩石组", "@Url.Action("Add")/@Model.S_ID");
-        //$('#myFormation').dialog("open");
+        $('#myFormation').dialog("open");
     }
     function parseTimer(value) {
         return commHelper.ChangeDateFormatYMD(value);

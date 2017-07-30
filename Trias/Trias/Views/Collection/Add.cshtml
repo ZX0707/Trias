@@ -1,38 +1,30 @@
 ﻿@{
-    ViewBag.Title = "添加单元";
+    ViewBag.Title = "添加采样位置";
 }
-
 <form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
     <div class="form-group">
-        <label class="col-sm-2 control-label">单元编号：</label>
-        <div class="col-sm-2">
-            <input name="U_ID" id="U_ID" type="number" placeholder="单元编号" class="form-control" />
+        <div class="col-sm-6">
+            <label class="col-sm-2 control-label">位置：</label>
+            <div class="col-sm-3">
+                <input name="Depth1" id="Depth1" type="number" placeholder="开始" class="form-control" />
+            </div>
+            <label class="col-sm-1 control-label">—</label>
+            <div class="col-sm-3">
+                <input name="Depth2" id="Depth2" type="number" placeholder="结束" class="form-control" />
+            </div>
+            <div class="col-sm-2" style="width: auto">
+                <select class="form-control">
+                    <option>米</option>
+                    <option>英寸</option>
+                    <option>厘米</option>
+                </select>
+            </div>
         </div>
-        <label class="col-sm-2 control-label">基准点：</label>
-        <div class="col-sm-2">
-            <select name="ContactBase" id="ContactBase" class="form-control"></select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">外观：</label>
-        <div class="col-sm-2">
-            <input name="Facies" id="Facies" type="number" placeholder="外观" class="form-control" />
-        </div>
-        <label class="col-sm-2 control-label">沉积环境：</label>
-        <div class="col-sm-2">
-            <select name="Environments" id="Environments" class="form-control"></select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">厚度：</label>
-        <div class="col-sm-2">
-            <input name="Thickness" id="Thickness" type="number" placeholder="厚度" class="form-control" />
-        </div>
+        <label class="col-sm-2 control-label">精准度：</label>
         <div class="col-sm-2" style="width: auto">
             <select class="form-control">
-                <option>米</option>
-                <option>英寸</option>
-                <option>厘米</option>
+                <option>高</option>
+                <option>低</option>
             </select>
         </div>
     </div>
@@ -122,11 +114,21 @@
                 <input class="form-control" />
             </div>
             <div class="col-sm-3">
-                <button type="button" class="btn btn-info" style="width: 100%;">从岩石组拷贝</button>
+                <div class="btn-group" style="width: 100%;">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" style="width: 100%;">
+                        复制
+                    </button>
+                    <ul class="dropdown-menu" style="width: 100%;">
+                        <li><a href="#">从岩石组拷贝</a></li>
+                        <li><a href="#">从单元拷贝</a></li>
+                    </ul>
+                </div>
+                @*   <button type="button" class="btn btn-info" style="width: 100%;">从岩石组拷贝</button>*@
             </div>
         </div>
-
     </div>
+
+
     <div class="form-group">
         <label class="col-sm-2 control-label" for="name">备注：</label>
         <div class="col-sm-7">
@@ -137,3 +139,4 @@
         <button type="button" class="btn btn-default">保存</button>
     </div>
 </form>
+
