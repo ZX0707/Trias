@@ -23,6 +23,7 @@ namespace Trias.Models
         [Display(Name = "剖面Id")]
         public string S_ID { get; set; }
         [Display(Name = "岩石组名")]
+        [Required(ErrorMessage = "岩石组名必填")]
         public string FormationName { get; set; }
         [Display(Name = "沉积相带")]
         public string EnvironmentalZones { get; set; }
