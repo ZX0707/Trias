@@ -14,10 +14,10 @@
                 <input name="Depth2" id="Depth2" type="number" placeholder="结束" class="form-control" />
             </div>
             <div class="col-sm-2" style="width: auto">
-                <select class="form-control">
-                    <option>米</option>
-                    <option>英寸</option>
-                    <option>厘米</option>
+                <select id="ThicknessSize" class="form-control">
+                    <option value="100">米</option>
+                    <option value="2.54">英寸</option>
+                    <option value="1">厘米</option>
                 </select>
             </div>
         </div>
@@ -154,21 +154,21 @@
                 U_ID: uid,
                 Precision: $("#Precision").val(),
                 Details: $("#Details").val(),
-                Depth1: $("#Depth1").val(),
-                Depth2: $("#Depth2").val()
+                Depth1: parseFloat($("#Depth1").val()) * parseFloat($("#ThicknessSize").val()),
+                Depth2: parseFloat($("#Depth2").val()) * parseFloat($("#ThicknessSize").val())
             };
             var rocks = [];
             var lines = $(".co_li>div");
             for (var i = 0; i < lines.length; i++) {
                 var rock = {
-                    Type: "Collection",
+                    Type: "Formation",
                     Color1: $(lines[i]).find("input:eq(0)").val(),
                     Color2: $(lines[i]).find("input:eq(1)").val(),
-                    Lithology1: $(lines[i]).find("input:eq(1)").val(),
-                    Lithology2: $(lines[i]).find("input:eq(1)").val(),
-                    MainLithology: $(lines[i]).find("input:eq(1)").val(),
+                    Lithology1: $(lines[i]).find("input:eq(2)").val(),
+                    Lithology2: $(lines[i]).find("input:eq(3)").val(),
+                    MainLithology: $(lines[i]).find("input:eq(4)").val(),
                     Sort: i,
-                    Relation: $(lines[i]).find("input:eq(1)").val()
+                    Relation: $(lines[i]).find("select:eq(0)").val()
                 }
                 if (rock.Color1.length <= 0 && rock.Color2.length <= 0 && rock.Lithology1.length <= 0 && rock.Lithology2.length <= 0 && rock.MainLithology.length <= 0) {
                     //一个都没填视为无效

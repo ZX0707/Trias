@@ -23,7 +23,7 @@
 
 @*选择剖面模态框*@
 <div id="xx" class="easyui-dialog" title="选择剖面" style="width: 600px; height: 400px;"
-    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <div id="toolbar">
         <a class="easyui-linkbutton" href="/Section/Index" data-options="iconCls:'icon-add',plain:true">添加新剖面</a>
         <label>核准人：</label>
@@ -148,8 +148,8 @@
                 <label class="control-label" style="font-size: 20px">岩石组</label>
                 <div class="btn-group" style="float: right">
                     @*<button  type="button" class="btn btn-default" onclick="myFormation()">
-                        添加岩石组
-                    </button>*@
+                            添加岩石组
+                        </button>*@
                     <a href="#"><span class="glyphicon glyphicon-plus" onclick="myFormation()">添加岩石组</span></a>
                 </div>
                 <div id="box">
@@ -221,7 +221,7 @@
                             var fossilDiv = $("<div class='level2'/>");
                             fossilDiv.append("<label class='control-label'>" + foName + "</label>");
                             fossilDiv.append(
-                                "<div class='btn-group'><button type='button' class='btn btn-default' onclick='delFossil(\"" + foid + "\")'>删除化石</button><button type='button' class='btn btn-default'>修改化石</button></div>");
+                                "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delFossil(\"" + foid + "\")'>删除化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil'>修改化石</span></a></div>");
                             collectionDiv.append(fossilDiv);
                         }
                         var geochemicals = collections[k].geochemicals;
@@ -232,7 +232,7 @@
                             var geochemicalDiv = $("<div class='level2'/>");
                             geochemicalDiv.append("<label class='control-label'>" + gName + "</label>");
                             geochemicalDiv.append(
-                                "<div class='btn-group'><button type='button' class='btn btn-default' onclick='delGeochemical(\"" + gid + "\")'>删除地球化学信息 </button><button type='button' class='btn btn-default'>修改地球化学信息 </button></div>");
+                                "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delGeochemical(\"" + gid + "\")'>删除地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil'>修改地球化学信息</span></a></div>");
                             collectionDiv.append(geochemicalDiv);
                         }
                     }

@@ -70,7 +70,15 @@
         initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
     }
     $(function () {
-        initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function() { change() });
+        initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function () { change() });
+
+        $.post("@Url.Action("GetCurrentUser","Login")", {}, function(user) {
+            if (user.status === "success") {
+                $("#Authorizer").val(user.msg.UserName);
+                $("#Authorizer").attr("readonly", "readonly");
+            }
+        }, "json");
+
         //保存响应事件
         $("#btn_save").on("click", {}, function () {
             var geochemical = {

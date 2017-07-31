@@ -20,10 +20,10 @@
             <input name="Thickness" id="Thickness" type="number" placeholder="厚度" class="form-control" />
         </div>
         <div class="col-sm-2" style="width: auto">
-            <select class="form-control">
-                <option>米</option>
-                <option>英寸</option>
-                <option>厘米</option>
+            <select id="ThicknessSize" class="form-control">
+                <option value="100">米</option>
+                <option value="2.54">英寸</option>
+                <option value="1">厘米</option>
             </select>
         </div>
     </div>
@@ -36,86 +36,87 @@
             <label class="col-sm-3">主要岩性</label>
             <label class="col-sm-3">关系</label>
         </div>
-        <div class="form-group">
-            <div class="col-sm-1">
-                <input class="form-control" />
+        <div class="co_li">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control Relation"></select>
+                </div>
             </div>
-            <div class="col-sm-1">
-                <input class="form-control" />
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control Relation"></select>
+                </div>
             </div>
-            <div class="col-sm-2">
-                <input class="form-control" />
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control Relation"></select>
+                </div>
             </div>
-            <div class="col-sm-2">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <select class="form-control Relation"></select>
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-1">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-1">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-2">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-2">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <select class="form-control Relation"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-1">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-1">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-2">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-2">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <select class="form-control Relation"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-1">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-1">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-2">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-2">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <input class="form-control" />
-            </div>
-            <div class="col-sm-3">
-            </div>
-        </div>
-
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label" for="name">备注：</label>
@@ -127,6 +128,7 @@
         <button id="btn_save" type="button" class="btn btn-default">确定</button>
     </div>
 </form>
+
 <script>
     var SId = "@ViewBag.SId";
 </script>
@@ -138,9 +140,9 @@
         $("#btn_save").on("click", {}, function () {
             var formation = {
                 S_ID: SId,
-                FormationName: $("#FormationName").val(),
+                FormationName: $("#FormationName").val() ,
                 EnvironmentalZones: $("#EnvironmentalZones").val(),
-                Thickness: $("#Thickness").val(),
+                Thickness: parseFloat($("#Thickness").val()) * parseFloat($("#ThicknessSize").val()),
                 Comments: $("#Details").val()
             };
             var rocks = [];
@@ -150,11 +152,11 @@
                     Type: "Formation",
                     Color1: $(lines[i]).find("input:eq(0)").val(),
                     Color2: $(lines[i]).find("input:eq(1)").val(),
-                    Lithology1: $(lines[i]).find("input:eq(1)").val(),
-                    Lithology2: $(lines[i]).find("input:eq(1)").val(),
-                    MainLithology: $(lines[i]).find("input:eq(1)").val(),
+                    Lithology1: $(lines[i]).find("input:eq(2)").val(),
+                    Lithology2: $(lines[i]).find("input:eq(3)").val(),
+                    MainLithology: $(lines[i]).find("input:eq(4)").val(),
                     Sort: i,
-                    Relation: $(lines[i]).find("input:eq(1)").val()
+                    Relation: $(lines[i]).find("select:eq(0)").val()
                 }
                 if (rock.Color1.length <= 0 && rock.Color2.length <= 0 && rock.Lithology1.length <= 0 && rock.Lithology2.length <= 0 && rock.MainLithology.length <= 0) {
                     //一个都没填视为无效

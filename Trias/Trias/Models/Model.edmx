@@ -50,7 +50,7 @@
           <Property Name="Authorizer" Type="nvarchar" MaxLength="50" />
           <Property Name="FossilGroup" Type="nvarchar" MaxLength="50" />
           <Property Name="TaxonType" Type="nvarchar" MaxLength="50" />
-          <Property Name="CollectFromTreatise" Type="char" MaxLength="2" />
+          <Property Name="CollectFromTreatise" Type="nvarchar" MaxLength="50" />
           <Property Name="RefDescribingRelation" Type="nvarchar" MaxLength="50" />
           <Property Name="GenusName" Type="nvarchar" MaxLength="50" />
           <Property Name="SpeciesName" Type="nvarchar" MaxLength="50" />
@@ -247,7 +247,7 @@
           <Property Name="Authorizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FossilGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TaxonType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CollectFromTreatise" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="CollectFromTreatise" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RefDescribingRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GenusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SpeciesName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
