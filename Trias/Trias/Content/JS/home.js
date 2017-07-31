@@ -21,6 +21,26 @@ function login() {
     }, "json");
 }
 
+// 初始化下拉框
+// obj下拉框的Jquery对象
+// url请求的url地址
+// prarm请求附带的参数
+// callback回调函数
+function initSelect(obj, url, param, callback) {
+    $.post(url, param, function (result) {
+        obj.html("");
+        for (var i = 0; i < result.length; i++) {
+            var value = result[i].KeyName;
+            var text = result[i].ValueName;
+            var id = result[i].Id;
+            obj.append("<option id='" + id + "' value='" + value + "'>" + text + "</option>");
+        }
+        if (typeof callback == "function") {
+            callback();
+        }
+    }, "json");
+}
+
 var commHelper = {
     //1.0格式：yyyy-MM-dd HH:mm:ss将json格式的日期转换为正确格式：/Date(1330866873400)/
     ChangeDateFormatMS: function (cellval) {

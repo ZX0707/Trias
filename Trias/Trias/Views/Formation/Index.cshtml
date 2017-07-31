@@ -170,9 +170,6 @@
         <div class="col-sm-3">
             <button onclick="save()" type="button" class="btn btn-default">保存</button>
         </div>
-        <div class="col-sm-3">
-            <button onclick="addFossil()" type="button" class="btn btn-default">添加化石</button>
-        </div>
     </div>
 </form>
 
@@ -192,7 +189,7 @@
                 var formationDiv = $("<div class='level1'/>");
                 formationDiv.append("<label class='control-label'>" + fName + "</label>");
                 formationDiv.append(
-                    "<div class='btn-group'><button type='button' class='btn btn-default' onclick='myUnit(\""+fid+"\")'>添加单元</button><button type='button' class='btn btn-default'>删除岩石组</button><button type='button' class='btn btn-default'>修改岩石组</button></div>");
+                    "<div class='btn-group'><button type='button' class='btn btn-default' onclick='myUnit(\"" + fid + "\")'>添加单元</button><button type='button' class='btn btn-default' onclick='delFormation(\"" + fid + "\")'>删除岩石组</button><button type='button' class='btn btn-default'>修改岩石组</button></div>");
                 box.append(formationDiv);
                 for (var j = 0; j < units.length; j++) {
                     var unit = units[j].unit;
@@ -202,7 +199,7 @@
                     var unitDiv = $("<div class='level2'/>");
                     unitDiv.append("<label class='control-label'>" + uName + "</label>");
                     unitDiv.append(
-                        "<div class='btn-group'><button type='button' class='btn btn-default'>添加采样位置</button><button type='button' class='btn btn-default'>删除单元</button><button type='button' class='btn btn-default'>修改单元</button></div>");
+                        "<div class='btn-group'><button type='button' class='btn btn-default' onclick='myCollection(\"" + uid + "\")'>添加采样位置</button><button type='button' class='btn btn-default' onclick='delUnit(\"" + uid + "\")'>删除单元</button><button type='button' class='btn btn-default'>修改单元</button></div>");
                     formationDiv.append(unitDiv);
                     for (var k = 0; k < collections.length; k++) {
                         var collection = collections[i].collection;
@@ -210,18 +207,18 @@
                         var cName = "采样位置" + (k+1);
                         var fossils = collections[k].fossils;
                         var collectionDiv = $("<div class='level3'/>");
-                        collectionDiv.append("<label class='control-label'>" + uName + "</label>");
+                        collectionDiv.append("<label class='control-label'>" + cName + "</label>");
                         collectionDiv.append(
-                            "<div class='btn-group'><button type='button' class='btn btn-default'>添加化石</button><button type='button' class='btn btn-default'>添加地球化学信息</button><button type='button' class='btn btn-default'>删除单元</button><button type='button' class='btn btn-default'>修改单元</button></div>");
+                            "<div class='btn-group'><button type='button' class='btn btn-default' onclick='myFossil(\"" + cid + "\")'>添加化石</button><button type='button' class='btn btn-default' onclick='myGeochemical(\"" + cid + "\")'>添加地球化学信息</button><button type='button' class='btn btn-default' onclick='delCollection(\"" + cid +"\")'>删除单元</button><button type='button' class='btn btn-default'>修改单元</button></div>");
                         unitDiv.append(collectionDiv);
                         for (var l = 0; l < fossils.length; l++) {
                             var fossil = fossils[l];
                             var foid = fossil.H_ID;
                             var foName = "化石" + (l+1);
                             var fossilDiv = $("<div class='level2'/>");
-                            fossilDiv.append("<label class='control-label'>" + uName + "</label>");
+                            fossilDiv.append("<label class='control-label'>" + foName + "</label>");
                             fossilDiv.append(
-                                "<div class='btn-group'><button type='button' class='btn btn-default'>删除化石</button><button type='button' class='btn btn-default'>修改化石</button></div>");
+                                "<div class='btn-group'><button type='button' class='btn btn-default' onclick='delFossil(\"" + foid +"\")'>删除化石</button><button type='button' class='btn btn-default'>修改化石</button></div>");
                             collectionDiv.append(fossilDiv);
                         }
                         var geochemicals = collections[k].geochemicals;
@@ -230,9 +227,9 @@
                             var gid = geochemical.G_ID;
                             var gName = "地球化学信息 " + (l+1);
                             var geochemicalDiv = $("<div class='level2'/>");
-                            geochemicalDiv.append("<label class='control-label'>" + uName + "</label>");
+                            geochemicalDiv.append("<label class='control-label'>" + gName + "</label>");
                             geochemicalDiv.append(
-                                "<div class='btn-group'><button type='button' class='btn btn-default'>删除地球化学信息 </button><button type='button' class='btn btn-default'>修改地球化学信息 </button></div>");
+                                "<div class='btn-group'><button type='button' class='btn btn-default' onclick='delGeochemical(\"" + gid +"\")'>删除地球化学信息 </button><button type='button' class='btn btn-default'>修改地球化学信息 </button></div>");
                             collectionDiv.append(geochemicalDiv);
                         }
                     }
@@ -244,10 +241,73 @@
 
     //打开模态框
     function myFormation() {
+        if ("@Model.S_ID" == "") {
+            $.messager.alert("", "请选择一个剖面", "warning");
+            return;
+        }
         commHelper.OpenDialog("添加岩石组", "@Url.Action("Add")/@Model.S_ID");
+    }
+    function delFormation(fid) {
+        $.messager.confirm("", "删除操作不可逆，且删除岩石组会同时删除该岩石组下的单元，您确定删除该岩石组么？", function(flag) {
+            if (flag) {
+                $.post("@Url.Action("RemoveFormation", "Formation")", { id: fid }, function(data) {
+                    $.messager.alert("", data.msg, "info");
+                    reload();
+                }, "json");
+            }
+        });
     }
     function myUnit(fid) {
         commHelper.OpenDialog("添加单元", "@Url.Action("Add","Unit")/" + fid);
+    }
+    function delUnit(uid) {
+        $.messager.confirm("", "删除操作不可逆，且删除单元会同时删除该单元下的采样位置，您确定删除该单元么？", function(flag) {
+            if (flag) {
+                $.post("@Url.Action("RemoveUnit", "Unit")", { id: uid }, function(data) {
+                    $.messager.alert("", data.msg, "info");
+                    reload();
+                }, "json");
+            }
+        });
+    }
+    function myCollection(uid) {
+        commHelper.OpenDialog("添加采样位置", "@Url.Action("Add","Collection")/" + uid);
+    }
+    function delCollection(cid) {
+        $.messager.confirm("", "删除操作不可逆，且删除采样位置会同时删除该采样位置下的化石和地球化学信息，您确定删除该采样位置么？", function(flag) {
+            if (flag) {
+                $.post("@Url.Action("RemoveCollection", "Collection")", { id: cid }, function(data) {
+                    $.messager.alert("", data.msg, "info");
+                    reload();
+                }, "json");
+            }
+        });
+    }
+    function myFossil(cid) {
+        commHelper.OpenDialog("添加化石", "@Url.Action("Add","Fossil")/" + cid);
+    }
+    function delFossil(foid) {
+        $.messager.confirm("", "删除操作不可逆，您确定删除该化石么？", function(flag) {
+            if (flag) {
+                $.post("@Url.Action("RemoveFossil", "Fossil")", { id: foid }, function(data) {
+                    $.messager.alert("", data.msg, "info");
+                    reload();
+                }, "json");
+            }
+        });
+    }
+    function myGeochemical(cid) {
+        commHelper.OpenDialog("添加地球化学信息", "@Url.Action("Add","Geochemical")/" + cid);
+    }
+    function delGeochemical(gid) {
+        $.messager.confirm("", "删除操作不可逆，您确定删除该地球化学信息么？", function(flag) {
+            if (flag) {
+                $.post("@Url.Action("RemoveGeochemical", "Geochemical")", { id: gid }, function(data) {
+                    $.messager.alert("", data.msg, "info");
+                    reload();
+                }, "json");
+            }
+        });
     }
 
     function parseTimer(value) {

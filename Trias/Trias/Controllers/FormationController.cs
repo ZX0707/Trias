@@ -120,12 +120,26 @@ namespace Trias.Controllers
         //删除岩石组信息
         public ActionResult RemoveFormation(string id)
         {
-            if (id == null)
-            {
-                return WriteError("岩石组不存在");
-            }
             formationSer.RemoveWhere(x => x.F_ID == id);
+            var unitList = unitSer.Where(x => x.F_ID == id).ToList();
+            unitList.ForEach(x =>
+            {
+                unitSer.Remove(x);
+                var collectionList = collectionSer.Where(y => y.U_ID == x.U_ID).ToList();
+                collectionList.ForEach(y =>
+                {
+                    collectionSer.Remove(y);
+                    collectionSer.RemoveWhere(z => z.C_ID == y.C_ID);
+                    fossilSer.RemoveWhere(z => z.C_ID == y.C_ID);
+                    geochemicalSer.RemoveWhere(z => z.C_ID == y.C_ID);
+                });
+
+            });
             formationSer.SaveChanges();
+            unitSer.SaveChanges();
+            collectionSer.SaveChanges();
+            fossilSer.SaveChanges();
+            geochemicalSer.SaveChanges();
             return WriteSuccess("删除成功");
         }
     }

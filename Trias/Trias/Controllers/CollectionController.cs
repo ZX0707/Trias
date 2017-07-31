@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json;
 using Trias.Models;
 using Trias.Tool;
 
@@ -18,10 +19,30 @@ namespace Trias.Controllers
         //{
         //    return View();
         //}
-        public ActionResult Add()
+        public ActionResult Add(string id)
         {
+            ViewBag.U_ID = id;
             return View();
         }
+        [HttpPost]
+        public ActionResult Add(string collection, string rocks)
+        {
+            var collectionModel = JsonConvert.DeserializeObject<Collection>(collection);
+            collectionModel.C_ID = Guid.NewGuid().ToString();
+            var rockList = JsonConvert.DeserializeObject<List<Rock>>(rocks);
+            rockList.ForEach(x =>
+            {
+                x.Rock_ID = Guid.NewGuid().ToString();
+                x.Type_ID = collectionModel.C_ID;
+            });
+            collectionSer.Add(collectionModel);
+            rockSer.AddList(rockList);
+            collectionSer.SaveChanges();
+            rockSer.SaveChanges();
+            return WriteSuccess("添加成功！");
+
+        }
+
 
         //添加采样位置
         public ActionResult AddCollection(ViewCollection model)
@@ -66,12 +87,12 @@ namespace Trias.Controllers
         //删除采样位置
         public ActionResult RemoveCollection(string id)
         {
-            if (id == null)
-            {
-                return WriteError("采样位置不存在");
-            }
             collectionSer.RemoveWhere(x => x.C_ID == id);
+            fossilSer.RemoveWhere(x => x.C_ID == id);
+            geochemicalSer.RemoveWhere(x => x.C_ID == id);
             collectionSer.SaveChanges();
+            fossilSer.SaveChanges();
+            geochemicalSer.SaveChanges();
             return WriteSuccess("删除成功");
         }
 

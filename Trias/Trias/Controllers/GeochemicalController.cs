@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Trias.Models;
 using Trias.Tool;
 
@@ -17,11 +18,21 @@ namespace Trias.Controllers
         {
             return View();
         }
-        public ActionResult Add()
+        public ActionResult Add(string id)
         {
+            ViewBag.C_ID = id;
             return View();
         }
-        //添加地球化学信息
+        [HttpPost]
+        public ActionResult Add(string geochemical, string nothing)
+        {
+            var geochemicalModel = JsonConvert.DeserializeObject<Geochemical>(geochemical);
+            geochemicalModel.G_ID = Guid.NewGuid().ToString();
+            geochemicalSer.Add(geochemicalModel);
+            geochemicalSer.SaveChanges();
+            return WriteSuccess("添加成功！");
+
+        }
         public ActionResult AddGeochemiacal(GeochemicalView model)
         {
             if (!ModelState.IsValid)
@@ -63,10 +74,6 @@ namespace Trias.Controllers
         //删除地球化学信息
         public ActionResult RemoveGeochemical(string id)
         {
-            if (id == null)
-            {
-                return WriteError("地球化学信息不存在");
-            }
             geochemicalSer.RemoveWhere(x => x.G_ID == id);
             geochemicalSer.SaveChanges();
             return WriteSuccess("删除成功");

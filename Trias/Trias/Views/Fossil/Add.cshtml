@@ -84,7 +84,59 @@
         </div>
     </div>
     <div class="form-group" style="text-align: center">
-        <button type="button" class="btn btn-default">确定</button>
+        <button id="btn_save" type="button" class="btn btn-default">确定</button>
     </div>
 </form>
 
+<script>
+    var cid = "@ViewBag.C_ID";
+</script>
+<script>
+    function change() {
+        initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
+    }
+    $(function () {
+        initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function() { change() });
+        initSelect($("#FossilGroup"), "@Url.Action("GetSelectOptions", "Dict")", { type: "FossilGroup" });
+        initSelect($("#TaxonType"), "@Url.Action("GetSelectOptions", "Dict")", { type: "TaxonType" });
+        initSelect($("#CollectFromTreatise"), "@Url.Action("GetSelectOptions", "Dict")", { type: "CollectFromTreatise" });
+
+        //保存响应事件
+        $("#btn_save").on("click", {}, function () {
+            var fossil = {
+                C_ID: cid,
+                Time:$("#Time").val(),
+                SubTime:$("#SubTime").val(),
+                Time2:$("#Time2").val(),
+                Authorizer:$("#Authorizer").val(),
+                FossilGroup:$("#FossilGroup").val(),
+                TaxonType:$("#TaxonType").val(),
+                CollectFromTreatise:$("#CollectFromTreatise").val(),
+                RefDescribingRelation:$("#RefDescribingRelation").val(),
+                GenusName:$("#GenusName").val(),
+                SpeciesName:$("#SpeciesName").val(),
+                Position:$("#Position").val(),
+                Length:$("#Length").val(),
+                width:$("#width").val(),
+                Picture:$("#Picture").val(),
+                Notes: $("#Notes").val()
+            };
+            $.post("@Url.Action("Add")",
+                { fossil: JSON.stringify(fossil) },
+                function (data) {
+                    if (data.status === "success") {
+                        $.messager.alert("",
+                            data.msg,
+                            "info",
+                            function () {
+                                parent.reload();
+                                commHelper.CloseDialog("添加化石");
+                            });
+                    } else {
+                        $.messager.alert("", data.msg, "warning");
+                    }
+                },
+                "json");
+        });
+    });
+</script>

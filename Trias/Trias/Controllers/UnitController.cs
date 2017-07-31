@@ -82,12 +82,19 @@ namespace Trias.Controllers
         //删除单元信息
         public ActionResult RemoveUnit(string id)
         {
-            if (id == null)
-            {
-                WriteError("该单元信息不存在");
-            }
             unitSer.RemoveWhere(x => x.U_ID == id);
+            var collectionList = collectionSer.Where(x => x.U_ID == id).ToList();
+            collectionList.ForEach(x =>
+            {
+                collectionSer.Remove(x);
+                collectionSer.RemoveWhere(y => y.C_ID == x.C_ID);
+                fossilSer.RemoveWhere(y => y.C_ID == x.C_ID);
+                geochemicalSer.RemoveWhere(y => y.C_ID == x.C_ID);
+            });
             unitSer.SaveChanges();
+            collectionSer.SaveChanges();
+            fossilSer.SaveChanges();
+            geochemicalSer.SaveChanges();
             return WriteSuccess("删除成功");
         }
     }

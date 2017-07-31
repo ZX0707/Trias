@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Trias.Models;
 using Trias.Tool;
 
@@ -17,14 +18,26 @@ namespace Trias.Controllers
         {
             return View();
         }
-        public ActionResult Add()
+        public ActionResult Add(string id)
         {
+            ViewBag.C_ID = id;
             return View();
         }
+        [HttpPost]
+        public ActionResult Add(string fossil, string nothing)
+        {
+            var fossilModel = JsonConvert.DeserializeObject<Fossil>(fossil);
+            fossilModel.H_ID = Guid.NewGuid().ToString();
+            fossilSer.Add(fossilModel);
+            fossilSer.SaveChanges();
+            return WriteSuccess("添加成功！");
+
+        }
+
         //添加化石信息
         public ActionResult AddFossil(FossilView model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);
             }
@@ -38,12 +51,12 @@ namespace Trias.Controllers
         //根据 采样位置id 查询化石信息
         public ActionResult GetFossil(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return WriteError("采样位置不存在");
             }
             var fossillist = fossilSer.Where(x => x.H_ID.Contains(id)).ToList();
-            if(fossillist.Count==0)
+            if (fossillist.Count == 0)
             {
                 return WriteSuccess("暂无化石信息");
             }
@@ -52,7 +65,7 @@ namespace Trias.Controllers
         //修改化石信息
         public ActionResult EditFossil(FossilView model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);
             }
@@ -63,10 +76,6 @@ namespace Trias.Controllers
         //删除化石信息
         public ActionResult RemoveFossil(string id)
         {
-            if(id==null)
-            {
-                return WriteError("该化石信息不存在");
-            }
             fossilSer.RemoveWhere(x => x.H_ID == id);
             fossilSer.SaveChanges();
             return WriteSuccess("删除成功");
