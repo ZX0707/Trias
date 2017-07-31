@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "添加化石";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
 }
 
 <form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
@@ -16,7 +17,7 @@
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">化石大类：</label>
-        <div class="col-sm-2 ">
+        <div class="col-sm-2">
             <select name="FossilGroup" id="FossilGroup" class="form-control"></select>
         </div>
         <label class="col-sm-2 control-label">时代：</label>
@@ -33,7 +34,7 @@
             <select name="TaxonType" id="TaxonType" class="form-control"></select>
         </div>
         <label class="col-sm-2 control-label">分册号：</label>
-        <div class="col-sm-2 ">
+        <div class="col-sm-4 ">
             <select name="CollectFromTreatise" id="CollectFromTreatise" class="form-control"></select>
         </div>
 
