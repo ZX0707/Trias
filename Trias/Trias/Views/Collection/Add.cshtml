@@ -4,14 +4,14 @@
 }
 <form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
     <div class="form-group">
-        <div class="col-sm-6">
-            <label class="col-sm-2 control-label">位置：</label>
+        <div class="col-sm-8">
+            <label class="col-sm-3 control-label">距底部位置：</label>
             <div class="col-sm-3">
-                <input name="Depth1" id="Depth1" type="number" placeholder="开始" class="form-control" />
+                <input name="Depth1" id="Depth1" type="number" placeholder="开始" class="form-control required" />
             </div>
             <label class="col-sm-1 control-label">—</label>
             <div class="col-sm-3">
-                <input name="Depth2" id="Depth2" type="number" placeholder="结束" class="form-control" />
+                <input name="Depth2" id="Depth2" type="number" placeholder="结束" class="form-control required" />
             </div>
             <div class="col-sm-2" style="width: auto">
                 <select id="ThicknessSize" class="form-control">
@@ -25,7 +25,7 @@
         <div class="col-sm-2" style="width: auto">
             <select class="form-control">
                 <option value="high">高</option>
-                <option calue="low">低</option>
+                <option value="low">低</option>
             </select>
         </div>
     </div>
@@ -41,13 +41,13 @@
         <div class="co_li">
             <div class="form-group">
                 <div class="col-sm-1">
-                    <input class="form-control" />
+                    <input class="form-control required" />
                 </div>
                 <div class="col-sm-1">
                     <input class="form-control" />
                 </div>
                 <div class="col-sm-2">
-                    <input class="form-control" />
+                    <input class="form-control required" />
                 </div>
                 <div class="col-sm-2">
                     <input class="form-control" />
@@ -122,7 +122,7 @@
                         </button>
                         <ul class="dropdown-menu" style="width: 100%;">
                             <li><a href="#">从岩石组拷贝</a></li>
-                            <li><a href="#">从单元拷贝</a></li>
+                            <li><a href="#">从层拷贝</a></li>
                         </ul>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
 </script>
 <script>
     $(function () {
-        initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type:"Relation"});
+        initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Relation" });
         //保存响应事件
         $("#btn_save").on("click", {}, function () {
             var collection = {
@@ -178,12 +178,12 @@
             }
             $.post("@Url.Action("Add")",
                 { collection: JSON.stringify(collection), rocks: JSON.stringify(rocks) },
-                function(data) {
+                function (data) {
                     if (data.status === "success") {
                         $.messager.alert("",
                             data.msg,
                             "info",
-                            function() {
+                            function () {
                                 parent.reload();
                                 commHelper.CloseDialog("添加采样位置");
                             });

@@ -31,7 +31,7 @@ namespace Trias.Controllers
             rockSer.SaveChanges();
             return WriteSuccess("添加成功");
         }
-        //根据剖面或单元id查询添加的岩石信息
+        //根据剖面或层id查询添加的岩石信息
         public ActionResult GetRock(string id)
         {
             if (id == null)

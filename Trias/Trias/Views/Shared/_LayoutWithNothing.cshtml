@@ -22,10 +22,25 @@
     @* easyui *@
     <link href="~/Content/CSS/main.css" rel="stylesheet" />
     <script src="~/Content/JS/home.js"></script>
+     <style>
+        .required {
+            background-color: #FFFFC0;
+        }
+    </style>
 </head>
+   
 <body>
     <div>
         @RenderBody()
     </div>
 </body>
 </html>
+<script>
+    $(function () {
+        //移除必填项错误提示
+        $(".required").on("focus", {}, function () {
+            $(this).removeClass("error_ness");
+        });
+    });
+
+</script>

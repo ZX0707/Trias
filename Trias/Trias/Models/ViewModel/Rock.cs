@@ -20,7 +20,7 @@ namespace Trias.Models
     {
         [Display(Name = "主键")]
         public string Rock_ID { get; set; }
-        [Display(Name = "所属类型（岩石组，单元，采样位置。。。）")]
+        [Display(Name = "所属类型（岩石组，层，采样位置。。。）")]
         public string Type { get; set; }
         [Display(Name = "所属Id")]
         public string Type_Id { get; set; }

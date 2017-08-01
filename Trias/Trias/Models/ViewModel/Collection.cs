@@ -21,7 +21,7 @@ namespace Trias.Models
     {
         [Display(Name = "主键")]
         public string C_ID { get; set; }
-        [Display(Name = "单元Id")]
+        [Display(Name = "层Id")]
         public string U_ID { get; set; }
         [Display(Name = "精确度")]
         public string Precision { get; set; }

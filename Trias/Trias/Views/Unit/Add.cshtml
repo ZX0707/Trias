@@ -1,22 +1,22 @@
 ﻿@{
-    ViewBag.Title = "添加单元";
+    ViewBag.Title = "添加层";
     Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
 }
 <form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
     <div class="form-group">
-        <label class="col-sm-2 control-label">单元编号：</label>
+        <label class="col-sm-2 control-label">层编号：</label>
         <div class="col-sm-2">
-            <input name="U_ID" id="U_ID" type="number" placeholder="单元编号" class="form-control" />
+            <input name="U_ID" id="U_ID" type="number" placeholder="层编号" class="form-control required" />
         </div>
-        <label class="col-sm-2 control-label">基准点：</label>
+        <label class="col-sm-2 control-label">接触关系：</label>
         <div class="col-sm-2">
             <select name="ContactBase" id="ContactBase" class="form-control"></select>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">外观：</label>
+        <label class="col-sm-2 control-label">相：</label>
         <div class="col-sm-2">
-            <input name="Facies" id="Facies" type="text" placeholder="外观" class="form-control" />
+            <input name="Facies" id="Facies" type="text" placeholder="相" class="form-control" />
         </div>
         <label class="col-sm-2 control-label">沉积环境：</label>
         <div class="col-sm-2">
@@ -26,7 +26,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">厚度：</label>
         <div class="col-sm-2">
-            <input name="Thickness" id="Thickness" type="number" placeholder="厚度" class="form-control" />
+            <input name="Thickness" id="Thickness" type="number" placeholder="厚度" class="form-control required" />
         </div>
         <div class="col-sm-2" style="width: auto">
             <select id="ThicknessSize" class="form-control">
@@ -48,13 +48,13 @@
         <div class="co_li">
             <div class="form-group">
                 <div class="col-sm-1">
-                    <input class="form-control" />
+                    <input class="form-control required" />
                 </div>
                 <div class="col-sm-1">
                     <input class="form-control" />
                 </div>
                 <div class="col-sm-2">
-                    <input class="form-control" />
+                    <input class="form-control required" />
                 </div>
                 <div class="col-sm-2">
                     <input class="form-control" />
@@ -186,7 +186,7 @@
                             "info",
                             function () {
                                 parent.reload();
-                                commHelper.CloseDialog("添加单元");
+                                commHelper.CloseDialog("添加层");
                             });
                     } else {
                         $.messager.alert("", data.msg, "warning");

@@ -44,7 +44,7 @@ namespace Trias.Controllers
 
         }
 
-        //添加单元信息
+        //添加层信息
         public ActionResult AddUnit(UnitView model)
         {
             if (!ModelState.IsValid)
@@ -58,7 +58,7 @@ namespace Trias.Controllers
             unitSer.SaveChanges();
             return WriteSuccess("添加成功");
         }
-        //修改单元信息
+        //修改层信息
         public ActionResult EditUnit(UnitView model)
         {
             if (!ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace Trias.Controllers
             unitSer.SaveChanges();
             return WriteSuccess("修改成功");
         }
-        //根据 岩石组id 查询单元信息
+        //根据 岩石组id 查询层信息
         public ActionResult GetUnit(string id)
         {
             if (id == null)
@@ -79,7 +79,7 @@ namespace Trias.Controllers
             var unitlist = unitSer.Where(x => x.F_ID.Contains(id)).ToList();
             return Json(unitlist);
         }
-        //删除单元信息
+        //删除层信息
         public ActionResult RemoveUnit(string id)
         {
             unitSer.RemoveWhere(x => x.U_ID == id);

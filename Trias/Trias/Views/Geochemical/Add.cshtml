@@ -17,7 +17,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">距剖面底部的位置：</label>
         <div class="col-sm-2 ">
-            <input name="Position" id="Position" class="form-control" />
+            <input name="Position" id="Position" class="form-control required" />
         </div>
         <label class="col-sm-2 control-label">时代：</label>
         <div class="col-sm-2 ">
@@ -30,23 +30,36 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">同位素：</label>
         <div class="col-sm-2 ">
-            <input name="isotope" id="isotope" class="form-control" />
+            <select name="isotope" id="isotope" class="form-control">
+
+            </select>
         </div>
         <label class="col-sm-2 control-label">同位素含量：</label>
         <div class="col-sm-2 ">
             <input name="Isotopepersents" id="Isotopepersents" type="number" class="form-control" />
         </div>
-
+        <div class="col-sm-2"  style="width:auto">
+            <select class="form-control">
+                <option>百分比</option>
+                <option>千分比</option>
+            </select>
+        </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label">元素：</label>
         <div class="col-sm-2 ">
-            <input name="Element" id="Element" type="text" class="form-control" />
+            <select name="Element" id="Element" class="form-control"></select>
         </div>
         <label class="col-sm-2 control-label">元素含量：</label>
         <div class="col-sm-2 ">
             <input name="Elementpersents" id="Elementpersents" type="number" class="form-control" />
+        </div>
+          <div class="col-sm-2" style="width:auto">
+            <select class="form-control">
+                <option>百分比</option>
+                <option>千分比</option>
+            </select>
         </div>
     </div>
 
@@ -70,9 +83,11 @@
         initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
     }
     $(function () {
+        initSelect($("#isotope"), "@Url.Action("GetSelectOptions", "Dict")", { type: "isotope" });
+        initSelect($("#Element"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Element" });
         initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function () { change() });
 
-        $.post("@Url.Action("GetCurrentUser","Login")", {}, function(user) {
+        $.post("@Url.Action("GetCurrentUser", "Login")", {}, function (user) {
             if (user.status === "success") {
                 $("#Authorizer").val(user.msg.UserName);
                 $("#Authorizer").attr("readonly", "readonly");
@@ -83,25 +98,25 @@
         $("#btn_save").on("click", {}, function () {
             var geochemical = {
                 C_ID: cid,
-                Authorizer:$("#Authorizer").val(),
-                isotope:$("#isotope").val(),
-                Isotopepersents:$("#Isotopepersents").val(),
-                Element:$("#Element").val(),
-                Elementpersents:$("#Elementpersents").val(),
-                Time:$("#Time").val(),
-                SubTime:$("#SubTime").val(),
-                Time2:$("#Time2").val(),
-                Position:$("#Position").val(),
-                Notes:$("#Notes").val()
+                Authorizer: $("#Authorizer").val(),
+                isotope: $("#isotope").val(),
+                Isotopepersents: $("#Isotopepersents").val(),
+                Element: $("#Element").val(),
+                Elementpersents: $("#Elementpersents").val(),
+                Time: $("#Time").val(),
+                SubTime: $("#SubTime").val(),
+                Time2: $("#Time2").val(),
+                Position: $("#Position").val(),
+                Notes: $("#Notes").val()
             };
             $.post("@Url.Action("Add")",
-                { geochemical: JSON.stringify(geochemical)},
-                function(data) {
+                { geochemical: JSON.stringify(geochemical) },
+                function (data) {
                     if (data.status === "success") {
                         $.messager.alert("",
                             data.msg,
                             "info",
-                            function() {
+                            function () {
                                 parent.reload();
                                 commHelper.CloseDialog("添加地球化学信息");
                             });

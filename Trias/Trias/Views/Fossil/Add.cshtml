@@ -8,6 +8,27 @@
         <div class="col-sm-2 ">
             <input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control" />
         </div>
+        <label class="col-sm-2 control-label">化石带：</label>
+        <div class="col-sm-2 ">
+            <input name="RefDescribingRelation" id="RefDescribingRelation" type="text" class="form-control" />
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">属名：</label>
+        <div class="col-sm-2 ">
+            <input name="GenusName" id="GenusName" type="text" class="form-control required" />
+        </div>
+        <label class="col-sm-2 control-label">种名：</label>
+        <div class="col-sm-2 ">
+            <input name="SpeciesName" id="SpeciesName" type="text" class="form-control required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">距剖面底部的位置：</label>
+        <div class="col-sm-2 ">
+            <input name="Position" id="Position" type="number" class="form-control" />
+        </div>
         <label class="col-sm-2 control-label">时代：</label>
         <div class="col-sm-2 ">
             <input name="Time2" id="Time2" type="number" placeholder="输入时代" class="form-control" />
@@ -16,7 +37,7 @@
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">化石大类：</label>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <select name="FossilGroup" id="FossilGroup" class="form-control"></select>
         </div>
         <label class="col-sm-2 control-label">时代：</label>
@@ -29,7 +50,7 @@
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">分类型：</label>
-        <div class="col-sm-2 ">
+        <div class="col-sm-3 ">
             <select name="TaxonType" id="TaxonType" class="form-control"></select>
         </div>
         <label class="col-sm-2 control-label">分册号：</label>
@@ -39,34 +60,27 @@
 
     </div>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">属名：</label>
-        <div class="col-sm-2 ">
-            <input name="GenusName" id="GenusName" type="text" class="form-control" />
-        </div>
-        <label class="col-sm-2 control-label">种名：</label>
-        <div class="col-sm-2 ">
-            <input name="SpeciesName" id="SpeciesName" type="text" class="form-control" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">距剖面底部的位置：</label>
-        <div class="col-sm-2 ">
-            <input name="Position" id="Position" type="number" class="form-control" />
-        </div>
-        <label class="col-sm-2 control-label">描述关系：</label>
-        <div class="col-sm-2 ">
-            <input name="RefDescribingRelation" id="RefDescribingRelation" type="text" class="form-control" />
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-sm-2 control-label">长度：</label>
         <div class="col-sm-2 ">
             <input name="Length" id="Length" type="number" class="form-control" />
         </div>
+        <div class="col-sm-2" style="width: auto;">
+            <select class="form-control">
+                <option value="Arabic">厘米</option>
+                <option value="Arabic">毫米</option>
+            </select>
+        </div>
         <label class="col-sm-2 control-label">宽度：</label>
         <div class="col-sm-2 ">
             <input name="width" id="width" type="number" class="form-control" />
+        </div>
+        <div class="col-sm-2" style="width: auto;">
+            <select class="form-control">
+                <option value="Arabic">厘米</option>
+                <option value="Arabic">毫米</option>
+            </select>
         </div>
     </div>
     <div class="form-group">
@@ -83,8 +97,13 @@
             <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论" style="resize: none"></textarea>
         </div>
     </div>
-    <div class="form-group" style="text-align: center">
-        <button id="btn_save" type="button" class="btn btn-default">确定</button>
+    <div class="form-group col-sm-10" style="text-align: center">
+        <div class="col-sm-6">
+            <button id="btn_save" type="button" class="btn btn-default">保存</button>
+        </div>
+        <div class="col-sm-6">
+            <button id="btn_confirm" type="button" class="btn btn-default">确定</button>
+        </div>
     </div>
 </form>
 
@@ -96,12 +115,37 @@
         initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
     }
     $(function () {
-        initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function() { change() });
-        initSelect($("#FossilGroup"), "@Url.Action("GetSelectOptions", "Dict")", { type: "FossilGroup" });
+        var id = "";
+        var value = "";
+        var text = "";
+        var pid;
+        $.post("/Dict/GetSelectOptions", { type: "FossilGroup" }, function (result) {
+            $("#FossilGroup").html("");
+            console.log(result);
+            $("#FossilGroup").append("<option id='" + id + "' value='" + value + "'>" + "</option>");
+            for (var i = 0; i < result.length; i++) {
+                value = result[i].KeyName;
+                text = result[i].ValueName;
+                pid = result[i].Pid;
+                id = result[i].Id;
+                $("#FossilGroup").append("<option id='" + id + "' value='" + value + "'>" + text + "</option>");
+                if (pid == null) {
+                    $("#" + id).attr("disabled", "disabled").css("font-weight", "bold");
+
+                }
+
+            }
+
+            if (typeof callback == "function") {
+                callback();
+            }
+        }, "json");
+        initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function () { change() });
+       @* initSelect($("#FossilGroup"), "@Url.Action("GetSelectOptions", "Dict")", { type: "FossilGroup" });*@
         initSelect($("#TaxonType"), "@Url.Action("GetSelectOptions", "Dict")", { type: "TaxonType" });
         initSelect($("#CollectFromTreatise"), "@Url.Action("GetSelectOptions", "Dict")", { type: "CollectFromTreatise" });
 
-        $.post("@Url.Action("GetCurrentUser","Login")", {}, function(user) {
+        $.post("@Url.Action("GetCurrentUser", "Login")", {}, function (user) {
             if (user.status === "success") {
                 $("#Authorizer").val(user.msg.UserName);
                 $("#Authorizer").attr("readonly", "readonly");
@@ -112,20 +156,20 @@
         $("#btn_save").on("click", {}, function () {
             var fossil = {
                 C_ID: cid,
-                Time:$("#Time").val(),
-                SubTime:$("#SubTime").val(),
-                Time2:$("#Time2").val(),
-                Authorizer:$("#Authorizer").val(),
-                FossilGroup:$("#FossilGroup").val(),
-                TaxonType:$("#TaxonType").val(),
-                CollectFromTreatise:$("#CollectFromTreatise").val(),
-                RefDescribingRelation:$("#RefDescribingRelation").val(),
-                GenusName:$("#GenusName").val(),
-                SpeciesName:$("#SpeciesName").val(),
-                Position:$("#Position").val(),
-                Length:$("#Length").val(),
-                width:$("#width").val(),
-                Picture:$("#Picture").val(),
+                Time: $("#Time").val(),
+                SubTime: $("#SubTime").val(),
+                Time2: $("#Time2").val(),
+                Authorizer: $("#Authorizer").val(),
+                FossilGroup: $("#FossilGroup").val(),
+                TaxonType: $("#TaxonType").val(),
+                CollectFromTreatise: $("#CollectFromTreatise").val(),
+                RefDescribingRelation: $("#RefDescribingRelation").val(),
+                GenusName: $("#GenusName").val(),
+                SpeciesName: $("#SpeciesName").val(),
+                Position: $("#Position").val(),
+                Length: $("#Length").val(),
+                width: $("#width").val(),
+                Picture: $("#Picture").val(),
                 Notes: $("#Notes").val()
             };
             $.post("@Url.Action("Add")",

@@ -59,7 +59,7 @@ namespace Trias.Controllers
             return WriteSuccess("添加成功");
         }
 
-        //根据 单元id 查询采样位置
+        //根据 层id 查询采样位置
         public ActionResult GetCollection(string id)
         {
             if (id == null)
