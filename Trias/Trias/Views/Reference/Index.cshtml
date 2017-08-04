@@ -4,6 +4,16 @@
 
 @model Trias.Models.Reference
 
+<style>
+    .journal {
+    }
+
+    .book {
+    }
+
+    .PHD {
+    }
+</style>
 
 <form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
 
@@ -15,7 +25,28 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">文献类型：</label>
         <div class="col-sm-3">
-            <select name="ReferenceType" id="ReferenceType" class="form-control required"></select>
+            <select name="ReferenceType" id="ReferenceType" class="form-control required" onchange="changeType()"></select>
+        </div>
+    </div>
+    <div class="form-group book">
+        <label class="col-sm-2 control-label">书名：</label>
+        <div class="col-sm-3">
+            <input name="BookTitle" id="BookTitle" type="text" class="form-control"
+                   placeholder="输入书名" />
+        </div>
+    </div>
+    <div class="form-group journal PHD">
+        <label class="col-sm-2 control-label">文献名：</label>
+        <div class="col-sm-3">
+            <input name="Title" id="Title" type="text" class="form-control required"
+                   placeholder="输入文献名" />
+        </div>
+    </div>
+    <div class="form-group journal">
+        <label class="col-sm-2 control-label">杂志名：</label>
+        <div class="col-sm-3">
+            <input name="Journal" id="Journal" type="text" class="form-control"
+                   placeholder="输入杂志名" />
         </div>
     </div>
     <div class="form-group">
@@ -38,14 +69,7 @@
             <input name="Year" id="Year" type="number" class="form-control required" placeholder="输入年度" />
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">文献名：</label>
-        <div class="col-sm-3">
-            <input name="Title" id="Title" type="text" class="form-control required"
-                   placeholder="输入文献名" />
-        </div>
-    </div>
-    <div class="form-group">
+    <div class="form-group book">
         <label class="col-sm-2 control-label">编辑：</label>
         <div class="col-sm-2">
             <input name="Editor1" id="Editor1" type="text" class="form-control required"
@@ -61,22 +85,8 @@
             <input name="Editor4" id="Editor4" type="text" class="form-control" placeholder="输入第四编辑" />
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">书名：</label>
-        <div class="col-sm-3">
-            <input name="BookTitle" id="BookTitle" type="text" class="form-control"
-                   placeholder="输入书名" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">杂志名：</label>
-        <div class="col-sm-3">
-            <input name="Journal" id="Journal" type="text" class="form-control"
-                   placeholder="输入杂志名" />
-        </div>
-    </div>
 
-    <div class="form-group">
+    <div class="form-group journal">
         <label class="col-sm-2 control-label">册：</label>
         <div class="col-sm-2">
             <input name="Volume" id="Volume" type="number" class="form-control" placeholder="册" />
@@ -96,7 +106,7 @@
             <input name="PageEnd" id="PageEnd" type="number" class="form-control" placeholder="结束页" />
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group book">
         <label class="col-sm-2 control-label">出版社：</label>
         <div class="col-sm-3">
             <input name="Publisher" id="Publisher" type="text" class="form-control"
@@ -112,7 +122,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">编码：</label>
         <div class="col-sm-3">
-            <input name="DOI" id="DOI" type="text" class="form-control required"
+            <input name="DOI" id="DOI" type="text" class="form-control"
                    placeholder="输入编码" />
         </div>
     </div>
@@ -166,7 +176,9 @@
         //    }
         //}, "json");
         //处理文献类型下拉框
-        initSelect($("#ReferenceType"), getOptionsURL, { type: "ReferenceType" });
+        initSelect($("#ReferenceType"), getOptionsURL, { type: "ReferenceType" }, function () {
+            changeType();
+        });
         //处理语言下拉框
         initSelect($("#Language"), getOptionsURL, { type: "Language" });
         //$.post("/Dict/GetSelectOptions", { type: "Language" }, function (result) {
@@ -228,5 +240,33 @@
     }
     function save() {
         $('#form').form("submit");
+    }
+
+    function changeType() {
+        var value = $("#ReferenceType").val();
+        switch (value) {
+            case "journal article":
+            case "paper presented at metting":
+            case "abstract":
+                $(".book").css("display", "none");
+                $(".PHD").css("display", "none");
+                $(".journal").css("display", "block");
+                break;
+            case "book":
+            case "edit book":
+            case "book chapter":
+                $(".journal").css("display", "none");
+                $(".PHD").css("display", "none");
+                $(".book").css("display", "block");
+                break;
+            case "Ph.D.dissertation":
+            case "master thesis":
+                $(".journal").css("display", "none");
+                $(".book").css("display", "none");
+                $(".PHD").css("display", "block");
+                break;
+            default:
+                break;
+        }
     }
 </script>
