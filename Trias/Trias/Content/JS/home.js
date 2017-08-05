@@ -68,6 +68,7 @@ var commHelper = {
             height = $(window).height() * 0.8;
         }
         var dialog = $("<div id='dialog_" + title + "'/>");
+        //var dialog = $("<div id='dialog_" + title + "' style='overflow:scroll;'/>");
         $(window).find("body").append(dialog);
         dialog.dialog({
             title: title,

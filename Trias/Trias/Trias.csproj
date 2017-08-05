@@ -1124,8 +1124,6 @@
     <Content Include="Content\bootstrap-3.3.7-dist\css\Desktop_2.ini" />
     <Content Include="Content\bootstrap-3.3.7-dist\Desktop_1.ini" />
     <Content Include="Content\bootstrap-3.3.7-dist\Desktop_2.ini" />
-    <Content Include="Content\bootstrap-3.3.7-dist\fonts\Desktop_1.ini" />
-    <Content Include="Content\bootstrap-3.3.7-dist\fonts\Desktop_2.ini" />
     <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.ttf" />
