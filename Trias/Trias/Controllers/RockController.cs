@@ -65,5 +65,10 @@ namespace Trias.Controllers
             rockSer.SaveChanges();
             return WriteSuccess("删除成功");
         }
+
+        public ActionResult GetList(string id)
+        {
+            return Json(rockSer.Where(x => x.Type_ID == id).ToList());
+        }
     }
 }

@@ -118,7 +118,7 @@
                     <input class="form-control" />
                 </div>
                 <div class="col-sm-3">
-                    <button type="button" class="btn btn-info" style="width: 100%;">从岩石组拷贝</button>
+                    <button onclick="CopyFromFormation()" type="button" class="btn btn-info" style="width: 100%;">从岩石组拷贝</button>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
 </form>
 
 <script>
-    var uid = "@ViewBag.F_ID";
+    var fid = "@ViewBag.F_ID";
 </script>
 <script>
     $(function () {
@@ -146,7 +146,7 @@
         //保存响应事件
         $("#btn_save").on("click", {}, function () {
             var unit = {
-                F_ID: uid,
+                F_ID: fid,
                 Thickness: parseFloat($("#Thickness").val()) * parseFloat($("#ThicknessSize").val()),
                 ContactBase: $("#ContactBase").val(),
                 Facies: $("#Facies").val(),
@@ -190,4 +190,19 @@
                 "json");
         });
     });
+
+
+    function CopyFromFormation() {
+        $.post("@Url.Action("GetList","Rock")", { id: fid }, function (data) {
+            var lines = $(".co_li>div");
+            for (var i = 0; i < data.length; i++) {
+                $(lines[i]).find("input:eq(0)").val(data[i].Color1);
+                $(lines[i]).find("input:eq(1)").val(data[i].Color2);
+                $(lines[i]).find("input:eq(2)").val(data[i].Lithology1);
+                $(lines[i]).find("input:eq(3)").val(data[i].Lithology2);
+                $(lines[i]).find("input:eq(4)").val(data[i].MainLithology);
+                $(lines[i]).find("select:eq(0)").val(data[i].Relation);
+            }
+        },"json");
+    }
 </script>
