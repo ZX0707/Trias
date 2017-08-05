@@ -38,7 +38,7 @@
     <div class="form-group journal PHD">
         <label class="col-sm-2 control-label">文献名：</label>
         <div class="col-sm-3">
-            <input name="Title" id="Title" type="text" class="form-control required"
+            <input name="Title" id="Title" type="text" class="form-control"
                    placeholder="输入文献名" />
         </div>
     </div>
@@ -52,7 +52,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">第一作者：</label>
         <div class="col-sm-2">
-            <input name="FirstAuthor" id="FirstAuthor" class="form-control required" type="text"
+            <input name="FirstAuthor" id="FirstAuthor" class="form-control" type="text"
                    placeholder="输入第一作者">
         </div>
         <div class="col-sm-2">
@@ -72,7 +72,7 @@
     <div class="form-group book">
         <label class="col-sm-2 control-label">编辑：</label>
         <div class="col-sm-2">
-            <input name="Editor1" id="Editor1" type="text" class="form-control required"
+            <input name="Editor1" id="Editor1" type="text" class="form-control"
                    placeholder="输入第一编辑" />
         </div>
         <div class="col-sm-2">
@@ -193,6 +193,7 @@
         $('#form').form({
             url: '/Reference/Add',
             onSubmit: function () {
+                debugger;
                 //提交验证，return false;不提交
                 var arr = $(".required");
                 var flag = true;

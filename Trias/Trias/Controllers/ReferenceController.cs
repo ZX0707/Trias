@@ -56,10 +56,6 @@ namespace Trias.Controllers
             {
                 return WriteStatusError(ModelState);
             }
-            if (referenceSer.Any(x => x.DOI == model.DOI))
-            {
-                return WriteError("已经存在文献的DOI为" + model.DOI + "，请确认！");
-            }
             if (!string.IsNullOrWhiteSpace(model.PageBegin) && !string.IsNullOrWhiteSpace(model.PageEnd))
             {
                 try
@@ -76,6 +72,10 @@ namespace Trias.Controllers
                     return WriteError(e.Message);
                 }
             }
+            if (referenceSer.Any(x => x.ReferenceType == model.ReferenceType && x.Year == model.Year && x.FirstAuthor == model.FirstAuthor && x.Title == model.Title && x.BookTitle == model.BookTitle && x.Journal == model.Journal))
+            {
+                return WriteError("文献重复，请确认！");
+            }
             var rModel = new Reference();
             rModel.CopyFrom(model);
             referenceSer.Add(rModel);
@@ -83,7 +83,7 @@ namespace Trias.Controllers
             referenceSer.SaveChanges();
             return WriteSuccess(new
             {
-                rModel.DOI,
+                rModel.R_ID,
                 msg = "操作成功！"
             });
         }
@@ -99,10 +99,6 @@ namespace Trias.Controllers
             {
                 return WriteStatusError(ModelState);
             }
-            if (referenceSer.Any(x => x.DOI == model.DOI && x.R_ID != model.R_ID))
-            {
-                return WriteError("已经存在文献的DOI为" + model.DOI + "，请确认！");
-            }
             if (!string.IsNullOrWhiteSpace(model.PageBegin) && !string.IsNullOrWhiteSpace(model.PageEnd))
             {
                 try
@@ -118,6 +114,10 @@ namespace Trias.Controllers
                 {
                     return WriteError(e.Message);
                 }
+            }
+            if (referenceSer.Any(x => x.R_ID != model.R_ID && x.ReferenceType == model.ReferenceType && x.Year == model.Year && x.FirstAuthor == model.FirstAuthor && x.Title == model.Title && x.BookTitle == model.BookTitle && x.Journal == model.Journal))
+            {
+                return WriteError("文献重复，请确认！");
             }
             referenceSer.EditWhere(x => x.R_ID == model.R_ID, model);
             referenceSer.SaveChanges();

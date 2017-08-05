@@ -87,20 +87,20 @@
           <Property Name="SecondAuthor" Type="nvarchar" MaxLength="50" />
           <Property Name="OtherAuthors" Type="nvarchar" MaxLength="50" />
           <Property Name="Year" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="BookTitle" Type="nvarchar" MaxLength="50" />
           <Property Name="Journal" Type="nvarchar" MaxLength="50" />
-          <Property Name="Editor1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Editor1" Type="nvarchar" MaxLength="50" />
           <Property Name="Editor2" Type="nvarchar" MaxLength="50" />
           <Property Name="Editor3" Type="nvarchar" MaxLength="50" />
           <Property Name="Editor4" Type="nvarchar" MaxLength="50" />
-          <Property Name="Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Publisher" Type="nvarchar" MaxLength="50" />
           <Property Name="Volume" Type="nvarchar" MaxLength="50" />
           <Property Name="No" Type="nvarchar" MaxLength="50" />
           <Property Name="PageBegin" Type="nvarchar" MaxLength="50" />
           <Property Name="PageEnd" Type="nvarchar" MaxLength="50" />
-          <Property Name="DOI" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOI" Type="nvarchar" MaxLength="50" />
           <Property Name="URL1" Type="nvarchar" MaxLength="300" />
           <Property Name="URL2" Type="nvarchar" MaxLength="300" />
           <Property Name="Comments" Type="nvarchar" MaxLength="500" />
@@ -284,20 +284,20 @@
           <Property Name="SecondAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OtherAuthors" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Journal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Editor1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Editor1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Editor2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Editor3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Editor4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Volume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PageBegin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PageEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DOI" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="URL1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="URL2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
