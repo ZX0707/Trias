@@ -31,7 +31,7 @@ namespace Trias.Controllers
         {
             var unitModel = JsonConvert.DeserializeObject<Unit>(unit);
 
-            #region 是体验证
+            #region 实体验证
 
             if (unitModel.Thickness == null)
             {
@@ -46,11 +46,11 @@ namespace Trias.Controllers
             for (var i = 0; i < rockList.Count; ++i)
             {
                 var item = rockList.ElementAt(i);
-                if (!string.IsNullOrWhiteSpace(item.Color1))
+                if (string.IsNullOrWhiteSpace(item.Color1))
                 {
                     return WriteError("颜色一必填！");
                 }
-                if (!string.IsNullOrWhiteSpace(item.Lithology1))
+                if (string.IsNullOrWhiteSpace(item.Lithology1))
                 {
                     return WriteError("岩性一必填！");
                 }
