@@ -35,14 +35,12 @@ namespace Trias.Models
         [Required(ErrorMessage = "文献年度必填")]
         public int Year { get; set; }
         [Display(Name = "文献名称")]
-        [Required(ErrorMessage = "文献名称不能为空")]
         public string Title { get; set; }
         [Display(Name = "书名")]
         public string BookTitle { get; set; }
         [Display(Name = "杂志名")]
         public string Journal { get; set; }
         [Display(Name = "编辑")]
-        [Required(ErrorMessage = "至少有一位编辑")]
         public string Editor1 { get; set; }
         [Display(Name = "编辑")]
         public string Editor2 { get; set; }
@@ -64,7 +62,6 @@ namespace Trias.Models
         [Display(Name = "终止页")]
         public string PageEnd { get; set; }
         [Display(Name = "文献标识")]
-        [Required(ErrorMessage = "文献的唯一标识码必填")]
         public string DOI { get; set; }
         [Display(Name = "链接")]
         public string URL1 { get; set; }
