@@ -39,8 +39,10 @@ namespace Trias.Models
         [Display(Name = "描述关系（同物异名）")]
         public string RefDescribingRelation { get; set; }
         [Display(Name = "属名")]
+        [Required]
         public string GenusName { get; set; }
         [Display(Name = "种名")]
+        [Required]
         public string SpeciesName { get; set; }
         [Display(Name = "距离剖面底部的位置")]
         public string Position { get; set; }

@@ -39,6 +39,7 @@ namespace Trias.Models
         [Display(Name = "时代（百万年）")]
         public Nullable<int> Time2 { get; set; }
         [Display(Name = "距离剖面底部的位置")]
+        [Required]
         public string Position { get; set; }
         [Display(Name = "备注")]
         public string Notes { get; set; }

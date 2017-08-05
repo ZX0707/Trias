@@ -24,9 +24,9 @@ namespace Trias.Models
         public string F_ID { get; set; }
         [Display(Name = "厚度")]
         public Nullable<double> Thickness { get; set; }
-        [Display(Name = "基准点")]
+        [Display(Name = "接触关系")]
         public string ContactBase { get; set; }
-        [Display(Name = "外观")]
+        [Display(Name = "相")]
         public string Facies { get; set; }
         [Display(Name = "沉积环境")]
         public string Environments { get; set; }
