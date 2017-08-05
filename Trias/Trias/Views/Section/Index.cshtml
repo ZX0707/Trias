@@ -21,7 +21,7 @@
                 <th data-options="field:'DOI',width:100">DOI</th>
                 <th data-options="field:'FirstAuthor',width:100">作者</th>
                 <th data-options="field:'Year',width:100">年度</th>
-                <th data-options="field:'Title',width:100">标题</th>
+                <th data-options="field:'ShowTitle',width:100">标题</th>
             </tr>
         </thead>
     </table>
@@ -73,7 +73,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">参考文献：</label>
         <div class="col-sm-2 ">
-            <input name="RID1" id="RID1" type="text" value="@ViewBag.DOI" readonly="readonly"
+            <input name="RID1" id="RID1" type="text" value="@ViewBag.ShowTitle" rid="@ViewBag.R_ID" readonly="readonly"
                    onclick="openDialog(1)" placeholder="输入参考文献1" class="form-control required" />
         </div>
         <div class="col-sm-2 ">
@@ -242,10 +242,11 @@
     var sid;
     var index_dialog;
     function test(value, row, index) {
-        return "<div onclick='selectReference(\"" + row.DOI + "\")' class='icon-ok' style='width:30px;height:30px;'/>";
+        return "<div onclick='selectReference(\"" + row.ShowTitle + "\",\"" + row.R_ID + "\")' class='icon-ok' style='width:30px;height:30px;'/>";
     }
-    function selectReference(doi) {
-        $("#RID" + index_dialog).val(doi);
+    function selectReference(title, rid) {
+        $("#RID" + index_dialog).val(title);
+        $("#RID" + index_dialog).attr("rid", rid);
         $('#dd').dialog("close");
     }
 
@@ -348,7 +349,10 @@
         //表单操作
         $('#form').form({
             url: '/Section/AddSection',
-            onSubmit: function () {
+            onSubmit: function (param) {
+                param.RID11 = $("#RID1").attr("rid");
+                param.RID22 = $("#RID2").attr("rid");
+                param.RID33 = $("#RID3").attr("rid");
                 //提交验证，return false;不提交
                 var arr = $(".required");
                 var flag = true;

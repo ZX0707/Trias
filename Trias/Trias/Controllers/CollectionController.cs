@@ -28,8 +28,34 @@ namespace Trias.Controllers
         public ActionResult Add(string collection, string rocks)
         {
             var collectionModel = JsonConvert.DeserializeObject<Collection>(collection);
+
+            #region 是体验证
+
+            if (collectionModel.Depth1 == null || collectionModel.Depth2 == null)
+            {
+                return WriteError("距离底部位置必填！");
+            }
+
+            #endregion
             collectionModel.C_ID = Guid.NewGuid().ToString();
             var rockList = JsonConvert.DeserializeObject<List<Rock>>(rocks);
+            #region 实体验证
+
+            for (var i = 0; i < rockList.Count; ++i)
+            {
+                var item = rockList.ElementAt(i);
+                if (!string.IsNullOrWhiteSpace(item.Color1))
+                {
+                    return WriteError("颜色一必填！");
+                }
+                if (!string.IsNullOrWhiteSpace(item.Lithology1))
+                {
+                    return WriteError("岩性一必填！");
+                }
+            }
+
+            #endregion
+
             rockList.ForEach(x =>
             {
                 x.Rock_ID = Guid.NewGuid().ToString();
@@ -44,20 +70,6 @@ namespace Trias.Controllers
         }
 
 
-        //添加采样位置
-        public ActionResult AddCollection(ViewCollection model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return WriteStatusError(ModelState);
-            }
-            var modelCollection = new Collection();
-            modelCollection.CopyFrom(model);
-            collectionSer.Add(modelCollection);
-            modelCollection.U_ID = Guid.NewGuid().ToString();
-            collectionSer.SaveChanges();
-            return WriteSuccess("添加成功");
-        }
 
         //根据 层id 查询采样位置
         public ActionResult GetCollection(string id)

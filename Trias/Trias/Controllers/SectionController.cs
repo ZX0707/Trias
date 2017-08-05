@@ -13,14 +13,18 @@ namespace Trias.Controllers
         //
         // GET: /Section/
 
-        public ActionResult Index(string id)
+        public ActionResult Index(string rid, string showTitle)
         {
-            ViewBag.DOI = id;
+            ViewBag.R_ID = rid;
+            ViewBag.ShowTitle = showTitle;
             return View();
         }
         //添加剖面
-        public ActionResult AddSection(SectionView model)
+        public ActionResult AddSection(SectionView model, string RID11, string RID22, string RID33)
         {
+            model.RID1 = RID11;
+            model.RID2 = RID22;
+            model.RID3 = RID33;
             if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);

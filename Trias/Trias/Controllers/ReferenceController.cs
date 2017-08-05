@@ -38,10 +38,37 @@ namespace Trias.Controllers
             }
             var total = list.Count();
             list = list.OrderByDescending(x => x.Year).Skip(rows * (page - 1)).Take(rows);
+            var result = list.ToList().Select(x => new
+            {
+                x.R_ID,
+                x.ReferenceType,
+                x.FirstAuthor,
+                x.SecondAuthor,
+                x.OtherAuthors,
+                x.Year,
+                x.Title,
+                x.BookTitle,
+                x.Journal,
+                x.Editor1,
+                x.Editor2,
+                x.Editor3,
+                x.Editor4,
+                x.Language,
+                x.Publisher,
+                x.Volume,
+                x.No,
+                x.PageBegin,
+                x.PageEnd,
+                x.DOI,
+                x.URL1,
+                x.URL2,
+                x.Comments,
+                ShowTitle = x.Title ?? x.BookTitle ?? x.Journal
+            }).ToList();
             return Json(new
             {
                 total,
-                rows = list.ToList()
+                rows = result
             });
         }
 
@@ -72,7 +99,8 @@ namespace Trias.Controllers
                     return WriteError(e.Message);
                 }
             }
-            if (referenceSer.Any(x => x.ReferenceType == model.ReferenceType && x.Year == model.Year && x.FirstAuthor == model.FirstAuthor && x.Title == model.Title && x.BookTitle == model.BookTitle && x.Journal == model.Journal))
+            if (referenceSer.Any(x => x.ReferenceType == model.ReferenceType && x.Year == model.Year && x.FirstAuthor == model.FirstAuthor && (x.Title == model.Title || x.Title == null) && (x.BookTitle == model.BookTitle || x.BookTitle
+             == null) && (x.Journal == model.Journal || x.Journal == null)))
             {
                 return WriteError("文献重复，请确认！");
             }
@@ -84,6 +112,7 @@ namespace Trias.Controllers
             return WriteSuccess(new
             {
                 rModel.R_ID,
+                ShowTitle = rModel.Title ?? rModel.BookTitle ?? rModel.Journal,
                 msg = "操作成功！"
             });
         }

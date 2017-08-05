@@ -32,8 +32,39 @@ namespace Trias.Controllers
         public ActionResult Add(string formation, string rocks)
         {
             var formtionModel = JsonConvert.DeserializeObject<Formation>(formation);
+
+            #region 实体验证
+
+            if (!string.IsNullOrWhiteSpace(formtionModel.FormationName))
+            {
+                return WriteError("岩石组名必填！");
+            }
+            if (formtionModel.Thickness == null)
+            {
+                return WriteError("厚度必填！");
+            }
+
+            #endregion
+
             formtionModel.F_ID = Guid.NewGuid().ToString();
             var rockList = JsonConvert.DeserializeObject<List<Rock>>(rocks);
+
+            #region 实体验证
+
+            for (var i = 0; i < rockList.Count; ++i)
+            {
+                var item = rockList.ElementAt(i);
+                if (!string.IsNullOrWhiteSpace(item.Color1))
+                {
+                    return WriteError("颜色一必填！");
+                }
+                if (!string.IsNullOrWhiteSpace(item.Lithology1))
+                {
+                    return WriteError("岩性一必填！");
+                }
+            }
+
+            #endregion
             rockList.ForEach(x =>
             {
                 x.Rock_ID = Guid.NewGuid().ToString();

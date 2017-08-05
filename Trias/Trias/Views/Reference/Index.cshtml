@@ -160,7 +160,8 @@
     </div>
 </form>
 <script>
-    var doi;
+    var rid;
+    var showTitle;
     $(function () {
         $("#PageBegin,#PageEnd").on("focus", {}, function () {
             $(this).removeClass("error_ness");
@@ -220,7 +221,8 @@
                     data = $.parseJSON(data);
                 }
                 if (data.status == "success") {
-                    doi = data.msg.DOI;
+                    rid = data.msg.R_ID;
+                    showTitle = data.msg.ShowTitle;
                     $('#addSection').removeAttr("disabled");//启用button
                     $.messager.alert("", "保存成功！", "info");
                 }
@@ -230,7 +232,7 @@
             }
         });
         $("#addSection").click(function () {
-            location.href = "/Section/Index/" + doi;
+            location.href = "/Section/Index?rid=" + rid + "&showTitle=" + showTitle;
         });
 
 
