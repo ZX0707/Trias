@@ -109,6 +109,8 @@
                 Position: $("#Position").val(),
                 Notes: $("#Notes").val()
             };
+            //前端验证
+            if (!identify()) { return; };
             $.post("@Url.Action("Add")",
                 { geochemical: JSON.stringify(geochemical) },
                 function (data) {

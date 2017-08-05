@@ -197,7 +197,7 @@
                         "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-plus' onclick='myCollection(\"" + uid + "\")'>添加采样位置</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-trash' onclick='delUnit(\"" + uid + "\")'>删除层</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil'>修改层</span></a></div>");
                     formationDiv.append(unitDiv);
                     for (var k = 0; k < collections.length; k++) {
-                        var collection = collections[i].collection;
+                        var collection = collections[k].collection;
                         var cid = collection.C_ID;
                         var cName = "采样位置" + (k + 1);
                         var fossils = collections[k].fossils;

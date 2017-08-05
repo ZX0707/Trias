@@ -2,145 +2,150 @@
     ViewBag.Title = "添加岩石组";
     Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
 }
-<form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
-    <div class="form-group">
-        <label class="col-sm-2 control-label">岩石组名：</label>
-        <div class="col-sm-2">
-            <input name="FormationName" id="FormationName" type="text" placeholder="岩石组名" class="form-control required" />
-        </div>
-        <label class="col-sm-2 control-label">沉积相带：</label>
-        <div class="col-sm-3" style="width:auto">
-            <select name="EnvironmentalZones" id="EnvironmentalZones" class="form-control"></select>
-        </div>
-    </div>
+<body class="easyui-layout">
+    <div data-options="region:'center'">
+        <form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">岩石组名：</label>
+                <div class="col-sm-2">
+                    <input name="FormationName" id="FormationName" type="text" placeholder="岩石组名" class="form-control required" />
+                </div>
+                <label class="col-sm-2 control-label">沉积相带：</label>
+                <div class="col-sm-3" style="width:auto">
+                    <select name="EnvironmentalZones" id="EnvironmentalZones" class="form-control"></select>
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">厚度：</label>
-        <div class="col-sm-2">
-            <input name="Thickness" id="Thickness" type="number" placeholder="厚度" class="form-control required" />
-        </div>
-        <div class="col-sm-2" style="width: auto">
-            <select id="ThicknessSize" class="form-control">
-                <option value="100">米</option>
-                <option value="2.54">英寸</option>
-                <option value="1">厘米</option>
-            </select>
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <label class="col-sm-1">颜色1</label>
-            <label class="col-sm-1">颜色2</label>
-            <label class="col-sm-2">岩性1</label>
-            <label class="col-sm-2">岩性2</label>
-            <label class="col-sm-3">主要岩性</label>
-            <label class="col-sm-3">关系</label>
-        </div>
-        <div class="co_li">
             <div class="form-group">
-                <div class="col-sm-1">
-                    <input class="form-control required" />
-                </div>
-                <div class="col-sm-1">
-                    <input class="form-control" />
-                </div>
+                <label class="col-sm-2 control-label">厚度：</label>
                 <div class="col-sm-2">
-                    <input class="form-control required" />
+                    <input name="Thickness" id="Thickness" type="number" placeholder="厚度" class="form-control required" />
                 </div>
-                <div class="col-sm-2">
-                    <input class="form-control" />
+                <div class="col-sm-2" style="width: auto">
+                    <select id="ThicknessSize" class="form-control">
+                        <option value="100">米</option>
+                        <option value="2.54">英寸</option>
+                        <option value="1">厘米</option>
+                    </select>
                 </div>
-                <div class="col-sm-3">
-                    <input class="form-control" />
+            </div>
+            <div>
+                <div class="form-group">
+                    <label class="col-sm-1">颜色1</label>
+                    <label class="col-sm-1">颜色2</label>
+                    <label class="col-sm-2">岩性1</label>
+                    <label class="col-sm-2">岩性2</label>
+                    <label class="col-sm-3">主要岩性</label>
+                    <label class="col-sm-3">关系</label>
                 </div>
-                <div class="col-sm-3">
-                    <select class="form-control Relation"></select>
+                <div class="co_li">
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="form-control required" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control required" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control Relation"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control Relation"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control Relation"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-1">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-1">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-2">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-2">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-3">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-3">
-                    <select class="form-control Relation"></select>
+                <label class="col-sm-2 control-label" for="name">备注：</label>
+                <div class="col-sm-7">
+                    <textarea name="Details" id="Details" class="form-control" rows="3" placeholder="备注" style="resize: none"></textarea>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-1">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-1">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-2">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-2">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-3">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-3">
-                    <select class="form-control Relation"></select>
-                </div>
+            <div class="form-group" style="text-align: center">
+                <button id="btn_save" type="button" class="btn btn-default">确定</button>
             </div>
-            <div class="form-group">
-                <div class="col-sm-1">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-1">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-2">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-2">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-3">
-                    <input class="form-control" />
-                </div>
-                <div class="col-sm-3">
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label" for="name">备注：</label>
-        <div class="col-sm-7">
-            <textarea name="Details" id="Details" class="form-control" rows="3" placeholder="备注" style="resize: none"></textarea>
-        </div>
-    </div>
-    <div class="form-group" style="text-align: center">
-        <button id="btn_save" type="button" class="btn btn-default">确定</button>
-    </div>
-</form>
+</body>
+
 
 <script>
     var SId = "@ViewBag.SId";
 </script>
 <script>
     $(function () {
-        initSelect($("#EnvironmentalZones"), "@Url.Action("GetSelectOptions", "Dict")", { type:"EnvironmentalZones"});
-        initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type:"Relation"});
+        initSelect($("#EnvironmentalZones"), "@Url.Action("GetSelectOptions", "Dict")", { type: "EnvironmentalZones" });
+        initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Relation" });
         //保存响应事件
         $("#btn_save").on("click", {}, function () {
             var formation = {
                 S_ID: SId,
-                FormationName: $("#FormationName").val() ,
+                FormationName: $("#FormationName").val(),
                 EnvironmentalZones: $("#EnvironmentalZones").val(),
                 Thickness: parseFloat($("#Thickness").val()) * parseFloat($("#ThicknessSize").val()),
                 Comments: $("#Details").val()
@@ -164,6 +169,8 @@
                 }
                 rocks.push(rock);
             }
+            //前端验证
+            if (!identify()) { return; };
             $.post("@Url.Action("Add")",
                 { formation: JSON.stringify(formation), rocks: JSON.stringify(rocks) },
                 function (data) {

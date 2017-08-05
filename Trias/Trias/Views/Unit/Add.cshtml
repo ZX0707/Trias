@@ -172,6 +172,8 @@
                 }
                 rocks.push(rock);
             }
+            //前端验证
+            if (!identify()) { return;};
             $.post("@Url.Action("Add")",
                 { unit: JSON.stringify(unit), rocks: JSON.stringify(rocks) },
                 function (data) {

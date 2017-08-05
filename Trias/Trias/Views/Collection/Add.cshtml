@@ -177,6 +177,8 @@
                 }
                 rocks.push(rock);
             }
+            //前端验证
+            if (!identify()) { return; };
             $.post("@Url.Action("Add")",
                 { collection: JSON.stringify(collection), rocks: JSON.stringify(rocks) },
                 function (data) {

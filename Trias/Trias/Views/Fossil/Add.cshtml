@@ -99,10 +99,7 @@
     </div>
     <div class="form-group col-sm-10" style="text-align: center">
         <div class="col-sm-6">
-            <button id="btn_save" type="button" class="btn btn-default">保存</button>
-        </div>
-        <div class="col-sm-6">
-            <button id="btn_confirm" type="button" class="btn btn-default">确定</button>
+            <button id="btn_save" type="button" class="btn btn-default">确定</button>
         </div>
     </div>
 </form>
@@ -121,7 +118,7 @@
         var pid;
         $.post("/Dict/GetSelectOptions", { type: "FossilGroup" }, function (result) {
             $("#FossilGroup").html("");
-            console.log(result);
+            //console.log(result);
             $("#FossilGroup").append("<option id='" + id + "' value='" + value + "'>" + "</option>");
             for (var i = 0; i < result.length; i++) {
                 value = result[i].KeyName;
@@ -172,6 +169,8 @@
                 Picture: $("#Picture").val(),
                 Notes: $("#Notes").val()
             };
+            //前端验证
+            if (!identify()) { return; };
             $.post("@Url.Action("Add")",
                 { fossil: JSON.stringify(fossil) },
                 function (data) {
