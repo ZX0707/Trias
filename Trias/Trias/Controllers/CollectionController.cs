@@ -21,6 +21,7 @@ namespace Trias.Controllers
         //}
         public ActionResult Add(string id)
         {
+            ViewBag.F_ID = unitSer.FirstOrDefault(x => x.U_ID == id).F_ID;
             ViewBag.U_ID = id;
             return View();
         }

@@ -121,8 +121,8 @@
                             复制
                         </button>
                         <ul class="dropdown-menu" style="width: 100%;">
-                            <li><a href="#">从岩石组拷贝</a></li>
-                            <li><a href="#">从层拷贝</a></li>
+                            <li><a href="javascript:copyfromformation()">从岩石组拷贝</a></li>
+                            <li><a href="javascript:copyfromunit()">从层拷贝</a></li>
                         </ul>
                     </div>
                 </div>
@@ -144,6 +144,7 @@
 
 <script>
     var uid = "@ViewBag.U_ID";
+    var fid = "@ViewBag.F_ID";
 </script>
 <script>
     $(function () {
@@ -194,4 +195,30 @@
                 "json");
         });
     });
+    function copyfromformation() {
+        $.post("@Url.Action("GetList","Rock")", { id: fid }, function (data) {
+            var lines = $(".co_li>div");
+            for (var i = 0; i < data.length; i++) {
+                $(lines[i]).find("input:eq(0)").val(data[i].Color1);
+                $(lines[i]).find("input:eq(1)").val(data[i].Color2);
+                $(lines[i]).find("input:eq(2)").val(data[i].Lithology1);
+                $(lines[i]).find("input:eq(3)").val(data[i].Lithology2);
+                $(lines[i]).find("input:eq(4)").val(data[i].MainLithology);
+                $(lines[i]).find("select:eq(0)").val(data[i].Relation);
+            }
+        }, "json");
+    }
+    function copyfromunit() {
+        $.post("@Url.Action("GetList","Rock")", { id: uid }, function (data) {
+            var lines = $(".co_li>div");
+            for (var i = 0; i < data.length; i++) {
+                $(lines[i]).find("input:eq(0)").val(data[i].Color1);
+                $(lines[i]).find("input:eq(1)").val(data[i].Color2);
+                $(lines[i]).find("input:eq(2)").val(data[i].Lithology1);
+                $(lines[i]).find("input:eq(3)").val(data[i].Lithology2);
+                $(lines[i]).find("input:eq(4)").val(data[i].MainLithology);
+                $(lines[i]).find("select:eq(0)").val(data[i].Relation);
+            }
+        }, "json");
+    } 
 </script>
