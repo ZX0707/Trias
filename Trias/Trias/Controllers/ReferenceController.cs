@@ -16,6 +16,11 @@ namespace Trias.Controllers
         {
             return View();
         }
+        public ActionResult QueryList()
+        {
+            return View();
+        }
+
 
         /// <summary>
         /// 获取文献列表，带分页

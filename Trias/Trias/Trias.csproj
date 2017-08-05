@@ -1176,6 +1176,7 @@
     <Content Include="Views\Shared\_LayoutWithNothing.cshtml" />
     <Content Include="Views\Fossil\Add.cshtml" />
     <Content Include="Views\Geochemical\Add.cshtml" />
+    <Content Include="Views\Reference\QueryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

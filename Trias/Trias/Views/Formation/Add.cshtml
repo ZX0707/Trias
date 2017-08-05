@@ -170,6 +170,7 @@
                 rocks.push(rock);
             }
             //前端验证
+            debugger;
             if (!identify()) { return; };
             $.post("@Url.Action("Add")",
                 { formation: JSON.stringify(formation), rocks: JSON.stringify(rocks) },
