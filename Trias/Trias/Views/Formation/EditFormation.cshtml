@@ -155,14 +155,15 @@
                 $(lines[i]).find("select:eq(0)").val(data[i].Relation);
             }
         }, "json");
+
         $("#btn_save").on("click", {}, function () {
-            var unit = {
-                F_ID: "@Model.F_ID",
+            var formation = {
+                F_Id:"@Model.F_ID",
+                S_ID:"@Model.S_ID",
+                FormationName: $("#FormationName").val(),
+                EnvironmentalZones: $("#EnvironmentalZones").val(),
                 Thickness: parseFloat($("#Thickness").val()) * parseFloat($("#ThicknessSize").val()),
-                ContactBase: $("#ContactBase").val(),
-                Facies: $("#Facies").val(),
-                Environments: $("#Environments").val(),
-                Details: $("#Details").val()
+                Comments: $("#Details").val()
             };
             var rocks = [];
             var lines = $(".co_li>div");
@@ -184,9 +185,9 @@
                 rocks.push(rock);
             }
             //前端验证
-            if (!identify()) { return;};
-            $.post("@Url.Action("Add")",
-                { unit: JSON.stringify(unit), rocks: JSON.stringify(rocks) },
+            if (!identify()) { return; };
+            $.post("@Url.Action("EditFormation")",
+                { formation: JSON.stringify(formation), rocks: JSON.stringify(rocks) },
                 function (data) {
                     if (data.status === "success") {
                         $.messager.alert("",
@@ -194,7 +195,7 @@
                             "info",
                             function () {
                                 parent.reload();
-                                commHelper.CloseDialog("添加层");
+                                commHelper.CloseDialog("修改岩石组");
                             });
                     } else {
                         $.messager.alert("", data.msg, "warning");
@@ -202,5 +203,6 @@
                 },
                 "json");
         });
+
     });
 </script>

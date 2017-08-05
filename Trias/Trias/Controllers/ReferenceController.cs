@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using Trias.Models;
 using Trias.Tool;
 
@@ -166,6 +170,100 @@ namespace Trias.Controllers
         public ActionResult Remove(string id)
         {
             referenceSer.RemoveWhere(x => x.R_ID == id);
+            referenceSer.SaveChanges();
+            return WriteSuccess("操作成功！");
+        }
+
+        public ActionResult UpLoadRefecence()
+        {
+            #region 获取上传的文件 file
+
+            if (Request.Files.Count == 0) return WriteError("文件上传失败!");
+            var file = Request.Files[0];
+            if (file == null || file.ContentLength <= 0) return WriteError("文件上传失败!");
+
+            #endregion
+
+            IWorkbook workbook = null;
+            var ex = System.IO.Path.GetExtension(file.FileName);
+            if (ex.Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
+            {
+                workbook = new XSSFWorkbook(file.InputStream);
+            }
+            else if (ex.Equals(".xls", StringComparison.OrdinalIgnoreCase))
+            {
+                workbook = new HSSFWorkbook(file.InputStream);
+            }
+            else
+            {
+                return WriteError("文件格式错误，仅支持xlsx和xls格式的文件！");
+            }
+
+            if (workbook == null)
+            {
+                return WriteError("文件读取失败！");
+            }
+            var sheet = workbook.GetSheetAt(0);
+            if (sheet == null)
+            {
+                return WriteError("文件结构错误！");
+            }
+            var rowCount = sheet.LastRowNum;
+            if (rowCount <= 0)
+            {
+                return WriteError("文件内数据为空！");
+            }
+            var firstRow = sheet.GetRow(0);
+            var cellCount = firstRow.LastCellNum;
+            var cellNameArray = new[]
+            {
+                "文献类型", "第一作者", "第二作者", "其他作者", "年度", "文献名", "书名", "杂志名", "编辑1", "编辑2", "编辑3", "编辑4", "语言", "出版社", "卷",
+                "期", "起始页", "终止页", "DOI", "链接1", "链接2", "评论"
+            };
+            if (cellCount < cellNameArray.Length)
+            {
+                return WriteError("上传的文件列数缺少，请确认！");
+            }
+            for (var i = 0; i < cellCount; i++)
+            {
+                var cell = firstRow.GetCell(i);
+                if (!cell.ToString().Equals(cellNameArray[i]))
+                {
+                    return WriteError(string.Format(@"文件的第{0}列必须为{1}", i + 1, cellNameArray[i]));
+                }
+            }
+
+            var referenceList = new List<Reference>();
+            for (var rowIndex = 1; rowIndex < rowCount; rowIndex++)
+            {
+                var row = sheet.GetRow(rowIndex);
+                var referenceModel = new Reference();
+                referenceModel.R_ID = Guid.NewGuid().ToString();
+                referenceModel.ReferenceType = row.GetCell(0).ToString();
+                referenceModel.FirstAuthor = row.GetCell(1).ToString();
+                referenceModel.SecondAuthor = row.GetCell(2).ToString();
+                referenceModel.OtherAuthors = row.GetCell(3).ToString();
+                referenceModel.Year = int.Parse(row.GetCell(4).ToString());
+                referenceModel.Title = row.GetCell(5).ToString();
+                referenceModel.BookTitle = row.GetCell(6).ToString();
+                referenceModel.Journal = row.GetCell(7).ToString();
+                referenceModel.Editor1 = row.GetCell(8).ToString();
+                referenceModel.Editor2 = row.GetCell(9).ToString();
+                referenceModel.Editor3 = row.GetCell(10).ToString();
+                referenceModel.Editor4 = row.GetCell(11).ToString();
+                referenceModel.Language = row.GetCell(12).ToString();
+                referenceModel.Publisher = row.GetCell(13).ToString();
+                referenceModel.Volume = row.GetCell(14).ToString();
+                referenceModel.No = row.GetCell(15).ToString();
+                referenceModel.PageBegin = row.GetCell(16).ToString();
+                referenceModel.PageEnd = row.GetCell(17).ToString();
+                referenceModel.DOI = row.GetCell(18).ToString();
+                referenceModel.URL1 = row.GetCell(19).ToString();
+                referenceModel.URL2 = row.GetCell(20).ToString();
+                referenceModel.Comments = row.GetCell(21).ToString();
+                referenceList.Add(referenceModel);
+            }
+            referenceSer.AddList(referenceList);
             referenceSer.SaveChanges();
             return WriteSuccess("操作成功！");
         }

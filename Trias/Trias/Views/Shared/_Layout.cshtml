@@ -20,13 +20,18 @@
 
 </head>
 <body class="easyui-layout">
-    <div data-options="region:'north'" style="height: 90px;">1</div>
+    <div data-options="region:'north'" style="height: 90px;">
+        <form action="@Url.Action("UpLoadRefecence", "Reference")" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <input type="submit" value="提交" />
+        </form>
+    </div>
     <div data-options="region:'west',title:'Login'" style="width: 300px;">
         <div style="border:1px solid #B0BEC7;margin: 10px;">
             <form style="padding:10px;">
-                用户：<input type="text" id="UserName" class="form_input" value="admin"/><br />
+                用户：<input type="text" id="UserName" class="form_input" value="admin" /><br />
                 <br />
-                密码：<input type="password" id="Password" class="form_input" value="666"/><br />
+                密码：<input type="password" id="Password" class="form_input" value="666" /><br />
                 <div style="width: 275px; text-align: center">
                     <label id="remain" style="color:red"></label><br />
                     <input type="reset" value="重置" class="form_button" />
@@ -39,6 +44,8 @@
     <div data-options="region:'center'">
         @RenderBody()
     </div>
+
+
 
 </body>
 </html>

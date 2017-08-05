@@ -42,6 +42,10 @@ namespace Trias.Controllers
             var rockList = JsonConvert.DeserializeObject<List<Rock>>(rocks);
             #region 实体验证
 
+            if (!rockList.Any())
+            {
+                return WriteError("必填项不能为空！");
+            }
             for (var i = 0; i < rockList.Count; ++i)
             {
                 var item = rockList.ElementAt(i);

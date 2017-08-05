@@ -51,6 +51,10 @@ namespace Trias.Controllers
 
             #region 实体验证
 
+            if (!rockList.Any())
+            {
+                return WriteError("必填项不能为空！");
+            }
             for (var i = 0; i < rockList.Count; ++i)
             {
                 var item = rockList.ElementAt(i);
@@ -109,20 +113,6 @@ namespace Trias.Controllers
             return Json(list);
         }
 
-        //添加岩石组信息
-        public ActionResult AddFormation(FormationView model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return WriteStatusError(ModelState);
-            }
-            var modelformation = new Formation();
-            modelformation.CopyFrom(model);
-            formationSer.Add(modelformation);
-            modelformation.F_ID = Guid.NewGuid().ToString();
-            formationSer.SaveChanges();
-            return WriteSuccess("添加成功");
-        }
         public ActionResult EditFormation(string id)
         {
             var model = new FormationView();
@@ -132,15 +122,58 @@ namespace Trias.Controllers
         }
         //修改岩石组信息
         [HttpPost]
-        public ActionResult EditFormation(FormationView model)
+        public ActionResult EditFormation(string formation, string rocks)
         {
-            if (!ModelState.IsValid)
+            var formtionModel = JsonConvert.DeserializeObject<Formation>(formation);
+
+            #region 实体验证
+
+            if (string.IsNullOrWhiteSpace(formtionModel.FormationName))
             {
-                return WriteStatusError(ModelState);
+                return WriteError("岩石组名必填！");
             }
-            formationSer.EditWhere(x => x.F_ID == model.F_ID, model);
+            if (formtionModel.Thickness == null)
+            {
+                return WriteError("厚度必填！");
+            }
+
+            #endregion
+
+            formationSer.EditWhere(x => x.F_ID == formtionModel.F_ID, formtionModel);
+            var rockList = JsonConvert.DeserializeObject<List<Rock>>(rocks);
+
+            #region 实体验证
+
+            if (!rockList.Any())
+            {
+                return WriteError("必填项不能为空！");
+            }
+            for (var i = 0; i < rockList.Count; ++i)
+            {
+                var item = rockList.ElementAt(i);
+                if (string.IsNullOrWhiteSpace(item.Color1))
+                {
+                    return WriteError("颜色一必填！");
+                }
+                if (string.IsNullOrWhiteSpace(item.Lithology1))
+                {
+                    return WriteError("岩性一必填！");
+                }
+            }
+
+            #endregion
+
+            rockSer.RemoveWhere(x => x.Type_ID == formtionModel.F_ID);
+
+            rockList.ForEach(x =>
+            {
+                x.Rock_ID = Guid.NewGuid().ToString();
+                x.Type_ID = formtionModel.F_ID;
+            });
+            rockSer.AddList(rockList);
+            rockSer.SaveChanges();
             formationSer.SaveChanges();
-            return WriteSuccess("修改成功");
+            return WriteSuccess("添加成功！");
         }
         //根据 剖面id 查询岩石组信息
         public ActionResult GetFormation(string id)
