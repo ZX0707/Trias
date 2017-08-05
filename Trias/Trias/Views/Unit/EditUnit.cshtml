@@ -136,8 +136,12 @@
 </form>
 <script>
     $(function () {
-        initSelect($("#ContactBase"), "@Url.Action("GetSelectOptions", "Dict")", { type: "ContactBase" });
-        initSelect($("#Environments"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Environments" });
+        initSelect($("#ContactBase"), "@Url.Action("GetSelectOptions", "Dict")", { type: "ContactBase" }, function () {
+            $("#ContactBase").val("@Model.ContactBase");
+        });
+        initSelect($("#Environments"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Environments" }, function () {
+            $("#Environments").val("@Model.Environments");
+        });
         initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Relation" });
         $.post("@Url.Action("GetList","Rock")", { id: "@Model.U_ID" }, function (data) {
             var lines = $(".co_li>div");

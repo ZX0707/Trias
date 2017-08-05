@@ -1195,6 +1195,8 @@
     <Content Include="Views\Formation\EditFormation.cshtml" />
     <Content Include="Views\Unit\EditUnit.cshtml" />
     <Content Include="Views\Collection\EditCollection.cshtml" />
+    <Content Include="Views\Fossil\EditFossil.cshtml" />
+    <Content Include="Views\Geochemical\EditGeochemical.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

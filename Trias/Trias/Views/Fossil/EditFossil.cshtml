@@ -1,37 +1,40 @@
-﻿@{
-    ViewBag.Title = "添加化石";
+﻿@model Trias.Models.FossilView
+
+@{
+    ViewBag.Title = "EditFossil";
     Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
 }
+
 <form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
     <div class="form-group">
         <label class="col-sm-2 control-label">核准人：</label>
         <div class="col-sm-2 ">
-            <input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control" />
+            @Html.TextBoxFor(x => x.Authorizer, new { type = "text", @class = "form-control", @readonly = "readonly" })
         </div>
         <label class="col-sm-2 control-label">化石带：</label>
         <div class="col-sm-2 ">
-            <input name="RefDescribingRelation" id="RefDescribingRelation" type="text" class="form-control" />
+            @Html.TextBoxFor(x => x.RefDescribingRelation, new { type = "text", @class = "form-control", })
         </div>
 
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">属名：</label>
         <div class="col-sm-2 ">
-            <input name="GenusName" id="GenusName" type="text" class="form-control required" />
+            @Html.TextBoxFor(x => x.GenusName, new { type = "text", @class = "form-control", })
         </div>
         <label class="col-sm-2 control-label">种名：</label>
         <div class="col-sm-2 ">
-            <input name="SpeciesName" id="SpeciesName" type="text" class="form-control required" />
+            @Html.TextBoxFor(x => x.SpeciesName, new { type = "text", @class = "form-control", })
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">距剖面底部的位置：</label>
         <div class="col-sm-2 ">
-            <input name="Position" id="Position" type="number" class="form-control" />
+            @Html.TextBoxFor(x => x.Position, new { type = "text", @class = "form-control", })
         </div>
         <label class="col-sm-2 control-label">时代：</label>
         <div class="col-sm-2 ">
-            <input name="Time2" id="Time2" type="number" placeholder="输入时代" class="form-control" />
+            @Html.TextBoxFor(x => x.Time2, new { type = "text", @class = "form-control", })
         </div>
         <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
     </div>
@@ -57,14 +60,13 @@
         <div class="col-sm-4 ">
             <select name="CollectFromTreatise" id="CollectFromTreatise" class="form-control"></select>
         </div>
-
     </div>
 
 
     <div class="form-group">
         <label class="col-sm-2 control-label">长度：</label>
         <div class="col-sm-2 ">
-            <input name="Length" id="Length" type="number" class="form-control" />
+            @Html.TextBoxFor(x => x.Length, new { type = "text", @class = "form-control", })
         </div>
         <div class="col-sm-2" style="width: auto;">
             <select class="form-control">
@@ -74,7 +76,7 @@
         </div>
         <label class="col-sm-2 control-label">宽度：</label>
         <div class="col-sm-2 ">
-            <input name="width" id="width" type="number" class="form-control" />
+            @Html.TextBoxFor(x => x.width, new { type = "text", @class = "form-control", })
         </div>
         <div class="col-sm-2" style="width: auto;">
             <select class="form-control">
@@ -94,7 +96,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="name">评论：</label>
         <div class="col-sm-7">
-            <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论" style="resize: none"></textarea>
+            @Html.TextAreaFor(x => x.Notes, new { type = "text", @class = "form-control", })
         </div>
     </div>
     <div class="form-group col-sm-10" style="text-align: center">
@@ -103,14 +105,7 @@
         </div>
     </div>
 </form>
-
 <script>
-    var cid = "@ViewBag.C_ID";
-</script>
-<script>
-    function change() {
-        initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
-    }
     $(function () {
         var id = "";
         var value = "";
@@ -133,57 +128,25 @@
             if (typeof callback == "function") {
                 callback();
             }
+            $("#FossilGroup").val("@Model.FossilGroup");
         }, "json");
-        initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function () { change() });
-       @* initSelect($("#FossilGroup"), "@Url.Action("GetSelectOptions", "Dict")", { type: "FossilGroup" });*@
-        initSelect($("#TaxonType"), "@Url.Action("GetSelectOptions", "Dict")", { type: "TaxonType" });
-        initSelect($("#CollectFromTreatise"), "@Url.Action("GetSelectOptions", "Dict")", { type: "CollectFromTreatise" });
-
-        $.post("@Url.Action("GetCurrentUser", "Login")", {}, function (user) {
-            if (user.status === "success") {
-                $("#Authorizer").val(user.msg.UserName);
-                $("#Authorizer").attr("readonly", "readonly");
-            }
-        }, "json");
-
-        //保存响应事件
-        $("#btn_save").on("click", {}, function () {
-            var fossil = {
-                C_ID: cid,
-                Time: $("#Time").val(),
-                SubTime: $("#SubTime").val(),
-                Time2: $("#Time2").val(),
-                Authorizer: $("#Authorizer").val(),
-                FossilGroup: $("#FossilGroup").val(),
-                TaxonType: $("#TaxonType").val(),
-                CollectFromTreatise: $("#CollectFromTreatise").val(),
-                RefDescribingRelation: $("#RefDescribingRelation").val(),
-                GenusName: $("#GenusName").val(),
-                SpeciesName: $("#SpeciesName").val(),
-                Position: $("#Position").val(),
-                Length: $("#Length").val(),
-                width: $("#width").val(),
-                Picture: $("#Picture").val(),
-                Notes: $("#Notes").val()
-            };
-            //前端验证
-            if (!identify()) { return; };
-            $.post("@Url.Action("Add")",
-                { fossil: JSON.stringify(fossil) },
-                function (data) {
-                    if (data.status === "success") {
-                        $.messager.alert("",
-                            data.msg,
-                            "info",
-                            function () {
-                                parent.reload();
-                                commHelper.CloseDialog("添加化石");
-                            });
-                    } else {
-                        $.messager.alert("", data.msg, "warning");
-                    }
-                },
-                "json");
+        
+        initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function () {
+            $("#Time").val("@Model.Time");
+            change(function () {
+                $("#SubTime").val("@Model.SubTime");
+            });
+        });
+        initSelect($("#TaxonType"), "@Url.Action("GetSelectOptions", "Dict")", { type: "TaxonType" }, function () {
+            $("#TaxonType").val("@Model.TaxonType");
+        });
+        initSelect($("#CollectFromTreatise"), "@Url.Action("GetSelectOptions", "Dict")", { type: "CollectFromTreatise" }, function () {
+            $("#CollectFromTreatise").val("@Model.CollectFromTreatise");
         });
     });
+    function change(func) {
+        initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") }, function () {
+            func();
+        });
+    }
 </script>

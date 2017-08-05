@@ -61,6 +61,14 @@ namespace Trias.Controllers
             return Json(geochemicallist);
         }
         //修改地球化学信息
+        public ActionResult EditGeochemical(string id)
+        {
+            var model = new GeochemicalView();
+            var m = geochemicalSer.FirstOrDefault(x => x.G_ID == id);
+            model.CopyFrom(m);
+            return View(model);
+        }
+        [HttpPost]
         public ActionResult EditGeochemical(GeochemicalView model)
         {
             if (!ModelState.IsValid)

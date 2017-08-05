@@ -1,0 +1,94 @@
+﻿@model Trias.Models.GeochemicalView
+
+@{
+    ViewBag.Title = "EditGeochemical";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+}
+<form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">核准人：</label>
+        <div class="col-sm-2 ">
+            @Html.TextBoxFor(x => x.Authorizer, new { type = "text", @class = "form-control",@readonly="readonly" })
+        </div>
+        <label class="col-sm-2 control-label">时代：</label>
+        <div class="col-sm-2 ">
+            @Html.TextBoxFor(x => x.Time2, new { type = "text", @class = "form-control", })
+        </div>
+        <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">距剖面底部的位置：</label>
+        <div class="col-sm-2 ">
+            @Html.TextBoxFor(x => x.Position, new { type = "text", @class = "form-control", })
+        </div>
+        <label class="col-sm-2 control-label">时代：</label>
+        <div class="col-sm-2 ">
+            <select name="Time" id="Time" onchange="change()" class="form-control"></select>
+        </div>
+        <div class="col-sm-2 ">
+            <select name="SubTime" id="SubTime" class="form-control" style="width: auto"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">同位素：</label>
+        <div class="col-sm-2 ">
+            <select name="isotope" id="isotope" class="form-control"></select>
+        </div>
+        <label class="col-sm-2 control-label">同位素含量：</label>
+        <div class="col-sm-2 ">
+            @Html.TextBoxFor(x => x.Isotopepersents, new { type = "text", @class = "form-control", })
+        </div>
+        <div class="col-sm-2" style="width:auto">
+            <select class="form-control">
+                <option>百分比</option>
+                <option>千分比</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">元素：</label>
+        <div class="col-sm-2 ">
+            <select name="Element" id="Element" class="form-control"></select>
+        </div>
+        <label class="col-sm-2 control-label">元素含量：</label>
+        <div class="col-sm-2 ">
+            @Html.TextBoxFor(x => x.Elementpersents, new { type = "text", @class = "form-control", })
+        </div>
+        <div class="col-sm-2" style="width:auto">
+            <select class="form-control">
+                <option>百分比</option>
+                <option>千分比</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">备注：</label>
+        <div class="col-sm-7">
+            @Html.TextAreaFor(x => x.Notes, new { type = "text", @class = "form-control", })
+        </div>
+    </div>
+    <div class="form-group" style="text-align: center">
+        <button id="btn_save" type="button" class="btn btn-default">确定</button>
+    </div>
+</form>
+<script>
+    $(function () {
+        initSelect($("#isotope"), "@Url.Action("GetSelectOptions", "Dict")", { type: "isotope" }, function () {
+            $("#isotope").val("@Model.isotope");
+        });
+        initSelect($("#Element"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Element" }, function () {
+            $("#Element").val("@Model.Element");
+        });
+        initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function () {
+            $("#Time").val("@Model.Time");
+            change(function () {
+                $("#SubTime").val("@Model.SubTime");
+            })
+        });
+    });
+    function change(func) {
+        initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") }, function () {
+            func();
+        });
+    }
+</script>

@@ -215,7 +215,7 @@
                             var fossilDiv = $("<div class='level2'/>");
                             fossilDiv.append("<label>" + foName + "</label>");
                             fossilDiv.append(
-                                "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delFossil(\"" + foid + "\")'>删除化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil'>修改化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>化石上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>化石下移</span></a></div>");
+                                "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delFossil(\"" + foid + "\")'>删除化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altFossil(\"" + foid + "\")'>修改化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>化石上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>化石下移</span></a></div>");
                             collectionDiv.append(fossilDiv);
                         }
                         var geochemicals = collections[k].geochemicals;
@@ -226,7 +226,7 @@
                             var geochemicalDiv = $("<div class='level2'/>");
                             geochemicalDiv.append("<label>" + gName + "</label>");
                             geochemicalDiv.append(
-                                "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delGeochemical(\"" + gid + "\")'>删除地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil'>修改地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>地球化学信息上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>地球化学信息下移</span></a></div>");
+                                "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delGeochemical(\"" + gid + "\")'>删除地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altGeochemical(\"" + gid + "\")'>修改地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>地球化学信息上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>地球化学信息下移</span></a></div>");
                             collectionDiv.append(geochemicalDiv);
                         }
                     }
@@ -328,6 +328,9 @@
             }
         });
     }
+    function altFossil(foid) {
+        commHelper.OpenDialog("修改化石", "@Url.Action("EditFossil","Fossil")/" + foid);
+    }
     function myGeochemical(cid) {
         commHelper.OpenDialog("添加地球化学信息", "@Url.Action("Add", "Geochemical")/" + cid);
     }
@@ -341,7 +344,10 @@
             }
         });
     }
-
+    function altGeochemical(gid) {
+        debugger;
+        commHelper.OpenDialog("修改地球化学信息", "@Url.Action("EditGeochemical", "Geochemical")/" + gid);
+    }
     function parseTimer(value) {
         return commHelper.ChangeDateFormatYMD(value);
     }

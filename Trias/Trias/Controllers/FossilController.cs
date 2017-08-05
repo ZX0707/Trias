@@ -65,8 +65,12 @@ namespace Trias.Controllers
         //修改化石信息
         public ActionResult EditFossil(string id)
         {
-
+            var model = new FossilView();
+            var m = fossilSer.FirstOrDefault(x => x.H_ID == id);
+            model.CopyFrom(m);
+            return View(model);
         }
+        [HttpPost]
         public ActionResult EditFossil(FossilView model)
         {
             if (!ModelState.IsValid)
