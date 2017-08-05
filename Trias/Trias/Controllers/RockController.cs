@@ -68,7 +68,7 @@ namespace Trias.Controllers
 
         public ActionResult GetList(string id)
         {
-            return Json(rockSer.Where(x => x.Type_ID == id).ToList());
+            return Json(rockSer.Where(x => x.Type_ID == id).OrderBy(x => x.Sort).ToList());
         }
     }
 }
