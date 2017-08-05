@@ -1177,6 +1177,7 @@
     <Content Include="Views\Fossil\Add.cshtml" />
     <Content Include="Views\Geochemical\Add.cshtml" />
     <Content Include="Views\Reference\QueryList.cshtml" />
+    <Content Include="Views\Formation\EditFormation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

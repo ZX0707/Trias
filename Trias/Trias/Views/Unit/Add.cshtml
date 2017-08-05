@@ -195,8 +195,11 @@
 
 
     function CopyFromFormation() {
+
         $.post("@Url.Action("GetList","Rock")", { id: fid }, function (data) {
             var lines = $(".co_li>div");
+            lines.find("input").val("");
+            lines.find("select").val("");
             for (var i = 0; i < data.length; i++) {
                 $(lines[i]).find("input:eq(0)").val(data[i].Color1);
                 $(lines[i]).find("input:eq(1)").val(data[i].Color2);

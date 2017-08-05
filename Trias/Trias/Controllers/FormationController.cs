@@ -123,7 +123,15 @@ namespace Trias.Controllers
             formationSer.SaveChanges();
             return WriteSuccess("添加成功");
         }
+        public ActionResult EditFormation(string id)
+        {
+            var model = new FormationView();
+            var m = formationSer.FirstOrDefault(x => x.F_ID == id);
+            model.CopyFrom(m);
+            return View(model);
+        }
         //修改岩石组信息
+        [HttpPost]
         public ActionResult EditFormation(FormationView model)
         {
             if (!ModelState.IsValid)

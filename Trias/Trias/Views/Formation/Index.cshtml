@@ -183,7 +183,8 @@
                 var formationDiv = $("<div class='level1'/>");
                 formationDiv.append("<label>" + fName + "</label>");
                 formationDiv.append(
-                    "<div class='btn-group'style='float:right;'><a href='#'><span class='glyphicon glyphicon-plus' onclick='myUnit(\"" + fid + "\")'>添加层</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-trash' onclick='delFormation(\"" + fid + "\")'>删除岩石组</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil'>修改岩石组</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>岩石组上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>岩石组下移</span></a></div>");
+
+                    "<div class='btn-group'style='float:right;'><a href='#'><span class='glyphicon glyphicon-plus' onclick='myUnit(\"" + fid + "\")'>添加层</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-trash' onclick='delFormation(\"" + fid + "\")'>删除岩石组</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altFormation(\"" + fid + "\")'>修改岩石组</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>岩石组上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>岩石组下移</span></a></div>");
 
                 // "<div class='btn-group'><button type='button' class='btn btn-default' onclick='myUnit(\"" + fid + "\")'>添加层</button><button type='button' class='btn btn-default' onclick='delFormation(\"" + fid + "\")'>删除岩石组</button><button type='button' class='btn btn-default'>修改岩石组</button></div>");
                 box.append(formationDiv);
@@ -272,6 +273,14 @@
                 }, "json");
             }
         });
+    }
+    function altFormation(fid) {
+        if ("@Model.S_ID" == "") {
+            $.messager.alert("", "请选择一个剖面", "warning");
+            return;
+        }
+        commHelper.OpenDialog("修改岩石组", "@Url.Action("EditFormation")/"+fid);
+
     }
     function myUnit(fid) {
         commHelper.OpenDialog("添加层", "@Url.Action("Add", "Unit")/" + fid);

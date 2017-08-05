@@ -1,0 +1,206 @@
+﻿@model Trias.Models.FormationView
+
+@{
+    ViewBag.Title = "EditFormation";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+}
+
+
+<body class="easyui-layout">
+    <div data-options="region:'center'">
+        <form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">岩石组名：</label>
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(x => x.FormationName, new { type = "text", @class = "form-control", })
+                </div>
+                <label class="col-sm-2 control-label">沉积相带：</label>
+                <div class="col-sm-3" style="width:auto">
+                    <select name="EnvironmentalZones" id="EnvironmentalZones" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">厚度：</label>
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(x => x.Thickness, new { type = "text", @class = "form-control", })
+                </div>
+                <div class="col-sm-2" style="width: auto">
+                    <select id="ThicknessSize" class="form-control">
+                        <option value="100">米</option>
+                        <option value="2.54">英寸</option>
+                        <option value="1">厘米</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label class="col-sm-1">颜色1</label>
+                    <label class="col-sm-1">颜色2</label>
+                    <label class="col-sm-2">岩性1</label>
+                    <label class="col-sm-2">岩性2</label>
+                    <label class="col-sm-3">主要岩性</label>
+                    <label class="col-sm-3">关系</label>
+                </div>
+                <div class="co_li">
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="form-control required" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control required" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control Relation"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control Relation"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control Relation"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="name">备注：</label>
+                <div class="col-sm-7">
+                    @Html.TextAreaFor(x => x.Comments, new { type = "text", @class = "form-control", })
+                </div>
+            </div>
+            <div class="form-group" style="text-align: center">
+                <button id="btn_save" type="button" class="btn btn-default">保存</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    $(function () {
+        initSelect($("#EnvironmentalZones"), "@Url.Action("GetSelectOptions", "Dict")", { type: "EnvironmentalZones" }, function () {
+            $("#EnvironmentalZones").val("@Model.EnvironmentalZones");
+        });
+        initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Relation" });
+
+        $.post("@Url.Action("GetList","Rock")", { id: "@Model.F_ID" }, function (data) {
+            var lines = $(".co_li>div");
+            lines.find("input").val("");
+            lines.find("select").val("");
+            for (var i = 0; i < data.length; i++) {
+                $(lines[i]).find("input:eq(0)").val(data[i].Color1);
+                $(lines[i]).find("input:eq(1)").val(data[i].Color2);
+                $(lines[i]).find("input:eq(2)").val(data[i].Lithology1);
+                $(lines[i]).find("input:eq(3)").val(data[i].Lithology2);
+                $(lines[i]).find("input:eq(4)").val(data[i].MainLithology);
+                $(lines[i]).find("select:eq(0)").val(data[i].Relation);
+            }
+        }, "json");
+        $("#btn_save").on("click", {}, function () {
+            var unit = {
+                F_ID: "@Model.F_ID",
+                Thickness: parseFloat($("#Thickness").val()) * parseFloat($("#ThicknessSize").val()),
+                ContactBase: $("#ContactBase").val(),
+                Facies: $("#Facies").val(),
+                Environments: $("#Environments").val(),
+                Details: $("#Details").val()
+            };
+            var rocks = [];
+            var lines = $(".co_li>div");
+            for (var i = 0; i < lines.length; i++) {
+                var rock = {
+                    Type: "Formation",
+                    Color1: $(lines[i]).find("input:eq(0)").val(),
+                    Color2: $(lines[i]).find("input:eq(1)").val(),
+                    Lithology1: $(lines[i]).find("input:eq(2)").val(),
+                    Lithology2: $(lines[i]).find("input:eq(3)").val(),
+                    MainLithology: $(lines[i]).find("input:eq(4)").val(),
+                    Sort: i,
+                    Relation: $(lines[i]).find("select:eq(0)").val()
+                }
+                if (rock.Color1.length <= 0 && rock.Color2.length <= 0 && rock.Lithology1.length <= 0 && rock.Lithology2.length <= 0 && rock.MainLithology.length <= 0) {
+                    //一个都没填视为无效
+                    continue;
+                }
+                rocks.push(rock);
+            }
+            //前端验证
+            if (!identify()) { return;};
+            $.post("@Url.Action("Add")",
+                { unit: JSON.stringify(unit), rocks: JSON.stringify(rocks) },
+                function (data) {
+                    if (data.status === "success") {
+                        $.messager.alert("",
+                            data.msg,
+                            "info",
+                            function () {
+                                parent.reload();
+                                commHelper.CloseDialog("添加层");
+                            });
+                    } else {
+                        $.messager.alert("", data.msg, "warning");
+                    }
+                },
+                "json");
+        });
+    });
+</script>
