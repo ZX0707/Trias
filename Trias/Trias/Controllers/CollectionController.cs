@@ -91,6 +91,14 @@ namespace Trias.Controllers
             return Json(collectionlist);
         }
         //修改采样位置
+        public ActionResult EditCollection(string id)
+        {
+            var model = new CollectionView();
+            var m = collectionSer.FirstOrDefault(x => x.C_ID == id);
+            model.CopyFrom(m);
+            return View(model);
+        }
+        [HttpPost]
         public ActionResult EditCollection(CollectionView model)
         {
             if (!ModelState.IsValid)

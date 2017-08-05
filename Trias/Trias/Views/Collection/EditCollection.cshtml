@@ -1,0 +1,152 @@
+﻿@model Trias.Models.CollectionView
+
+@{
+    ViewBag.Title = "EditCollection";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+}
+
+<form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
+    <div class="form-group">
+        <div class="col-sm-8">
+            <label class="col-sm-3 control-label">距底部位置：</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(x => x.Depth1, new { type = "text", @class = "form-control", })
+            </div>
+            <label class="col-sm-1 control-label">—</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(x => x.Depth2, new { type = "text", @class = "form-control", })
+            </div>
+            <div class="col-sm-2" style="width: auto">
+                <select id="ThicknessSize" class="form-control">
+                    <option value="100">米</option>
+                    <option value="2.54">英寸</option>
+                    <option value="1">厘米</option>
+                </select>
+            </div>
+        </div>
+        <label class="col-sm-2 control-label">精准度：</label>
+        <div class="col-sm-2" style="width: auto">
+            <select class="form-control">
+                <option value="high">高</option>
+                <option value="low">低</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <div class="form-group">
+            <label class="col-sm-1">颜色1</label>
+            <label class="col-sm-1">颜色2</label>
+            <label class="col-sm-2">岩性1</label>
+            <label class="col-sm-2">岩性2</label>
+            <label class="col-sm-3">主要岩性</label>
+            <label class="col-sm-3">关系</label>
+        </div>
+        <div class="co_li">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <input class="form-control required" />
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control required" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control Relation"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control Relation"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control Relation"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">备注：</label>
+        <div class="col-sm-7">
+            @Html.TextAreaFor(x => x.Details, new { type = "text", @class = "form-control", })
+        </div>
+    </div>
+    <div class="form-group" style="text-align: center">
+        <button id="btn_save" type="button" class="btn btn-default">确定</button>
+    </div>
+</form>
+<script>
+    $(function () {
+        initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Relation" });
+        $.post("@Url.Action("GetList","Rock")", { id: "@Model.C_ID" }, function (data) {
+            var lines = $(".co_li>div");
+            lines.find("input").val("");
+            lines.find("select").val("");
+            for (var i = 0; i < data.length; i++) {
+                $(lines[i]).find("input:eq(0)").val(data[i].Color1);
+                $(lines[i]).find("input:eq(1)").val(data[i].Color2);
+                $(lines[i]).find("input:eq(2)").val(data[i].Lithology1);
+                $(lines[i]).find("input:eq(3)").val(data[i].Lithology2);
+                $(lines[i]).find("input:eq(4)").val(data[i].MainLithology);
+                $(lines[i]).find("select:eq(0)").val(data[i].Relation);
+            }
+        }, "json");
+    });
+    
+</script>

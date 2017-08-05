@@ -63,6 +63,10 @@ namespace Trias.Controllers
             return Json(fossillist);
         }
         //修改化石信息
+        public ActionResult EditFossil(string id)
+        {
+
+        }
         public ActionResult EditFossil(FossilView model)
         {
             if (!ModelState.IsValid)

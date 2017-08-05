@@ -1193,6 +1193,8 @@
     <Content Include="Views\Geochemical\Add.cshtml" />
     <Content Include="Views\Reference\QueryList.cshtml" />
     <Content Include="Views\Formation\EditFormation.cshtml" />
+    <Content Include="Views\Unit\EditUnit.cshtml" />
+    <Content Include="Views\Collection\EditCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

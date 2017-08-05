@@ -90,6 +90,14 @@ namespace Trias.Controllers
             return WriteSuccess("添加成功");
         }
         //修改层信息
+        public ActionResult EditUnit(string id)
+        {
+            var model = new UnitView();
+            var m = unitSer.FirstOrDefault(x => x.U_ID == id);
+            model.CopyFrom(m);
+            return View(model);
+        }
+        [HttpPost]
         public ActionResult EditUnit(UnitView model)
         {
             if (!ModelState.IsValid)
