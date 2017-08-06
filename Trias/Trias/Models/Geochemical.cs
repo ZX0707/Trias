@@ -26,5 +26,6 @@ namespace Trias.Models
         public Nullable<int> Time2 { get; set; }
         public string Position { get; set; }
         public string Notes { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }

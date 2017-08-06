@@ -20,5 +20,6 @@ namespace Trias.Models
         public string EnvironmentalZones { get; set; }
         public Nullable<double> Thickness { get; set; }
         public string Comments { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }

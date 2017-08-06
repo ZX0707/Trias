@@ -34,7 +34,7 @@ namespace Trias.Controllers
         /// <param name="rows">每页多少条数据</param>
         /// <param name="doiANDauthor">doi或者作者名</param>
         /// <returns></returns>
-        public ActionResult GetList(string doiANDauthor, int year = 0, int page = 1, int rows = int.MaxValue)
+        public ActionResult GetList(string doiANDauthor, int year = 0, int page = 1, int rows = int.MaxValue, string keyWord = "")
         {
             var list = referenceSer.Where();
             if (year != 0)
@@ -43,7 +43,19 @@ namespace Trias.Controllers
             }
             if (!string.IsNullOrWhiteSpace(doiANDauthor))
             {
-                list = list.Where(x => x.DOI == doiANDauthor || x.FirstAuthor.Contains(doiANDauthor) || x.SecondAuthor.Contains(doiANDauthor) || x.OtherAuthors.Contains(doiANDauthor));
+                list = list.Where(x => x.DOI == doiANDauthor || x.FirstAuthor.Contains(doiANDauthor) || x.OtherAuthors.Contains(doiANDauthor));
+            }
+            if (!string.IsNullOrWhiteSpace(keyWord))
+            {
+                var searchYear = 0;
+                if(int.TryParse(keyWord,out searchYear))
+                {
+                    list = list.Where(x => x.Year == searchYear);
+                }
+                else
+                {
+                    list = list.Where(x => x.FirstAuthor.Contains(keyWord) || x.OtherAuthors.Contains(keyWord) ||  x.Title.Contains(keyWord) || x.BookTitle.Contains(keyWord) || x.Journal.Contains(keyWord));
+                }
             }
             var total = list.Count();
             list = list.OrderByDescending(x => x.Year).Skip(rows * (page - 1)).Take(rows);
@@ -52,16 +64,12 @@ namespace Trias.Controllers
                 x.R_ID,
                 x.ReferenceType,
                 x.FirstAuthor,
-                x.SecondAuthor,
                 x.OtherAuthors,
                 x.Year,
                 x.Title,
                 x.BookTitle,
                 x.Journal,
                 x.Editor1,
-                x.Editor2,
-                x.Editor3,
-                x.Editor4,
                 x.Language,
                 x.Publisher,
                 x.Volume,
@@ -241,16 +249,12 @@ namespace Trias.Controllers
                 referenceModel.R_ID = Guid.NewGuid().ToString();
                 referenceModel.ReferenceType = row.GetCell(0).ToString();
                 referenceModel.FirstAuthor = row.GetCell(1).ToString();
-                referenceModel.SecondAuthor = row.GetCell(2).ToString();
                 referenceModel.OtherAuthors = row.GetCell(3).ToString();
                 referenceModel.Year = int.Parse(row.GetCell(4).ToString());
                 referenceModel.Title = row.GetCell(5).ToString();
                 referenceModel.BookTitle = row.GetCell(6).ToString();
                 referenceModel.Journal = row.GetCell(7).ToString();
                 referenceModel.Editor1 = row.GetCell(8).ToString();
-                referenceModel.Editor2 = row.GetCell(9).ToString();
-                referenceModel.Editor3 = row.GetCell(10).ToString();
-                referenceModel.Editor4 = row.GetCell(11).ToString();
                 referenceModel.Language = row.GetCell(12).ToString();
                 referenceModel.Publisher = row.GetCell(13).ToString();
                 referenceModel.Volume = row.GetCell(14).ToString();

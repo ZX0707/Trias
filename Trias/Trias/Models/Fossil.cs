@@ -31,5 +31,6 @@ namespace Trias.Models
         public string width { get; set; }
         public string Picture { get; set; }
         public string Notes { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }

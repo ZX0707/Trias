@@ -20,5 +20,6 @@ namespace Trias.Models
         public string Details { get; set; }
         public Nullable<double> Depth1 { get; set; }
         public Nullable<double> Depth2 { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }

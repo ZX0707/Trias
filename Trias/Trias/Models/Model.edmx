@@ -15,6 +15,7 @@
           <Property Name="Details" Type="text" />
           <Property Name="Depth1" Type="float" />
           <Property Name="Depth2" Type="float" />
+          <Property Name="sort" Type="int" />
         </EntityType>
         <EntityType Name="Dict">
           <Key>
@@ -37,6 +38,7 @@
           <Property Name="EnvironmentalZones" Type="nvarchar" MaxLength="50" />
           <Property Name="Thickness" Type="float" />
           <Property Name="Comments" Type="text" />
+          <Property Name="sort" Type="int" />
         </EntityType>
         <EntityType Name="Fossil">
           <Key>
@@ -59,6 +61,7 @@
           <Property Name="width" Type="nvarchar" MaxLength="50" />
           <Property Name="Picture" Type="nvarchar(max)" />
           <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+          <Property Name="sort" Type="int" />
         </EntityType>
         <EntityType Name="Geochemical">
           <Key>
@@ -76,6 +79,7 @@
           <Property Name="Time2" Type="int" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Notes" Type="text" />
+          <Property Name="sort" Type="int" />
         </EntityType>
         <EntityType Name="Reference">
           <Key>
@@ -84,16 +88,12 @@
           <Property Name="R_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ReferenceType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstAuthor" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SecondAuthor" Type="nvarchar" MaxLength="50" />
           <Property Name="OtherAuthors" Type="nvarchar" MaxLength="50" />
           <Property Name="Year" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="BookTitle" Type="nvarchar" MaxLength="50" />
           <Property Name="Journal" Type="nvarchar" MaxLength="50" />
           <Property Name="Editor1" Type="nvarchar" MaxLength="50" />
-          <Property Name="Editor2" Type="nvarchar" MaxLength="50" />
-          <Property Name="Editor3" Type="nvarchar" MaxLength="50" />
-          <Property Name="Editor4" Type="nvarchar" MaxLength="50" />
           <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Publisher" Type="nvarchar" MaxLength="50" />
           <Property Name="Volume" Type="nvarchar" MaxLength="50" />
@@ -162,6 +162,7 @@
           <Property Name="Facies" Type="nvarchar" MaxLength="50" />
           <Property Name="Environments" Type="nvarchar" MaxLength="50" />
           <Property Name="Details" Type="text" />
+          <Property Name="sort" Type="int" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -212,6 +213,7 @@
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Depth1" Type="Double" />
           <Property Name="Depth2" Type="Double" />
+          <Property Name="sort" Type="Int32" />
         </EntityType>
         <EntityType Name="Dict">
           <Key>
@@ -234,6 +236,7 @@
           <Property Name="EnvironmentalZones" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Thickness" Type="Double" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sort" Type="Int32" />
         </EntityType>
         <EntityType Name="Fossil">
           <Key>
@@ -256,6 +259,7 @@
           <Property Name="width" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" />
         </EntityType>
         <EntityType Name="Geochemical">
           <Key>
@@ -273,6 +277,7 @@
           <Property Name="Time2" Type="Int32" />
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sort" Type="Int32" />
         </EntityType>
         <EntityType Name="Reference">
           <Key>
@@ -281,17 +286,13 @@
           <Property Name="R_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ReferenceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstAuthor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SecondAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OtherAuthors" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Journal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Editor1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Editor2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Editor3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Editor4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Volume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -359,6 +360,7 @@
           <Property Name="Facies" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Environments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sort" Type="Int32" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -380,6 +382,7 @@
           <EntitySetMapping Name="Collection">
             <EntityTypeMapping TypeName="TriasModel.Collection">
               <MappingFragment StoreEntitySet="Collection">
+                <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="Depth2" ColumnName="Depth2" />
                 <ScalarProperty Name="Depth1" ColumnName="Depth1" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
@@ -404,6 +407,7 @@
           <EntitySetMapping Name="Formation">
             <EntityTypeMapping TypeName="TriasModel.Formation">
               <MappingFragment StoreEntitySet="Formation">
+                <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="Thickness" ColumnName="Thickness" />
                 <ScalarProperty Name="EnvironmentalZones" ColumnName="EnvironmentalZones" />
@@ -416,6 +420,7 @@
           <EntitySetMapping Name="Fossil">
             <EntityTypeMapping TypeName="TriasModel.Fossil">
               <MappingFragment StoreEntitySet="Fossil">
+                <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="width" ColumnName="width" />
@@ -439,6 +444,7 @@
           <EntitySetMapping Name="Geochemical">
             <EntityTypeMapping TypeName="TriasModel.Geochemical">
               <MappingFragment StoreEntitySet="Geochemical">
+                <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Time2" ColumnName="Time2" />
@@ -467,16 +473,12 @@
                 <ScalarProperty Name="Volume" ColumnName="Volume" />
                 <ScalarProperty Name="Publisher" ColumnName="Publisher" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="Editor4" ColumnName="Editor4" />
-                <ScalarProperty Name="Editor3" ColumnName="Editor3" />
-                <ScalarProperty Name="Editor2" ColumnName="Editor2" />
                 <ScalarProperty Name="Editor1" ColumnName="Editor1" />
                 <ScalarProperty Name="Journal" ColumnName="Journal" />
                 <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="OtherAuthors" ColumnName="OtherAuthors" />
-                <ScalarProperty Name="SecondAuthor" ColumnName="SecondAuthor" />
                 <ScalarProperty Name="FirstAuthor" ColumnName="FirstAuthor" />
                 <ScalarProperty Name="ReferenceType" ColumnName="ReferenceType" />
                 <ScalarProperty Name="R_ID" ColumnName="R_ID" />
@@ -534,6 +536,7 @@
           <EntitySetMapping Name="Unit">
             <EntityTypeMapping TypeName="TriasModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Environments" ColumnName="Environments" />
                 <ScalarProperty Name="Facies" ColumnName="Facies" />

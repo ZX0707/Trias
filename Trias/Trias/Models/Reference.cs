@@ -17,16 +17,12 @@ namespace Trias.Models
         public string R_ID { get; set; }
         public string ReferenceType { get; set; }
         public string FirstAuthor { get; set; }
-        public string SecondAuthor { get; set; }
         public string OtherAuthors { get; set; }
         public int Year { get; set; }
         public string Title { get; set; }
         public string BookTitle { get; set; }
         public string Journal { get; set; }
         public string Editor1 { get; set; }
-        public string Editor2 { get; set; }
-        public string Editor3 { get; set; }
-        public string Editor4 { get; set; }
         public string Language { get; set; }
         public string Publisher { get; set; }
         public string Volume { get; set; }

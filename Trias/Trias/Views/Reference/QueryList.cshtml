@@ -1,5 +1,133 @@
 ﻿@{
-    ViewBag.Title = "QueryList";
+    ViewBag.Title = "查询文献";
 }
+<style>
+    .paging {
+        width: 100%;
+        background-color: #c1c1c1;
+    }
 
-<h2>QueryList</h2>
+        .paging label {
+            height: 30px;
+            line-height: 30px;
+            margin-right: 2px;
+        }
+
+        .paging input {
+            height: 20px;
+            width: 40px;
+        }
+</style>
+<div style="padding:20px">
+    <input id="queryList" class="easyui-searchbox" style="width:auto"
+           data-options="searcher:queryList,prompt:'输入文献相关查询'" />
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:false" style="float:right">添加文献</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>标题 / 作者 / 来源 / 收录</th>
+                <th style="width:50px"></th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr>
+                <td>
+                    <div>
+                        <a style="font-size:1.2em;">Permian–Triassic boundary microbialites at Zuodeng Section, Guangxi Province, South China: Geobiolog</a>
+                    </div>
+                    <span style="color:#999999;font-weight:normal">
+                        Yuheng Fang(#)，Zhong-Qiang Chen，Stephen Kershaw，Hao Yang，Mao Luo
+                        Global and Planetary Change, 2017/3/2
+                    </span>
+
+                </td>
+                <td>
+                    <div>
+                        <span class='glyphicon glyphicon-pencil'></span>
+                        <span class='glyphicon glyphicon-trash'></span>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="paging">
+        <div style="float:right;">
+            <label class="control-label">共<font id="pages"></font>页/<font id="total"></font>条记录</label>
+            <label class="control-label">每页显示</label>
+            <select id="rows" onchange="reload()">
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>50</option>
+                <option>100</option>
+
+            </select>
+            <label>条</label>
+        </div>
+        <div style="float:right;">
+            <label class="control-label">到</label>
+            <input id="currentPage" />
+            <label class="control-label">页</label>
+            <button>跳转</button>
+        </div>
+        <div style="float:right;">
+            <label class="control-label">首页</label>
+            <label class="control-label">上一页</label>
+            <label class="control-label">下一页</label>
+            <label class="control-label">尾页</label>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script>
+    //查询函数
+    function queryList(value) {
+
+    }
+    $(function () {
+        reload(1);
+    })
+    function reload(page) {
+        //获取当前页的值
+        if (page == undefined) {
+            page = $("#currentPage").val();
+        }
+        var keyWord = $("#queryList").searchbox("getValue");
+        //每页显示rows条记录
+        var rows = $("#rows").val();
+        $.post("@Url.Action("GetList","Reference")", { keyWord: keyWord, rows: rows, page: page }, function (data) {
+            //console.log(data);
+            $("#currentPage").val(page);
+            $("#total").html(data.total);
+            var pages = Math.ceil(data.total / rows);
+            $("#pages").html(pages);
+            $("#tbody").html("");
+            for (var i = 0; i < data.rows.length; i++) {
+                //取标题
+                var title = data.rows[i].ShowTitle;
+                var journal = data.rows[i].Journal;
+                if (journal) {
+                    title = title + "," + journal;
+                }
+
+                //取作者
+                var content = data.rows[i].FirstAuthor;
+                var second = data.rows[i].SecondAuthor;
+                var other = data.rows[i].OtherAuthor;
+                if (second) {
+                    content = content + "," + second;
+                }
+                if (other) {
+                    content = contend + "," + other;
+                }
+                //取年度
+                var year = data.rows[i].Year;
+                content = content + "," + year;
+                $("#tbody").append("<tr><td><div><a style='font-size:1.2em;'>" + title + "</a></div><span style='color:#999999;font-weight:normal'>" + content + "</span></td><td><div><span class='glyphicon glyphicon-pencil'></span>&nbsp;&nbsp;<span class='glyphicon glyphicon-trash'></span></div></td></tr>");
+            }
+        }, "json");
+
+    }
+</script>

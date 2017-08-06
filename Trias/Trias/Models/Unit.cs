@@ -21,5 +21,6 @@ namespace Trias.Models
         public string Facies { get; set; }
         public string Environments { get; set; }
         public string Details { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }
