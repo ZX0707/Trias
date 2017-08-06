@@ -19,6 +19,11 @@ namespace Trias.Controllers
             ViewBag.ShowTitle = showTitle;
             return View();
         }
+        //查询剖面
+        public ActionResult QueryList()
+        {
+            return View();
+        }
         //添加剖面
         public ActionResult AddSection(SectionView model, string RID11, string RID22, string RID33, double? Altitude1)
         {

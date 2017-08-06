@@ -1,0 +1,239 @@
+﻿@model Trias.Models.ReferenceView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+
+}
+<style>
+    * {
+        font-size: 12px;
+        font-family: "Microsoft YaHei";
+    }
+
+    .container {
+        width: 806px;
+        margin: 0px auto;
+        /*background-color: #e8e8e8;*/
+        margin-top: 40px;
+        padding-bottom: 4px;
+        position: relative;
+        overflow: auto;
+    }
+
+    .conta {
+        width: 740px;
+        border-top: 2px solid #4469a1;
+        border-bottom: 1px solid #d6d6d6;
+        border-left: 1px solid #d6d6d6;
+        border-right: 1px solid #d6d6d6;
+        /*background: url(../../images/product/contant_bj.gif) left top no-repeat;*/
+        box-shadow: 2px 2px 3px #888888;
+        overflow: hidden;
+        padding: 30px 30px 20px 30px;
+        background-color: #FFF;
+    }
+
+    .display-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: right;
+        min-height: 30px;
+        width: 15%;
+        font-weight: bold;
+        float: left;
+        clear: both;
+    }
+
+    .display-field {
+        padding-top: 7px;
+        margin-bottom: 0;
+        margin-left: 10px;
+        text-align: left;
+        min-height: 30px;
+        width: 70%;
+        float: left;
+    }
+</style>
+
+
+<body style="overflow:auto">
+    <div class="container">
+        <div class="conta">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.ReferenceType)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.ReferenceType)
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FirstAuthor)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FirstAuthor)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.OtherAuthors)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.OtherAuthors)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Year)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Year)
+                </div>
+            </div>
+            <div class="journal PHD">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Title)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Title)
+                </div>
+            </div>
+            <div class="book">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.BookTitle)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.BookTitle)
+                </div>
+            </div>
+            <div class="journal">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Journal)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Journal)
+                </div>
+            </div>
+            <div class="book">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Editor1)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Editor1)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Language)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Language)
+                </div>
+            </div>
+            <div class="book">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Publisher)
+                </div>
+            </div>
+            <div class="journal">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Volume)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Volume)
+                </div>
+            </div>
+            <div class="journal">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.No)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.No)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.PageBegin)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.PageBegin)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.PageEnd)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.PageEnd)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.DOI)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DOI)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.URL1)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.URL1)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.URL2)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.URL2)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Comments)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Comments)
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        changeType();
+    })
+    function changeType() {
+        var value = "@Model.ReferenceType";
+        switch (value) {
+            case "journal article":
+            case "paper presented at metting":
+            case "abstract":
+                $(".book").css("display", "none");
+                $(".PHD").css("display", "none");
+                $(".journal").css("display", "block");
+                break;
+            case "book":
+            case "edit book":
+            case "book chapter":
+                $(".journal").css("display", "none");
+                $(".PHD").css("display", "none");
+                $(".book").css("display", "block");
+                break;
+            case "Ph.D.dissertation":
+            case "master thesis":
+                $(".journal").css("display", "none");
+                $(".book").css("display", "none");
+                $(".PHD").css("display", "block");
+                break;
+            default:
+                break;
+        }
+    }
+</script>

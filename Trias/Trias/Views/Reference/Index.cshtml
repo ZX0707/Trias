@@ -24,6 +24,7 @@
                    placeholder="输入书名" />
         </div>
     </div>
+
     <div class="form-group journal PHD">
         <label class="col-sm-2 control-label">文献名：</label>
         <div class="col-sm-3">
@@ -215,7 +216,6 @@
     });
     function resetForm() {
         $('#form').form("reset");
-        commHelper.OpenDialog("添加剖面", "/Section");
     }
     function save() {
         $('#form').form("submit");

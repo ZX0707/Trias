@@ -1,6 +1,7 @@
 ﻿@{
-    ViewBag.Title = "查询文献";
+    ViewBag.Title = "查询剖面";
 }
+
 <style>
     .paging {
         width: 100%;
@@ -28,8 +29,8 @@
 </style>
 <div style="padding:20px">
     <input id="queryList" class="easyui-searchbox" style="width:auto"
-           data-options="searcher:queryList,prompt:'输入文献相关查询'" />
-    <a href="/Reference/Index" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:false" style="float:right">添加文献</a>
+           data-options="searcher:queryList,prompt:'输入剖面相关查询'" />
+    <a href="/Section/Index" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:false" style="float:right">添加剖面</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -37,8 +38,7 @@
                 <th style="width:50px"></th>
             </tr>
         </thead>
-        <tbody id="tbody">    
-        </tbody>
+        <tbody id="tbody"></tbody>
     </table>
 
     <div class="paging">

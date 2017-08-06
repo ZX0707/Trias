@@ -1197,6 +1197,9 @@
     <Content Include="Views\Collection\EditCollection.cshtml" />
     <Content Include="Views\Fossil\EditFossil.cshtml" />
     <Content Include="Views\Geochemical\EditGeochemical.cshtml" />
+    <Content Include="Views\Reference\Details.cshtml" />
+    <Content Include="Views\Reference\Edit.cshtml" />
+    <Content Include="Views\Section\QueryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

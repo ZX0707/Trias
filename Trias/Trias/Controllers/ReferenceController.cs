@@ -30,6 +30,16 @@ namespace Trias.Controllers
             return View();
         }
 
+
+        public ActionResult Details(string id)
+        {
+            var model = referenceSer.FirstOrDefault(x => x.R_ID == id);
+            var viewModel = new ReferenceView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
+        }
+
+
         /// <summary>
         /// 获取文献列表，带分页
         /// </summary>
@@ -132,11 +142,20 @@ namespace Trias.Controllers
             });
         }
 
+        public ActionResult Edit(string id)
+        {
+            var model = referenceSer.FirstOrDefault(x => x.R_ID == id);
+            var viewModel = new ReferenceView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
+        }
+
         /// <summary>
         /// 修改文献
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult Edit(ReferenceView model)
         {
             if (!ModelState.IsValid)
