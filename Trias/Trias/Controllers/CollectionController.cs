@@ -29,7 +29,9 @@ namespace Trias.Controllers
         public ActionResult Add(string collection, string rocks)
         {
             var collectionModel = JsonConvert.DeserializeObject<Collection>(collection);
-
+            var sort = collectionSer.Where().Select(x => x.sort).OrderByDescending(x => x).FirstOrDefault() ?? 0;
+            sort++;
+            collectionModel.sort = sort;
             #region 是体验证
 
             if (collectionModel.Depth1 == null || collectionModel.Depth2 == null)

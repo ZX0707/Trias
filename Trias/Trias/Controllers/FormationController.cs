@@ -32,7 +32,9 @@ namespace Trias.Controllers
         public ActionResult Add(string formation, string rocks)
         {
             var formtionModel = JsonConvert.DeserializeObject<Formation>(formation);
-
+            var sort = formationSer.Where().Select(x => x.sort).OrderByDescending(x => x).FirstOrDefault() ?? 0;
+            sort++;
+            formtionModel.sort = sort;
             #region 实体验证
 
             if (string.IsNullOrWhiteSpace(formtionModel.FormationName))
@@ -88,14 +90,14 @@ namespace Trias.Controllers
         /// <returns></returns>
         public ActionResult GetInfomationBySId(string sid)
         {
-            var formationList = formationSer.Where(x => x.S_ID == sid).ToList();
+            var formationList = formationSer.Where(x => x.S_ID == sid).OrderBy(x => x.sort).ToList();
             var formationIds = formationList.Select(x => x.F_ID).ToList();
-            var unitList = unitSer.Where(x => formationIds.Contains(x.F_ID)).ToList();
+            var unitList = unitSer.Where(x => formationIds.Contains(x.F_ID)).OrderBy(x => x.sort).ToList();
             var unitIds = unitList.Select(x => x.U_ID).ToList();
-            var collectionList = collectionSer.Where(x => unitIds.Contains(x.U_ID)).ToList();
+            var collectionList = collectionSer.Where(x => unitIds.Contains(x.U_ID)).OrderBy(x => x.sort).ToList();
             var collectionIds = collectionList.Select(x => x.C_ID).ToList();
-            var fossilList = fossilSer.Where(x => collectionIds.Contains(x.C_ID)).ToList();
-            var geochemicalList = geochemicalSer.Where(x => collectionIds.Contains(x.C_ID)).ToList();
+            var fossilList = fossilSer.Where(x => collectionIds.Contains(x.C_ID)).OrderBy(x => x.sort).ToList();
+            var geochemicalList = geochemicalSer.Where(x => collectionIds.Contains(x.C_ID)).OrderBy(x => x.sort).ToList();
             var list = formationList.Select(f => new
             {
                 formation = f,
@@ -213,6 +215,59 @@ namespace Trias.Controllers
             fossilSer.SaveChanges();
             geochemicalSer.SaveChanges();
             return WriteSuccess("删除成功");
+        }
+
+        public ActionResult ChangeSort(string id1, string id2, string level)
+        {
+            int? sort;
+            switch (level)
+            {
+                case "level1":
+                    var f1 = formationSer.FirstOrDefault(x => x.F_ID == id1);
+                    var f2 = formationSer.FirstOrDefault(x => x.F_ID == id2);
+                    sort = f1.sort;
+                    f1.sort = f2.sort;
+                    f2.sort = sort;
+                    break;
+                case "level2":
+                    var u1 = unitSer.FirstOrDefault(x => x.U_ID == id1);
+                    var u2 = unitSer.FirstOrDefault(x => x.U_ID == id2);
+                    sort = u1.sort;
+                    u1.sort = u2.sort;
+                    u2.sort = sort;
+                    break;
+                case "level3":
+                    var c1 = collectionSer.FirstOrDefault(x => x.C_ID == id1);
+                    var c2 = collectionSer.FirstOrDefault(x => x.C_ID == id2);
+                    sort = c1.sort;
+                    c1.sort = c2.sort;
+                    c2.sort = sort;
+                    break;
+                case "level4":
+                    var fo1 = fossilSer.FirstOrDefault(x => x.H_ID == id1);
+                    var fo2 = fossilSer.FirstOrDefault(x => x.H_ID == id2);
+                    if (fo1 != null && fo2 != null)
+                    {
+                        sort = fo1.sort;
+                        fo1.sort = fo2.sort;
+                        fo2.sort = sort;
+                    }
+                    else
+                    {
+                        var g1 = geochemicalSer.FirstOrDefault(x => x.G_ID == id1);
+                        var g2 = geochemicalSer.FirstOrDefault(x => x.G_ID == id2);
+                        if (g1!=null&& g2!=null)
+                        {
+                            sort = g1.sort;
+                            g1.sort = g2.sort;
+                            g2.sort = sort;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return null;
         }
     }
 }

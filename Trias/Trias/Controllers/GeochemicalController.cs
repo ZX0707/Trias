@@ -27,6 +27,9 @@ namespace Trias.Controllers
         public ActionResult Add(string geochemical, string nothing)
         {
             var geochemicalModel = JsonConvert.DeserializeObject<Geochemical>(geochemical);
+            var sort = geochemicalSer.Where().Select(x => x.sort).OrderByDescending(x => x).FirstOrDefault() ?? 0;
+            sort++;
+            geochemicalModel.sort = sort;
             geochemicalModel.G_ID = Guid.NewGuid().ToString();
             geochemicalSer.Add(geochemicalModel);
             geochemicalSer.SaveChanges();

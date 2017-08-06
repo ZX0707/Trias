@@ -27,6 +27,9 @@ namespace Trias.Controllers
         public ActionResult Add(string fossil, string nothing)
         {
             var fossilModel = JsonConvert.DeserializeObject<Fossil>(fossil);
+            var sort = fossilSer.Where().Select(x => x.sort).OrderByDescending(x => x).FirstOrDefault() ?? 0;
+            sort++;
+            fossilModel.sort = sort;
             fossilModel.H_ID = Guid.NewGuid().ToString();
             fossilSer.Add(fossilModel);
             fossilSer.SaveChanges();

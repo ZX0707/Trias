@@ -192,8 +192,8 @@ namespace Trias.Controllers
 
             #endregion
 
-            IWorkbook workbook = null;
-            var ex = System.IO.Path.GetExtension(file.FileName);
+            IWorkbook workbook;
+            var ex = System.IO.Path.GetExtension(file.FileName) ?? string.Empty;
             if (ex.Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
             {
                 workbook = new XSSFWorkbook(file.InputStream);
@@ -207,10 +207,6 @@ namespace Trias.Controllers
                 return WriteError("文件格式错误，仅支持xlsx和xls格式的文件！");
             }
 
-            if (workbook == null)
-            {
-                return WriteError("文件读取失败！");
-            }
             var sheet = workbook.GetSheetAt(0);
             if (sheet == null)
             {
@@ -225,7 +221,7 @@ namespace Trias.Controllers
             var cellCount = firstRow.LastCellNum;
             var cellNameArray = new[]
             {
-                "文献类型", "第一作者", "第二作者", "其他作者", "年度", "文献名", "书名", "杂志名", "编辑1", "编辑2", "编辑3", "编辑4", "语言", "出版社", "卷",
+                "文献类型", "第一作者",  "其他作者", "年度", "文献名", "书名", "杂志名", "编辑", "语言", "出版社", "卷",
                 "期", "起始页", "终止页", "DOI", "链接1", "链接2", "评论"
             };
             if (cellCount < cellNameArray.Length)
@@ -245,26 +241,29 @@ namespace Trias.Controllers
             for (var rowIndex = 1; rowIndex < rowCount; rowIndex++)
             {
                 var row = sheet.GetRow(rowIndex);
-                var referenceModel = new Reference();
-                referenceModel.R_ID = Guid.NewGuid().ToString();
-                referenceModel.ReferenceType = row.GetCell(0).ToString();
-                referenceModel.FirstAuthor = row.GetCell(1).ToString();
-                referenceModel.OtherAuthors = row.GetCell(3).ToString();
-                referenceModel.Year = int.Parse(row.GetCell(4).ToString());
-                referenceModel.Title = row.GetCell(5).ToString();
-                referenceModel.BookTitle = row.GetCell(6).ToString();
-                referenceModel.Journal = row.GetCell(7).ToString();
-                referenceModel.Editor1 = row.GetCell(8).ToString();
-                referenceModel.Language = row.GetCell(12).ToString();
-                referenceModel.Publisher = row.GetCell(13).ToString();
-                referenceModel.Volume = row.GetCell(14).ToString();
-                referenceModel.No = row.GetCell(15).ToString();
-                referenceModel.PageBegin = row.GetCell(16).ToString();
-                referenceModel.PageEnd = row.GetCell(17).ToString();
-                referenceModel.DOI = row.GetCell(18).ToString();
-                referenceModel.URL1 = row.GetCell(19).ToString();
-                referenceModel.URL2 = row.GetCell(20).ToString();
-                referenceModel.Comments = row.GetCell(21).ToString();
+                var count = 0;
+                var referenceModel = new Reference
+                {
+                    R_ID = Guid.NewGuid().ToString(),
+                    ReferenceType = row.GetCell(count++).ToString(),
+                    FirstAuthor = row.GetCell(count++).ToString(),
+                    OtherAuthors = row.GetCell(count++).ToString(),
+                    Year = int.Parse(row.GetCell(count++).ToString()),
+                    Title = row.GetCell(count++).ToString(),
+                    BookTitle = row.GetCell(count++).ToString(),
+                    Journal = row.GetCell(count++).ToString(),
+                    Editor1 = row.GetCell(count++).ToString(),
+                    Language = row.GetCell(count++).ToString(),
+                    Publisher = row.GetCell(count++).ToString(),
+                    Volume = row.GetCell(count++).ToString(),
+                    No = row.GetCell(count++).ToString(),
+                    PageBegin = row.GetCell(count++).ToString(),
+                    PageEnd = row.GetCell(count++).ToString(),
+                    DOI = row.GetCell(count++).ToString(),
+                    URL1 = row.GetCell(count++).ToString(),
+                    URL2 = row.GetCell(count++).ToString(),
+                    Comments = row.GetCell(count).ToString()
+                };
                 referenceList.Add(referenceModel);
             }
             referenceSer.AddList(referenceList);

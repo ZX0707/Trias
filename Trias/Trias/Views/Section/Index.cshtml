@@ -201,8 +201,8 @@
         </div>
         <div class="col-sm-2" style="width: auto;">
             <select name="measure" id="measure" class="form-control">
-                <option value="Arabic">米</option>
-                <option value="Arabic">英寸</option>
+                <option value="1">米</option>
+                <option value="0.0254">英寸</option>
             </select>
         </div>
     </div>
@@ -256,7 +256,7 @@
     }
     function GetGPS() {
         var value = $("#GetLocation").val();
-        var text = $("#" + value).val()
+        var text = $("#" + value).val();
         $.post("/Baidu/GetLocationByPlaceName", { city: $("#City").val(), place: text }, function (data) {
             $('#mm').dialog("open");//弹出模态框
             if (data.status == "error") {
@@ -349,6 +349,7 @@
         $('#form').form({
             url: '/Section/AddSection',
             onSubmit: function (param) {
+                param.Altitude1 = parseFloat($("#measure").val()) * parseFloat($("#Altitude").val());
                 param.RID11 = $("#RID1").attr("rid");
                 param.RID22 = $("#RID2").attr("rid");
                 param.RID33 = $("#RID3").attr("rid");

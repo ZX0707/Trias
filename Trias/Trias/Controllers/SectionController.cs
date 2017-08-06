@@ -20,8 +20,9 @@ namespace Trias.Controllers
             return View();
         }
         //添加剖面
-        public ActionResult AddSection(SectionView model, string RID11, string RID22, string RID33)
+        public ActionResult AddSection(SectionView model, string RID11, string RID22, string RID33, double? Altitude1)
         {
+            model.Altitude = Altitude1;
             model.RID1 = RID11;
             model.RID2 = RID22;
             model.RID3 = RID33;

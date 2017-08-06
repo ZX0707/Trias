@@ -180,7 +180,7 @@
                 var fid = formation.F_ID;
                 var fName = formation.FormationName;
                 var units = data[i].units;
-                var formationDiv = $("<div class='level1'/>");
+                var formationDiv = $("<div class='level1' id='"+fid+"'/>");
                 formationDiv.append("<label>" + fName + "</label>");
                 formationDiv.append(
 
@@ -193,7 +193,7 @@
                     var uid = unit.U_ID;
                     var uName = "层" + (j + 1);
                     var collections = units[j].collections;
-                    var unitDiv = $("<div class='level2'/>");
+                    var unitDiv = $("<div class='level2' id='" + uid +"'/>");
                     unitDiv.append("<label>" + uName + "</label>");
                     unitDiv.append(
                         "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-plus' onclick='myCollection(\"" + uid + "\")'>添加采样位置</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-trash' onclick='delUnit(\"" + uid + "\")'>删除层</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altUnit(\"" + uid + "\")'>修改层</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>层上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>层下移</span></a></div>");
@@ -203,7 +203,7 @@
                         var cid = collection.C_ID;
                         var cName = "采样位置" + (k + 1);
                         var fossils = collections[k].fossils;
-                        var collectionDiv = $("<div class='level3'/>");
+                        var collectionDiv = $("<div class='level3' id='" + cid +"'/>");
                         collectionDiv.append("<label>" + cName + "</label>");
                         collectionDiv.append(
                             "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-plus' onclick='myFossil(\"" + cid + "\")'>添加化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-plus' onclick='myGeochemical(\"" + cid + "\")'>添加地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-trash'  onclick='delCollection(\"" + cid + "\")'>删除采样位置</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altCollection(\"" + cid + "\")'>修改采样位置</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>采样位置上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>采样位置下移</span></a></div>");
@@ -212,7 +212,7 @@
                             var fossil = fossils[l];
                             var foid = fossil.H_ID;
                             var foName = "化石" + (l + 1);
-                            var fossilDiv = $("<div class='level2'/>");
+                            var fossilDiv = $("<div class='level4' id='" + foid +"'/>");
                             fossilDiv.append("<label>" + foName + "</label>");
                             fossilDiv.append(
                                 "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delFossil(\"" + foid + "\")'>删除化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altFossil(\"" + foid + "\")'>修改化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>化石上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>化石下移</span></a></div>");
@@ -223,7 +223,7 @@
                             var geochemical = geochemicals[l];
                             var gid = geochemical.G_ID;
                             var gName = "地球化学信息 " + (l + 1);
-                            var geochemicalDiv = $("<div class='level2'/>");
+                            var geochemicalDiv = $("<div class='level4' id='" + gid +"'/>");
                             geochemicalDiv.append("<label>" + gName + "</label>");
                             geochemicalDiv.append(
                                 "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delGeochemical(\"" + gid + "\")'>删除地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altGeochemical(\"" + gid + "\")'>修改地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>地球化学信息上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>地球化学信息下移</span></a></div>");
@@ -244,6 +244,10 @@
             return;
         }
         div.insertBefore(nextDiv);
+        var id1 = div.attr("id");
+        var id2 = nextDiv.attr("id");
+        $.post("@Url.Action("ChangeSort")", { id1: id1, id2: id2, level: f1 }, function(data) {
+        });
     }
     //下移
     function down(dom) {
@@ -255,6 +259,10 @@
             return;
         }
         div.insertAfter(nextDiv);
+        var id1 = div.attr("id");
+        var id2 = nextDiv.attr("id");
+        $.post("@Url.Action("ChangeSort")", { id1: id1, id2: id2, level: f1 }, function(data) {
+        });
     }
     //打开模态框
     function myFormation() {

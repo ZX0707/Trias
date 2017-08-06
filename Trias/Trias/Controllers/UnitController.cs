@@ -30,7 +30,9 @@ namespace Trias.Controllers
         public ActionResult Add(string unit, string rocks)
         {
             var unitModel = JsonConvert.DeserializeObject<Unit>(unit);
-
+            var sort = unitSer.Where().Select(x => x.sort).OrderByDescending(x => x).FirstOrDefault() ?? 0;
+            sort++;
+            unitModel.sort = sort;
             #region 实体验证
 
             if (unitModel.Thickness == null)
