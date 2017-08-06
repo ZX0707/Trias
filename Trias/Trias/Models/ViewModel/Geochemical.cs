@@ -43,5 +43,6 @@ namespace Trias.Models
         public string Position { get; set; }
         [Display(Name = "备注")]
         public string Notes { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }
