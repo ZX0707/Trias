@@ -4,19 +4,27 @@
 <style>
     .paging {
         width: 100%;
-        background-color: #c1c1c1;
+        background-color: #dddbdb;
+        padding: 0px 10px;
     }
 
         .paging label {
             height: 30px;
-            line-height: 30px;
-            margin-right: 2px;
+            line-height: 35px;
         }
 
         .paging input {
             height: 20px;
             width: 40px;
         }
+
+    .link a:link {
+        color: #000000;
+    }
+
+    .link a:hover {
+        color: #0756AA;
+    }
 </style>
 <div style="padding:20px">
     <input id="queryList" class="easyui-searchbox" style="width:auto"
@@ -53,7 +61,7 @@
     </table>
 
     <div class="paging">
-        <div style="float:right;">
+        <span style="float:right;">
             <label class="control-label">共<font id="pages"></font>页/<font id="total"></font>条记录</label>
             <label class="control-label">每页显示</label>
             <select id="rows" onchange="reload()">
@@ -62,21 +70,18 @@
                 <option>30</option>
                 <option>50</option>
                 <option>100</option>
-
             </select>
             <label>条</label>
-        </div>
-        <div style="float:right;">
+        </span>
+        <div class="link">
+            <a href="javascript:void(0)" onclick="reload(1)">首页</a>
+            <a href="javascript:void(0)" onclick="prePage()">上一页</a>
+            <a href="javascript:void(0)" onclick="nextPage()">下一页</a>
+            <a href="javascript:void(0)" onclick="reload(parseInt($('#pages').html()))">尾页</a>
             <label class="control-label">到</label>
             <input id="currentPage" />
             <label class="control-label">页</label>
             <button>跳转</button>
-        </div>
-        <div style="float:right;">
-            <label class="control-label">首页</label>
-            <label class="control-label">上一页</label>
-            <label class="control-label">下一页</label>
-            <label class="control-label">尾页</label>
         </div>
         <div class="clear"></div>
     </div>
@@ -85,6 +90,27 @@
     //查询函数
     function queryList(value) {
 
+    }
+    //获取上一页
+    function prePage() {
+        var currentPage = $("#currentPage").val();
+        //将字符串转化为整型
+        currentPage = parseInt(currentPage);
+        //debugger;
+        if (currentPage != 1) {
+            currentPage += -1;
+            reload(currentPage);
+        }
+
+    }
+    //获取下一页
+    function nextPage() {
+        var currentPage = parseInt($("#currentPage").val());
+        var pages = parseInt($("#pages").html());
+        if (currentPage != pages) {
+            currentPage += +1;
+            reload(currentPage);
+        }
     }
     $(function () {
         reload(1);
