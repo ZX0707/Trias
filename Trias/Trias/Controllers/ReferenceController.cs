@@ -52,7 +52,8 @@ namespace Trias.Controllers
             }
             if (!string.IsNullOrWhiteSpace(keyWord))
             {
-                list = int.TryParse(keyWord, out int searchYear) ? list.Where(x => x.Year == searchYear) : list.Where(x => x.FirstAuthor.Contains(keyWord) || x.OtherAuthors.Contains(keyWord) || x.Title.Contains(keyWord) || x.BookTitle.Contains(keyWord) || x.Journal.Contains(keyWord));
+                int searchYear;
+                list = int.TryParse(keyWord, out searchYear) ? list.Where(x => x.Year == searchYear) : list.Where(x => x.FirstAuthor.Contains(keyWord) || x.OtherAuthors.Contains(keyWord) || x.Title.Contains(keyWord) || x.BookTitle.Contains(keyWord) || x.Journal.Contains(keyWord));
             }
             var total = list.Count();
             list = list.OrderByDescending(x => x.Year).Skip(rows * (page - 1)).Take(rows);
