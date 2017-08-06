@@ -100,15 +100,46 @@ namespace Trias.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditUnit(UnitView model)
+        public ActionResult EditUnit(string unit, string rocks)
         {
-            if (!ModelState.IsValid)
+            var unitmodel = JsonConvert.DeserializeObject<Unit>(unit);//接受字符串转换成对象
+            #region 
+            if(unitmodel.Thickness==null)
             {
-                return WriteStatusError(ModelState);
+                return WriteError("层厚度必填");
             }
-            unitSer.EditWhere(x => x.U_ID == model.U_ID, model);
-            unitSer.SaveChanges();
-            return WriteSuccess("修改成功");
+            #endregion
+            unitSer.EditWhere(x => x.U_ID == unitmodel.U_ID,unitmodel);
+            var rockList = JsonConvert.DeserializeObject<List<Rock>>(rocks);
+            #region 
+            if (!rockList.Any())
+            {
+                return WriteError("必填项不能为空！");
+            }
+            for (var i = 0; i < rockList.Count; ++i)
+            {
+                var item = rockList.ElementAt(i);
+                if (string.IsNullOrWhiteSpace(item.Color1))
+                {
+                    return WriteError("颜色一必填！");
+                }
+                if (string.IsNullOrWhiteSpace(item.Lithology1))
+                {
+                    return WriteError("岩性一必填！");
+                }
+            }
+            #endregion
+            rockSer.RemoveWhere(x => x.Type_ID == unitmodel.U_ID);
+
+            rockList.ForEach(x =>
+            {
+                x.Rock_ID = Guid.NewGuid().ToString();
+                x.Type_ID = unitmodel.U_ID;
+            });
+            rockSer.AddList(rockList);
+            rockSer.SaveChanges();
+            formationSer.SaveChanges();
+            return WriteSuccess("修改成功！");
         }
         //根据 岩石组id 查询层信息
         public ActionResult GetUnit(string id)

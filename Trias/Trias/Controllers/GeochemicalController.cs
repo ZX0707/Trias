@@ -72,13 +72,16 @@ namespace Trias.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditGeochemical(GeochemicalView model)
+        public ActionResult EditGeochemical(string geochemical,string id)
         {
-            if (!ModelState.IsValid)
+            var geochemicalmodel = JsonConvert.DeserializeObject<Geochemical>(geochemical);
+            #region 
+            if(geochemicalmodel.Position==null)
             {
-                return WriteStatusError(ModelState);
+                return WriteError("距离底部位置不能为空");
             }
-            geochemicalSer.EditWhere(x => x.G_ID == model.G_ID, model);
+            #endregion
+            geochemicalSer.EditWhere(x => x.G_ID == geochemicalmodel.G_ID, geochemicalmodel);
             geochemicalSer.SaveChanges();
             return WriteSuccess("修改成功");
         }

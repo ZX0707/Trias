@@ -39,9 +39,9 @@
             @Html.TextBoxFor(x => x.Isotopepersents, new { type = "text", @class = "form-control", })
         </div>
         <div class="col-sm-2" style="width:auto">
-            <select class="form-control">
-                <option>百分比</option>
-                <option>千分比</option>
+            <select id="IsPersentSize" class="form-control">
+                <option value="1">百分比</option>
+                <option value="0.1">千分比</option>
             </select>
         </div>
     </div>
@@ -55,9 +55,9 @@
             @Html.TextBoxFor(x => x.Elementpersents, new { type = "text", @class = "form-control", })
         </div>
         <div class="col-sm-2" style="width:auto">
-            <select class="form-control">
-                <option>百分比</option>
-                <option>千分比</option>
+            <select id="PersentSize" class="form-control">
+                <option value="1">百分比</option>
+                <option value="0.1">千分比</option>
             </select>
         </div>
     </div>
@@ -68,7 +68,7 @@
         </div>
     </div>
     <div class="form-group" style="text-align: center">
-        <button id="btn_save" type="button" class="btn btn-default">确定</button>
+        <button id="btn_save" type="button" class="btn btn-default">保存</button>
     </div>
 </form>
 <script>
@@ -85,10 +85,44 @@
                 $("#SubTime").val("@Model.SubTime");
             })
         });
-    });
-    function change(func) {
-        initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") }, function () {
-            func();
+        $("#btn_save").on("click", {}, function () {
+            var geochemical = {
+                G_ID: "@Model.G_ID",
+                C_ID:"@Model.C_ID",
+                Authorizer: $("#Authorizer").val(),
+                isotope: $("#isotope").val(),
+                Isotopepersents: parseFloat($("#Isotopepersents").val()) * parseFloat($("#IsPersentSize").val()),
+                Element: $("#Element").val(),
+                Elementpersents: parseFloat($("#Elementpersents").val()) * parseFloat($("#PersentSize").val()),
+                Time: $("#Time").val(),
+                SubTime: $("#SubTime").val(),
+                Time2: $("#Time2").val(),
+                Position: $("#Position").val(),
+                Notes: $("#Notes").val()
+            };
+            debugger
+            if (!identify()) { return; };
+            $.post("@Url.Action("EditGeochemical")",
+                { geochemical: JSON.stringify(geochemical) },
+                function (data) {
+                    if (data.status === "success") {
+                        $.messager.alert("",
+                            data.msg,
+                            "info",
+                            function () {
+                                parent.reload();
+                                commHelper.CloseDialog("修改地球化学信息");
+                            });
+                    } else {
+                        $.messager.alert("", data.msg, "warning");
+                    }
+                },
+                "json");
         });
-    }
+        function change(func) {
+            initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") }, function () {
+                func();
+            });
+        }
+    });
 </script>

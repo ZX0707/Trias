@@ -141,6 +141,7 @@
             $("#EnvironmentalZones").val("@Model.EnvironmentalZones");
         });
         initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Relation" });
+        $("#ThicknessSize").val("1");
 
         $.post("@Url.Action("GetList","Rock")", { id: "@Model.F_ID" }, function (data) {
             var lines = $(".co_li>div");

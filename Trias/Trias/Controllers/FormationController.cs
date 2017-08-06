@@ -175,7 +175,7 @@ namespace Trias.Controllers
             rockSer.AddList(rockList);
             rockSer.SaveChanges();
             formationSer.SaveChanges();
-            return WriteSuccess("添加成功！");
+            return WriteSuccess("修改成功！");
         }
         //根据 剖面id 查询岩石组信息
         public ActionResult GetFormation(string id)

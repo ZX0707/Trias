@@ -74,13 +74,20 @@ namespace Trias.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditFossil(FossilView model)
+        public ActionResult EditFossil(string fossil,string id)
         {
-            if (!ModelState.IsValid)
+            var fossilmodel = JsonConvert.DeserializeObject<Fossil>(fossil);
+            #region 
+            if(string.IsNullOrWhiteSpace(fossilmodel.GenusName))
             {
-                return WriteStatusError(ModelState);
+                WriteError("属名不能为空");
             }
-            fossilSer.EditWhere(x => x.H_ID == model.H_ID, model);
+            if (string.IsNullOrWhiteSpace(fossilmodel.SpeciesName))
+            {
+                WriteError("种名不能为空");
+            }
+            #endregion
+            fossilSer.EditWhere(x => x.H_ID == fossilmodel.H_ID, fossilmodel);
             fossilSer.SaveChanges();
             return WriteSuccess("修改成功");
         }

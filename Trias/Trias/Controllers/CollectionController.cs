@@ -101,13 +101,47 @@ namespace Trias.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditCollection(CollectionView model)
+        public ActionResult EditCollection(string collection,string rocks)
         {
-            if (!ModelState.IsValid)
+            var collectionmodel = JsonConvert.DeserializeObject<Collection>(collection);
+            #region 
+            if(collectionmodel.Depth1==null)
             {
-                return WriteStatusError(ModelState);
+                return WriteError("起始深度不能为空");
             }
-            collectionSer.EditWhere(x => x.C_ID == model.C_ID, model);
+            if (collectionmodel.Depth2 == null)
+            {
+                return WriteError("终止深度不能为空");
+            }
+            #endregion
+            collectionSer.EditWhere(x => x.C_ID == collectionmodel.C_ID, collectionmodel);
+            var rocklist = JsonConvert.DeserializeObject<List<Rock>>(rocks);
+            #region 
+            if(!rocklist.Any())
+            {
+                return WriteError("必填项不能为空！");
+            }
+            for(var i=0;i<rocklist.Count;i++)
+            {
+                var item = rocklist.ElementAt(i);
+                if(string.IsNullOrWhiteSpace(item.Color1))
+                {
+                    return WriteError("颜色一不能为空！");
+                }
+                if(string.IsNullOrWhiteSpace(item.Lithology1))
+                {
+                    return WriteError("岩性一不能为空！");
+                }
+            }
+            #endregion
+            rockSer.RemoveWhere(x => x.Type_ID == collectionmodel.C_ID);
+            rocklist.ForEach(x =>
+            {
+                x.Rock_ID = Guid.NewGuid().ToString();
+                x.Type_ID = collectionmodel.C_ID;
+            });
+            rockSer.AddList(rocklist);
+            rockSer.SaveChanges();
             collectionSer.SaveChanges();
             return WriteSuccess("修改成功");
         }

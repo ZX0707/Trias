@@ -26,7 +26,7 @@
         </div>
         <label class="col-sm-2 control-label">精准度：</label>
         <div class="col-sm-2" style="width: auto">
-            <select class="form-control">
+            <select id="Precision" name="Precision" class="form-control">
                 <option value="high">高</option>
                 <option value="low">低</option>
             </select>
@@ -134,6 +134,8 @@
 <script>
     $(function () {
         initSelect($(".Relation"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Relation" });
+        $("#ThicknessSize").val("1");
+        $("#Precision").val("@Model.Precision");
         $.post("@Url.Action("GetList","Rock")", { id: "@Model.C_ID" }, function (data) {
             var lines = $(".co_li>div");
             lines.find("input").val("");
@@ -147,6 +149,53 @@
                 $(lines[i]).find("select:eq(0)").val(data[i].Relation);
             }
         }, "json");
+        $("#btn_save").on("click", {}, function () {
+            var collection = {
+                C_ID: "@Model.C_ID",
+                U_ID:"@Model.U_ID",
+                Depth1: parseFloat($("#Depth1").val())*parseFloat($("#ThicknessSize").val()),
+                Depth2: parseFloat($("#Depth2").val()) * parseFloat($("#ThicknessSize").val()),
+                Precision: $("#Precision").val(),
+                Details:$("#Details").val()
+            }
+            var rocks = [];
+            var lines = $(".co_li>div");
+            for (var i = 0; i < lines.length; i++) {
+                var rock = {
+                    Type: "Collection",
+                    Color1: $(lines[i]).find("input:eq(0)").val(),
+                    Color2: $(lines[i]).find("input:eq(1)").val(),
+                    Lithology1: $(lines[i]).find("input:eq(2)").val(),
+                    Lithology2: $(lines[i]).find("input:eq(3)").val(),
+                    MainLithology: $(lines[i]).find("input:eq(4)").val(),
+                    Sort: i,
+                    Relation: $(lines[i]).find("select:eq(0)").val()
+                }
+                if (rock.Color1.length <= 0 && rock.Color2.length <= 0 && rock.Lithology1.length <= 0 && rock.Lithology2.length <= 0 && rock.MainLithology.length <= 0) {
+                    //一个都没填视为无效
+                    continue;
+                }
+                rocks.push(rock);
+            }
+            //前端验证
+            if (!identify()) { return; };
+            $.post("@Url.Action("EditCollection")",
+                { collection: JSON.stringify(collection), rocks: JSON.stringify(rocks) },
+                function (data) {
+                    if (data.status === "success") {
+                        $.messager.alert("",
+                            data.msg,
+                            "info",
+                            function () {
+                                parent.reload();
+                                commHelper.CloseDialog("修改采样位置");
+                            });
+                    } else {
+                        $.messager.alert("", data.msg, "warning");
+                    }
+                },
+                "json");
+        });
     });
     
 </script>

@@ -39,9 +39,9 @@
             <input name="Isotopepersents" id="Isotopepersents" type="number" class="form-control" />
         </div>
         <div class="col-sm-2"  style="width:auto">
-            <select class="form-control">
-                <option>百分比</option>
-                <option>千分比</option>
+            <select id="IsPersentSize" class="form-control">
+                <option value="1">百分比</option>
+                <option value="0.1">千分比</option>
             </select>
         </div>
     </div>
@@ -56,9 +56,9 @@
             <input name="Elementpersents" id="Elementpersents" type="number" class="form-control" />
         </div>
           <div class="col-sm-2" style="width:auto">
-            <select class="form-control">
-                <option>百分比</option>
-                <option>千分比</option>
+            <select id="PersentSize" class="form-control">
+                <option value="1">百分比</option>
+                <option value="0.1">千分比</option>
             </select>
         </div>
     </div>
@@ -100,9 +100,9 @@
                 C_ID: cid,
                 Authorizer: $("#Authorizer").val(),
                 isotope: $("#isotope").val(),
-                Isotopepersents: $("#Isotopepersents").val(),
+                Isotopepersents:parseFloat($("#Isotopepersents").val())*parseFloat($("#IsPersentSize").val()),
                 Element: $("#Element").val(),
-                Elementpersents: $("#Elementpersents").val(),
+                Elementpersents:parseFloat($("#Elementpersents").val())*parseFloat($("#PersentSize").val()),
                 Time: $("#Time").val(),
                 SubTime: $("#SubTime").val(),
                 Time2: $("#Time2").val(),

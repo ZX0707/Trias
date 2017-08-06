@@ -23,7 +23,7 @@
         </div>
         <label class="col-sm-2 control-label">精准度：</label>
         <div class="col-sm-2" style="width: auto">
-            <select class="form-control">
+            <select id="Precision" name="Precision" class="form-control">
                 <option value="high">高</option>
                 <option value="low">低</option>
             </select>
@@ -162,7 +162,7 @@
             var lines = $(".co_li>div");
             for (var i = 0; i < lines.length; i++) {
                 var rock = {
-                    Type: "Formation",
+                    Type: "Collection",
                     Color1: $(lines[i]).find("input:eq(0)").val(),
                     Color2: $(lines[i]).find("input:eq(1)").val(),
                     Lithology1: $(lines[i]).find("input:eq(2)").val(),
