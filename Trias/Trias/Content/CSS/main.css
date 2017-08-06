@@ -26,3 +26,22 @@ ul, li {
     height: 20px;
 }
 
+.order {
+    color: #447C88;
+}
+
+.meu {
+    padding: 3px 10px;
+    font-size: 12px;
+    /*border: 1px solid #666666;*/
+}
+
+.required {
+    background-color: #FFFFC0;
+}
+
+.error_ness {
+    border: 1px solid red;
+    box-shadow: 0px 0px 5px red;
+    background-color: white;
+}

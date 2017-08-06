@@ -13,7 +13,7 @@ function login() {
         //UserName,UserPwd传到后台的值，保持一致
     };
     $.post("/Login/Login", user, function (result) {
-        if (result.status == "error") {
+        if (result.status === "error") {
             $("#remain").html(result.msg);
         } else {
             location.href = "/Home/IndexWithLogin";

@@ -399,12 +399,12 @@
 
     }
     function SearchBtn() {
-        var NoAuthorizer = $("#NoAuthorizer").val();
-        var SearchYear = $("#SearchYear").val();
-        SearchYear = parseInt(SearchYear);
+        var author = $("#NoAuthorizer").val();
+        var searchYear = $("#SearchYear").val();
+        searchYear = parseInt(searchYear);
         $("#grid").datagrid("reload", {
-            doiANDauthor: NoAuthorizer,
-            year: SearchYear
+            author: author,
+            year: searchYear
         });
    @*     $.post("@Url.Action("GetList", "Reference")", { doiANDauthor: NoAuthorizer, year: SearchYear, page: 1, rows: 5 }, function (data) {
             $("#grid").datagrid("loadData", data);

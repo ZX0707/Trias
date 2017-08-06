@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/Content/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+
     <script src="~/Content/JS/jquery-1.9.1.min.js"></script>
+
+    @* bootstrap *@
+    <link href="~/Content/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Content/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    @* bootstrap *@
 
     @* easyui *@
     <link href="~/Content/easyui/themes/default/easyui.css" rel="stylesheet" />
@@ -15,33 +19,13 @@
     <script src="~/Content/easyui/jquery.easyui.min.js"></script>
     <script src="~/Content/easyui/locale/easyui-lang-zh_CN.js"></script>
     @* easyui *@
+
     <link href="~/Content/CSS/main.css" rel="stylesheet" />
     <script src="~/Content/JS/home.js"></script>
-    <style>
-        .order {
-            color: #447C88;
-        }
-
-        .meu {
-            padding: 3px 10px;
-            font-size: 12px;
-            /*border: 1px solid #666666;*/
-        }
-
-        .required {
-            background-color: #FFFFC0;
-        }
-
-        .error_ness {
-            border: 1px solid red;
-            box-shadow: 0px 0px 5px red;
-            background-color: white;
-        }
-    </style>
 </head>
 <body class="easyui-layout">
-    <div data-options="region:'north'" style="height: 90px;">1</div>
-    <div data-options="region:'west',title:'Login'" style="width: 300px;">
+    <div data-options="region:'north'" style="height: 90px;"></div>
+    <div data-options="region:'west',title:'Menu'" style="width: 300px;">
         <div style="margin: 10px; text-align: center">
             <span>
                 <strong id="name"></strong>
@@ -49,23 +33,19 @@
             </span>
         </div>
         <div>
-            <div id="aa" class="easyui-accordion" style="width: 300px; height: auto;">
+            <div id="aa" class="easyui-accordion" style="width: auto; height: auto;">
                 <div title="添加数据" data-options="iconCls:'icon-save',selected:true" style="overflow: auto; padding: 10px;">
                     <div class="order">
-                        <div class="meu"><a href="/Reference/Index"><b>添加文献</b></a></div>
-                        <div class="meu"><a href="/Section/Index"><b>添加剖面</b></a></div>
-                        <div class="meu"><a href="/Formation/Index"><b>添加岩石组</b></a></div>
-                        @*<div class="meu"><a href="/Fossil/Index"><b>添加化石</b></a></div>*@
+                        <div class="meu"><a href="@Url.Action("Index","Reference")"><b>添加文献</b></a></div>
+                        <div class="meu"><a href="@Url.Action("Index","Section")"><b>添加剖面</b></a></div>
+                        <div class="meu"><a href="@Url.Action("Index","Formation")"><b>添加岩石组</b></a></div>
                     </div>
                 </div>
                 <div title="查询数据" data-options="iconCls:'icon-save'" style="padding: 10px;">
                     <div class="order">
-                        <div class="meu"><a href="/Reference/QueryList"><b>查询文献</b></a></div>
+                        <div class="meu"><a href="@Url.Action("QueryList","Reference")"><b>查询文献</b></a></div>
                         <div class="meu"><a href="#"><b>查询剖面</b></a></div>
                     </div>
-                </div>
-                <div title="Title3" data-options="iconCls:'icon-save'">
-                    content3
                 </div>
             </div>
         </div>
@@ -77,12 +57,13 @@
 </html>
 <script>
     var currentUser;
+    var getOptionsURL = "@Url.Action("GetSelectOptions", "Dict")";
     $(function () {
         //获取用户名
-        $.post("/Login/GetCurrentUser", {}, function (result) {
+        $.post("@Url.Action("GetCurrentUser", "Login")", {}, function (result) {
             currentUser = result.msg;
             if (currentUser == null) {
-               location.href = "/Home/Index";
+               location.href = "/";
             }
             else {
                 $("#name").html(currentUser.UserName);
@@ -95,20 +76,11 @@
         $(".required").on("focus", {}, function () {
             $(this).removeClass("error_ness");
         });
-        //移除必填项错误提示方法2
-        //$(function () {
-        //    $(".required").map(function (index, dom) {
-        //        $(dom).on("focus",{},function () {
-        //        $(this).removeClass("error_ness");
-        //        });
-        //    });
     });
     //退出函数
     function SignOut() {
-        $.post("/Login/SignOut/", {}, function (url) {
+        $.post("@Url.Action("SignOut", "Login")", {}, function (url) {
             location.href = url;
         }, "text");
     }
-    var getOptionsURL = "@Url.Action("GetSelectOptions", "Dict")";
-
 </script>

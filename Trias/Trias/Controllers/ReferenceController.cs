@@ -13,18 +13,22 @@ namespace Trias.Controllers
     public class ReferenceController : BaseController
     {
         /// <summary>
-        /// 主页面
+        /// 文献添加页面
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
+
+        /// <summary>
+        /// 文献展示页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult QueryList()
         {
             return View();
         }
-
 
         /// <summary>
         /// 获取文献列表，带分页
@@ -32,30 +36,23 @@ namespace Trias.Controllers
         /// <param name="year">年份</param>
         /// <param name="page">页码</param>
         /// <param name="rows">每页多少条数据</param>
-        /// <param name="doiANDauthor">doi或者作者名</param>
+        /// <param name="author">doi或者作者名</param>
+        /// <param name="keyWord">搜索关键字</param>
         /// <returns></returns>
-        public ActionResult GetList(string doiANDauthor, int year = 0, int page = 1, int rows = int.MaxValue, string keyWord = "")
+        public ActionResult GetList(string author = "", int year = 0, int page = 1, int rows = int.MaxValue, string keyWord = "")
         {
             var list = referenceSer.Where();
             if (year != 0)
             {
                 list = list.Where(x => x.Year == year);
             }
-            if (!string.IsNullOrWhiteSpace(doiANDauthor))
+            if (!string.IsNullOrWhiteSpace(author))
             {
-                list = list.Where(x => x.DOI == doiANDauthor || x.FirstAuthor.Contains(doiANDauthor) || x.OtherAuthors.Contains(doiANDauthor));
+                list = list.Where(x => x.FirstAuthor.Contains(author) || x.OtherAuthors.Contains(author));
             }
             if (!string.IsNullOrWhiteSpace(keyWord))
             {
-                var searchYear = 0;
-                if(int.TryParse(keyWord,out searchYear))
-                {
-                    list = list.Where(x => x.Year == searchYear);
-                }
-                else
-                {
-                    list = list.Where(x => x.FirstAuthor.Contains(keyWord) || x.OtherAuthors.Contains(keyWord) ||  x.Title.Contains(keyWord) || x.BookTitle.Contains(keyWord) || x.Journal.Contains(keyWord));
-                }
+                list = int.TryParse(keyWord, out int searchYear) ? list.Where(x => x.Year == searchYear) : list.Where(x => x.FirstAuthor.Contains(keyWord) || x.OtherAuthors.Contains(keyWord) || x.Title.Contains(keyWord) || x.BookTitle.Contains(keyWord) || x.Journal.Contains(keyWord));
             }
             var total = list.Count();
             list = list.OrderByDescending(x => x.Year).Skip(rows * (page - 1)).Take(rows);
@@ -121,10 +118,10 @@ namespace Trias.Controllers
             {
                 return WriteError("文献重复，请确认！");
             }
+            model.R_ID = Guid.NewGuid().ToString();
             var rModel = new Reference();
             rModel.CopyFrom(model);
             referenceSer.Add(rModel);
-            rModel.R_ID = Guid.NewGuid().ToString();
             referenceSer.SaveChanges();
             return WriteSuccess(new
             {
