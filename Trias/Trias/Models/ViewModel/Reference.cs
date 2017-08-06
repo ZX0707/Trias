@@ -27,8 +27,6 @@ namespace Trias.Models
         [Display(Name = "第一作者")]
         [Required(ErrorMessage = "至少有一位作者")]
         public string FirstAuthor { get; set; }
-        [Display(Name = "第二作者")]
-        public string SecondAuthor { get; set; }
         [Display(Name = "其他作者")]
         public string OtherAuthors { get; set; }
         [Display(Name = "文献年度")]
@@ -42,12 +40,6 @@ namespace Trias.Models
         public string Journal { get; set; }
         [Display(Name = "编辑")]
         public string Editor1 { get; set; }
-        [Display(Name = "编辑")]
-        public string Editor2 { get; set; }
-        [Display(Name = "编辑")]
-        public string Editor3 { get; set; }
-        [Display(Name = "编辑")]
-        public string Editor4 { get; set; }
         [Display(Name = "语言")]
         [Required(ErrorMessage = "语言必选")]
         public string Language { get; set; }

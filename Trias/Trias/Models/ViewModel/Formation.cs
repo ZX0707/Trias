@@ -31,5 +31,6 @@ namespace Trias.Models
         public Nullable<double> Thickness { get; set; }
         [Display(Name = "评论")]
         public string Comments { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }

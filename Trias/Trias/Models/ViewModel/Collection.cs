@@ -31,5 +31,6 @@ namespace Trias.Models
         public Nullable<double> Depth1 { get; set; }
         [Display(Name = "结束位置")]
         public Nullable<double> Depth2 { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }

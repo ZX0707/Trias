@@ -32,5 +32,6 @@ namespace Trias.Models
         public string Environments { get; set; }
         [Display(Name = "备注")]
         public string Details { get; set; }
+        public Nullable<int> sort { get; set; }
     }
 }
