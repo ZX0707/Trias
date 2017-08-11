@@ -258,34 +258,40 @@ namespace Trias.Controllers
             for (var rowIndex = 1; rowIndex < rowCount; rowIndex++)
             {
                 var row = sheet.GetRow(rowIndex);
+                var c = row.LastCellNum;
                 var count = 0;
                 var referenceModel = new Reference
                 {
                     R_ID = Guid.NewGuid().ToString(),
-                    ReferenceType = row.GetCell(count++).ToString(),
-                    FirstAuthor = row.GetCell(count++).ToString(),
-                    OtherAuthors = row.GetCell(count++).ToString(),
-                    Year = int.Parse(row.GetCell(count++).ToString()),
-                    Title = row.GetCell(count++).ToString(),
-                    BookTitle = row.GetCell(count++).ToString(),
-                    Journal = row.GetCell(count++).ToString(),
-                    Editor1 = row.GetCell(count++).ToString(),
-                    Language = row.GetCell(count++).ToString(),
-                    Publisher = row.GetCell(count++).ToString(),
-                    Volume = row.GetCell(count++).ToString(),
-                    No = row.GetCell(count++).ToString(),
-                    PageBegin = row.GetCell(count++).ToString(),
-                    PageEnd = row.GetCell(count++).ToString(),
-                    DOI = row.GetCell(count++).ToString(),
-                    URL1 = row.GetCell(count++).ToString(),
-                    URL2 = row.GetCell(count++).ToString(),
-                    Comments = row.GetCell(count).ToString()
+                    ReferenceType = GetCell(row, count++).ToString(),
+                    FirstAuthor = GetCell(row, count++).ToString(),
+                    OtherAuthors = GetCell(row, count++).ToString(),
+                    Year = int.Parse(GetCell(row, count++).ToString()),
+                    Title = GetCell(row, count++).ToString(),
+                    BookTitle = GetCell(row, count++).ToString(),
+                    Journal = GetCell(row, count++).ToString(),
+                    Editor1 = GetCell(row, count++).ToString(),
+                    Language = GetCell(row, count++).ToString(),
+                    Publisher = GetCell(row, count++).ToString(),
+                    Volume = GetCell(row, count++).ToString(),
+                    No = GetCell(row, count++).ToString(),
+                    PageBegin = GetCell(row, count++).ToString(),
+                    PageEnd = GetCell(row, count++).ToString(),
+                    DOI = GetCell(row, count++).ToString(),
+                    URL1 = GetCell(row, count++).ToString(),
+                    URL2 = GetCell(row, count++).ToString(),
+                    Comments = GetCell(row, count).ToString()
                 };
                 referenceList.Add(referenceModel);
             }
             referenceSer.AddList(referenceList);
             referenceSer.SaveChanges();
             return WriteSuccess("操作成功！");
+        }
+
+        private ICell GetCell(IRow row, int index)
+        {
+            return row.FirstOrDefault(x => x.ColumnIndex == index) ?? row.CreateCell(index);
         }
 
     }
