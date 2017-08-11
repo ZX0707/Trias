@@ -19,12 +19,11 @@
     <script src="~/Content/easyui/jquery.easyui.min.js"></script>
     <script src="~/Content/easyui/locale/easyui-lang-zh_CN.js"></script>
     @* easyui *@
-
     <link href="~/Content/CSS/main.css" rel="stylesheet" />
     <script src="~/Content/JS/home.js"></script>
 </head>
 <body class="easyui-layout">
-    <div data-options="region:'north'" style="height: 90px;"></div>
+    @*<div data-options="region:'north'" style="height: 90px;"></div>*@
     <div data-options="region:'west',title:'Menu'" style="width: 300px;">
         <div style="margin: 10px; text-align: center">
             <span>
@@ -52,6 +51,7 @@
     </div>
     <div data-options="region:'center'">
         @RenderBody()
+        @*用这个的母版页的页面的所有东西都放在这个地方*@
     </div>
 </body>
 </html>

@@ -4,44 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <script src="~/Content/JS/jquery-1.9.1.min.js"></script>
-
-    @* easyui *@
-    <link href="~/Content/easyui/themes/default/easyui.css" rel="stylesheet" />
-    <link href="~/Content/easyui/themes/icon.css" rel="stylesheet" />
-    <link href="~/Content/easyui/demo/demo.css" rel="stylesheet" />
-    <script src="~/Content/easyui/jquery.easyui.min.js"></script>
-    <script src="~/Content/easyui/locale/easyui-lang-zh_CN.js"></script>
-    @* easyui *@
-
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<script src="~/Content/JS/jquery-1.9.1.min.js"></script>*@
+    @* bootstrap *@
+    <link href="~/Content/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/JS/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    @* bootstrap *@
     <link href="~/Content/CSS/main.css" rel="stylesheet" />
     <script src="~/Content/JS/home.js"></script>
 
 </head>
-<body class="easyui-layout">
-    <div data-options="region:'north'" style="height: 90px;">
-        <form action="@Url.Action("UpLoadRefecence", "Reference")" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" />
-            <input type="submit" value="提交" />
-        </form>
-    </div>
-    <div data-options="region:'west',title:'Login'" style="width: 300px;">
-        <div style="border:1px solid #B0BEC7;margin: 10px;">
-            <form style="padding:10px;">
-                用户：<input type="text" id="UserName" class="form_input" value="admin" /><br />
-                <br />
-                密码：<input type="password" id="Password" class="form_input" value="666" /><br />
-                <div style="width: 275px; text-align: center">
-                    <label id="remain" style="color:red"></label><br />
-                    <input type="reset" value="重置" class="form_button" />
-                    <input type="button" value="登录" onclick="login()" class="form_button" />
-                </div>
-            </form>
-        </div>
-    </div>
-    <div data-options="region:'center'">
+<body >
         @RenderBody()
-    </div>
 </body>
 </html>

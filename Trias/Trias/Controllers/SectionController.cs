@@ -10,6 +10,49 @@ namespace Trias.Controllers
 {
     public class SectionController : BaseController
     {
+
+        /// <summary>
+        ///    
+        /// </summary>
+        /// <param name="page">页码</param>
+        /// <param name="rows">每页多少条数据</param>
+        /// <param name="keyWord">搜索关键字</param>
+        /// <returns></returns>
+        public ActionResult GetList(int page, int rows, string keyWord)
+        {
+            var list = sectionSer.Where();
+            if (!string.IsNullOrWhiteSpace(keyWord))
+            {
+                int year = 0;
+                if (int.TryParse(keyWord, out year))
+                {
+                    var start = DateTime.Parse(year + "-01-01 00:00:00");
+                    var end = DateTime.Parse(year + "-12-31 23:59:59");
+                    list = list.Where(s => s.EnterTime >= start && s.EnterTime <= end);
+                }
+                else
+                {
+                    list = list.Where(s => s.SectionName.Contains(keyWord) || s.Time.Contains(keyWord) || s.SubTime.Contains(keyWord) || s.Authorizer.Contains(keyWord));
+                }
+            }
+            var total = list.Count();
+            list = list.OrderByDescending(s => s.SectionName).Skip(rows * (page - 1)).Take(rows);
+            var result = list.ToList().Select(s => new
+            {
+                s.S_ID,//必须传一个唯一值过去
+                s.SectionName,
+                s.Time,
+                s.SubTime,
+                s.Authorizer,
+                s.EnterTime
+
+            }).ToList();
+            return Json(new
+            {
+                total = total,
+                rows = result
+            });
+        }
         //
         // GET: /Section/
 

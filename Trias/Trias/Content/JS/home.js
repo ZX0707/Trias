@@ -21,6 +21,7 @@ function login() {
     }, "json");
 }
 
+
 // 初始化下拉框
 // obj下拉框的Jquery对象
 // url请求的url地址

@@ -2,4 +2,140 @@
     ViewBag.Title = "登录页面";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .content {
+        width: 887px;
+        margin: 70px auto 0;
+    }
+
+    .header {
+        width: 887px;
+        background: url('../../Content/images/logo.png') no-repeat;
+        background-size: 70px 70px;
+        height: 70px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+        .header div {
+            font-family: 微软雅黑;
+            margin-left: 80px;
+            color: #264c1a;
+            white-space: nowrap;
+            /*强制字符换行*/
+        }
+
+            .header div span:nth-child(1) {
+                display: block;
+                font-weight: bold;
+                font-size: 24px;
+                color: #264c1a;
+                letter-spacing: 2px;
+            }
+
+            .header div span:nth-child(2) {
+                display: block;
+                font-size: 14px;
+                color: #4b9434;
+                letter-spacing: 1px;
+            }
+
+    .main {
+        height: 326px;
+        margin: 10px auto;
+    }
+
+    .left{
+         /*width: 478px;*/
+        float: left;
+    }
+    #myCarousel {
+        width: 478px;
+    }
+
+    .right {
+        margin-left: 478px;
+        height: 326px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .login {
+        width: 300px;
+        padding: 40px 20px;
+        background-color: #ecf0f1;
+        margin-left: 60px;
+    }
+
+    .top {
+        margin-top: 10px;
+    }
+
+    .footer {
+        background: #ECF0F1;
+        text-align: center;
+        line-height: 30px;
+        color: #848484;
+        height: 30px;
+        width: 887px;
+    }
+</style>
+<div class="content">
+    <div class="header">
+        <div>
+            <span>三叠纪数据库</span>
+            <span>Triassic Database</span>
+        </div>
+    </div>
+    <div class="main">
+        <div class="left">
+            <div id="myCarousel" class="carousel slide">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="~/Content/images/lunb1.jpg" alt="First slide">
+                    </div>
+                    <div class="item">
+                        <img src="~/Content/images/lunb2.jpg" alt="Second slide">
+                    </div>
+                    <div class="item">
+                        <img src="~/Content/images/lunb3.jpg" alt="Third slide">
+                    </div>
+                </div>
+                <!-- 轮播（Carousel）导航 -->
+                @*<a class="carousel-control left" href="#myCarousel"
+                   data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel"
+                   data-slide="next">&rsaquo;</a>*@
+            </div> 
+        </div>
+        <div class="right">
+            <form class="login">
+                <div>
+                    <label>用户：</label><input type="text" id="UserName" class="form_input" value="" />
+                </div>
+                <div class="top">
+                    <label>密码：</label><input type="password" id="Password" class="form_input" value="" />
+                </div>
+                <div class="top" style="width: 275px; text-align: center">
+                    <input type="reset" name="reset" value="重置" class="form_button" />
+                    <input type="button" value="登录" onclick="login()" class="form_button" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        Copyright&nbsp;2017-2020&nbsp;版权所有&nbsp;中国地质大学(武汉)
+    </div>
+</div>
+
+
+
+
 

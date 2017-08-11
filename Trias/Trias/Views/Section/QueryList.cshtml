@@ -34,7 +34,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>标题 / 作者 / 来源 / 收录</th>
+                <th>剖面名称 / 时代 / 核准人 / 时间</th>
                 <th style="width:50px"></th>
             </tr>
         </thead>
@@ -120,7 +120,7 @@
         var keyWord = $("#queryList").searchbox("getValue");
         //每页显示rows条记录
         var rows = $("#rows").val();
-        $.post("@Url.Action("GetList","Reference")", { keyWord: keyWord, rows: rows, page: Page }, function (data) {
+        $.post("@Url.Action("GetList","Section")", { keyWord: keyWord, rows: rows, page: Page }, function (data) {
             //console.log(data);
             //赋值
             $("#currentPage").val(Page);
@@ -129,24 +129,24 @@
             $("#pages").html(pages);
             $("#tbody").html("");
             for (var i = 0; i < data.rows.length; i++) {
-                //取标题
-                var title = data.rows[i].ShowTitle;
-                var journal = data.rows[i].Journal;
-                if (journal) {
-                    title = title + "," + journal;
+                //取剖面名称
+                var name = data.rows[i].SectionName;
+                //取时代
+                var time = data.rows[i].Time;
+                var subTime = data.rows[i].SubTime;
+                //完成拼接
+                if (time) {
+                    name = name + "," + time + "," + subTime;
                 }
-
-                //取作者
-                var content = data.rows[i].FirstAuthor;
-                var other = data.rows[i].OtherAuthor;
-                if (other) {
-                    content = contend + "," + other;
-                }
-                //取年度
-                var year = data.rows[i].Year;
-                content = content + "," + year;
+                //取核准人
+                var authorizer = data.rows[i].Authorizer;
+                //取核准时间
+                var enterTime = data.rows[i].EnterTime;
+               enterTime= commHelper.ChangeDateFormatYMD(enterTime);//将json格式的日期进行转化
+                //完成拼接
+                authorizer = authorizer +","+ enterTime;
                 //拼接字符串
-                $("#tbody").append("<tr><td><div><a href='/Reference/Details/" + data.rows[i].R_ID + "' target='_blank' style='font-size:1.2em;'>" + title + "</a></div><span style='color:#999999;font-weight:normal'>" + content + "</span></td><td><div><span class='glyphicon glyphicon-pencil'onclick='modify(\""+data.rows[i].R_ID+"\")'></span>&nbsp;&nbsp;<span class='glyphicon glyphicon-trash' onclick='trash(\"" + data.rows[i].R_ID + "\")'></span></div></td></tr>");
+                $("#tbody").append("<tr><td><div><a href='/Section/Details/" + data.rows[i].S_ID + "' target='_blank' style='font-size:1.2em;'>" + name + "</a></div><span style='color:#999999;font-weight:normal'>" + authorizer + "</span></td><td><div><span class='glyphicon glyphicon-pencil'onclick='modify(\"" + data.rows[i].S_ID + "\")'></span>&nbsp;&nbsp;<span class='glyphicon glyphicon-trash' onclick='trash(\"" + data.rows[i].S_ID + "\")'></span></div></td></tr>");
             }
         }, "json");
 

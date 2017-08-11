@@ -92,7 +92,7 @@ namespace Trias.Controllers
             }).ToList();
             return Json(new
             {
-                total,
+                total=total,
                 rows = result
             });
         }

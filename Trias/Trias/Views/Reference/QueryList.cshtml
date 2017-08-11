@@ -25,11 +25,94 @@
     .link a:hover {
         color: #0756AA;
     }
+
+    .addRe li {
+        width: 120px;
+        float: left;
+        margin: 20px 20px 15px 20px;
+    }
+
+    a.import {
+        /*background: url('../../Content/images/import.png');*/
+        width: 120px;
+        height: 120px;
+        display: block;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid #d6d6d6;
+    }
+
+        a.import img {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid #d6d6d6;
+            opacity: 0.8;
+        }
+
+            a.import img:hover {
+                opacity: 1;
+            }
+
+    h4 a {
+        color: #000;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        border-bottom: 1px dashed #b5b5b5;
+        padding-bottom: 8px;
+        margin-top: 10px;
+    }
+
+    .addRe p {
+        text-align: center;
+    }
 </style>
+@*第三方导入模态框*@
+<div id="import" class="easyui-dialog" title="第三方导入" style="width:80%;height:80%;"
+     data-options="resizable:false,modal:true,closed:true">
+    <div data-options="region:'north'" style="height: 90px;">
+        <form action="@Url.Action("UpLoadRefecence", "Reference")" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+</div>
+@*添加文献模态框*@
+<div id="addReference" class="easyui-dialog" title="添加文献方式" style="width:530px;height:330px;"
+     data-options="resizable:false,modal:true,closed:true">
+    <div class="addRe">
+        <ul>
+            <li style="width:30px;"></li>
+            <li>
+                <a href="javascript:void(0);" onclick="openImport()" target="_parent" class="import">
+                    <img src="~/Content/images/import.png" />
+                </a>
+                <h4><a href="javascript:void(0);" onclick="openImport()" target="_parent">第三方导入</a></h4>
+                <p>通过第三方导入文献</p>
+            </li>
+            <li>
+                <a href="/Reference/Index" target="_parent" class="import">
+                    <img src="~/Content/images/write.png" />
+                </a>
+                <h4><a href="/Reference/Index" target="_parent">手工输入</a></h4>
+                <p>通过手工录入文献</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
 <div style="padding:20px">
     <input id="queryList" class="easyui-searchbox" style="width:auto"
            data-options="searcher:queryList,prompt:'输入文献相关查询'" />
-    <a href="/Reference/Index" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:false" style="float:right">添加文献</a>
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:false" style="float:right" onclick="addReference()">添加文献</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -37,8 +120,7 @@
                 <th style="width:50px"></th>
             </tr>
         </thead>
-        <tbody id="tbody">    
-        </tbody>
+        <tbody id="tbody"></tbody>
     </table>
 
     <div class="paging">
@@ -67,7 +149,16 @@
         <div class="clear"></div>
     </div>
 </div>
+
+
 <script>
+    function openImport() {
+        $('#import').dialog("open");//弹出模态框
+    }
+
+    function addReference() {
+        $('#addReference').dialog("open");//弹出模态框
+    }
     //查询函数
     function queryList() {
         reload(1);
@@ -146,7 +237,7 @@
                 var year = data.rows[i].Year;
                 content = content + "," + year;
                 //拼接字符串
-                $("#tbody").append("<tr><td><div><a href='/Reference/Details/" + data.rows[i].R_ID + "' target='_blank' style='font-size:1.2em;'>" + title + "</a></div><span style='color:#999999;font-weight:normal'>" + content + "</span></td><td><div><span class='glyphicon glyphicon-pencil'onclick='modify(\""+data.rows[i].R_ID+"\")'></span>&nbsp;&nbsp;<span class='glyphicon glyphicon-trash' onclick='trash(\"" + data.rows[i].R_ID + "\")'></span></div></td></tr>");
+                $("#tbody").append("<tr><td><div><a href='/Reference/Details/" + data.rows[i].R_ID + "' target='_blank' style='font-size:1.2em;'>" + title + "</a></div><span style='color:#999999;font-weight:normal'>" + content + "</span></td><td><div><span class='glyphicon glyphicon-pencil'onclick='modify(\"" + data.rows[i].R_ID + "\")'></span>&nbsp;&nbsp;<span class='glyphicon glyphicon-trash' onclick='trash(\"" + data.rows[i].R_ID + "\")'></span></div></td></tr>");
             }
         }, "json");
 

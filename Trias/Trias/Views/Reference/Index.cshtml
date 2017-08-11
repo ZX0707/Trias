@@ -106,14 +106,14 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">链接1：</label>
         <div class="col-sm-5">
-            <input name="URL1" id="URL1" type="text" class="form-control"
+            <input name="URL1" id="URL1" type="url" class="form-control"
                    placeholder="输入链接1" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">链接2：</label>
         <div class="col-sm-5">
-            <input name="URL2" id="URL2" type="text" class="form-control"
+            <input name="URL2" id="URL2" type="url" class="form-control"
                    placeholder="输入链接2" />
         </div>
     </div>
@@ -144,30 +144,12 @@
             $(this).removeClass("error_ness");
         });
         $('#addSection').attr({ "disabled": "disabled" });//禁用button
-        //$('#addSection').linkbutton('disable');//禁用button
-        //$.post("/Dict/GetSelectOptions", { type: "ReferenceType" }, function (result) {
-        //    $("#ReferenceType").html("");
-        //    for (var i = 0; i < result.length; i++) {
-        //        var value = result[i].KeyName;
-        //        var text = result[i].ValueName;
-        //        $("#ReferenceType").append("<option value='" + value + "'>" + text + "</option>");
-        //    }
-        //}, "json");
         //处理文献类型下拉框
         initSelect($("#ReferenceType"), getOptionsURL, { type: "ReferenceType" }, function () {
             changeType();
         });
         //处理语言下拉框
         initSelect($("#Language"), getOptionsURL, { type: "Language" });
-        //$.post("/Dict/GetSelectOptions", { type: "Language" }, function (result) {
-        //    $("#Language").html("");
-        //    for (var i = 0; i < result.length; i++) {
-        //        var value = result[i].KeyName;
-        //        var text = result[i].ValueName;
-        //        $("#Language").append("<option value='" + value + "'>" + text + "</option>");
-        //    }
-        //}, "json");
-
         $('#form').form({
             url: '/Reference/Add',
             onSubmit: function () {
