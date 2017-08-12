@@ -166,7 +166,7 @@ namespace Trias.Controllers
             {
                 throw;
             }
-            return WriteSuccess("修改成功");
+            return WriteSuccess("修改成功"); 
         }
         public ActionResult RemoveSection(string id)
         {

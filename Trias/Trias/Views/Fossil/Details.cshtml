@@ -7,132 +7,134 @@
 
 <body style="overflow:auto">
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.H_ID)
+        @Html.DisplayNameFor(model => model.H_ID)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.H_ID)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.C_ID)
+        @Html.DisplayNameFor(model => model.C_ID)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.C_ID)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Time)
+        @Html.DisplayNameFor(model => model.Time)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Time)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.SubTime)
+        @Html.DisplayNameFor(model => model.SubTime)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.SubTime)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Time2)
+        @Html.DisplayNameFor(model => model.Time2)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Time2)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Authorizer)
+        @Html.DisplayNameFor(model => model.Authorizer)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Authorizer)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.FossilGroup)
+        @Html.DisplayNameFor(model => model.FossilGroup)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.FossilGroup)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.TaxonType)
+        @Html.DisplayNameFor(model => model.TaxonType)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.TaxonType)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.CollectFromTreatise)
+        @Html.DisplayNameFor(model => model.CollectFromTreatise)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.CollectFromTreatise)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.RefDescribingRelation)
+        @Html.DisplayNameFor(model => model.RefDescribingRelation)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.RefDescribingRelation)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.GenusName)
+        @Html.DisplayNameFor(model => model.GenusName)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.GenusName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.SpeciesName)
+        @Html.DisplayNameFor(model => model.SpeciesName)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.SpeciesName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Position)
+        @Html.DisplayNameFor(model => model.Position)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Position)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Length)
+        @Html.DisplayNameFor(model => model.Length)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Length)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.width)
+        @Html.DisplayNameFor(model => model.width)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.width)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Picture)
+        @Html.DisplayNameFor(model => model.Picture)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Picture)
+        @{
+            var arr = (Model.Picture ?? "").Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in arr)
+            {
+                @:<img src="@item" />
+            }
+        }
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Notes)
+        @Html.DisplayNameFor(model => model.Notes)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Notes)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.sort)
+        @Html.DisplayNameFor(model => model.sort)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.sort)
     </div>
 </body>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

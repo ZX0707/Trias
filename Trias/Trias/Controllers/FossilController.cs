@@ -52,6 +52,7 @@ namespace Trias.Controllers
                 fileName += Path.GetExtension(file.FileName);
                 fileName = Path.Combine(filePath, fileName);
                 file.SaveAs(fileName);
+                fileName = fileName.Replace(Server.MapPath("~"), "/");
                 fossilModel.Picture += fileName + ";";
             }
             var sort = fossilSer.Where().Select(x => x.sort).OrderByDescending(x => x).FirstOrDefault() ?? 0;
@@ -135,6 +136,7 @@ namespace Trias.Controllers
                 fileName += Path.GetExtension(file.FileName);
                 fileName = Path.Combine(filePath, fileName);
                 file.SaveAs(fileName);
+                fileName = fileName.Replace(Server.MapPath("~"), "/");
                 fossilmodel.Picture += fileName + ";";
             }
             if (Request.Files.Count <= 0)
