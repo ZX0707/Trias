@@ -92,7 +92,7 @@ namespace Trias.Controllers
             }).ToList();
             return Json(new
             {
-                total=total,
+                total = total,
                 rows = result
             });
         }
@@ -194,7 +194,12 @@ namespace Trias.Controllers
         /// <returns></returns>
         public ActionResult Remove(string id)
         {
-            referenceSer.RemoveWhere(x => x.R_ID == id);
+            var model = referenceSer.FirstOrDefault(x => x.R_ID == id);
+            if (model == null)
+            {
+                return WriteError("没有找到该剖面！");
+            }
+            referenceSer.Remove(model);
             referenceSer.SaveChanges();
             return WriteSuccess("操作成功！");
         }

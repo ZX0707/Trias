@@ -142,14 +142,15 @@ namespace Trias.Controllers
         }
         public ActionResult RemoveSection(string id)
         {
-            if (id == null)
+            var model = sectionSer.FirstOrDefault(x => x.S_ID == id);
+            if (model == null)
             {
-                return WriteError("次文献不存在");
+                return WriteError("该剖面不存在！");
             }
-            sectionSer.RemoveWhere(x => x.S_ID == id);
+            sectionSer.Remove(model);
             sectionSer.SaveChanges();
             return WriteSuccess("删除成功");
         }
     }
-   
+
 }
