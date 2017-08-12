@@ -245,7 +245,7 @@ namespace Trias.Controllers
             {
                 return WriteError("上传的文件列数缺少，请确认！");
             }
-            for (var i = 0; i < cellCount; i++)
+            for (var i = 0; i <= cellCount; i++)
             {
                 var cell = firstRow.GetCell(i);
                 if (!cell.ToString().Equals(cellNameArray[i]))
