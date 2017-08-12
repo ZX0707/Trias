@@ -33,6 +33,16 @@ namespace Trias.Controllers
                 Directory.CreateDirectory(filePath);
             }
             var fossilModel = JsonConvert.DeserializeObject<Fossil>(fossil);
+            #region 
+            if (string.IsNullOrWhiteSpace(fossilModel.GenusName))
+            {
+                WriteError("属名不能为空");
+            }
+            if (string.IsNullOrWhiteSpace(fossilModel.SpeciesName))
+            {
+                WriteError("种名不能为空");
+            }
+            #endregion
             fossilModel.Picture = "";
             for (var i = 0; i < Request.Files.Count; i++)
             {
@@ -98,7 +108,7 @@ namespace Trias.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditFossil(string fossil, string id)
+        public ActionResult EditFossil(Fossil model, string fossil)
         {
             var fossilmodel = JsonConvert.DeserializeObject<Fossil>(fossil);
             #region 
@@ -111,6 +121,31 @@ namespace Trias.Controllers
                 WriteError("种名不能为空");
             }
             #endregion
+            var filePath = Server.MapPath("~/UpLoad/Picture");
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+            fossilmodel.Picture = "";
+            for (var i = 0; i < Request.Files.Count; i++)
+            {
+                var file = Request.Files[i];
+                if (file == null) continue;
+                var fileName = MD5Helper.GetStreamMd5(file.InputStream);
+                fileName += Path.GetExtension(file.FileName);
+                fileName = Path.Combine(filePath, fileName);
+                file.SaveAs(fileName);
+                fossilmodel.Picture += fileName + ";";
+            }
+            if (Request.Files.Count <= 0)
+            {
+                model = fossilSer.FirstOrDefault(x => x.H_ID == fossilmodel.H_ID);
+                if (model == null)
+                {
+                    return WriteError("未查询到该实体！");
+                }
+                fossilmodel.Picture = model.Picture;
+            }
             fossilSer.EditWhere(x => x.H_ID == fossilmodel.H_ID, fossilmodel);
             fossilSer.SaveChanges();
             return WriteSuccess("修改成功");

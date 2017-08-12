@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
 }
 
-<form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
+<form class="form-horizontal" role="form" id="form" method="post" enctype="multipart/form-data" style="padding: 20px; text-align: center;">
     <div class="form-group">
         <label class="col-sm-2 control-label">核准人：</label>
         <div class="col-sm-2 ">
@@ -81,7 +81,7 @@
         <div class="col-sm-2" style="width: auto;">
             <select id="widthSize" class="form-control">
                 <option value="1">厘米</option>
-                <option value="0.1">毫米</option> 
+                <option value="0.1">毫米</option>
             </select>
         </div>
     </div>
@@ -89,7 +89,7 @@
         <label class="col-sm-2 control-label">图片：</label>
         <div class="col-sm-2 ">
             <label class="sr-only" for="inputfile">文件输入</label>
-            <input name="Picture" id="Picture" type="file">
+            <input name="Picture" id="Picture" type="file" multiple="multiple">
         </div>
     </div>
 
@@ -130,7 +130,7 @@
             }
             $("#FossilGroup").val("@Model.FossilGroup");
         }, "json");
-        
+
         initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function () {
             $("#Time").val("@Model.Time");
             change(function () {
@@ -145,8 +145,10 @@
         });
         $("#LengthSize").val("1");
         $("#widthSize").val("1");
+        init_form();
         $("#btn_save").on("click", {}, function () {
-            var fossil = {
+            $("#form").form("submit");
+            @*var fossil = {
                 H_ID: "@Model.H_ID",
                 C_ID:"@Model.C_ID",
                 Time: $("#Time").val(),
@@ -182,9 +184,55 @@
                         $.messager.alert("", data.msg, "warning");
                     }
                 },
-                "json");
+                "json");*@
         });
     });
+    function init_form() {
+        $("#form").form({
+            url:"@Url.Action("EditFossil")",
+            onSubmit: function (data) {
+                var fossil = {
+                    H_ID: "@Model.H_ID",
+                    C_ID: "@Model.C_ID",
+                    Time: $("#Time").val(),
+                    SubTime: $("#SubTime").val(),
+                    Time2: $("#Time2").val(),
+                    Authorizer: $("#Authorizer").val(),
+                    FossilGroup: $("#FossilGroup").val(),
+                    TaxonType: $("#TaxonType").val(),
+                    CollectFromTreatise: $("#CollectFromTreatise").val(),
+                    RefDescribingRelation: $("#RefDescribingRelation").val(),
+                    GenusName: $("#GenusName").val(),
+                    SpeciesName: $("#SpeciesName").val(),
+                    Position: $("#Position").val(),
+                    Length: parseFloat($("#Length").val())*parseFloat($("#LengthSize").val()),
+                    width: parseFloat($("#width").val()) * parseFloat($("#widthSize").val()),
+                    Picture: $("#Picture").val(),
+                    Notes: $("#Notes").val()
+                };
+                if (!identify()) { return false; };
+                data.fossil = JSON.stringify(fossil);
+                return true;
+            },
+            success: function (data) {
+                if (typeof data == "string") {
+                    data = $.parseJSON(data);
+                }
+                if (data.status === "success") {
+                    $.messager.alert("",
+                        data.msg,
+                        "info",
+                        function () {
+                            parent.reload();
+                            commHelper.CloseDialog("修改化石");
+                        });
+                } else {
+                    $.messager.alert("", data.msg, "warning");
+                }
+            }
+        });
+    }
+
     function change(func) {
         initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") }, function () {
             func();
