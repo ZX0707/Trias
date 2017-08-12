@@ -152,7 +152,8 @@
 
     }
     function trash(id) {
-        $.post("/Reference/Remove", { id: id }, function (data) {
+        debugger;
+        $.post("/Section/Remove", { id: id }, function (data) {
             if (data.status = "success") {
                 $.messager.alert("", data.msg, "info", function () {
                     reload();
@@ -164,7 +165,7 @@
         }, "json");
     }
     function modify(id) {
-        commHelper.OpenDialog("修改文献", "/Reference/Edit/" + id, $(window).width() * 0.7, $(window).height() * 0.7);
+        commHelper.OpenDialog("修改文献", "/Section/Edit/" + id, $(window).width() * 0.7, $(window).height() * 0.7);
     }
 
 </script>

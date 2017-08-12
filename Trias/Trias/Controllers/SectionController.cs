@@ -53,6 +53,17 @@ namespace Trias.Controllers
                 rows = result
             });
         }
+        /// <summary>
+        /// 删除剖面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Remove(string id)
+        {
+            sectionSer.RemoveWhere(x => x.S_ID == id);
+            sectionSer.SaveChanges();
+            return WriteSuccess("操作成功！");
+        }
         //
         // GET: /Section/
 
@@ -140,4 +151,5 @@ namespace Trias.Controllers
             return WriteSuccess("删除成功");
         }
     }
+   
 }

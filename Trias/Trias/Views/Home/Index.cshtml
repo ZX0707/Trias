@@ -45,15 +45,16 @@
         margin: 10px auto;
     }
 
-    .left{
-         /*width: 478px;*/
+    .mainLeft {
+        /*width: 478px;*/
         float: left;
     }
+
     #myCarousel {
         width: 478px;
     }
 
-    .right {
+    .mainRight {
         margin-left: 478px;
         height: 326px;
         display: table-cell;
@@ -62,13 +63,9 @@
 
     .login {
         width: 300px;
-        padding: 40px 20px;
+        padding: 40px 20px 80px;
         background-color: #ecf0f1;
         margin-left: 60px;
-    }
-
-    .top {
-        margin-top: 10px;
     }
 
     .footer {
@@ -88,8 +85,8 @@
         </div>
     </div>
     <div class="main">
-        <div class="left">
-            <div id="myCarousel" class="carousel slide">
+        <div class="mainLeft">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- 轮播（Carousel）指标 -->
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -109,23 +106,20 @@
                     </div>
                 </div>
                 <!-- 轮播（Carousel）导航 -->
-                @*<a class="carousel-control left" href="#myCarousel"
-                   data-slide="prev">&lsaquo;</a>
-                <a class="carousel-control right" href="#myCarousel"
-                   data-slide="next">&rsaquo;</a>*@
-            </div> 
+                @*<label class="carousel-control left"></label>
+                <label class="carousel-control right"></label>*@
+            </div>
         </div>
-        <div class="right">
+        <div class="mainRight">
             <form class="login">
-                <div>
-                    <label>用户：</label><input type="text" id="UserName" class="form_input" value="" />
+                <div class="form-group">
+                    <input type="text" id="UserName" class="form-control" placeholder="账号" value="admin" />
                 </div>
-                <div class="top">
-                    <label>密码：</label><input type="password" id="Password" class="form_input" value="" />
+                <div class="form-group">
+                    <input type="password" id="Password" class="form-control" placeholder="密码" value="666" />
                 </div>
-                <div class="top" style="width: 275px; text-align: center">
-                    <input type="reset" name="reset" value="重置" class="form_button" />
-                    <input type="button" value="登录" onclick="login()" class="form_button" />
+                <div class="form-group">
+                    <input type="button" id="Password" onclick="login()" class="btn btn-primary col-sm-12" value="登录" />
                 </div>
             </form>
         </div>

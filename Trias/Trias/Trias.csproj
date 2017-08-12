@@ -1143,6 +1143,10 @@
     <Content Include="Content\bootstrap-3.3.7-dist\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\bootstrap-3.3.7-dist\js\Desktop_1.ini" />
     <Content Include="Content\bootstrap-3.3.7-dist\js\Desktop_2.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\Desktop_1.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\Desktop_2.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\Desktop_1.ini" />
+    <Content Include="Content\bootstrap-3.3.7-dist\fonts\Desktop_2.ini" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
