@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">岩石组名：</label>
                 <div class="col-sm-2">
-                    @Html.TextBoxFor(x => x.FormationName, new { type = "text", @class = "form-control", })
+                    @Html.TextBoxFor(x => x.FormationName, new { type = "text", @class = "form-control required", })
                 </div>
                 <label class="col-sm-2 control-label">沉积相带：</label>
                 <div class="col-sm-3" style="width:auto">
@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">厚度：</label>
                 <div class="col-sm-2">
-                    @Html.TextBoxFor(x => x.Thickness, new { type = "text", @class = "form-control", })
+                    @Html.TextBoxFor(x => x.Thickness, new { type = "text", @class = "form-control required", })
                 </div>
                 <div class="col-sm-2" style="width: auto">
                     <select id="ThicknessSize" class="form-control">

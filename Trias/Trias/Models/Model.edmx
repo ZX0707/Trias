@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TriasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="TriasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="Collection">
           <Key>
             <PropertyRef Name="C_ID" />
@@ -53,14 +53,14 @@
           <Property Name="FossilGroup" Type="nvarchar" MaxLength="50" />
           <Property Name="TaxonType" Type="nvarchar" MaxLength="50" />
           <Property Name="CollectFromTreatise" Type="nvarchar" MaxLength="50" />
-          <Property Name="RefDescribingRelation" Type="nvarchar" MaxLength="50" />
-          <Property Name="GenusName" Type="nvarchar" MaxLength="50" />
-          <Property Name="SpeciesName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RefDescribingRelation" Type="nvarchar" MaxLength="100" />
+          <Property Name="GenusName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SpeciesName" Type="nvarchar" MaxLength="100" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Length" Type="nvarchar" MaxLength="50" />
           <Property Name="width" Type="nvarchar" MaxLength="50" />
           <Property Name="Picture" Type="nvarchar(max)" />
-          <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" />
           <Property Name="sort" Type="int" />
         </EntityType>
         <EntityType Name="Geochemical">
@@ -88,14 +88,14 @@
           <Property Name="R_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ReferenceType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstAuthor" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="OtherAuthors" Type="nvarchar" MaxLength="50" />
+          <Property Name="OtherAuthors" Type="nvarchar" MaxLength="255" />
           <Property Name="Year" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="BookTitle" Type="nvarchar" MaxLength="50" />
-          <Property Name="Journal" Type="nvarchar" MaxLength="50" />
-          <Property Name="Editor1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="400" />
+          <Property Name="BookTitle" Type="nvarchar" MaxLength="400" />
+          <Property Name="Journal" Type="nvarchar" MaxLength="400" />
+          <Property Name="Editor1" Type="nvarchar" MaxLength="100" />
           <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Publisher" Type="nvarchar" MaxLength="50" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="100" />
           <Property Name="Volume" Type="nvarchar" MaxLength="50" />
           <Property Name="No" Type="nvarchar" MaxLength="50" />
           <Property Name="PageBegin" Type="nvarchar" MaxLength="50" />
@@ -159,7 +159,7 @@
           <Property Name="F_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Thickness" Type="float" />
           <Property Name="ContactBase" Type="nvarchar" MaxLength="50" />
-          <Property Name="Facies" Type="nvarchar" MaxLength="50" />
+          <Property Name="Facies" Type="nvarchar" MaxLength="100" />
           <Property Name="Environments" Type="nvarchar" MaxLength="50" />
           <Property Name="Details" Type="text" />
           <Property Name="sort" Type="int" />
@@ -171,9 +171,9 @@
           <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="UserPwd" Type="nvarchar" MaxLength="50" />
-          <Property Name="UserUnit" Type="nvarchar" MaxLength="50" />
-          <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
-          <Property Name="ResearchField" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserUnit" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResearchField" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityContainer Name="TriasModelStoreContainer">
           <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
@@ -251,14 +251,14 @@
           <Property Name="FossilGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TaxonType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CollectFromTreatise" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RefDescribingRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GenusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SpeciesName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RefDescribingRelation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GenusName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SpeciesName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Length" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="width" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="sort" Type="Int32" />
         </EntityType>
         <EntityType Name="Geochemical">
@@ -286,14 +286,14 @@
           <Property Name="R_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ReferenceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstAuthor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OtherAuthors" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OtherAuthors" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Journal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Editor1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="BookTitle" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Journal" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Editor1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Language" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Publisher" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Volume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PageBegin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -357,7 +357,7 @@
           <Property Name="F_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Thickness" Type="Double" />
           <Property Name="ContactBase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Facies" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Facies" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Environments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sort" Type="Int32" />
@@ -369,9 +369,9 @@
           <Property Name="User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResearchField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserUnit" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResearchField" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
