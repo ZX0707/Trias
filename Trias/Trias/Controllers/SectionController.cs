@@ -133,8 +133,12 @@ namespace Trias.Controllers
             viewModel.CopyFrom(model);
             return View(viewModel);
         }
-        public ActionResult EditSection(SectionView model)
+        public ActionResult EditSection(SectionView model, string RID11, string RID22, string RID33, double? Altitude1)
         {
+            model.Altitude = Altitude1;
+            model.RID1 = RID11;
+            model.RID2 = RID22;
+            model.RID3 = RID33;
             if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);
