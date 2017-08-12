@@ -15,7 +15,13 @@ namespace Trias.Controllers
     {
         //
         // GET: /Formation/
-
+        public ActionResult Details(string id)
+        {
+            var model = formationSer.Find(id);
+            var viewModel = new FormationView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
+        }
         public ActionResult Index(string id)
         {
             var model = sectionSer.Find(id) ?? new Section();
@@ -264,7 +270,7 @@ namespace Trias.Controllers
                     {
                         var g1 = geochemicalSer.FirstOrDefault(x => x.G_ID == id1);
                         var g2 = geochemicalSer.FirstOrDefault(x => x.G_ID == id2);
-                        if (g1!=null&& g2!=null)
+                        if (g1 != null && g2 != null)
                         {
                             sort = g1.sort;
                             g1.sort = g2.sort;

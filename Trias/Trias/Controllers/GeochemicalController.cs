@@ -13,7 +13,13 @@ namespace Trias.Controllers
     {
         //
         // GET: /Geochemical/
-
+        public ActionResult Details(string id)
+        {
+            var model = geochemicalSer.Find(id);
+            var viewModel = new GeochemicalView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
+        }
         public ActionResult Index()
         {
             return View();

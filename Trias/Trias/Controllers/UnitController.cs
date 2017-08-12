@@ -14,7 +14,13 @@ namespace Trias.Controllers
     {
         //
         // GET: /Unit/
-
+        public ActionResult Details(string id)
+        {
+            var model = unitSer.Find(id);
+            var viewModel = new UnitView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
+        }
         public ActionResult Index()
         {
             return View();

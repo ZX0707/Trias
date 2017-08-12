@@ -1,0 +1,135 @@
+﻿@model Trias.Models.UnitView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+}
+
+
+<style>
+    .level1, .level2, .level3, .level4 {
+        padding-left: 25px;
+        line-height: 30px;
+    }
+
+    .co_li div {
+        height: 100%;
+        margin-top: 5px;
+    }
+
+    .co_li input {
+        width: 70px;
+    }
+
+    .bian_ju {
+        margin-bottom: 10px;
+    }
+
+    .colorTable th {
+        width: 100px;
+    }
+</style>
+
+<body style="overflow:auto">
+    <div class="container">
+        <div class="conta">
+
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.U_ID)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.U_ID)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.F_ID)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.F_ID)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Thickness)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Thickness)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.ContactBase)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.ContactBase)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Facies)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Facies)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Environments)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Environments)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Details)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Details)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.sort)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.sort)
+            </div>
+            <div>
+                <table class="colorTable">
+                    <thead>
+                    <tr>
+                        <th>颜色一</th>
+                        <th>颜色儿</th>
+                        <th>岩性一</th>
+                        <th>岩性儿</th>
+                        <th>主要岩性</th>
+                        <th>关系</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    $(function() {
+        $.post("@Url.Action("GetList","Rock")", { id: "@Model.U_ID" }, function (data) {
+            console.log(data);
+            $("#tbody").html("");
+            for (var i = 0; i < data.length; i++) {
+                var tr = $("<tr><td>" +
+                    data[i].Color1 +
+                    "</td><td>" +
+                    data[i].Color2 +
+                    "</td><td>" +
+                    data[i].Lithology1 +
+                    "</td><td>" +
+                    data[i].Lithology2 +
+                    "</td><td>" +
+                    data[i].MainLithology +
+                    "</td><td>" +
+                    data[i].Relation +
+                    "</td></tr>");
+                $("#tbody").append(tr);
+            }
+        },"json");
+    });
+</script>

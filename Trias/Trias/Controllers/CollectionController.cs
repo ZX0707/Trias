@@ -19,6 +19,13 @@ namespace Trias.Controllers
         //{
         //    return View();
         //}
+        public ActionResult Details(string id)
+        {
+            var model = collectionSer.Find(id);
+            var viewModel = new CollectionView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
+        }
         public ActionResult Add(string id)
         {
             ViewBag.F_ID = unitSer.FirstOrDefault(x => x.U_ID == id).F_ID;

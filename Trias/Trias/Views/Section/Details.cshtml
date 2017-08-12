@@ -198,9 +198,9 @@
     </div>
 </body>
 @*<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
+        @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
 <script>
     function reload() {
         $.post("@Url.Action("GetInfomationBySId","Formation")", { sid: "@Model.S_ID" }, function (data) {
@@ -215,7 +215,7 @@
                 formationDiv.append("<label>" + fName + "</label>");
                 formationDiv.append(
 
-                    "<div class='btn-group'style='float:right;'><a href='#'><span class='glyphicon glyphicon-search' onclick='myUnit(\"" + fid + "\")'>查看详情</span></a></div>");
+                    "<div class='btn-group'style='float:right;'><a href='javascript:void(0)'><span class='glyphicon glyphicon-search' onclick='lookFormation(\"" + fid + "\")'>查看详情</span></a></div>");
 
                 // "<div class='btn-group'><button type='button' class='btn btn-default' onclick='myUnit(\"" + fid + "\")'>添加层</button><button type='button' class='btn btn-default' onclick='delFormation(\"" + fid + "\")'>删除岩石组</button><button type='button' class='btn btn-default'>修改岩石组</button></div>");
                 box.append(formationDiv);
@@ -227,7 +227,7 @@
                     var unitDiv = $("<div class='level2' id='" + uid +"'/>");
                     unitDiv.append("<label>" + uName + "</label>");
                     unitDiv.append(
-                        "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-search' onclick='myCollection(\"" + uid + "\")'>查看详情</span></a></div>");
+                        "<div class='btn-group'style='float:right'><a href='javascript:void(0)'><span class='glyphicon glyphicon-search' onclick='lookUnit(\"" + uid + "\")'>查看详情</span></a></div>");
                     formationDiv.append(unitDiv);
                     for (var k = 0; k < collections.length; k++) {
                         var collection = collections[k].collection;
@@ -237,7 +237,7 @@
                         var collectionDiv = $("<div class='level3' id='" + cid +"'/>");
                         collectionDiv.append("<label>" + cName + "</label>");
                         collectionDiv.append(
-                            "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-search' onclick='myFossil(\"" + cid + "\")'>查看详情</span></a></div>");
+                            "<div class='btn-group'style='float:right'><a href='javascript:void(0)'><span class='glyphicon glyphicon-search' onclick='lookCollection(\"" + cid + "\")'>查看详情</span></a></div>");
                         unitDiv.append(collectionDiv);
                         for (var l = 0; l < fossils.length; l++) {
                             var fossil = fossils[l];
@@ -257,7 +257,7 @@
                             var geochemicalDiv = $("<div class='level4' id='" + gid +"'/>");
                             geochemicalDiv.append("<label>" + gName + "</label>");
                             geochemicalDiv.append(
-                                "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-search'  onclick='delGeochemical(\"" + gid + "\")'>查看详情</span></a></div>");
+                                "<div class='btn-group'style='float:right'><a href='javascript:void(0)'><span class='glyphicon glyphicon-search'  onclick='lookGeochemical(\"" + gid + "\")'>查看详情</span></a></div>");
                             collectionDiv.append(geochemicalDiv);
                         }
                     }
@@ -268,8 +268,19 @@
     $(function () {
         reload();
     });
-    function lookFossil(foid) {
-        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Fossil")/"+foid);
-
+    function lookUnit(id) {
+        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Unit")/"+id);
+    }
+    function lookFormation(id) {
+        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Formation")/"+id);
+    }
+    function lookCollection(id) {
+        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Collection")/"+id);
+    }
+    function lookFossil(id) {
+        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Fossil")/"+id);
+    }
+    function lookGeochemical(id) {
+        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Geochemical")/"+id);
     }
 </script>

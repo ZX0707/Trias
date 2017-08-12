@@ -1,0 +1,131 @@
+﻿@model Trias.Models.GeochemicalView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+}
+
+
+<style>
+    .level1, .level2, .level3, .level4 {
+        padding-left: 25px;
+        line-height: 30px;
+    }
+
+    .co_li div {
+        height: 100%;
+        margin-top: 5px;
+    }
+
+    .co_li input {
+        width: 70px;
+    }
+
+    .bian_ju {
+        margin-bottom: 10px;
+    }
+
+    .colorTable th {
+        width: 100px;
+    }
+</style>
+
+<body style="overflow:auto">
+    <div class="container">
+        <div class="conta">
+
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.G_ID)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.G_ID)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.C_ID)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.C_ID)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Authorizer)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Authorizer)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.isotope)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.isotope)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Isotopepersents)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Isotopepersents)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Element)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Element)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Elementpersents)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Elementpersents)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Time)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Time)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.SubTime)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.SubTime)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Time2)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Time2)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Position)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Position)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Notes)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Notes)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.sort)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.sort)
+            </div>
+
+        </div>
+    </div>
+</body>
