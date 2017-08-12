@@ -126,6 +126,13 @@ namespace Trias.Controllers
                 rows = list.ToList()
             });
         }
+        public ActionResult Edit(string id)
+        {
+            var model = sectionSer.FirstOrDefault(s => s.S_ID == id);
+            var viewModel = new SectionView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
+        }
         public ActionResult EditSection(SectionView model)
         {
             if (!ModelState.IsValid)

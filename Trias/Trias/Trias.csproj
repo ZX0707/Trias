@@ -1201,6 +1201,7 @@
     <Content Include="Views\Reference\Details.cshtml" />
     <Content Include="Views\Reference\Edit.cshtml" />
     <Content Include="Views\Section\QueryList.cshtml" />
+    <Content Include="Views\Section\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,10 +2,12 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";    
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
 }
 <body style="overflow-y:auto;">
     <form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
+        @*@Html.HiddenFor(x=>x.R_ID)*@
+        <input id="R_ID" name="R_ID" type="hidden" value="@Model.R_ID">
         <div class="form-group">
             <label class="col-sm-2 control-label">文献类型：</label>
             <div class="col-sm-3">
@@ -31,7 +33,7 @@
             <label class="col-sm-2 control-label">杂志名：</label>
             <div class="col-sm-3">
                 <input name="Journal" id="Journal" type="text" class="form-control"
-                       placeholder="输入杂志名" value="@Model.Journal"/>
+                       placeholder="输入杂志名" value="@Model.Journal" />
             </div>
         </div>
         <div class="form-group">
@@ -47,42 +49,42 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">年度：</label>
             <div class="col-sm-2">
-                <input name="Year" id="Year" type="number" class="form-control required" placeholder="输入年度" value="@Model.Year"/>
+                <input name="Year" id="Year" type="number" class="form-control required" placeholder="输入年度" value="@Model.Year" />
             </div>
         </div>
         <div class="form-group book">
             <label class="col-sm-2 control-label">编辑：</label>
             <div class="col-sm-2">
                 <input name="Editor1" id="Editor1" type="text" class="form-control"
-                       placeholder="输入编辑" value="@Model.Editor1"/>
+                       placeholder="输入编辑" value="@Model.Editor1" />
             </div>
         </div>
 
         <div class="form-group journal">
             <label class="col-sm-2 control-label">册：</label>
             <div class="col-sm-2">
-                <input name="Volume" id="Volume" type="number" class="form-control" placeholder="册" value="@Model.Volume"/>
+                <input name="Volume" id="Volume" type="number" class="form-control" placeholder="册" value="@Model.Volume" />
             </div>
             <label class="col-sm-1 control-label">卷：</label>
             <div class="col-sm-2">
-                <input name="No" id="No" type="number" class="form-control" placeholder="卷" value="@Model.No"/>
+                <input name="No" id="No" type="number" class="form-control" placeholder="卷" value="@Model.No" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">起始页：</label>
             <div class="col-sm-2">
-                <input name="PageBegin" id="PageBegin" type="number" class="form-control" placeholder="起始页" value="@Model.PageBegin"/>
+                <input name="PageBegin" id="PageBegin" type="number" class="form-control" placeholder="起始页" value="@Model.PageBegin" />
             </div>
             <label class="col-sm-1 control-label">结束页：</label>
             <div class="col-sm-2">
-                <input name="PageEnd" id="PageEnd" type="number" class="form-control" placeholder="结束页" value="@Model.PageEnd"/>
+                <input name="PageEnd" id="PageEnd" type="number" class="form-control" placeholder="结束页" value="@Model.PageEnd" />
             </div>
         </div>
         <div class="form-group book">
             <label class="col-sm-2 control-label">出版社：</label>
             <div class="col-sm-3">
                 <input name="Publisher" id="Publisher" type="text" class="form-control"
-                       placeholder="输入出版社" value="@Model.Publisher"/>
+                       placeholder="输入出版社" value="@Model.Publisher" />
             </div>
         </div>
         <div class="form-group">
@@ -95,21 +97,21 @@
             <label class="col-sm-2 control-label">编码：</label>
             <div class="col-sm-3">
                 <input name="DOI" id="DOI" type="text" class="form-control"
-                       placeholder="输入编码" value="@Model.DOI"/>
+                       placeholder="输入编码" value="@Model.DOI" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">链接1：</label>
             <div class="col-sm-5">
                 <input name="URL1" id="URL1" type="text" class="form-control"
-                       placeholder="输入链接1" value="@Model.URL1"/>
+                       placeholder="输入链接1" value="@Model.URL1" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">链接2：</label>
             <div class="col-sm-5">
                 <input name="URL2" id="URL2" type="text" class="form-control"
-                       placeholder="输入链接2" value="@Model.URL2"/>
+                       placeholder="输入链接2" value="@Model.URL2" />
             </div>
         </div>
 
@@ -120,11 +122,12 @@
             </div>
         </div>
         <div class="form-group" style="text-align: center">
-            <div class="col-sm-3">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
                 <button onclick="resetForm()" type="button" class="btn btn-default">重置</button>
             </div>
-            <div class="col-sm-3">
-                <button onclick="save()" type="button" class="btn btn-default">保存</button>
+            <div class="col-sm-2">
+                <button onclick="save()" type="button" class="btn btn-default">确定</button>
             </div>
             <div class="col-sm-3">
                 <button id="addSection" type="button" class="btn btn-default" style="display:none">添加剖面</button>
@@ -154,6 +157,7 @@
             url: '/Reference/Edit',
             onSubmit: function () {
                 //提交验证，return false;不提交
+
                 var arr = $(".required");
                 var flag = true;
                 for (var i = 0; i < arr.length; i++) {
@@ -171,6 +175,35 @@
                         $.messager.alert("", "结束页须大于等于起始页！", "warning");
                     }
                 }
+                if (flag == true) {
+                    var value = $("#ReferenceType").val();
+                    debugger;
+                    switch (value) {
+                        case "journal article":
+                        case "paper presented at metting":
+                        case "abstract":
+                            //$(".book").css("display", "none");
+                            //$(".PHD").css("display", "none");
+                            //$(".journal").css("display", "block");
+                            $(".book:not(.journal),.PHD:not(.journal)").find("input").val("");//包含book或PHD但不包含journal
+                            break;
+                        case "book":
+                        case "edit book":
+                        case "book chapter":
+                            //$(".journal").css("display", "none");
+                            //$(".PHD").css("display", "none");
+                            //$(".book").css("display", "block");
+                            $(".journal:not(.book),.PHD:not(.book)").find("input").val("");
+                            break;
+                        case "Ph.D.dissertation":
+                        case "master thesis":
+                            $(".journal:not(PHD),.book:not(PHD)").find("input").val("");
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
                 return flag;
             },
             success: function (data) {
@@ -182,8 +215,11 @@
                     rid = data.msg.R_ID;
                     showTitle = data.msg.ShowTitle;
                     $('#addSection').removeAttr("disabled");//启用button
-                    commHelper.CloseDialog("修改文献");
-                   // $.messager.alert("", "保存成功！", "info");
+                    //.messager异步弹窗
+                    $.messager.alert("", "修改成功！", "info", function () {
+                        parent.queryList();//调用父页面的函数
+                        commHelper.CloseDialog("修改文献");
+                    });
                 }
                 else {
                     $.messager.alert("", data.msg, "warning");
