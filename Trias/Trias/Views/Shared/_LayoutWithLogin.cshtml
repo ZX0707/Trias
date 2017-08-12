@@ -63,7 +63,7 @@
         $.post("@Url.Action("GetCurrentUser", "Login")", {}, function (result) {
             currentUser = result.msg;
             if (currentUser == null) {
-               location.href = "/";
+                location.href = "/";
             }
             else {
                 $("#name").html(currentUser.UserName);
@@ -76,6 +76,7 @@
         $(".required").on("focus", {}, function () {
             $(this).removeClass("error_ness");
         });
+        
     });
     //退出函数
     function SignOut() {

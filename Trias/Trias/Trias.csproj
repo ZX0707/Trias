@@ -1030,6 +1030,9 @@
     <Content Include="Content\images\lunb1.jpg" />
     <Content Include="Content\images\lunb2.jpg" />
     <Content Include="Content\images\lunb3.jpg" />
+    <Content Include="Content\images\lunbo4.jpg" />
+    <Content Include="Content\images\lunbo5.jpg" />
+    <Content Include="Content\images\lunbo6.jpg" />
     <Content Include="Content\images\write.png" />
     <Content Include="Content\JS\home.js" />
     <Content Include="Content\JS\jquery-1.9.1.min.js" />

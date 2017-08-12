@@ -1,3 +1,115 @@
 ﻿@{
     ViewBag.Title = "首页";
 }
+<style type="text/css">
+    #myCarousel {
+        width: 380px;
+    }
+</style>
+<div style="width: 400px; height:100%; text-align:center; margin:10px;">
+    <div style="margin:10px;">
+        <table width="380" height="180" cellpadding="0" cellspacing="0" style="border: 1px solid #B0BEC7;">
+            <tr style="height:30px">
+                <td width="200" style="text-align:right">reference</td>
+                <td width="20"></td>
+                <td style="text-align:left" id="referencetotal"></td>
+            </tr>
+            <tr style="height:30px">
+                <td width="200" style="text-align:right">formation</td>
+                <td width="20"></td>
+                <td style="text-align:left" id="formationtotal"></td>
+
+            </tr>
+            <tr style="height:30px">
+                <td width="200" style="text-align:right">collection</td>
+                <td width="20"></td>
+                <td style="text-align:left" id="collectiontotal"></td>
+            </tr>
+            <tr style="height:30px">
+                <td width="170" style="text-align:right">section</td>
+                <td width="20"></td>
+                <td style="text-align:left" id="sectiontotal"></td>
+            </tr>
+            <tr style="height:30px">
+                <td width="200" style="text-align:right">fossil</td>
+                <td width="20"></td>
+                <td style="text-align:left" id="fossiltotal"></td>
+            </tr>
+            <tr style="height:30px">
+                <td width="200" style="text-align:right">user</td>
+                <td width="20"></td>
+                <td style="text-align:left" id="usertotal"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin:10px;">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="~/Content/images/lunbo4.jpg" alt="First slide">
+            </div>
+            <div class="item">
+                <img src="~/Content/images/lunbo5.jpg" alt="Second slide">
+            </div>
+            <div class="item">
+                <img src="~/Content/images/lunbo6.jpg" alt="Third slide">
+            </div>
+        </div>
+    </div>
+    <div style="margin:10px">
+        <table width="380" height="200" border="0" cellpadding="0" cellspacing="0"style="border: 1px solid #B0BEC7;">
+            <tr>
+                <td height="50">
+                <font color="#447C88">&nbsp;&nbsp;&nbsp;<span style="font-size:20px">Contact us</span> </font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table style="width:100%"  border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td height="15" colspan="3">&nbsp;&nbsp;<strong>Dr. Fan Junxuan</strong></td>
+                        </tr>
+                        <tr>
+                            <td width="23%" height="15" align="right">Phone:</td>
+                            <td width="5%">&nbsp;</td>
+                            <td width="72%">+86-25-83282247</td>
+                        </tr>
+                        <tr>
+                            <td height="15" align="right">&nbsp;E-mail:</td>
+                            <td>&nbsp;</td>
+                            <td> <a href="mailto:fanjunxuan@gmail.com"><u>fanjunxuan@gmail.com</u></a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    $(function () {
+        $.post("@Url.Action("GetList", "Reference")", {}, function (result) {
+            $("#referencetotal").html(result.total);
+        });
+        $.post("@Url.Action("GetList", "Section")", {}, function (result) {
+            $("#sectiontotal").html(result.total);
+        });
+        $.post("@Url.Action("GetList", "Fossil")", {}, function (result) {
+            $("#fossiltotal").html(result.total);
+        });
+        $.post("@Url.Action("GetList", "Collection")", {}, function (result) {
+            $("#collectiontotal").html(result.total);
+        });
+        $.post("@Url.Action("GetList", "Login")", {}, function (result) {
+            $("#usertotal").html(result.total);
+        });
+        $.post("@Url.Action("GetList", "Formation")", {}, function (result) {
+            $("#formationtotal").html(result.total);
+        });
+    })
+</script>

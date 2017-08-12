@@ -75,7 +75,13 @@ namespace Trias.Controllers
             return WriteSuccess("添加成功！");
 
         }
-
+        public ActionResult GetList()
+        {
+            var list = collectionSer.Where();
+            return Json(new{
+                total=list.Count()
+            });
+        }
 
 
         //根据 层id 查询采样位置

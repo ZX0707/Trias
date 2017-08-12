@@ -18,7 +18,7 @@ namespace Trias.Controllers
         /// <param name="rows">每页多少条数据</param>
         /// <param name="keyWord">搜索关键字</param>
         /// <returns></returns>
-        public ActionResult GetList(int page, int rows, string keyWord)
+        public ActionResult GetList(int page=1, int rows=int.MaxValue, string keyWord="")
         {
             var list = sectionSer.Where();
             if (!string.IsNullOrWhiteSpace(keyWord))

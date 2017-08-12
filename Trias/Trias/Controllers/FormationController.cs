@@ -192,6 +192,14 @@ namespace Trias.Controllers
             return Json(formationlist);
         }
         //删除岩石组信息
+        public ActionResult GetList()
+        {
+            var list = formationSer.Where();
+            return Json(new
+            {
+                total = list.Count()
+            });
+        }
         public ActionResult RemoveFormation(string id)
         {
             formationSer.RemoveWhere(x => x.F_ID == id);

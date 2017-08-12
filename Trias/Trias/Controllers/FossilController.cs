@@ -53,7 +53,14 @@ namespace Trias.Controllers
             return WriteSuccess("添加成功！");
 
         }
-
+        public ActionResult GetList()
+        {
+            var list = fossilSer.Where();
+            return Json(
+                new{
+                    total=list.Count()
+                });
+        }
         //添加化石信息
         public ActionResult AddFossil(FossilView model)
         {

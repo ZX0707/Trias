@@ -26,7 +26,14 @@ namespace Trias.Controllers
             Session[Keys.Login_UserInfo] = null;//清除Session
             return Content("/");
         }
-
+        public ActionResult GetList()
+        {
+            var list = userSer.Where();
+            return Json(new
+            {
+                total = list.Count()
+            });
+        }
         public ActionResult GetCurrentUser()
         {
             return WriteSuccess(UserMgr.CurrUserInfo());
