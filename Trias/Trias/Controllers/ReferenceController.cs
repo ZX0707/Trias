@@ -255,7 +255,7 @@ namespace Trias.Controllers
             }
 
             var referenceList = new List<Reference>();
-            for (var rowIndex = 1; rowIndex < rowCount; rowIndex++)
+            for (var rowIndex = 1; rowIndex <= rowCount; rowIndex++)
             {
                 var row = sheet.GetRow(rowIndex);
                 var c = row.LastCellNum;
@@ -289,7 +289,7 @@ namespace Trias.Controllers
             return WriteSuccess("操作成功！");
         }
 
-        private ICell GetCell(IRow row, int index)
+        private static ICell GetCell(IRow row, int index)
         {
             return row.FirstOrDefault(x => x.ColumnIndex == index) ?? row.CreateCell(index);
         }
