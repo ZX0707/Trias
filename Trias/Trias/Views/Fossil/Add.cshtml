@@ -30,7 +30,7 @@
         }
 </style>
 
-<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" style="padding: 20px; text-align: center;">
+<form class="form-horizontal" role="form" id="form" method="post" enctype="multipart/form-data" style="padding: 20px; text-align: center;">
     <div class="form-group">
         <label class="col-sm-2 control-label">核准人：</label>
         <div class="col-sm-2 ">
@@ -114,7 +114,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">图片：</label>
         <div class="col-sm-2 ">
-            <input name="Picture" id="Picture" type="file">
+            <input name="Picture" id="Picture" type="file" multiple="multiple">
         </div>
     </div>
 
@@ -138,7 +138,7 @@
     function change() {
         initSelect($("#SubTime"), "@Url.Action("GetSelectOptions", "Dict")", { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
     }
-    $(function () {
+    function init_select() {
         var id = "";
         var value = "";
         var text = "";
@@ -162,20 +162,70 @@
             }
         }, "json");
         initSelect($("#Time"), "@Url.Action("GetSelectOptions", "Dict")", { type: "Time" }, function () { change() });
-       @* initSelect($("#FossilGroup"), "@Url.Action("GetSelectOptions", "Dict")", { type: "FossilGroup" });*@
         initSelect($("#TaxonType"), "@Url.Action("GetSelectOptions", "Dict")", { type: "TaxonType" });
         initSelect($("#CollectFromTreatise"), "@Url.Action("GetSelectOptions", "Dict")", { type: "CollectFromTreatise" });
+    }
 
+    function setAuthorizer() {
         $.post("@Url.Action("GetCurrentUser", "Login")", {}, function (user) {
             if (user.status === "success") {
                 $("#Authorizer").val(user.msg.UserName);
                 $("#Authorizer").attr("readonly", "readonly");
             }
         }, "json");
-
+    }
+    function init_form() {
+        $("#form").form({
+            url:"@Url.Action("Add")",
+            onSubmit: function (data) {
+                var fossil = {
+                    C_ID: cid,
+                    Time: $("#Time").val(),
+                    SubTime: $("#SubTime").val(),
+                    Time2: $("#Time2").val(),
+                    Authorizer: $("#Authorizer").val(),
+                    FossilGroup: $("#FossilGroup").val(),
+                    TaxonType: $("#TaxonType").val(),
+                    CollectFromTreatise: $("#CollectFromTreatise").val(),
+                    RefDescribingRelation: $("#RefDescribingRelation").val(),
+                    GenusName: $("#GenusName").val(),
+                    SpeciesName: $("#SpeciesName").val(),
+                    Position: $("#Position").val(),
+                    Length: parseFloat($("#Length").val())*parseFloat($("#LengthSize").val()),
+                    width: parseFloat($("#width").val()) * parseFloat($("#widthSize").val()),
+                    Picture: $("#Picture").val(),
+                    Notes: $("#Notes").val()
+                };
+                if (!identify()) { return false; };
+                data.fossil = JSON.stringify(fossil);
+                return true;
+            },
+            success: function (data) {
+                if (typeof data == "string") {
+                    data = $.parseJSON(data);
+                }
+                if (data.status === "success") {
+                    $.messager.alert("",
+                        data.msg,
+                        "info",
+                        function () {
+                            parent.reload();
+                            commHelper.CloseDialog("添加化石");
+                        });
+                } else {
+                    $.messager.alert("", data.msg, "warning");
+                }
+            }
+        });
+    }
+    $(function () {
+        init_select();
+        setAuthorizer();
+        init_form();
         //保存响应事件
         $("#btn_save").on("click", {}, function () {
-            var fossil = {
+            $("#form").form("submit");
+            @*var fossil = {
                 C_ID: cid,
                 Time: $("#Time").val(),
                 SubTime: $("#SubTime").val(),
@@ -210,7 +260,7 @@
                         $.messager.alert("", data.msg, "warning");
                     }
                 },
-                "json");
+                "json");*@
         });
     });
 </script>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,9 +25,25 @@ namespace Trias.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Add(string fossil, string nothing)
+        public ActionResult Add(FossilView model, string fossil)
         {
+            var filePath = Server.MapPath("~/UpLoad/Picture");
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
             var fossilModel = JsonConvert.DeserializeObject<Fossil>(fossil);
+            fossilModel.Picture = "";
+            for (var i = 0; i < Request.Files.Count; i++)
+            {
+                var file = Request.Files[i];
+                if (file == null) continue;
+                var fileName = MD5Helper.GetStreamMd5(file.InputStream);
+                fileName += Path.GetExtension(file.FileName);
+                fileName = Path.Combine(filePath, fileName);
+                file.SaveAs(fileName);
+                fossilModel.Picture += fileName + ";";
+            }
             var sort = fossilSer.Where().Select(x => x.sort).OrderByDescending(x => x).FirstOrDefault() ?? 0;
             sort++;
             fossilModel.sort = sort;
@@ -74,11 +91,11 @@ namespace Trias.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditFossil(string fossil,string id)
+        public ActionResult EditFossil(string fossil, string id)
         {
             var fossilmodel = JsonConvert.DeserializeObject<Fossil>(fossil);
             #region 
-            if(string.IsNullOrWhiteSpace(fossilmodel.GenusName))
+            if (string.IsNullOrWhiteSpace(fossilmodel.GenusName))
             {
                 WriteError("属名不能为空");
             }
