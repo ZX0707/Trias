@@ -122,11 +122,11 @@
             </div>
         </div>
         <div class="form-group" style="text-align: center">
-            <div class="col-sm-2"></div>
+            <div class="col-sm-1"></div>
             <div class="col-sm-2">
-                <button onclick="resetForm()" type="button" class="btn btn-default">重置</button>
+                <button onclick="resetForm()" type="button" class="btn btn-default" style="display:none">重置</button>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <button onclick="save()" type="button" class="btn btn-default">确定</button>
             </div>
             <div class="col-sm-3">
@@ -157,7 +157,6 @@
             url: '/Reference/Edit',
             onSubmit: function () {
                 //提交验证，return false;不提交
-
                 var arr = $(".required");
                 var flag = true;
                 for (var i = 0; i < arr.length; i++) {
@@ -177,7 +176,6 @@
                 }
                 if (flag == true) {
                     var value = $("#ReferenceType").val();
-                    debugger;
                     switch (value) {
                         case "journal article":
                         case "paper presented at metting":

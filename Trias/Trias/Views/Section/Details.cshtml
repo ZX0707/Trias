@@ -1,0 +1,275 @@
+﻿@model Trias.Models.SectionView
+
+@{
+    ViewBag.Title = "剖面细节";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+}
+<style>
+    .level1, .level2, .level3, .level4 {
+        padding-left: 25px;
+        line-height: 30px;
+    }
+
+    .co_li div {
+        height: 100%;
+        margin-top: 5px;
+    }
+
+    .co_li input {
+        width: 70px;
+    }
+
+    .bian_ju {
+        margin-bottom: 10px;
+    }
+</style>
+<body style="overflow:auto">
+    <div class="container">
+        <div class="conta">
+            <div style="display:none">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.S_ID)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.S_ID)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.User_ID)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.User_ID)
+                </div>
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.SectionName)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.SectionName)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Authorizer)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Authorizer)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.RID1)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.RID1)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.RID2)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.RID2)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.RID3)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.RID3)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Time)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Time)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.SubTime)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.SubTime)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Time2)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Time2)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.EnterTime)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.EnterTime)
+            </div>
+
+
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Country)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Country)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Province)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Province)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.City)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.City)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.County)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.County)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Village)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Village)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LonDegrees)
+            </div>
+            <div class="display-field">
+                @(Model.LonDegrees + Model.LonMinutes / 60.0 + Model.LonSeconds / 60.0 / 60.0)
+            </div>
+
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LatDegrees)
+            </div>
+            <div class="display-field">
+                @(Model.LatDegrees + Model.LatMinutes / 60.0 + Model.LatSeconds / 60.0 / 60.0)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.TectonicPlate)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.TectonicPlate)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Notes)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Notes)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Comments)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Comments)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Altitude)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Altitude)
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12" style="background-color: #bee2fb; height: auto; padding: 10px;">
+                    <div style="margin-bottom:5px">
+                        <label>岩石组层级关系</label>
+                    </div>
+                    <div id="box">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+<script>
+    function reload() {
+        $.post("@Url.Action("GetInfomationBySId","Formation")", { sid: "@Model.S_ID" }, function (data) {
+            var box = $("#box");
+            box.html("");
+            for (var i = 0; i < data.length; i++) {
+                var formation = data[i].formation;
+                var fid = formation.F_ID;
+                var fName = formation.FormationName;
+                var units = data[i].units;
+                var formationDiv = $("<div class='level1' id='"+fid+"'/>");
+                formationDiv.append("<label>" + fName + "</label>");
+                formationDiv.append(
+
+                    "<div class='btn-group'style='float:right;'><a href='#'><span class='glyphicon glyphicon-search' onclick='myUnit(\"" + fid + "\")'>查看详情</span></a></div>");
+
+                // "<div class='btn-group'><button type='button' class='btn btn-default' onclick='myUnit(\"" + fid + "\")'>添加层</button><button type='button' class='btn btn-default' onclick='delFormation(\"" + fid + "\")'>删除岩石组</button><button type='button' class='btn btn-default'>修改岩石组</button></div>");
+                box.append(formationDiv);
+                for (var j = 0; j < units.length; j++) {
+                    var unit = units[j].unit;
+                    var uid = unit.U_ID;
+                    var uName = "层" + (j + 1);
+                    var collections = units[j].collections;
+                    var unitDiv = $("<div class='level2' id='" + uid +"'/>");
+                    unitDiv.append("<label>" + uName + "</label>");
+                    unitDiv.append(
+                        "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-search' onclick='myCollection(\"" + uid + "\")'>查看详情</span></a></div>");
+                    formationDiv.append(unitDiv);
+                    for (var k = 0; k < collections.length; k++) {
+                        var collection = collections[k].collection;
+                        var cid = collection.C_ID;
+                        var cName = "采样位置" + (k + 1);
+                        var fossils = collections[k].fossils;
+                        var collectionDiv = $("<div class='level3' id='" + cid +"'/>");
+                        collectionDiv.append("<label>" + cName + "</label>");
+                        collectionDiv.append(
+                            "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-search' onclick='myFossil(\"" + cid + "\")'>查看详情</span></a></div>");
+                        unitDiv.append(collectionDiv);
+                        for (var l = 0; l < fossils.length; l++) {
+                            var fossil = fossils[l];
+                            var foid = fossil.H_ID;
+                            var foName = "化石" + (l + 1);
+                            var fossilDiv = $("<div class='level4' id='" + foid +"'/>");
+                            fossilDiv.append("<label>" + foName + "</label>");
+                            fossilDiv.append(
+                                "<div class='btn-group'style='float:right'><a href='javascript:void(0)'><span class='glyphicon glyphicon-search'  onclick='lookFossil(\"" + foid + "\")'>查看详情</span></a></div>");
+                            collectionDiv.append(fossilDiv);
+                        }
+                        var geochemicals = collections[k].geochemicals;
+                        for (var l = 0; l < geochemicals.length; l++) {
+                            var geochemical = geochemicals[l];
+                            var gid = geochemical.G_ID;
+                            var gName = "地球化学信息 " + (l + 1);
+                            var geochemicalDiv = $("<div class='level4' id='" + gid +"'/>");
+                            geochemicalDiv.append("<label>" + gName + "</label>");
+                            geochemicalDiv.append(
+                                "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-search'  onclick='delGeochemical(\"" + gid + "\")'>查看详情</span></a></div>");
+                            collectionDiv.append(geochemicalDiv);
+                        }
+                    }
+                }
+            }
+        }, "json");
+    }
+    $(function () {
+        reload();
+    });
+    function lookFossil(foid) {
+        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Fossil")/"+foid);
+
+    }
+</script>

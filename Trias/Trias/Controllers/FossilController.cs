@@ -157,5 +157,13 @@ namespace Trias.Controllers
             fossilSer.SaveChanges();
             return WriteSuccess("删除成功");
         }
+
+        public ActionResult Details(string id)
+        {
+            var model = fossilSer.Find(id);
+            var viewModel = new FossilView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
+        }
     }
 }

@@ -46,6 +46,7 @@
 <body style="overflow-y:auto;">
     <form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
         @Html.HiddenFor(s => s.S_ID)
+        @Html.HiddenFor(s => s.User_ID)
         <div class="form-group">
             <label class="col-sm-2 control-label">核准人：</label>
             <div class="col-sm-2 ">
@@ -69,7 +70,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">参考文献：</label>
             <div class="col-sm-2 ">
-                <input name="RID1" id="RID1" type="text" value="@ViewBag.ShowTitle" rid="@ViewBag.R_ID" readonly="readonly"
+                <input name="RID1" id="RID1" type="text" value="" rid="@Model.RID1" readonly="readonly"
                        onclick="openDialog(1)" placeholder="输入参考文献1" class="form-control required" />
             </div>
             <div class="col-sm-2 ">
@@ -143,12 +144,12 @@
             <label class="col-sm-2 control-label">经度：</label>
             <div class="col-sm-2">
                 <input name="Lon" id="Lon" type="number" placeholder="经度"
-                       class="form-control required lon_lat" />
+                       class="form-control required lon_lat" value="@(Model.LonDegrees+Model.LonMinutes/60.0+Model.LonSeconds/60.0/60.0)" />
             </div>
             <label class="col-sm-1 control-label">纬度：</label>
             <div class="col-sm-2">
                 <input name="Lat" id="Lat" type="number" placeholder="纬度"
-                       class="form-control required lon_lat" />
+                       class="form-control required lon_lat" value="@(Model.LatDegrees+Model.LatMinutes/60.0+Model.LatSeconds/60.0/60.0)" />
             </div>
 
         </div>
@@ -157,17 +158,17 @@
             <label class="col-sm-2 control-label">经度：</label>
             <div class="col-sm-2">
                 <input name="LonDegrees" id="LonDegrees" type="number" placeholder="经度"
-                       class="form-control required lon_lat" value="@Model.LonDegrees"/>
+                       class="form-control required lon_lat" value="@Model.LonDegrees" />
             </div>
             <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
             <div class="col-sm-2 ">
                 <input name="LonMinutes" id="LonMinutes" type="number" placeholder="经分"
-                       class="form-control required lon_lat" value="@Model.LonDegrees"/>
+                       class="form-control required lon_lat" value="@Model.LonDegrees" />
             </div>
             <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
             <div class="col-sm-2 ">
                 <input name="LonSeconds" id="LonSeconds" type="number" placeholder="经秒"
-                       class="form-control required lon_lat" value="@Model.LonSeconds"/>
+                       class="form-control required lon_lat" value="@Model.LonSeconds" />
             </div>
             <label class="col-sm-1 control-label" style="margin-left: -7%;">"</label>
         </div>
@@ -175,12 +176,12 @@
             <label class="col-sm-2 control-label">纬度：</label>
             <div class="col-sm-2 ">
                 <input name="LatDegrees" id="LatDegrees" type="number" placeholder="纬度"
-                       class="form-control required lon_lat" value="@Model.LatDegrees"/>
+                       class="form-control required lon_lat" value="@Model.LatDegrees" />
             </div>
             <label class="col-sm-1 control-label" style="margin-left: -7%;">°</label>
             <div class="col-sm-2 ">
                 <input name="LatMinutes" id="LatMinutes" type="number" placeholder="纬分"
-                       class="form-control required lon_lat" value="@Model.LatMinutes"/>
+                       class="form-control required lon_lat" value="@Model.LatMinutes" />
             </div>
             <label class="col-sm-1 control-label" style="margin-left: -7%;">'</label>
             <div class="col-sm-2 ">
@@ -194,7 +195,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">海拔：</label>
             <div class="col-sm-2">
-                <input name="Altitude" id="Altitude" type="number" class="form-control" placeholder="输入海拔" value="@Model.Altitude"/>
+                <input name="Altitude" id="Altitude" type="number" class="form-control" placeholder="输入海拔" value="@Model.Altitude" />
             </div>
             <div class="col-sm-2" style="width: auto;">
                 <select name="measure" id="measure" class="form-control">
@@ -206,30 +207,31 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">构造板块：</label>
             <div class="col-sm-2">
-                <input name="TectonicPlate" id="TectonicPlate" type="text" class="form-control" placeholder="输入构造板块" />
+                <input name="TectonicPlate" id="TectonicPlate" type="text" class="form-control" placeholder="输入构造板块" value="@Model.TectonicPlate" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">注释：</label>
             <div class="col-sm-2">
-                <input name="Notes" id="Notes" type="text" class="form-control" placeholder="输入注释" />
+                <input name="Notes" id="Notes" type="text" class="form-control" placeholder="输入注释" value="@Model.Notes" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="name">评论：</label>
             <div class="col-sm-5">
-                <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论"></textarea>
+                <textarea name="Comments" id="Comments" class="form-control" rows="3" placeholder="评论" value="@Model.Comments"></textarea>
             </div>
         </div>
         <div class="form-group" style="text-align: center">
-            <div class="col-sm-3">
-                <button onclick="resetForm()" type="button" class="btn btn-default">重置</button>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <button onclick="resetForm()" type="button" class="btn btn-default" style="display:none">重置</button>
             </div>
             <div class="col-sm-3">
-                <button onclick="save()" type="button" class="btn btn-default">保存</button>
+                <button onclick="save()" type="button" class="btn btn-default">确定</button>
             </div>
             <div class="col-sm-3">
-                <button id="addFormation" type="button" class="btn btn-default">添加岩石组</button>
+                <button id="addFormation" type="button" class="btn btn-default" style="display:none">添加岩石组</button>
             </div>
         </div>
     </form>
@@ -318,7 +320,7 @@
     }
 
     $(function () {
-
+        getReference();
         $("#Lon,#Lat").on("change", {}, function () {
             var lon = $("#Lon").val();
             var pint = parseInt(lon);
@@ -348,7 +350,7 @@
         initSelect($("#Time"), getOptionsURL, { type: "Time" }, change);
         //表单操作
         $('#form').form({
-            url: '/Section/AddSection',
+            url: '/Section/EditSection',
             onSubmit: function (param) {
                 param.Altitude1 = parseFloat($("#measure").val()) * parseFloat($("#Altitude").val());
                 param.RID11 = $("#RID1").attr("rid");
@@ -373,9 +375,11 @@
                 }
                 if (data.status == "success") {
                     sid = data.msg.S_ID;
-                    //$('#addFormation').linkbutton('enable');//启用button
                     $('#addFormation').removeAttr('disabled');//启用button
-                    $.messager.alert("", "保存成功！", "info");
+                    $.messager.alert("", "修改成功！", "info", function () {
+                        parent.queryList();//调用父页面的函数
+                        commHelper.CloseDialog("修改剖面");
+                    });
                 }
                 else {
                     $.messager.alert("", data.msg, "warning");
@@ -393,7 +397,6 @@
         commHelper.CloseDialog("添加剖面");
     }
     function save() {
-
         $('#form').form("submit");
     }
     function Formation() {
@@ -407,5 +410,85 @@
             author: author,
             year: searchYear
         });
+    }
+
+    function getReference() {
+        if ("@Model.RID1" != null) {
+
+            $.post("@Url.Action("GetReferenceById","Reference")", { id: "@Model.RID1" }, function (data) {
+                var value = data.ReferenceType;
+                switch (value) {
+                    case "journal article":
+                    case "paper presented at metting":
+                    case "abstract":
+                        $("#RID1").val(data.Title)
+                        break;
+                    case "book":
+                    case "edit book":
+                    case "book chapter":
+                        $("#RID1").val(data.BookTitle)
+                        break;
+                    case "Ph.D.dissertation":
+                    case "master thesis":
+                        $("#RID1").val(data.Title)
+                        break;
+                    default:
+                        break;
+                }
+                $("#RID1").attr("rid", data.R_ID);
+            });
+        }
+
+        if ("@Model.RID2" != null) {
+
+            $.post("@Url.Action("GetReferenceById","Reference")", { id: "@Model.RID2" }, function (data) {
+                var value = data.ReferenceType;
+                switch (value) {
+                    case "journal article":
+                    case "paper presented at metting":
+                    case "abstract":
+                        $("#RID2").val(data.Title)
+                        break;
+                    case "book":
+                    case "edit book":
+                    case "book chapter":
+                        $("#RID2").val(data.BookTitle)
+                        break;
+                    case "Ph.D.dissertation":
+                    case "master thesis":
+                        $("#RID2").val(data.Title)
+                        break;
+                    default:
+                        break;
+                }
+                $("#RID2").attr("rid", data.R_ID);
+            });
+    }
+        if ("@Model.RID1" != null) {
+
+            $.post("@Url.Action("GetReferenceById","Reference")", { id: "@Model.RID3" }, function (data) {
+                var value = data.ReferenceType;
+                switch (value) {
+                    case "journal article":
+                    case "paper presented at metting":
+                    case "abstract":
+                        $("#RID3").val(data.Title)
+                        break;
+                    case "book":
+                    case "edit book":
+                    case "book chapter":
+                        $("#RID3").val(data.BookTitle)
+                        break;
+                    case "Ph.D.dissertation":
+                    case "master thesis":
+                        $("#RID3").val(data.Title)
+                        break;
+                    default:
+                        break;
+                }
+                $("#RID3").attr("rid", data.R_ID);
+
+            });
+    }
     }
 </script>

@@ -299,5 +299,11 @@ namespace Trias.Controllers
             return row.FirstOrDefault(x => x.ColumnIndex == index) ?? row.CreateCell(index);
         }
 
+
+        public ActionResult GetReferenceById(string id)
+        {
+            var model = referenceSer.Find(id);
+            return Json(model);
+        }
     }
 }

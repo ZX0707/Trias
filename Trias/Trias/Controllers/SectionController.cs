@@ -36,7 +36,7 @@ namespace Trias.Controllers
                 }
             }
             var total = list.Count();
-            list = list.OrderByDescending(s => s.SectionName).Skip(rows * (page - 1)).Take(rows);
+            list = list.OrderByDescending(s => s.EnterTime).Skip(rows * (page - 1)).Take(rows);//剖面按照核准时间排序
             var result = list.ToList().Select(s => new
             {
                 s.S_ID,//必须传一个唯一值过去
@@ -77,6 +77,14 @@ namespace Trias.Controllers
         public ActionResult QueryList()
         {
             return View();
+        }
+        //展示细节
+        public ActionResult Details(string id)
+        {
+            var model = sectionSer.FirstOrDefault(s => s.S_ID == id);
+            var viewModel = new SectionView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
         }
         //添加剖面
         public ActionResult AddSection(SectionView model, string RID11, string RID22, string RID33, double? Altitude1)
@@ -126,6 +134,7 @@ namespace Trias.Controllers
                 rows = list.ToList()
             });
         }
+        //展示页面
         public ActionResult Edit(string id)
         {
             var model = sectionSer.FirstOrDefault(s => s.S_ID == id);
@@ -133,6 +142,7 @@ namespace Trias.Controllers
             viewModel.CopyFrom(model);
             return View(viewModel);
         }
+        //修改
         public ActionResult EditSection(SectionView model, string RID11, string RID22, string RID33, double? Altitude1)
         {
             model.Altitude = Altitude1;
@@ -148,7 +158,14 @@ namespace Trias.Controllers
                 return WriteError("剖面名称" + model.SectionName + "已经存在，请确认！");
             }
             sectionSer.EditWhere(x => x.S_ID == model.S_ID, model);
-            sectionSer.SaveChanges();
+            try
+            {
+                sectionSer.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
             return WriteSuccess("修改成功");
         }
         public ActionResult RemoveSection(string id)
