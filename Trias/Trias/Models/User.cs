@@ -20,5 +20,6 @@ namespace Trias.Models
         public string UserUnit { get; set; }
         public string UserEmail { get; set; }
         public string ResearchField { get; set; }
+        public Nullable<bool> isPass { get; set; }
     }
 }
