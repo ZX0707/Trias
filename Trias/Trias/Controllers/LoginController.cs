@@ -38,7 +38,7 @@ namespace Trias.Controllers
         {
             return WriteSuccess(UserMgr.CurrUserInfo());
         }
-        public ActionResult Regist(User user)
+        public ActionResult Regist(User user) 
         {
             if (string.IsNullOrWhiteSpace(user.UserName))
             {
