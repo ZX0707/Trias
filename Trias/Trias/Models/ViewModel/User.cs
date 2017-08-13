@@ -24,5 +24,7 @@ namespace Trias.Models
         public string UserEmail { get; set; }
         [Display(Name = "研究方向")]
         public string ResearchField { get; set; }
+        [Display(Name="是否通过验证")]
+        public Nullable<bool> isPass { get; set; }
     }
 }
