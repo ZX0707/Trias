@@ -38,7 +38,7 @@ namespace Trias.Controllers
         {
             return WriteSuccess(UserMgr.CurrUserInfo());
         }
-        public ActionResult Regist(User user) 
+        public ActionResult Regist(User user)
         {
             if (string.IsNullOrWhiteSpace(user.UserName))
             {
@@ -50,7 +50,7 @@ namespace Trias.Controllers
             }
             if (user.UserPwd.Length < 6)
             {
-                return WriteError("密码");
+                return WriteError("密码最小长度为6！");
             }
             if (user.UserPwd.Length > 14)
             {
