@@ -18,7 +18,7 @@ namespace Trias.Controllers
         /// <param name="rows">每页多少条数据</param>
         /// <param name="keyWord">搜索关键字</param>
         /// <returns></returns>
-        public ActionResult GetList(int page=1, int rows=int.MaxValue, string keyWord="")
+        public ActionResult GetList(int page = 1, int rows = int.MaxValue, string keyWord = "")
         {
             var list = sectionSer.Where();
             if (!string.IsNullOrWhiteSpace(keyWord))
@@ -93,6 +93,7 @@ namespace Trias.Controllers
             model.RID1 = RID11;
             model.RID2 = RID22;
             model.RID3 = RID33;
+            ModelState.Remove("Altitude1");
             if (!ModelState.IsValid)
             {
                 return WriteStatusError(ModelState);
@@ -166,7 +167,7 @@ namespace Trias.Controllers
             {
                 throw;
             }
-            return WriteSuccess("修改成功"); 
+            return WriteSuccess("修改成功");
         }
         public ActionResult RemoveSection(string id)
         {

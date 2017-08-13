@@ -75,9 +75,9 @@
 <div id="import" class="easyui-dialog" title="第三方导入" style="width:80%;height:80%;"
      data-options="resizable:false,modal:true,closed:true">
     <div data-options="region:'north'" style="height: 90px;">
-        <form action="@Url.Action("UpLoadRefecence", "Reference")" method="post" enctype="multipart/form-data">
+        <form id="fileForm" action="@Url.Action("UpLoadRefecence", "Reference")" method="post" enctype="multipart/form-data">
             <input type="file" name="file" />
-            <input type="submit" value="提交" />
+            <input type="button" onclick="submitFile()" value="提交" />
         </form>
     </div>
 </div>
@@ -151,6 +151,29 @@
 
 
 <script>
+    function submitFile() {
+        $("#fileForm").form("submit");
+    }
+    function initFileForm() {
+        $("#fileForm").form({
+            url: "@Url.Action("UpLoadRefecence", "Reference")",
+            onSubmit: function () {
+            },
+            success: function (data) {
+                if (typeof data == "string") {
+                    data = $.parseJSON(data);
+                }
+                if (data.status == "success") {
+                    $.messager.alert("", data.msg, "info");
+                    $('#import').dialog("close");
+                } else {
+                    $.messager.alert("", data.msg, "error");
+                }
+            }
+        });
+
+    }
+
     function openImport() {
         $('#import').dialog("open");//弹出模态框
     }
@@ -184,6 +207,7 @@
         }
     }
     $(function () {
+        initFileForm();
         reload(1);
     })
     function reload(page) {
