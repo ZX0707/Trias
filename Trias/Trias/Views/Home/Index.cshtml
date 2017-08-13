@@ -77,6 +77,106 @@
         width: 887px;
     }
 </style>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    注册
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="form">
+                    <div class="form-group" id="group1">
+                        <div style="width: 100%;text-align: center;">
+                            <label id="register-email-info" style="visibility: visible;  color: rgb(157, 157, 157);">
+                                请输入常用邮箱，通过验证后用于登录
+                            </label>
+                        </div>
+                        <label for="UserEmail" class="col-sm-2 control-label"><span style="color: red;">*</span>邮箱</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="UserEmail" name="UserEmail" placeholder="">
+                        </div>
+                        <div>
+                            <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
+                            <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="rUserName" class="col-sm-2 control-label"><span style="color: red;">*</span>用户名</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="rUserName" name="rUserName" placeholder="">
+                        </div>
+                        <div>
+                            <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
+                            <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="UserUnit" class="col-sm-2 control-label"><span style="color: red;">*</span>用户单位</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="UserUnit" name="UserUnit" placeholder="">
+                        </div>
+                        <div>
+                            <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
+                            <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ResearchField" class="col-sm-2 control-label">研究方向</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ResearchField" name="ResearchField" placeholder="">
+                        </div>
+                        <div>
+                            <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
+                            <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="rUserPwd" class="col-sm-2 control-label"><span style="color: red;">*</span>密码</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="rUserPwd" name="rUserPwd">
+                        </div>
+                        <div>
+                            <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
+                            <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="reUserPwd" class="col-sm-2 control-label"><span style="color: red;">*</span>确认密码</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="reUserPwd" name="reUserPwd" placeholder="">
+                        </div>
+                        <div>
+                            <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
+                            <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
+                        </div>
+                    </div>
+                </form>
+
+                <div class="modal-footer" style="width: 100%;text-align: center;">
+                    <button type="button" class="btn btn-success" style="width:280px;height:45px;font-size:20px" onclick="register()">
+                        注&nbsp;&nbsp;册
+                    </button>
+                    <div style="padding-top:10px;">
+                        <span>已有帐号？</span><a href="/Home/Index" id="guc-btn-tab-toggle-2">立即登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 <div class="content">
     <div class="header">
         <div>
@@ -105,9 +205,6 @@
                         <img src="~/Content/images/lunb3.jpg" alt="Third slide">
                     </div>
                 </div>
-                <!-- 轮播（Carousel）导航 -->
-                @*<label class="carousel-control left"></label>
-                <label class="carousel-control right"></label>*@
             </div>
         </div>
         <div class="mainRight">
@@ -117,6 +214,12 @@
                 </div>
                 <div class="form-group">
                     <input type="password" id="Password" class="form-control" placeholder="密码" value="666" />
+                </div>
+                <div class="form-group" style="text-align:right">
+                    <span>
+                        没有账号?<a data-toggle="modal"
+                                data-target="#myModal">立即注册</a>
+                    </span>
                 </div>
                 <div class="form-group">
                     <input type="button" id="Password" onclick="login()" class="btn btn-primary col-sm-12" value="登录" />
@@ -128,7 +231,30 @@
         Copyright&nbsp;2017-2020&nbsp;版权所有&nbsp;中国地质大学(武汉)
     </div>
 </div>
+@*注册信息*@
+<script>
+ 
+    $(function () {
+        //页面加载完成时自动调用
+        
+               
 
+    })
+    function register() {
+        $.ajax({
+            url: "/Login/Regist",
+            dataType: 'json',
+            data: { UserName: $("#rUserName").val(), UserPwd: $("#rUserPwd ").val(), UserUnit: $("#UserUnit ").val(), UserEmail: $("#UserEmail").val(), ResearchField: $("#ResearchField").val() },
+            success: function (data) {
+                if (data.status = "success") {
+                    alert(data.msg);
+                }
+                else
+                    alert(data.msg);//弹出警告框
+            }
+        });
+    }
+</script>
 
 
 
