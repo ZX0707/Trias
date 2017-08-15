@@ -22,7 +22,7 @@
             margin-left: 80px;
             color: #264c1a;
             white-space: nowrap;
-            /*强制字符换行*/
+            /*让字符不换行*/
         }
 
             .header div span:nth-child(1) {
@@ -76,6 +76,14 @@
         height: 30px;
         width: 887px;
     }
+
+    .infoError {
+        width: 100%;
+        height: 15px;
+        text-align: center;
+        clear: both;
+        color: red;
+    }
 </style>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -93,84 +101,90 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="form">
-                    <div class="form-group" id="group1">
+                    <div class="form-group" id="groupEmail">
                         <div style="width: 100%;text-align: center;">
-                            <label id="register-email-info" style="visibility: visible;  color: rgb(157, 157, 157);">
-                                请输入常用邮箱，通过验证后用于登录
+                            <label id="register-email-info" color rgb(157, 157, 157);">
+                                请输入常用邮箱，通过验证后即可登录
                             </label>
                         </div>
                         <label for="UserEmail" class="col-sm-2 control-label"><span style="color: red;">*</span>邮箱</label>
                         <div class="col-sm-8">
                             <input type="email" class="form-control" id="UserEmail" name="UserEmail" placeholder="">
                         </div>
-                        <div>
+                        <label class="control-label">
                             <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
                             <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
-                        </div>
+                        </label>
+                        <div class="infoError"></div>
                     </div>
 
-
-                    <div class="form-group">
+                    <div class="form-group" id="groupName">
                         <label for="rUserName" class="col-sm-2 control-label"><span style="color: red;">*</span>用户名</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="rUserName" name="rUserName" placeholder="">
                         </div>
-                        <div>
+                        <label class="control-label">
                             <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
                             <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
-                        </div>
+                        </label>
+                        <div class="infoError"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="groupUnit">
                         <label for="UserUnit" class="col-sm-2 control-label"><span style="color: red;">*</span>用户单位</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="UserUnit" name="UserUnit" placeholder="">
                         </div>
-                        <div>
+                        <label class="control-label">
                             <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
                             <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
-                        </div>
+                        </label>
+                        <div class="infoError"></div>
                     </div>
-                    <div class="form-group">
+
+                    <div class="form-group" id="groupResearchField">
                         <label for="ResearchField" class="col-sm-2 control-label">研究方向</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="ResearchField" name="ResearchField" placeholder="">
                         </div>
-                        <div>
+                        <label class="control-label">
                             <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
                             <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
-                        </div>
+                        </label>
+                        <div class="infoError"></div>
                     </div>
-                    <div class="form-group">
+
+                    <div class="form-group" id="groupPwd">
                         <label for="rUserPwd" class="col-sm-2 control-label"><span style="color: red;">*</span>密码</label>
                         <div class="col-sm-8">
                             <input type="password" class="form-control" id="rUserPwd" name="rUserPwd">
                         </div>
-                        <div>
+                        <label class="control-label">
                             <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
                             <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
-                        </div>
+                        </label>
+                        <div class="infoError"></div>
                     </div>
 
-
-                    <div class="form-group">
+                    <div class="form-group" id="groupRePwd">
                         <label for="reUserPwd" class="col-sm-2 control-label"><span style="color: red;">*</span>确认密码</label>
                         <div class="col-sm-8">
                             <input type="password" class="form-control" id="reUserPwd" name="reUserPwd" placeholder="">
                         </div>
-                        <div>
+                        <label class="control-label">
                             <img src="~/Content/images/gou.png" style="width:20px;height:20px;display:none" />
                             <img src="~/Content/images/gantan.png" style="width:20px;height:20px;display:none" />
-                        </div>
+                        </label>
+                        <div class="infoError"></div>
                     </div>
                 </form>
 
                 <div class="modal-footer" style="width: 100%;text-align: center;">
-                    <button type="button" class="btn btn-success" style="width:280px;height:45px;font-size:20px" onclick="register()">
+                    <button type="button" class="btn btn-success" style="width:280px;height:45px;font-size:20px" id="register">
                         注&nbsp;&nbsp;册
                     </button>
                     <div style="padding-top:10px;">
-                        <span>已有帐号？</span><a href="/Home/Index" id="guc-btn-tab-toggle-2">立即登录</a>
+                        <span>已有帐号？</span><a href="/Home/Index">立即登录</a>
                     </div>
                 </div>
             </div>
@@ -233,29 +247,205 @@
 </div>
 @*注册信息*@
 <script>
- 
+ /*
+ *  初始化注册信息
+ */
+    function initialize(id) {
+        focus(id);
+        $(id).find("input:eq(0)").val("");
+    }
     $(function () {
         //页面加载完成时自动调用
-        
-               
+        $("#myModal").on('show.bs.modal', function () {
+            initialize("#groupEmail");
+            initialize("#groupName");
+            initialize("#groupUnit");
+            initialize("#groupResearchField");
+            initialize("#groupPwd");
+            initialize("#groupRePwd");
+        })
+    })
+    /*
+     *  提示错误信息的
+     */
+    function infoError(id) {
+        $(id).find("input:eq(0)").css("border-color", "red");
+        $(id).find("img:eq(1)").show();
+        $(id).find("img:eq(0)").hide();
+    }
+    //输入正确
+    function infoSucc(id) {
+        $(id).find("input:eq(0)").css("border-color", "");//移除边框颜色
+        $(id).find("img:eq(0)").show();
+        $(id).find("img:eq(1)").hide();
+        $(id).find(".infoError").eq(0).html("");
+    }
+    //获得焦点，移除错误提示信息
+    function focus(id) {
+        $(id).find("input:eq(0)").css("border-color", "");//移除边框颜色
+        $(id).find("img").hide();
+        $(id).find(".infoError").eq(0).html("");
+    }
+    var email_chk = true;
+    var name_chk = true;
+    var unit_chk = true;
+    var pwd_chk = true;
+    var rePwd_chk = true;
+    //验证邮箱
+    function isEmail(email) {
+        var reg = /^(\w)+(\.\w+)*@@(\w)+((\.\w+)+)$/;//razor的原因@是关键字,需转义再用，所以要多加一个
+        return reg.test(email);
+    }
+    
+    $("#UserEmail").focus(function () {
+        focus("#groupEmail");
+    })
+    $("#UserEmail").blur(function () {
+        var UserEmail = $("#UserEmail").val().replace(/ /g, '');//获取id对应元素的值，清空左右空格
+        $("#UserEmail").val(UserEmail);
+        if (UserEmail == "") {
+            email_chk = false;
+            infoError("#groupEmail");
+            $("#groupEmail").find(".infoError").eq(0).html("邮箱不为空！");
+        }
+        else if (UserEmail.length > 32 || (UserEmail.length > 0 && UserEmail.length < 6)) {
+            email_chk = false;
+            infoError("#groupEmail");
+            $("#groupEmail").find(".infoError").eq(0).html("邮箱地址必须6至32字符！");
+        }
+        else if (!isEmail(UserEmail)) {
+            email_chk = false;
+            infoError("#groupEmail");
+            $("#groupEmail)").find(".infoError").eq(0).html("邮箱地址不合法！");
+        }
+        else {
+            email_chk = true;
+            infoSucc("#groupEmail");
+        }
+    })
+    $("#rUserName").focus(function () {
+        focus("#groupName");
+    })
+    $("#rUserName").blur(function () {
+       
+        var rUserName = $("#rUserName").val().replace(/ /g, '');
+        $("#rUserName").val(rUserName);
+        if (rUserName == "") {
+            name_chk = false;
+            infoError("#groupName");
+            $("#groupName").find(".infoError").eq(0).html("用户名不为空！");
+        }
+        else {
+            name_chk = true;
+            infoSucc("#groupName");
+        }
+    })
+    $("#UserUnit").focus(function () {
+        focus("#groupUnit");
+    })
+    $("#UserUnit").blur(function () {
+        var UserUnit = $("#UserUnit ").val().replace(/ /g, '');
+        $("#UserUnit ").val(UserUnit);
+        if (UserUnit == "") {
+            unit_chk = false;
+            infoError("#groupUnit");
+            $("#groupUnit").find(".infoError").eq(0).html("用户单位不为空！");
+        }
+        else {
+            unit_chk = true;
+            infoSucc("#groupUnit");
+        }
+    })
+    //$("#ResearchField").focus(function () {
+    //    focus("#groupResearchField");
+    //})
+    //$("#ResearchField").blur(function () {
+    //    var ResearchField = $.trim($("#ResearchField").val());
+    //    if (ResearchField == "") {
+    //        infoError("#groupResearchField");
+    //    }
+    //    else {
+    //        infoSucc("#groupResearchField");
+    //    }
+    //})
+    $("#rUserPwd").focus(function () {
+        focus("#groupPwd");
+    })
+    $("#rUserPwd").blur(function () {
+        var rUserPwd = $("#rUserPwd ").val().replace(/ /g, '');
+        $("#rUserPwd ").val(rUserPwd);
+        if (rUserPwd == "") {
+            pwd_chk = false;
+            infoError("#groupPwd");
+            $("#groupPwd").find(".infoError").eq(0).html("密码不为空！");
+        }
+        else if (rUserPwd.length > 14 || (rUserPwd.length > 0 && rUserPwd.length < 6)) {
+            pwd_chk = false;
+            infoError("#groupPwd");
+            $("#groupPwd").find(".infoError").eq(0).html("密码最小长度为6位，最大长度为14位！");
+        }
+
+        $("#reUserPwd").focus(function () {
+            focus("#groupRePwd");
+        })
+        $("#reUserPwd").blur(function () {
+            var reUserPwd = $("#reUserPwd ").val().replace(/ /g, '');
+            $("#reUserPwd ").val(reUserPwd);
+            if (reUserPwd == "") {
+                rePwd_chk = false;
+                infoError("#groupRePwd");
+                $("#groupRePwd").find(".infoError").eq(0).html("确认密码不为空！");
+            }
+            else if (reUserPwd.length > 14 || (reUserPwd.length > 0 && reUserPwd.length < 6)) {
+                reRwd_chk = false;
+                infoError("#groupRePwd");
+                $("#groupRePwd").find(".infoError").eq(0).html("确认密码最小长度为6位，最大长度为14位！");
+            }
+            else if (rUserPwd != reUserPwd) {
+                pwd_chk = false;
+                rePwd_chk = false;
+                infoError("#groupRePwd");
+                $("#groupRePwd").find(".infoError").eq(0).html("两次输入的密码不一致！");
+
+            }
+            else {
+                pwd_chk = true;
+                rePwd_chk = true;
+                infoSucc("#groupPwd");
+                infoSucc("#groupRePwd");
+            }
+        })
+    })
+
+    $("#register").click(function () {
+        $("#UserEmail").blur();
+        $("#rUserName").blur();
+        $("#UserUnit").blur();
+        $("#rUserPwd").blur();
+        $("#reUserPwd").blur();
+        var rUserName = $("#rUserName").val();
+        var rUserPwd = $("#rUserPwd").val();
+        var UserUnit = $("#UserUnit").val();
+        var UserEmail = $("#UserEmail").val();
+        var ResearchField = $("#ResearchField").val();
+        var gister = false;
+        if (email_chk && name_chk && unit_chk && pwd_chk && rePwd_chk) { gister = true; }
+        if (gister) {
+            $.ajax({
+                url: "/Login/Regist",
+                dataType: 'json',
+                data: { UserName: rUserName, UserPwd: rUserPwd, UserUnit: UserUnit, UserEmail: UserEmail, ResearchField: ResearchField },
+                success: function (data) {
+                    if (data.status = "success") {
+                        alert(data.msg);
+                    }
+                    else
+                        alert(data.msg);//弹出警告框
+                }
+            });
+        }
+       
 
     })
-    function register() {
-        $.ajax({
-            url: "/Login/Regist",
-            dataType: 'json',
-            data: { UserName: $("#rUserName").val(), UserPwd: $("#rUserPwd ").val(), UserUnit: $("#UserUnit ").val(), UserEmail: $("#UserEmail").val(), ResearchField: $("#ResearchField").val() },
-            success: function (data) {
-                if (data.status = "success") {
-                    alert(data.msg);
-                }
-                else
-                    alert(data.msg);//弹出警告框
-            }
-        });
-    }
+   
 </script>
-
-
-
-
