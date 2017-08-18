@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "Manage";
+}
+<style>
+    .paging {
+        width: 100%;
+        background-color: #dddbdb;
+        padding: 0px 10px;
+    }
+
+        .paging label {
+            height: 30px;
+            line-height: 35px;
+        }
+
+        .paging input {
+            height: 20px;
+            width: 40px;
+        }
+
+    .link a:link {
+        color: #000000;
+    }
+
+    .link a:hover {
+        color: #0756AA;
+    }
+</style>
+<div style="padding:20px">
+    <input id="queryList" class="easyui-searchbox" style="width:auto"
+           data-options="searcher:queryList,prompt:'输入用户相关查询'" />
+    <div style="float:right">
+        <button type="button" class="btn btn-info" style="height: 30px;width:auto;">同意</button>
+        <button type="button" class="btn btn-info" style="height: 30px;width:auto;">不同意</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>邮箱</th>
+                <th>用户名</th>
+                <th>用户单位</th>
+                <th>研究方向</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr>
+                <td>111</td>
+                <td>222</td>
+                <td>333</td>
+                <td>444</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>222</td>
+                <td>333</td>
+                <td>444</td>
+            </tr>
+            <tr>
+                <td>111</td>
+                <td>222</td>
+                <td>333</td>
+                <td>444</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="paging">
+        <span style="float:right;">
+            <label class="control-label">共<font id="pages"></font>页/<font id="total"></font>条记录</label>
+            <label class="control-label">每页显示</label>
+            <select id="rows" onchange="reload(1)">
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>50</option>
+                <option>100</option>
+            </select>
+            <label>条</label>
+        </span>
+        <div class="link">
+            <a href="javascript:void(0)" onclick="reload(1)">首页</a>
+            <a href="javascript:void(0)" onclick="prePage()">上一页</a>
+            <a href="javascript:void(0)" onclick="nextPage()">下一页</a>
+            <a href="javascript:void(0)" onclick="reload(parseInt($('#pages').html()))">尾页</a>
+            <label class="control-label">到</label>
+            <input id="currentPage" />
+            <label class="control-label">页</label>
+            <button onclick="reload()">跳转</button>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script>
+    //查询函数
+    function queryList() {
+        reload(1);
+    }
+    //获取上一页
+    function prePage() {
+        var currentPage = $("#currentPage").val();
+        //将字符串转化为整型
+        currentPage = parseInt(currentPage);
+        //debugger;
+        if (currentPage != 1) {
+            currentPage += -1;
+            reload(currentPage);
+        }
+
+    }
+    //获取下一页
+    function nextPage() {
+        var currentPage = parseInt($("#currentPage").val());
+        var pages = parseInt($("#pages").html());
+        if (currentPage != pages) {
+            currentPage += +1;
+            reload(currentPage);
+        }
+    }
+    $(function () {
+        reload(1);
+    })
+    function reload(page) {
+        //获取当前页的值
+        if (page == undefined) {
+            page = $("#currentPage").val();
+        }
+        if (isNaN(page)) {
+            page = 1;
+        }
+        //验证跳转
+        var Page = parseInt(page);
+        if (Page <= 0) {
+            Page = 1;
+        }
+        var Pages = parseInt($("#pages").html());
+        if (Pages == 0) {
+            Pages = 1;
+        }
+        if (Page > Pages) {
+            reload(Pages);
+        }
+        //获取搜索框的值
+        var keyWord = $("#queryList").searchbox("getValue");
+        //每页显示rows条记录
+        var rows = $("#rows").val();
+        @*$.post("@Url.Action("GetList","Section")", { keyWord: keyWord, rows: rows, page: Page }, function (data) {
+            //console.log(data);
+            //赋值
+            $("#currentPage").val(Page);
+            $("#total").html(data.total);
+            var pages = Math.ceil(data.total / rows);
+            $("#pages").html(pages);
+            $("#tbody").html("");
+            for (var i = 0; i < data.rows.length; i++) {
+                //取剖面名称
+                var name = data.rows[i].SectionName;
+                //取时代
+                var time = data.rows[i].Time;
+                var subTime = data.rows[i].SubTime;
+                //完成拼接
+                if (time) {
+                    name = name + "," + time + "," + subTime;
+                }
+                //取核准人
+                var authorizer = data.rows[i].Authorizer;
+                //取核准时间
+                var enterTime = data.rows[i].EnterTime;
+                enterTime = commHelper.ChangeDateFormatYMD(enterTime);//将json格式的日期进行转化
+                //完成拼接
+                authorizer = authorizer + "," + enterTime;
+                //拼接字符串
+                $("#tbody").append("<tr><td><div><a href='/Section/Details/" + data.rows[i].S_ID + "' target='_blank' style='font-size:1.2em;'>" + name + "</a></div><span style='color:#999999;font-weight:normal'>" + authorizer + "</span></td><td><div><span class='glyphicon glyphicon-pencil'onclick='modify(\"" + data.rows[i].S_ID + "\")'></span>&nbsp;&nbsp;<span class='glyphicon glyphicon-trash' onclick='trash(\"" + data.rows[i].S_ID + "\")'></span></div></td></tr>");
+            }
+        }, "json");*@
+
+    }
+    function trash(id) {
+        debugger;
+        $.post("/Section/Remove", { id: id }, function (data) {
+            if (data.status = "success") {
+                $.messager.alert("", data.msg, "info", function () {
+                    reload();
+                });//easy弹框
+            }
+            else {
+                $.messager.alert("", data.msg, "warning");
+            }
+        }, "json");
+    }
+    function modify(id) {
+        commHelper.OpenDialog("修改剖面", "/Section/Edit/" + id, $(window).width() * 0.7, $(window).height() * 0.7);
+    }
+
+</script>

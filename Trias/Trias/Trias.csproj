@@ -1210,6 +1210,7 @@
     <Content Include="Views\Unit\Details.cshtml" />
     <Content Include="Views\Collection\Details.cshtml" />
     <Content Include="Views\Geochemical\Details.cshtml" />
+    <Content Include="Views\Login\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

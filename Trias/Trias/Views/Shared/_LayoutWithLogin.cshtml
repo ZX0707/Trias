@@ -21,15 +21,79 @@
     @* easyui *@
     <link href="~/Content/CSS/main.css" rel="stylesheet" />
     <script src="~/Content/JS/home.js"></script>
+    <style>
+        .header {
+            height: 90px;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+            .header div {
+                font-family: 微软雅黑;
+                white-space: nowrap;
+                /*让字符不换行*/
+            }
+
+        .lef-head {
+            width: 600px;
+            float: left;
+        }
+
+            .lef-head img {
+                width: 80px;
+                height: 80px;
+                margin: 0 10px;
+            }
+
+            .lef-head span {
+                font-weight: bold;
+                font-size: 24px;
+                color: #264c1a;
+                letter-spacing: 2px;
+            }
+
+        .rig-head {
+            margin-right: 90px;
+            float: right;
+            margin-top:50px;
+        }
+
+            .rig-head ul li {
+                padding-left: 20px;
+                float: left;
+                text-align: center;
+            }
+
+                .rig-head ul li a {
+                    font-size: 14px;
+                    color: #000000;
+                }
+    </style>
 </head>
 <body class="easyui-layout">
-    @*<div data-options="region:'north'" style="height: 90px;"></div>*@
-    <div data-options="region:'west',title:'Menu'" style="width: 300px;">
+    <div class="header" data-options="region:'north'">
+        <div class="lef-head">
+            <img src="~/Content/images/logo.png" />
+            <span>生物地质与环境地质国家重点实验室</span>
+        </div>
+        <div class="rig-head">
+            <ul>
+                <li><a href="javascript:void(0)"> 首页</a></li>
+                <li><a href="javascript:void(0)"> 关于我们</a></li>
+                <li>
+                    <strong id="name"></strong>
+                    <a onclick="SignOut()" style="color: #FF9A00;"><strong>退出</strong></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div data-options="region:'west',title:'菜单栏'" style="width: 300px;">
         <div style="margin: 10px; text-align: center">
-            <span>
-                <strong id="name"></strong>
-                <a onclick="SignOut()" style="color: #FF9A00;"><strong>Sign out</strong></a>
-            </span>
+            @*<span>
+                    <strong id="name"></strong>
+                    <a onclick="SignOut()" style="color: #FF9A00;"><strong>退出</strong></a>
+                </span>*@
         </div>
         <div>
             <div id="aa" class="easyui-accordion" style="width: auto; height: auto;">
@@ -44,6 +108,16 @@
                     <div class="order">
                         <div class="meu"><a href="@Url.Action("QueryList","Reference")"><b>查询文献</b></a></div>
                         <div class="meu"><a href="/Section/QueryList"><b>查询剖面</b></a></div>
+                    </div>
+                </div>
+                <div title="用户管理" data-options="iconCls:'icon-save'" style="padding: 10px;">
+                    <div class="order">
+                        <div class="meu"><a href="@Url.Action("Manage","Login")"><b>人员管理</b></a></div>
+                    </div>
+                </div>
+                <div title="数据分析" data-options="iconCls:'icon-save'" style="padding: 10px;">
+                    <div class="order">
+                        <div class="meu"><a href=""><b>数据分析</b></a></div>
                     </div>
                 </div>
             </div>
@@ -76,7 +150,7 @@
         $(".required").on("focus", {}, function () {
             $(this).removeClass("error_ness");
         });
-        
+
     });
     //退出函数
     function SignOut() {

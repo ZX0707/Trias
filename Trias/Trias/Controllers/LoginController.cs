@@ -21,6 +21,10 @@ namespace Trias.Controllers
             Session[Keys.Login_UserInfo] = user;
             return WriteSuccess("登录成功");
         }
+        public ActionResult Manage()
+        {
+            return View();
+        }
         public ActionResult SignOut()
         {
             Session[Keys.Login_UserInfo] = null;//清除Session
