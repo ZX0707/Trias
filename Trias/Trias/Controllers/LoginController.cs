@@ -105,6 +105,13 @@ namespace Trias.Controllers
             return WriteSuccess("操作成功！");
         }
 
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="page"></param>
+        /// <param name="rows"></param>
+        /// <returns></returns>
         public ActionResult GetUserWithNoPass(string keyword, int page, int rows)
         {
             var list = userSer.Where(x => x.isPass == false);
@@ -121,6 +128,12 @@ namespace Trias.Controllers
                 rows = resule
             });
         }
+        /// <summary>
+        /// 是否同意授权
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="flag"></param>
+        /// <returns></returns>
 
         public ActionResult PermissUser(string ids, bool flag)
         {

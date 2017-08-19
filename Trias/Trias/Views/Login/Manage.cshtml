@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "人员管理";
 }
 <style>
     .paging {
@@ -30,32 +30,36 @@
     <input id="queryList" class="easyui-searchbox" style="width:auto"
            data-options="searcher:queryList,prompt:'输入用户相关查询'" />
     <div style="float:right">
-        <button type="button" class="btn btn-info" style="height: 30px;width:auto;">同意</button>
-        <button type="button" class="btn btn-info" style="height: 30px;width:auto;">不同意</button>
+        <button type="button" class="btn btn-info" style="height: 30px;width:70px;" id="agree" onclick="Pass(true)">同意</button>
+        <button type="button" class="btn btn-info" style="height: 30px;width:70px;" id="disagree" onclick="Pass(false)">不同意</button>
     </div>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>邮箱</th>
+                <th style="width:20px"><input type="checkbox" id="checkAll" value=""></th>
                 <th>用户名</th>
+                <th>邮箱</th>
                 <th>用户单位</th>
                 <th>研究方向</th>
             </tr>
         </thead>
         <tbody id="tbody">
             <tr>
+                <td><input type="checkbox" name="checkBox" value=""></td>
                 <td>111</td>
                 <td>222</td>
                 <td>333</td>
                 <td>444</td>
             </tr>
             <tr>
+                <td><input type="checkbox" name="checkBox" value=""></td>
                 <td>111</td>
                 <td>222</td>
                 <td>333</td>
                 <td>444</td>
             </tr>
             <tr>
+                <td><input type="checkbox" name="checkBox" value=""></td>
                 <td>111</td>
                 <td>222</td>
                 <td>333</td>
@@ -91,6 +95,30 @@
     </div>
 </div>
 <script>
+    $(function () {
+        reload(1);
+        $("#checkAll").click(function () {//判断全选框的改变
+            var flage = $(this).is(":checked");//全选选中为true，否则为false
+            $("input[type=checkbox]").each(function () {
+                $(this).prop("checked", flage);
+            })
+        });
+        //当子元素都选全选选中，其中一个不选取消全选
+        $("input[name=checkBox]").click(function () {
+            var flage1 = true;
+            for (var i = 0; i < $("input[name=checkBox]").length; i++) {
+                if (!$($("input[name=checkBox]")[i]).is(":checked")) {
+                    flage1 = false;
+                    break;
+                }
+            }
+            $("#checkAll").prop("checked", flage1);
+
+        })
+
+
+
+    })
     //查询函数
     function queryList() {
         reload(1);
@@ -116,9 +144,27 @@
             reload(currentPage);
         }
     }
-    $(function () {
-        reload(1);
-    })
+    function Pass(flag) {
+        var array = $("input[name=checkBox]");
+        var ids = "";
+        for (var i = 0; i < array.length; i++) {
+            if ($($("input[name=checkBox]")[i]).is(":checked")) {
+                ids += "," + $($("input[name=checkBox]")[i]).attr("id");
+            }
+        }
+        if (ids.length <= 0) {
+            alert("23456");
+            return;
+        }
+        $.post("@Url.Action("PermissUser","Login")", { ids: ids, flag: flag }, function (data) {
+            if (data.status == "success") {
+                alert(data.msg);
+                reload();
+            } else {
+                alert(data.msg);
+            }
+        }, "json");
+    }
     function reload(page) {
         //获取当前页的值
         if (page == undefined) {
@@ -143,8 +189,8 @@
         var keyWord = $("#queryList").searchbox("getValue");
         //每页显示rows条记录
         var rows = $("#rows").val();
-        @*$.post("@Url.Action("GetList","Section")", { keyWord: keyWord, rows: rows, page: Page }, function (data) {
-            //console.log(data);
+        $.post("@Url.Action("GetUserWithNoPass","Login")", { keyWord: keyWord, rows: rows, page: Page }, function (data) {
+            console.log(data);
             //赋值
             $("#currentPage").val(Page);
             $("#total").html(data.total);
@@ -152,26 +198,14 @@
             $("#pages").html(pages);
             $("#tbody").html("");
             for (var i = 0; i < data.rows.length; i++) {
-                //取剖面名称
-                var name = data.rows[i].SectionName;
-                //取时代
-                var time = data.rows[i].Time;
-                var subTime = data.rows[i].SubTime;
-                //完成拼接
-                if (time) {
-                    name = name + "," + time + "," + subTime;
-                }
-                //取核准人
-                var authorizer = data.rows[i].Authorizer;
-                //取核准时间
-                var enterTime = data.rows[i].EnterTime;
-                enterTime = commHelper.ChangeDateFormatYMD(enterTime);//将json格式的日期进行转化
-                //完成拼接
-                authorizer = authorizer + "," + enterTime;
-                //拼接字符串
-                $("#tbody").append("<tr><td><div><a href='/Section/Details/" + data.rows[i].S_ID + "' target='_blank' style='font-size:1.2em;'>" + name + "</a></div><span style='color:#999999;font-weight:normal'>" + authorizer + "</span></td><td><div><span class='glyphicon glyphicon-pencil'onclick='modify(\"" + data.rows[i].S_ID + "\")'></span>&nbsp;&nbsp;<span class='glyphicon glyphicon-trash' onclick='trash(\"" + data.rows[i].S_ID + "\")'></span></div></td></tr>");
+                var Id = data.rows[i].User_ID;
+                var UserName = data.rows[i].UserName;
+                var UserEmail = data.rows[i].UserEmail;
+                var UserUnit = data.rows[i].UserUnit;
+                var ResearchField = data.rows[i].ResearchField;
+                $("#tbody").append("<tr><td><input type='checkbox' id='" + Id + "' name='checkBox' value=''></td><td>" + UserName + "</td><td>" + UserEmail + "</td><td>" + UserUnit + "</td><td>" + ResearchField + "</td></tr>")
             }
-        }, "json");*@
+        }, "json");
 
     }
     function trash(id) {

@@ -147,6 +147,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AnalyzeController.cs" />
     <Compile Include="Controllers\CollectionController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\FossilController.cs" />
@@ -1211,6 +1212,7 @@
     <Content Include="Views\Collection\Details.cshtml" />
     <Content Include="Views\Geochemical\Details.cshtml" />
     <Content Include="Views\Login\Manage.cshtml" />
+    <Content Include="Views\Analyze\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
