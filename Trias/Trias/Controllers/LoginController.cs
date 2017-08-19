@@ -103,5 +103,17 @@ namespace Trias.Controllers
             userSer.SaveChanges();
             return WriteSuccess("操作成功！");
         }
+
+        public ActionResult GetUserWithNoPass(string keyword, int page, int rows)
+        {
+            var list = userSer.Where(x => x.isPass == false);
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                list = list.Where(x => x.UserEmail.Contains(keyword) || x.UserName.Contains(keyword) ||
+                                       x.UserUnit.Contains(keyword) || x.ResearchField.Contains(keyword));
+            }
+            var resule = list.OrderBy(x => x.UserName).Skip(rows * (page - 1)).Take(rows).ToList();
+            return Json(resule);
+        }
     }
 }
