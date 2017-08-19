@@ -175,6 +175,7 @@
           <Property Name="UserEmail" Type="nvarchar" MaxLength="100" />
           <Property Name="ResearchField" Type="nvarchar" MaxLength="100" />
           <Property Name="isPass" Type="bit" />
+          <Property Name="AddTime" Type="datetime" />
         </EntityType>
         <EntityContainer Name="TriasModelStoreContainer">
           <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
@@ -374,6 +375,7 @@
           <Property Name="UserEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ResearchField" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="isPass" Type="Boolean" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -552,6 +554,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="TriasModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
                 <ScalarProperty Name="isPass" ColumnName="isPass" />
                 <ScalarProperty Name="ResearchField" ColumnName="ResearchField" />
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />

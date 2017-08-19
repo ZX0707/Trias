@@ -21,5 +21,6 @@ namespace Trias.Models
         public string UserEmail { get; set; }
         public string ResearchField { get; set; }
         public Nullable<bool> isPass { get; set; }
+        public Nullable<System.DateTime> AddTime { get; set; }
     }
 }

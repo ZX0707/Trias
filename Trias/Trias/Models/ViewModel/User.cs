@@ -26,5 +26,7 @@ namespace Trias.Models
         public string ResearchField { get; set; }
         [Display(Name="是否通过验证")]
         public Nullable<bool> isPass { get; set; }
+        [Display(Name="注册时间")]
+        public Nullable<System.DateTime> AddTime { get; set; }
     }
 }
