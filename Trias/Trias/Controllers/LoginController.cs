@@ -113,8 +113,13 @@ namespace Trias.Controllers
                 list = list.Where(x => x.UserEmail.Contains(keyword) || x.UserName.Contains(keyword) ||
                                        x.UserUnit.Contains(keyword) || x.ResearchField.Contains(keyword));
             }
+            var total = list.Count();
             var resule = list.OrderByDescending(x => x.AddTime).Skip(rows * (page - 1)).Take(rows).ToList();
-            return Json(resule);
+            return Json(new
+            {
+                total,
+                rows = resule
+            });
         }
 
         public ActionResult PermissUser(string ids, bool flag)
