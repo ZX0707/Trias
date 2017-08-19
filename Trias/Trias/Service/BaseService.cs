@@ -104,7 +104,7 @@ namespace Trias.Service
         }
 
         /// <summary>
-        /// 通过条件删除实体
+        /// 通过条件修改实体
         /// </summary>
         /// <param name="predicate"></param>
         /// <param name="obj"></param>

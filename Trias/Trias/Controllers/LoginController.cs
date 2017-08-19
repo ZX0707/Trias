@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Trias.Models;
+using Trias.Service;
 using Trias.Tool;
 
 namespace Trias.Controllers
@@ -112,8 +113,26 @@ namespace Trias.Controllers
                 list = list.Where(x => x.UserEmail.Contains(keyword) || x.UserName.Contains(keyword) ||
                                        x.UserUnit.Contains(keyword) || x.ResearchField.Contains(keyword));
             }
-            var resule = list.OrderBy(x => x.UserName).Skip(rows * (page - 1)).Take(rows).ToList();
+            var resule = list.OrderByDescending(x => x.AddTime).Skip(rows * (page - 1)).Take(rows).ToList();
             return Json(resule);
+        }
+
+        public ActionResult PermissUser(string ids, bool flag)
+        {
+            var list = userSer.Where(x => ids.Contains(x.User_ID)).ToList();
+            if (flag)
+            {
+                list.ForEach(x =>
+                {
+                    x.isPass = true;
+                });
+            }
+            else
+            {
+                userSer.RemoveList(list);
+            }
+            userSer.SaveChanges();
+            return WriteSuccess("操作成功！");
         }
     }
 }
