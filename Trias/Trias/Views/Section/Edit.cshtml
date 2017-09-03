@@ -270,13 +270,13 @@
         //console.log($("#Time>option:selected").attr("id"));
         //处理时代子元素下拉框
         initSelect($("#SubTime"), getOptionsURL, { type: "SubTime", pid: $("#Time>option:selected").attr("id") }, function () {
-            $("#Time").val("@Model.Time");
+            //$("#Time").val("@Model.Time");
             $("#SubTime").val("@Model.SubTime");
         });
     }
     function change2() {
         initSelect($("#SubTimeEnd"), getOptionsURL, { type: "SubTime", pid: $("#TimeEnd>option:selected").attr("id") }, function () {
-            $("#TimeEnd").val("@Model.TimeEnd");
+            //$("#TimeEnd").val("@Model.TimeEnd");
             $("#SubTimeEnd").val("@Model.SubTimeEnd");
         });
     }
@@ -370,13 +370,21 @@
 
         $('#addFormation').attr({ "disabled": "disabled" });//禁用button
         //处理时代下拉框
-        initSelect($("#Time"), getOptionsURL, { type: "Time" }, change);
-        initSelect($("#TimeEnd"), getOptionsURL, { type: "Time" }, change2);
+        initSelect($("#Time"), getOptionsURL, { type: "Time" }, change, function() {
+            $("#Time").val("@Model.Time");
+        });
+        initSelect($("#TimeEnd"), getOptionsURL, { type: "Time" }, change2,function() {
+            $("#TimeEnd").val("@Model.TimeEnd");
+        });
         //表单操作
         $('#form').form({
             url: '/Section/EditSection',
             onSubmit: function (param) {
+                var Altitude1 = parseFloat($("#measure").val()) * parseFloat($("#Altitude").val());
                 param.Altitude1 = parseFloat($("#measure").val()) * parseFloat($("#Altitude").val());
+                if (isNaN(Altitude1)) {
+                    param.Altitude1 = null;
+                }
                 param.RID11 = $("#RID1").attr("rid");
                 param.RID22 = $("#RID2").attr("rid");
                 param.RID33 = $("#RID3").attr("rid");
