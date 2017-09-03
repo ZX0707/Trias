@@ -19,8 +19,28 @@
     .bian_ju {
         margin-bottom: 10px;
     }
+     .container {
+            width: 806px;
+            margin: 0px auto;
+            margin-top: 40px;
+            padding-bottom: 4px;
+            position: relative;
+            overflow: auto;
+        }
+
+        .conta {
+            width: 740px;
+            border-top: 2px solid #4469a1;
+            border-bottom: 1px solid #d6d6d6;
+            border-left: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+            box-shadow: 2px 2px 3px #888888;
+            overflow: hidden;
+            padding: 30px 30px 20px 30px;
+            background-color: #FFF;
+        }
 </style>
-@model Trias.Models.Section
+@model Trias.Models.SectionView
 
 @*选择剖面模态框*@
 <div id="xx" class="easyui-dialog" title="选择剖面" style="width: 600px; height: 400px;"
@@ -48,123 +68,211 @@
 
 <form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
     <div class="form-group">
-        <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
-            添加岩石组
-        </label>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">剖面名称：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.SectionName, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
-                class="form-control required" />*@
-        </div>
         <div class="col-sm-1">
             <button onclick="seSection()" type="button" class="btn btn-default">选择剖面</button>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">核准人：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.Authorizer, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="Authorizer" id="Authorizer" type="text" placeholder="输入核准人" class="form-control required"
-                readonly="readonly" />*@
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">核准时间：</label>
-        <div class="col-sm-2 ">
-            @{
-                var enterStr = "";
-                if (Model.EnterTime == null)
-                {
-                    enterStr = "";
-                }
-                else
-                {
-                    enterStr = ((DateTime)Model.EnterTime).ToString("yyyy-MM-dd");
-                }
-            }
-            @Html.TextBox("EnterTime", enterStr, new { type = "text", @class = "form-control", @readonly = "readonly" })
-        </div>
-    </div>
+    <div class="container">
+        <div class="conta">
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.SectionName)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.SectionName)
+            </div>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">时代：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.Time2, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="Time2" id="Time2" type="text" placeholder="输入时代" class="form-control" />*@
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Time)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Time)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.SubTime)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.SubTime)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.TimeEnd)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.TimeEnd)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.SubTimeEnd)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.SubTimeEnd)
+            </div>
+
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Time2)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Time2)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Time2End)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Time2End)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.EnterTime)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.EnterTime)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Authorizer)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Authorizer)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Country)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Country)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Province)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Province)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.City)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.City)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.County)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.County)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Village)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Village)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LonDegrees)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LonDegrees)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LonMinutes)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LonMinutes)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LonSeconds)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LonSeconds)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LatDegrees)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LatDegrees)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LatMinutes)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LatMinutes)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.LatSeconds)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LatSeconds)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.TectonicPlate)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.TectonicPlate)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Notes)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Notes)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Comments)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Comments)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Altitude)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Altitude)
+            </div>
+
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Sthickness)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Sthickness)
+            </div>
+            </div>
         </div>
-        <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">时代：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.Time, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<select name="Time" id="Time" onchange="change()" class="form-control" value="@Model.Time"></select>*@
-        </div>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.SubTime, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @* <select name="SubTime" id="SubTime" class="form-control" style="width: auto" value="@Model.SubTime"></select>*@
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">国家：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.Country, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="Country" id="Country" type="text" placeholder="输入国家"
-                class="form-control required" />*@
-        </div>
-        <label class="col-sm-1 control-label">省份：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.Province, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="Province" id="Province" type="text" placeholder="输入省份"
-                class="form-control required" />*@
-        </div>
-        <label class="col-sm-1 control-label">城市：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.City, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="City" id="City" type="text" placeholder="输入城市"
-                class="form-control required" />*@
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">县/区：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.County, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="County" id="County" type="text" placeholder="输入县/区"
-                class="form-control" />*@
-        </div>
-        <label class="col-sm-1 control-label">村：</label>
-        <div class="col-sm-2 ">
-            @Html.TextBoxFor(x => x.Village, new { type = "text", @class = "form-control", @readonly = "readonly" })
-            @*<input name="Village" id="Village" type="text" placeholder="输入村"
-                class="form-control" />*@
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-1 control-label"></label>
-        <div class="col-sm-10" style="background-color: #bee2fb; height: auto; padding: 10px;">
-            <div style="margin-bottom:5px">
-                <label>岩石组层级关系</label>
-                <div class="btn-group" style="float: right">
-                    @*<button  type="button" class="btn btn-default" onclick="myFormation()">
-                            添加岩石组
-                        </button>*@
-                    <a href="#"><span class="glyphicon glyphicon-plus " onclick="myFormation()">添加岩石组</span></a>
+
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label"></label>
+                <div class="col-sm-10" style="background-color: #bee2fb; height: auto; padding: 10px;">
+                    <div style="margin-bottom:5px">
+                        <label>岩石组层级关系</label>
+                        <div class="btn-group" style="float: right">
+                            @*<button  type="button" class="btn btn-default" onclick="myFormation()">
+                                    添加岩石组
+                                </button>*@
+                            <a href="#"><span class="glyphicon glyphicon-plus " onclick="myFormation()">添加岩石组</span></a>
+                        </div>
+                    </div>
+                    <div id="box">
+                    </div>
+
                 </div>
             </div>
-            <div id="box">
+
+            <div class="form-group" style="text-align: center">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-default">完成</button>
+                </div>
             </div>
-
-        </div>
-    </div>
-
-    <div class="form-group" style="text-align: center">
-        <div class="col-sm-12">
-            <button type="button" class="btn btn-default">完成</button>
-        </div>
-    </div>
 </form>
 
 <script>
@@ -180,7 +288,7 @@
                 var fid = formation.F_ID;
                 var fName = formation.FormationName;
                 var units = data[i].units;
-                var formationDiv = $("<div class='level1' id='"+fid+"'/>");
+                var formationDiv = $("<div class='level1' id='" + fid + "'/>");
                 formationDiv.append("<label>" + fName + "</label>");
                 formationDiv.append(
 
@@ -193,7 +301,7 @@
                     var uid = unit.U_ID;
                     var uName = "层" + (j + 1);
                     var collections = units[j].collections;
-                    var unitDiv = $("<div class='level2' id='" + uid +"'/>");
+                    var unitDiv = $("<div class='level2' id='" + uid + "'/>");
                     unitDiv.append("<label>" + uName + "</label>");
                     unitDiv.append(
                         "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-plus' onclick='myCollection(\"" + uid + "\")'>添加采样位置</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-trash' onclick='delUnit(\"" + uid + "\")'>删除层</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altUnit(\"" + uid + "\")'>修改层</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>层上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>层下移</span></a></div>");
@@ -203,7 +311,7 @@
                         var cid = collection.C_ID;
                         var cName = "采样位置" + (k + 1);
                         var fossils = collections[k].fossils;
-                        var collectionDiv = $("<div class='level3' id='" + cid +"'/>");
+                        var collectionDiv = $("<div class='level3' id='" + cid + "'/>");
                         collectionDiv.append("<label>" + cName + "</label>");
                         collectionDiv.append(
                             "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-plus' onclick='myFossil(\"" + cid + "\")'>添加化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-plus' onclick='myGeochemical(\"" + cid + "\")'>添加地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-trash'  onclick='delCollection(\"" + cid + "\")'>删除采样位置</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altCollection(\"" + cid + "\")'>修改采样位置</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>采样位置上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>采样位置下移</span></a></div>");
@@ -212,7 +320,7 @@
                             var fossil = fossils[l];
                             var foid = fossil.H_ID;
                             var foName = "化石" + (l + 1);
-                            var fossilDiv = $("<div class='level4' id='" + foid +"'/>");
+                            var fossilDiv = $("<div class='level4' id='" + foid + "'/>");
                             fossilDiv.append("<label>" + foName + "</label>");
                             fossilDiv.append(
                                 "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delFossil(\"" + foid + "\")'>删除化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altFossil(\"" + foid + "\")'>修改化石</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>化石上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>化石下移</span></a></div>");
@@ -223,7 +331,7 @@
                             var geochemical = geochemicals[l];
                             var gid = geochemical.G_ID;
                             var gName = "地球化学信息 " + (l + 1);
-                            var geochemicalDiv = $("<div class='level4' id='" + gid +"'/>");
+                            var geochemicalDiv = $("<div class='level4' id='" + gid + "'/>");
                             geochemicalDiv.append("<label>" + gName + "</label>");
                             geochemicalDiv.append(
                                 "<div class='btn-group'style='float:right'><a href='#'><span class='glyphicon glyphicon-trash'  onclick='delGeochemical(\"" + gid + "\")'>删除地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-pencil' onclick='altGeochemical(\"" + gid + "\")'>修改地球化学信息</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-up' onclick='up(this)'>地球化学信息上移</span></a>&nbsp;&nbsp;<a href='#'><span class='glyphicon glyphicon-arrow-down' onclick='down(this)'>地球化学信息下移</span></a></div>");
@@ -246,7 +354,7 @@
         div.insertBefore(nextDiv);
         var id1 = div.attr("id");
         var id2 = nextDiv.attr("id");
-        $.post("@Url.Action("ChangeSort")", { id1: id1, id2: id2, level: f1 }, function(data) {
+        $.post("@Url.Action("ChangeSort")", { id1: id1, id2: id2, level: f1 }, function (data) {
         });
     }
     //下移
@@ -261,7 +369,7 @@
         div.insertAfter(nextDiv);
         var id1 = div.attr("id");
         var id2 = nextDiv.attr("id");
-        $.post("@Url.Action("ChangeSort")", { id1: id1, id2: id2, level: f1 }, function(data) {
+        $.post("@Url.Action("ChangeSort")", { id1: id1, id2: id2, level: f1 }, function (data) {
         });
     }
     //打开模态框
@@ -287,7 +395,7 @@
             $.messager.alert("", "请选择一个剖面", "warning");
             return;
         }
-        commHelper.OpenDialog("修改岩石组", "@Url.Action("EditFormation")/"+fid);
+        commHelper.OpenDialog("修改岩石组", "@Url.Action("EditFormation")/" + fid);
 
     }
     function myUnit(fid) {
@@ -303,9 +411,8 @@
             }
         });
     }
-    function altUnit(uid)
-    {
-        commHelper.OpenDialog("修改层", "@Url.Action("EditUnit","Unit")/"+uid);
+    function altUnit(uid) {
+        commHelper.OpenDialog("修改层", "@Url.Action("EditUnit","Unit")/" + uid);
     }
     function myCollection(uid) {
         commHelper.OpenDialog("添加采样位置", "@Url.Action("Add", "Collection")/" + uid);
@@ -321,7 +428,7 @@
         });
     }
     function altCollection(cid) {
-        commHelper.OpenDialog("修改采样位置", "@Url.Action("EditCollection","Collection")/"+cid);
+        commHelper.OpenDialog("修改采样位置", "@Url.Action("EditCollection","Collection")/" + cid);
     }
     function myFossil(cid) {
         commHelper.OpenDialog("添加化石", "@Url.Action("Add", "Fossil")/" + cid);

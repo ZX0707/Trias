@@ -25,7 +25,9 @@ namespace Trias.Controllers
         public ActionResult Index(string id)
         {
             var model = sectionSer.Find(id) ?? new Section();
-            return View(model);
+            var viewModel = new SectionView();
+            viewModel.CopyFrom(model);
+            return View(viewModel);
         }
 
         public ActionResult Add(string id)

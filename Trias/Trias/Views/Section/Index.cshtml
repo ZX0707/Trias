@@ -64,9 +64,14 @@
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">剖面名称：</label>
-        <div class="col-sm-3 ">
-            <input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
+        <div class="col-sm-2 ">
+            <input name="SectionName" id="SectionName" type="text" placeholder="剖面名称"
                    class="form-control required" />
+        </div>
+        <label class="col-sm-2 control-label">剖面厚度：</label>
+        <div class="col-sm-2 ">
+            <input name="Sthickness" id="Sthickness" type="number" placeholder="厚度"
+                   class="form-control" />
         </div>
     </div>
     <div class="form-group">
@@ -87,8 +92,13 @@
         <div class="col-sm-2 ">
             <input name="Time2" id="Time2" type="number" placeholder="输入时代" class="form-control" />
         </div>
+        <label class="col-sm-1 control-label" style="width:0;padding-left: 2px;">—</label>
+        <div class="col-sm-2 ">
+            <input name="Time2End" id="Time2End" type="number" placeholder="输入时代" class="form-control" />
+        </div>
         <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
     </div>
+
     <div class="form-group">
         <label class="col-sm-2 control-label">时代：</label>
         <div class="col-sm-2 ">
@@ -96,6 +106,13 @@
         </div>
         <div class="col-sm-2 ">
             <select name="SubTime" id="SubTime" class="form-control" style="width: auto"></select>
+        </div>
+        <label class="col-sm-1 control-label" style="width:0;padding-left:30px;padding-right:15px;">—</label>
+        <div class="col-sm-2 ">
+            <select name="TimeEnd" id="TimeEnd" onchange="change2()" class="form-control"></select>
+        </div>
+        <div class="col-sm-2 ">
+            <select name="SubTimeEnd" id="SubTimeEnd" class="form-control" style="width: auto"></select>
         </div>
     </div>
     <div class="form-group">
@@ -250,9 +267,13 @@
     }
 
     function change() {
-        console.log($("#Time>option:selected").attr("id"));
+        //console.log($("#Time>option:selected").attr("id"));
         //处理时代子元素下拉框
         initSelect($("#SubTime"), getOptionsURL, { type: "SubTime", pid: $("#Time>option:selected").attr("id") });
+    }
+    function change2() {
+        //处理时代子元素下拉框
+        initSelect($("#SubTimeEnd"), getOptionsURL, { type: "SubTime", pid: $("#TimeEnd>option:selected").attr("id") });
     }
     function GetGPS() {
         var value = $("#GetLocation").val();
@@ -345,6 +366,7 @@
         $('#addFormation').attr({ "disabled": "disabled" });//禁用button
         //处理时代下拉框
         initSelect($("#Time"), getOptionsURL, { type: "Time" }, change);
+        initSelect($("#TimeEnd"), getOptionsURL, { type: "Time" }, change2);
         //表单操作
         $('#form').form({
             url: '/Section/AddSection',

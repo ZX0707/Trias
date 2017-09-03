@@ -62,10 +62,16 @@
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">剖面名称：</label>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
                 <input name="SectionName" id="SectionName" type="text" placeholder="输入剖面名称"
                        class="form-control required" value="@Model.SectionName" />
             </div>
+            <label class="col-sm-2 control-label">剖面厚度：</label>
+            <div class="col-sm-2 ">
+                <input name="Sthickness" id="Sthickness" type="number" placeholder="厚度"
+                       class="form-control" value="@Model.Sthickness" />
+            </div>
+
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">参考文献：</label>
@@ -85,6 +91,10 @@
             <div class="col-sm-2 ">
                 <input name="Time2" id="Time2" type="number" placeholder="输入时代" class="form-control" value="@Model.Time2" />
             </div>
+            <label class="col-sm-1 control-label" style="width:0;padding-left: 2px;">—</label>
+            <div class="col-sm-2 ">
+                <input name="Time2End" id="Time2End" type="number" placeholder="输入时代" class="form-control" value="@Model.Time2End" />
+            </div>
             <label class="col-sm-1 control-label" style="margin-left: -3%;">百万年</label>
         </div>
         <div class="form-group">
@@ -94,6 +104,13 @@
             </div>
             <div class="col-sm-2 ">
                 <select name="SubTime" id="SubTime" class="form-control" style="width: auto"></select>
+            </div>
+            <label class="col-sm-1 control-label" style="width:0;padding-left:45px;padding-right:15px;">—</label>
+            <div class="col-sm-2 ">
+                <select name="TimeEnd" id="TimeEnd" onchange="change2()" class="form-control"></select>
+            </div>
+            <div class="col-sm-2 ">
+                <select name="SubTimeEnd" id="SubTimeEnd" class="form-control" style="width: auto"></select>
             </div>
         </div>
         <div class="form-group">
@@ -257,6 +274,12 @@
             $("#SubTime").val("@Model.SubTime");
         });
     }
+    function change2() {
+        initSelect($("#SubTimeEnd"), getOptionsURL, { type: "SubTime", pid: $("#TimeEnd>option:selected").attr("id") }, function () {
+            $("#TimeEnd").val("@Model.TimeEnd");
+            $("#SubTimeEnd").val("@Model.SubTimeEnd");
+        });
+    }
     function GetGPS() {
         var value = $("#GetLocation").val();
         var text = $("#" + value).val();
@@ -348,6 +371,7 @@
         $('#addFormation').attr({ "disabled": "disabled" });//禁用button
         //处理时代下拉框
         initSelect($("#Time"), getOptionsURL, { type: "Time" }, change);
+        initSelect($("#TimeEnd"), getOptionsURL, { type: "Time" }, change2);
         //表单操作
         $('#form').form({
             url: '/Section/EditSection',
@@ -368,7 +392,8 @@
                 return flag;
             },
             success: function (data) {
-                //提交成功后的操作
+                debugger;
+                 //提交成功后的操作
                 //提交成功后的操作
                 if (typeof data == "string") {
                     data = $.parseJSON(data);
