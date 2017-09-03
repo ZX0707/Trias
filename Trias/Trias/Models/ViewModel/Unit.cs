@@ -33,5 +33,7 @@ namespace Trias.Models
         [Display(Name = "备注")]
         public string Details { get; set; }
         public Nullable<int> sort { get; set; }
+        [Display(Name="名称")]
+        public string UnitName { get; set; }
     }
 }

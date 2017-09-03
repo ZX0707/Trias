@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TriasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="TriasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="Collection">
           <Key>
             <PropertyRef Name="C_ID" />
@@ -62,6 +62,7 @@
           <Property Name="Picture" Type="nvarchar(max)" />
           <Property Name="Notes" Type="nvarchar" MaxLength="500" />
           <Property Name="sort" Type="int" />
+          <Property Name="FossilName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Geochemical">
           <Key>
@@ -150,6 +151,10 @@
           <Property Name="Notes" Type="text" />
           <Property Name="Comments" Type="text" />
           <Property Name="Altitude" Type="float" />
+          <Property Name="Time2End" Type="int" />
+          <Property Name="TimeEnd" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTimeEnd" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sthickness" Type="int" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -163,6 +168,7 @@
           <Property Name="Environments" Type="nvarchar" MaxLength="50" />
           <Property Name="Details" Type="text" />
           <Property Name="sort" Type="int" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -262,6 +268,7 @@
           <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="sort" Type="Int32" />
+          <Property Name="FossilName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Geochemical">
           <Key>
@@ -350,6 +357,10 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Altitude" Type="Double" />
+          <Property Name="Time2End" Type="Int32" />
+          <Property Name="TimeEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTimeEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sthickness" Type="Int32" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -363,6 +374,7 @@
           <Property Name="Environments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sort" Type="Int32" />
+          <Property Name="UnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -424,6 +436,7 @@
           <EntitySetMapping Name="Fossil">
             <EntityTypeMapping TypeName="TriasModel.Fossil">
               <MappingFragment StoreEntitySet="Fossil">
+                <ScalarProperty Name="FossilName" ColumnName="FossilName" />
                 <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
@@ -508,6 +521,10 @@
           <EntitySetMapping Name="Section">
             <EntityTypeMapping TypeName="TriasModel.Section">
               <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="Sthickness" ColumnName="Sthickness" />
+                <ScalarProperty Name="SubTimeEnd" ColumnName="SubTimeEnd" />
+                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+                <ScalarProperty Name="Time2End" ColumnName="Time2End" />
                 <ScalarProperty Name="Altitude" ColumnName="Altitude" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -540,6 +557,7 @@
           <EntitySetMapping Name="Unit">
             <EntityTypeMapping TypeName="TriasModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
                 <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Environments" ColumnName="Environments" />

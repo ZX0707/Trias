@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "关于我们";
+    Layout = "~/Views/Shared/_LayoutWithNothing.cshtml";
+}
+<style>
+ 
+    .header {
+        height: 90px;
+        line-height: 73px;
+        min-width: 1000px;
+        border: 1px solid #eee;
+    }
+
+        .header div {
+            font-family: 微软雅黑;
+            white-space: nowrap;
+            /*让字符不换行*/
+        }
+
+    .lef-head {
+        width: 600px;
+        float: left;
+    }
+
+        .lef-head img {
+            width: 80px;
+            height: 80px;
+            margin: 0 10px;
+        }
+
+        .lef-head span {
+            font-weight: bold;
+            font-size: 24px;
+            color: #264c1a;
+            letter-spacing: 2px;
+        }
+
+    .rig-head {
+        margin-right: 90px;
+        float: right;
+        margin-top: 34px;
+    }
+
+        .rig-head ul li {
+            padding-left: 20px;
+            float: left;
+            text-align: center;
+        }
+
+            .rig-head ul li a {
+                font-size: 14px;
+                color: #000000;
+            }
+
+    .cur {
+        color: #fb4d4d !important;
+        font-weight: bold;
+    }
+
+    .midContent {
+        margin: 0 auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        width: 620px;
+    }
+
+    .article .title {
+        word-break: break-word !important;
+        word-break: break-all;
+        margin: 20px 0;
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+    .article p{
+        font-family:'Microsoft YaHei';
+        font-size:15px;
+        margin:20px 0;
+
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        vertical-align: middle;
+        border: 0;
+        cursor: -webkit-zoom-in;
+        transition: all .25s ease-in-out;
+    }
+
+    .copyright {
+        margin: 0 auto;
+        padding-bottom: 40px;
+        width: 620px;
+    }
+
+        .copyright span {
+            display: block;
+            text-align: center;
+            background: #eee;
+            padding:5px 0;
+            font-size:15px;
+        }
+</style>
+
+<div class="header">
+    <div class="lef-head">
+        <img src="~/Content/images/logo.png" />
+        <span>生物地质与环境地质国家重点实验室</span>
+    </div>
+    <div class="rig-head">
+        <ul>
+            <li><a href="@Url.Action("IndexWithLogin", "Home")"> 首页</a></li>
+            <li><a href="@Url.Action("Index","AboutUs")"> 关于我们</a></li>
+            <li>
+                <strong id="name"></strong>
+                <a onclick="SignOut()" style="color: #FF9A00;"><strong>退出</strong></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="midContent">
+    <div class="article">
+        <h1 class="title">这是标题</h1>
+        <img src="~/Content/images/about01.jpg" />
+        <p>
+            这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本:
+        </p>
+        <div style="text-align:center">
+            <img src="~/Content/images/about02.jpg" style="width:300px;max-height:365px" />
+            <img src="~/Content/images/about03.jpg" style="width:300px;max-height:365px" />
+        </div>
+        <p>
+            这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本。 这是一些文本。这是一些文本。这是一些文本:
+        </p>
+        <div style="text-align:center">
+            <img src="~/Content/images/about04.jpg" />
+        </div>
+
+
+
+    </div>
+</div>
+<div class="copyright">
+    <span>© 著作权归作者所有&nbsp;&nbsp;中国地质大学（武汉）</span>
+</div>
+<script>
+    //导航栏与当前页对应
+    var urlstr = location.href;
+    //alert(urlstr);
+    var urlstatus = false;
+    $(".rig-head a").each(function () {
+        if ((urlstr + '/').indexOf($(this).attr('href')) > -1 && $(this).attr('href') != '') {
+            $(this).addClass('cur'); urlstatus = true;
+        } else {
+            $(this).removeClass('cur');
+        }
+    });
+    if (!urlstatus) { $(".rig-head a").eq(0).addClass('cur'); }
+
+
+    var currentUser;
+    var getOptionsURL = "@Url.Action("GetSelectOptions", "Dict")";
+    $(function () {
+        //获取用户名
+        $.post("@Url.Action("GetCurrentUser", "Login")", {}, function (result) {
+            currentUser = result.msg;
+            if (currentUser == null) {
+                location.href = "/";
+            }
+            else {
+                $("#name").html(currentUser.UserName);
+            }
+            if (typeof init == "function") {
+                init();
+            }
+        }, "json");
+    });
+    //退出函数
+    function SignOut() {
+        $.post("@Url.Action("SignOut", "Login")", {}, function (url) {
+            location.href = url;
+        }, "text");
+    }
+
+</script>

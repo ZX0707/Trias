@@ -40,5 +40,9 @@ namespace Trias.Models
         public string Notes { get; set; }
         public string Comments { get; set; }
         public Nullable<double> Altitude { get; set; }
+        public Nullable<int> Time2End { get; set; }
+        public string TimeEnd { get; set; }
+        public string SubTimeEnd { get; set; }
+        public Nullable<int> Sthickness { get; set; }
     }
 }

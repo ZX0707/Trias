@@ -77,5 +77,14 @@ namespace Trias.Models
         public string Comments { get; set; }
         [Display(Name = "海拔")]
         public Nullable<double> Altitude { get; set; }
+        [Display(Name="到时代（百万年）")]
+        public Nullable<int> Time2End { get; set; }
+        [Display(Name="到时代")]
+        public string TimeEnd { get; set; }
+        [Display(Name = "到子时代")]
+        public string SubTimeEnd { get; set; }
+        [Display(Name = "厚度")]
+        public Nullable<int> Sthickness { get; set; }
+
     }
 }

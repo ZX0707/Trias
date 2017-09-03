@@ -26,6 +26,7 @@
             height: 90px;
             display: table-cell;
             vertical-align: middle;
+            min-width: 1000px;
         }
 
             .header div {
@@ -68,6 +69,11 @@
                     font-size: 14px;
                     color: #000000;
                 }
+
+        .cur {
+            color: #fb4d4d !important;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body class="easyui-layout">
@@ -79,7 +85,7 @@
         <div class="rig-head">
             <ul>
                 <li><a href="javascript:void(0)"> 首页</a></li>
-                <li><a href="javascript:void(0)"> 关于我们</a></li>
+                <li><a href="@Url.Action("Index","AboutUs")"> 关于我们</a></li>
                 <li>
                     <strong id="name"></strong>
                     <a onclick="SignOut()" style="color: #FF9A00;"><strong>退出</strong></a>
@@ -131,6 +137,19 @@
 </body>
 </html>
 <script>
+    var urlstr = location.href;
+    //alert(urlstr);
+    var urlstatus = false;
+    $(".rig-head a").each(function () {
+        if ((urlstr + '/').indexOf($(this).attr('href')) > -1 && $(this).attr('href') != '') {
+            $(this).addClass('cur'); urlstatus = true;
+        } else {
+            $(this).removeClass('cur');
+        }
+    });
+    if (!urlstatus) { $(".rig-head a").eq(0).addClass('cur'); }
+
+
     var currentUser;
     var getOptionsURL = "@Url.Action("GetSelectOptions", "Dict")";
     $(function () {
@@ -159,4 +178,5 @@
             location.href = url;
         }, "text");
     }
+
 </script>

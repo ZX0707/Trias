@@ -32,5 +32,6 @@ namespace Trias.Models
         public string Picture { get; set; }
         public string Notes { get; set; }
         public Nullable<int> sort { get; set; }
+        public string FossilName { get; set; }
     }
 }

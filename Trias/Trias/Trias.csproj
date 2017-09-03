@@ -147,6 +147,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\AnalyzeController.cs" />
     <Compile Include="Controllers\CollectionController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
@@ -242,6 +243,8 @@
     <Compile Include="Tool\UserMgr.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\about01.jpg" />
+    <Content Include="Content\images\about04.jpg" />
     <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap-3.3.7-dist\css\bootstrap.css" />
@@ -1025,6 +1028,8 @@
     <Content Include="Content\easyui\themes\metro\validatebox.css" />
     <Content Include="Content\easyui\themes\metro\window.css" />
     <Content Include="Content\easyui\themes\mobile.css" />
+    <Content Include="Content\images\about02.jpg" />
+    <Content Include="Content\images\about03.jpg" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\gantan.png" />
     <Content Include="Content\images\gou.png" />
@@ -1213,6 +1218,7 @@
     <Content Include="Views\Geochemical\Details.cshtml" />
     <Content Include="Views\Login\Manage.cshtml" />
     <Content Include="Views\Analyze\Index.cshtml" />
+    <Content Include="Views\AboutUs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
