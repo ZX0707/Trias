@@ -8,6 +8,13 @@
 
 <form class="form-horizontal" role="form" method="post" style="padding: 20px; text-align: center;">
     <div class="form-group">
+        <label class="col-sm-2 control-label">名称：</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(x => x.UnitName, new { type = "text", @class = "form-control required", })
+            @*<input name="UnitName" id="UnitName" type="text" placeholder="名称" class="form-control required" />*@
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-sm-2 control-label">接触关系：</label>
         <div class="col-sm-2">
             <select name="ContactBase" id="ContactBase" class="form-control"></select>
@@ -159,6 +166,7 @@
         }, "json");
         $("#btn_save").on("click", {}, function () {
             var unit = {
+                UnitName :$("#UnitName").val(),
                 U_ID: "@Model.U_ID",
                 F_ID: "@Model.F_ID",
                 ContactBase: $("#ContactBase").val(),

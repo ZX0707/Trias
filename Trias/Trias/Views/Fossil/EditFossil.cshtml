@@ -7,6 +7,12 @@
 
 <form class="form-horizontal" role="form" id="form" method="post" enctype="multipart/form-data" style="padding: 20px; text-align: center;">
     <div class="form-group">
+        <label class="col-sm-2 control-label">名称：</label>
+        <div class="col-sm-2 ">
+            <input name="FossilName" id="FossilName" type="text" placeholder="名称" class="form-control required" />
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-sm-2 control-label">核准人：</label>
         <div class="col-sm-2 ">
             @Html.TextBoxFor(x => x.Authorizer, new { type = "text", @class = "form-control", @readonly = "readonly" })
@@ -192,6 +198,7 @@
             url:"@Url.Action("EditFossil")",
             onSubmit: function (data) {
                 var fossil = {
+                    FossilName:$("#FossilName").val(),
                     H_ID: "@Model.H_ID",
                     C_ID: "@Model.C_ID",
                     Time: $("#Time").val(),

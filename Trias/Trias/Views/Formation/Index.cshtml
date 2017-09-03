@@ -19,27 +19,29 @@
     .bian_ju {
         margin-bottom: 10px;
     }
-     .container {
-            width: 806px;
-            margin: 0px auto;
-            margin-top: 40px;
-            padding-bottom: 4px;
-            position: relative;
-            overflow: auto;
-        }
 
-        .conta {
-            width: 740px;
-            border-top: 2px solid #4469a1;
-            border-bottom: 1px solid #d6d6d6;
-            border-left: 1px solid #d6d6d6;
-            border-right: 1px solid #d6d6d6;
-            box-shadow: 2px 2px 3px #888888;
-            overflow: hidden;
-            padding: 30px 30px 20px 30px;
-            background-color: #FFF;
-        }
+    .container {
+        width: 806px;
+        margin: 0px auto;
+        margin-top: 40px;
+        padding-bottom: 4px;
+        position: relative;
+        overflow: auto;
+    }
+
+    .conta {
+        width: 740px;
+        border-top: 2px solid #4469a1;
+        border-bottom: 1px solid #d6d6d6;
+        border-left: 1px solid #d6d6d6;
+        border-right: 1px solid #d6d6d6;
+        box-shadow: 2px 2px 3px #888888;
+        overflow: hidden;
+        padding: 30px 30px 20px 30px;
+        background-color: #FFF;
+    }
 </style>
+
 @model Trias.Models.SectionView
 
 @*选择剖面模态框*@
@@ -246,33 +248,33 @@
             <div class="display-field">
                 @Html.DisplayFor(model => model.Sthickness)
             </div>
-            </div>
         </div>
+    </div>
 
 
-            <div class="form-group">
-                <label class="col-sm-1 control-label"></label>
-                <div class="col-sm-10" style="background-color: #bee2fb; height: auto; padding: 10px;">
-                    <div style="margin-bottom:5px">
-                        <label>岩石组层级关系</label>
-                        <div class="btn-group" style="float: right">
-                            @*<button  type="button" class="btn btn-default" onclick="myFormation()">
-                                    添加岩石组
-                                </button>*@
-                            <a href="#"><span class="glyphicon glyphicon-plus " onclick="myFormation()">添加岩石组</span></a>
-                        </div>
-                    </div>
-                    <div id="box">
-                    </div>
-
+    <div class="form-group">
+        <label class="col-sm-1 control-label"></label>
+        <div class="col-sm-10" style="background-color: #bee2fb; height: auto; padding: 10px;">
+            <div style="margin-bottom:5px">
+                <label>岩石组层级关系</label>
+                <div class="btn-group" style="float: right">
+                    @*<button  type="button" class="btn btn-default" onclick="myFormation()">
+                            添加岩石组
+                        </button>*@
+                    <a href="#"><span class="glyphicon glyphicon-plus " onclick="myFormation()">添加岩石组</span></a>
                 </div>
             </div>
-
-            <div class="form-group" style="text-align: center">
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-default">完成</button>
-                </div>
+            <div id="box">
             </div>
+
+        </div>
+    </div>
+
+    <div class="form-group" style="text-align: center">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-default">完成</button>
+        </div>
+    </div>
 </form>
 
 <script>
@@ -300,6 +302,9 @@
                     var unit = units[j].unit;
                     var uid = unit.U_ID;
                     var uName = "层" + (j + 1);
+                    if (unit.UnitName) {
+                        uName = unit.UnitName;
+                    }
                     var collections = units[j].collections;
                     var unitDiv = $("<div class='level2' id='" + uid + "'/>");
                     unitDiv.append("<label>" + uName + "</label>");
@@ -320,6 +325,9 @@
                             var fossil = fossils[l];
                             var foid = fossil.H_ID;
                             var foName = "化石" + (l + 1);
+                            if (fossil.FossilName) {
+                                foName = fossil.FossilName;
+                            }
                             var fossilDiv = $("<div class='level4' id='" + foid + "'/>");
                             fossilDiv.append("<label>" + foName + "</label>");
                             fossilDiv.append(
