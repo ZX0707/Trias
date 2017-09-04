@@ -25,7 +25,7 @@
 </style>
 <body style="overflow:auto">
     <div class="container">
-        <div class="conta">
+        <div class="con">
             <div style="display:none">
                 <div class="display-label">
                     @Html.DisplayNameFor(model => model.S_ID)
@@ -47,6 +47,12 @@
             </div>
             <div class="display-field">
                 @Html.DisplayFor(model => model.SectionName)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Sthickness)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Sthickness)
             </div>
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.Authorizer)
@@ -75,36 +81,34 @@
             <div class="display-field">
                 @Html.DisplayFor(model => model.RID3)
             </div>
-
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.Time)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Time)
-            </div>
-
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.SubTime)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.SubTime)
-            </div>
-
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.Time2)
             </div>
             <div class="display-field">
                 @Html.DisplayFor(model => model.Time2)
+                <label>&nbsp;</label>
+                <label>-</label>
+                <label>&nbsp;</label>
+                @Html.DisplayFor(model => model.Time2End)
             </div>
-
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Time)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Time)
+                <label>&nbsp;</label>
+                @Html.DisplayFor(model => model.SubTime)
+                <label>-</label>
+                @Html.DisplayFor(model => model.TimeEnd)
+                <label>&nbsp;</label>
+                @Html.DisplayFor(model => model.SubTimeEnd)
+            </div>
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.EnterTime)
             </div>
             <div class="display-field">
                 @Html.DisplayFor(model => model.EnterTime)
             </div>
-
-
 
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.Country)
@@ -274,11 +278,11 @@
     $(function () {
         reload();
     });
-    function lookUnit(id) {
-        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Unit")/"+id);
-    }
     function lookFormation(id) {
         commHelper.OpenDialog("查看详情", "@Url.Action("Details","Formation")/"+id);
+    }
+    function lookUnit(id) {
+        commHelper.OpenDialog("查看详情", "@Url.Action("Details","Unit")/"+id);
     }
     function lookCollection(id) {
         commHelper.OpenDialog("查看详情", "@Url.Action("Details","Collection")/"+id);

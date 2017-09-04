@@ -84,7 +84,7 @@
         </div>
         <div class="rig-head">
             <ul>
-                <li><a href="javascript:void(0)"> 首页</a></li>
+                <li><a href="@Url.Action("IndexWithLogin","Home")"> 首页</a></li>
                 <li><a href="@Url.Action("Index","AboutUs")"> 关于我们</a></li>
                 <li>
                     <strong id="name"></strong>
@@ -95,13 +95,6 @@
 
     </div>
     <div data-options="region:'west',title:'菜单栏'" style="width: 300px;">
-        @*<div style="margin: 10px; text-align: center">
-                <span>
-                        <strong id="name"></strong>
-                        <a onclick="SignOut()" style="color: #FF9A00;"><strong>退出</strong></a>
-                    </span>
-            </div>*@
-        <div>
             <div id="aa" class="easyui-accordion" style="width: auto; height: auto;">
                 <div title="添加数据" data-options="iconCls:'icon-save',selected:true" style="overflow: auto; padding: 10px;">
                     <div class="order">
@@ -128,7 +121,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <div data-options="region:'center'">
         @RenderBody()
@@ -139,15 +131,14 @@
 <script>
     var urlstr = location.href;
     //alert(urlstr);
-    var urlstatus = false;
     $(".rig-head a").each(function () {
         if ((urlstr + '/').indexOf($(this).attr('href')) > -1 && $(this).attr('href') != '') {
-            $(this).addClass('cur'); urlstatus = true;
-        } else {
+            $(this).addClass('cur');
+        }
+        else {
             $(this).removeClass('cur');
         }
     });
-    if (!urlstatus) { $(".rig-head a").eq(0).addClass('cur'); }
 
 
     var currentUser;

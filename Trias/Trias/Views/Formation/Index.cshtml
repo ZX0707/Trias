@@ -23,7 +23,7 @@
     .container {
         width: 806px;
         margin: 0px auto;
-        margin-top: 40px;
+        margin-top: 20px;
         padding-bottom: 4px;
         position: relative;
         overflow: auto;
@@ -31,7 +31,7 @@
 
     .conta {
         width: 740px;
-        border-top: 2px solid #4469a1;
+        border-top: 1px solid #d6d6d6;
         border-bottom: 1px solid #d6d6d6;
         border-left: 1px solid #d6d6d6;
         border-right: 1px solid #d6d6d6;
@@ -40,6 +40,26 @@
         padding: 30px 30px 20px 30px;
         background-color: #FFF;
     }
+    .display-label {
+            padding-top: 7px;
+            margin-bottom: 0;
+            text-align: right;
+            min-height: 30px;
+            width: 15%;
+            font-weight: bold;
+            float: left;
+            clear: both;
+        }
+
+        .display-field {
+            padding-top: 7px;
+            margin-bottom: 0;
+            margin-left: 10px;
+            text-align: left;
+            min-height: 30px;
+            width: 70%;
+            float: left;
+        }
 </style>
 
 @model Trias.Models.SectionView
@@ -70,71 +90,100 @@
 
 <form class="form-horizontal" role="form" id="form" method="post" style="padding: 10px;">
     <div class="form-group">
-        <div class="col-sm-1">
-            <button onclick="seSection()" type="button" class="btn btn-default">选择剖面</button>
-        </div>
+        <label class="col-sm-12 control-label" style="font-size: 24px; font-weight: bold; color: #16387c; text-align: center">
+            添加岩石组
+        </label>
     </div>
+    
     <div class="container">
+        <div class="form-group">
+            <div class="col-sm-1">
+                <button onclick="seSection()" type="button" class="btn btn-default">选择剖面</button>
+            </div>
+        </div>
         <div class="conta">
+            <div style="display:none">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.S_ID)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.S_ID)
+                </div>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.User_ID)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.User_ID)
+                </div>
+            </div>
+
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.SectionName)
             </div>
             <div class="display-field">
                 @Html.DisplayFor(model => model.SectionName)
             </div>
-
             <div class="display-label">
-                @Html.DisplayNameFor(model => model.Time)
+                @Html.DisplayNameFor(model => model.Sthickness)
             </div>
             <div class="display-field">
-                @Html.DisplayFor(model => model.Time)
-            </div>
-
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.SubTime)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.SubTime)
+                @Html.DisplayFor(model => model.Sthickness)
             </div>
             <div class="display-label">
-                @Html.DisplayNameFor(model => model.TimeEnd)
+                @Html.DisplayNameFor(model => model.Authorizer)
             </div>
             <div class="display-field">
-                @Html.DisplayFor(model => model.TimeEnd)
+                @Html.DisplayFor(model => model.Authorizer)
             </div>
 
             <div class="display-label">
-                @Html.DisplayNameFor(model => model.SubTimeEnd)
+                @Html.DisplayNameFor(model => model.RID1)
             </div>
             <div class="display-field">
-                @Html.DisplayFor(model => model.SubTimeEnd)
+                @Html.DisplayFor(model => model.RID1)
             </div>
 
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.RID2)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.RID2)
+            </div>
 
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.RID3)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.RID3)
+            </div>
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.Time2)
             </div>
             <div class="display-field">
                 @Html.DisplayFor(model => model.Time2)
+                <label>&nbsp;</label>
+                <label>-</label>
+                <label>&nbsp;</label>
+                @Html.DisplayFor(model => model.Time2End)
             </div>
             <div class="display-label">
-                @Html.DisplayNameFor(model => model.Time2End)
+                @Html.DisplayNameFor(model => model.Time)
             </div>
             <div class="display-field">
-                @Html.DisplayFor(model => model.Time2End)
+                @Html.DisplayFor(model => model.Time)
+                <label>&nbsp;</label>
+                @Html.DisplayFor(model => model.SubTime)
+                <label>-</label>
+                @Html.DisplayFor(model => model.TimeEnd)
+                <label>&nbsp;</label>
+                @Html.DisplayFor(model => model.SubTimeEnd)
             </div>
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.EnterTime)
             </div>
             <div class="display-field">
                 @Html.DisplayFor(model => model.EnterTime)
-            </div>
-
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.Authorizer)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Authorizer)
             </div>
 
             <div class="display-label">
@@ -176,44 +225,16 @@
                 @Html.DisplayNameFor(model => model.LonDegrees)
             </div>
             <div class="display-field">
-                @Html.DisplayFor(model => model.LonDegrees)
+                @(Model.LonDegrees + Model.LonMinutes / 60.0 + Model.LonSeconds / 60.0 / 60.0)
             </div>
 
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.LonMinutes)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.LonMinutes)
-            </div>
-
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.LonSeconds)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.LonSeconds)
-            </div>
 
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.LatDegrees)
             </div>
             <div class="display-field">
-                @Html.DisplayFor(model => model.LatDegrees)
+                @(Model.LatDegrees + Model.LatMinutes / 60.0 + Model.LatSeconds / 60.0 / 60.0)
             </div>
-
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.LatMinutes)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.LatMinutes)
-            </div>
-
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.LatSeconds)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.LatSeconds)
-            </div>
-
             <div class="display-label">
                 @Html.DisplayNameFor(model => model.TectonicPlate)
             </div>
@@ -241,40 +262,26 @@
             <div class="display-field">
                 @Html.DisplayFor(model => model.Altitude)
             </div>
+             
 
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.Sthickness)
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Sthickness)
-            </div>
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <label class="col-sm-1 control-label"></label>
-        <div class="col-sm-10" style="background-color: #bee2fb; height: auto; padding: 10px;">
-            <div style="margin-bottom:5px">
-                <label>岩石组层级关系</label>
-                <div class="btn-group" style="float: right">
-                    @*<button  type="button" class="btn btn-default" onclick="myFormation()">
-                            添加岩石组
-                        </button>*@
-                    <a href="#"><span class="glyphicon glyphicon-plus " onclick="myFormation()">添加岩石组</span></a>
+            <div class="form-group">
+                <div class="col-sm-12" style="background-color: #bee2fb; height: auto; padding: 10px;">
+                    <div style="margin-bottom:5px">
+                        <label>岩石组层级关系</label>
+                        <div class="btn-group" style="float: right">
+                            <a href="#"><span class="glyphicon glyphicon-plus " onclick="myFormation()">添加岩石组</span></a>
+                        </div>
+                    </div>
+                    <div id="box">
+                    </div>
                 </div>
             </div>
-            <div id="box">
-            </div>
 
         </div>
     </div>
 
-    <div class="form-group" style="text-align: center">
-        <div class="col-sm-12">
-            <button type="button" class="btn btn-default">完成</button>
-        </div>
-    </div>
+
+   
 </form>
 
 <script>
