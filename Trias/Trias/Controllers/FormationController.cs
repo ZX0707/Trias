@@ -244,6 +244,7 @@ namespace Trias.Controllers
                     sort = f1.sort;
                     f1.sort = f2.sort;
                     f2.sort = sort;
+                    formationSer.SaveChanges();
                     break;
                 case "level2":
                     var u1 = unitSer.FirstOrDefault(x => x.U_ID == id1);
@@ -251,6 +252,7 @@ namespace Trias.Controllers
                     sort = u1.sort;
                     u1.sort = u2.sort;
                     u2.sort = sort;
+                    unitSer.SaveChanges();
                     break;
                 case "level3":
                     var c1 = collectionSer.FirstOrDefault(x => x.C_ID == id1);
@@ -258,6 +260,7 @@ namespace Trias.Controllers
                     sort = c1.sort;
                     c1.sort = c2.sort;
                     c2.sort = sort;
+                    collectionSer.SaveChanges();
                     break;
                 case "level4":
                     var fo1 = fossilSer.FirstOrDefault(x => x.H_ID == id1);
@@ -267,6 +270,7 @@ namespace Trias.Controllers
                         sort = fo1.sort;
                         fo1.sort = fo2.sort;
                         fo2.sort = sort;
+                        fossilSer.SaveChanges();
                     }
                     else
                     {
@@ -277,6 +281,7 @@ namespace Trias.Controllers
                             sort = g1.sort;
                             g1.sort = g2.sort;
                             g2.sort = sort;
+                            geochemicalSer.SaveChanges();
                         }
                     }
                     break;
