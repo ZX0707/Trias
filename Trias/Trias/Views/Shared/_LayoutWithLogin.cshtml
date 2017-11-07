@@ -95,32 +95,32 @@
 
     </div>
     <div data-options="region:'west',title:'菜单栏'" style="width: 300px;">
-            <div id="aa" class="easyui-accordion" style="width: auto; height: auto;">
-                <div title="添加数据" data-options="iconCls:'icon-save',selected:true" style="overflow: auto; padding: 10px;">
-                    <div class="order">
-                        <div class="meu"><a href="@Url.Action("Index","Reference")"><b>添加文献</b></a></div>
-                        <div class="meu"><a href="@Url.Action("Index","Section")"><b>添加剖面</b></a></div>
-                        <div class="meu"><a href="@Url.Action("Index","Formation")"><b>添加岩石组</b></a></div>
-                    </div>
-                </div>
-                <div title="查询数据" data-options="iconCls:'icon-save'" style="padding: 10px;">
-                    <div class="order">
-                        <div class="meu"><a href="@Url.Action("QueryList","Reference")"><b>查询文献</b></a></div>
-                        <div class="meu"><a href="/Section/QueryList"><b>查询剖面</b></a></div>
-                    </div>
-                </div>
-
-                <div title="数据分析" data-options="iconCls:'icon-save'" style="padding: 10px;">
-                    <div class="order">
-                        <div class="meu"><a href="@Url.Action("Index","Analyze")"><b>数据分析</b></a></div>
-                    </div>
-                </div>
-                <div title="用户管理" data-options="iconCls:'icon-save'" style="padding: 10px;">
-                    <div class="order">
-                        <div class="meu"><a href="@Url.Action("Manage","Login")"><b>人员管理</b></a></div>
-                    </div>
+        <div id="aa" class="easyui-accordion" data-options="multiple:true,selected:false" style="width: auto; height: auto;">
+            <div title="添加数据" data-options="iconCls:'icon-save'" style="overflow: auto; padding: 10px;">
+                <div class="order">
+                    <div class="meu"><a href="@Url.Action("Index","Reference")"><b>添加文献</b></a></div>
+                    <div class="meu"><a href="@Url.Action("Index","Section")"><b>添加剖面</b></a></div>
+                    <div class="meu"><a href="@Url.Action("Index","Formation")"><b>添加岩石组</b></a></div>
                 </div>
             </div>
+            <div title="查询数据" data-options="iconCls:'icon-save'" style="padding: 10px;">
+                <div class="order">
+                    <div class="meu"><a href="@Url.Action("QueryList","Reference")"><b>查询文献</b></a></div>
+                    <div class="meu"><a href="/Section/QueryList"><b>查询剖面</b></a></div>
+                </div>
+            </div>
+
+            <div title="数据分析" data-options="iconCls:'icon-save'" style="padding: 10px;">
+                <div class="order">
+                    <div class="meu"><a href="@Url.Action("Index","Analyze")"><b>数据分析</b></a></div>
+                </div>
+            </div>
+            <div title="用户管理" data-options="iconCls:'icon-save'" style="padding: 10px;">
+                <div class="order">
+                    <div class="meu"><a href="@Url.Action("Manage","Login")"><b>人员管理</b></a></div>
+                </div>
+            </div>
+        </div>
     </div>
     <div data-options="region:'center'">
         @RenderBody()
@@ -161,6 +161,7 @@
         $(".required").on("focus", {}, function () {
             $(this).removeClass("error_ness");
         });
+        $(".easyui-accordion .panel-header").click();
 
     });
     //退出函数

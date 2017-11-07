@@ -13,7 +13,7 @@
     <div style="width: 560px; height:670px;float:left;background-color:#eef3f6;">
         <div style="height: 650px; width: 540px; overflow: hidden;margin:10px;" id="box">
             <ul id="ul1">
-                <li><a href="#">1.这是一段文本</a><span>2013-09-18</span></li>
+                @*<li><a href="#">1.这是一段文本</a><span>2013-09-18</span></li>
                 <li><a href="#">2.tab页面切换效果（案例）</a><span>2013-10-09</span></li>
                 <li><a href="#">3.圆角水晶按钮制作（案例）</a><span>2013-10-21</span></li>
                 <li><a href="#">4.HTML+CSS基础课程(系列)</a><span>2013-11-01</span></li>
@@ -39,7 +39,7 @@
                 <li><a href="#">6.导航条菜单的制作（案例）</a><span>2013-11-08</span></li>
                 <li><a href="#">7.信息列表制作(案例)</a><span>2013-11-15</span></li>
                 <li><a href="#">8.下拉菜单制作(案例)</a><span>2013-11-22</span></li>
-                <li><a href="#">9.如何实现“新手引导”效果</a><span>2013-12-06</span></li>
+                <li><a href="#">9.如何实现“新手引导”效果</a><span>2013-12-06</span></li>*@
             </ul>
 
             <ul id="ul2"></ul>
@@ -131,7 +131,12 @@
 <script>
     $(function () {
         $.post("@Url.Action("GetList", "Reference")", {}, function (result) {
+            debugger
             $("#referencetotal").html(result.total);
+            for (var i = 0; i < result.total; i++) {
+                var No = i + 1;
+                $("#ul1").append("<li>" + No + "、<a href=" + "" + ">" + result.rows[i].Title + "</a><span>" + " " + result.rows[i].Year + " " + result.rows[i].FirstAuthor + "</span></li>");
+            }
         });
         $.post("@Url.Action("GetList", "Section")", {}, function (result) {
             $("#sectiontotal").html(result.total);

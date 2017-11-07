@@ -1112,6 +1112,7 @@
     </Content>
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Models\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1154,6 +1155,7 @@
     <Content Include="Content\bootstrap-3.3.7-dist\js\Desktop_1.ini" />
     <Content Include="Content\bootstrap-3.3.7-dist\js\Desktop_2.ini" />
     <None Include="Properties\PublishProfiles\Trias.pubxml" />
+    <None Include="Properties\PublishProfiles\TriasNew.pubxml" />
     <None Include="Properties\PublishProfiles\Trisa.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
